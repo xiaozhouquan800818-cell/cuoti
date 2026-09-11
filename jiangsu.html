@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江苏申论 B 卷（2016—2026）十年命题纵向剖析与答题金句库</title>
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#F5F2E9; --paper2:#EDE8D9; --paper3:#E3DDCA;
+    --ink:#232F3A; --ink-soft:#5C6A75; --ink-faint:#8A938C;
+    --primary:#26505F; --primary-deep:#173A46; --primary-soft:#DCE6E4;
+    --gold:#A87B3F; --gold-soft:#EFE4CF;
+    --red:#A6402F; --red-soft:#F3DFD8;
+    --teal:#3E7A68; --teal-soft:#DCE9E3;
+    --line:#D8D0BC;
+    --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+    --sans:"Noto Sans SC","Microsoft YaHei","PingFang SC",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:400;
+    line-height:1.85;
+    font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold-soft);}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px;}
+
+  /* ===== Hero ===== */
+  header.hero{
+    padding:76px 0 52px;
+    border-bottom:3px solid var(--ink);
+    position:relative;
+  }
+  .hero .kicker{
+    font-family:var(--sans);font-size:12.5px;letter-spacing:.32em;color:var(--red);
+    font-weight:700;margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--serif);font-weight:900;font-size:40px;line-height:1.3;
+    letter-spacing:.01em;
+  }
+  .hero h1 .gold{color:var(--gold);}
+  .hero .sub{
+    margin-top:18px;font-size:16px;color:var(--ink-soft);max-width:760px;
+  }
+  .hero .meta{
+    margin-top:28px;display:flex;flex-wrap:wrap;gap:10px;
+  }
+  .chip{
+    font-family:var(--sans);font-size:12.5px;font-weight:500;
+    border:1px solid var(--line);background:var(--paper2);
+    padding:5px 14px;border-radius:999px;color:var(--ink);
+  }
+  .chip b{color:var(--primary);font-weight:700;}
+
+  /* ===== Nav ===== */
+  nav.toc{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,242,233,.96);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc .wrap{display:flex;flex-wrap:wrap;gap:2px 26px;padding-top:10px;padding-bottom:10px;}
+  nav.toc a{
+    font-size:13.5px;color:var(--ink-soft);text-decoration:none;font-weight:500;
+    padding:2px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;
+  }
+  nav.toc a:hover{color:var(--primary);border-color:var(--gold);}
+
+  /* ===== Section ===== */
+  section.block{padding:58px 0 26px;border-bottom:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+  .sec-no{
+    font-family:var(--serif);font-weight:900;font-size:17px;color:var(--gold);
+    letter-spacing:.06em;
+  }
+  .sec-title{
+    font-family:var(--serif);font-weight:900;font-size:27px;color:var(--ink);
+  }
+  .sec-line{height:3px;width:64px;background:var(--gold);margin:12px 0 22px;}
+  .lead{font-size:15.5px;color:var(--ink-soft);max-width:880px;margin-bottom:26px;}
+  .lead b{color:var(--ink);font-weight:700;}
+  .note{
+    font-size:12.5px;color:var(--ink-faint);border-left:3px solid var(--line);
+    padding:4px 0 4px 12px;margin:14px 0 4px;
+  }
+  h3.mini{
+    font-family:var(--serif);font-weight:700;font-size:19px;margin:34px 0 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  h3.mini::before{content:"";width:9px;height:9px;background:var(--teal);display:inline-block;flex:none;}
+
+  /* ===== 数字总览 ===== */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0 8px;}
+  .stat{
+    border:1px solid var(--line);background:var(--paper2);padding:20px 18px;
+    border-top:3px solid var(--primary);
+  }
+  .stat .num{font-family:var(--serif);font-weight:900;font-size:34px;color:var(--primary);line-height:1.1;}
+  .stat .num small{font-size:18px;color:var(--gold);}
+  .stat .lab{font-size:12.5px;color:var(--ink-soft);margin-top:6px;line-height:1.6;}
+
+  /* ===== 图表容器 ===== */
+  .chart-card{
+    border:1px solid var(--line);background:#FBF9F2;padding:22px 18px 12px;margin:18px 0 8px;
+  }
+  .chart-card .cap{font-size:13px;color:var(--ink-soft);margin-top:8px;}
+  .chart{width:100%;}
+  .chart.tall{height:600px;}
+  .chart.mid{height:430px;}
+  .chart.short{height:360px;}
+
+  /* ===== 两栏 ===== */
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .col-card{border:1px solid var(--line);background:#FBF9F2;padding:20px 22px;}
+  .col-card h4{font-family:var(--serif);font-weight:700;font-size:17px;margin-bottom:10px;color:var(--primary-deep);}
+  .col-card ul{list-style:none;}
+  .col-card li{font-size:14px;color:var(--ink);padding:5px 0 5px 20px;position:relative;}
+  .col-card li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;background:var(--gold);}
+
+  /* ===== 时间轴 ===== */
+  .timeline{margin:26px 0 10px;--col-time:86px;--col-line:34px;}
+  .tl-row{
+    display:grid;grid-template-columns:var(--col-time) var(--col-line) 1fr;
+    min-height:0;
+  }
+  .tl-time{
+    text-align:right;padding:20px 12px 20px 0;
+    font-family:var(--serif);font-weight:700;font-size:16.5px;color:var(--primary);
+    line-height:1.4;
+  }
+  .tl-line{
+    position:relative;display:grid;justify-items:center;
+  }
+  .tl-line::before{
+    content:"";position:absolute;top:0;bottom:0;width:2px;
+    background:var(--line);
+    left:calc(var(--col-line)/2);transform:translateX(-50%);
+  }
+  .tl-dot{
+    position:relative;z-index:1;align-self:center;justify-self:center;
+    width:15px;height:15px;border-radius:50%;
+    background:var(--gold);border:3px solid var(--paper);
+    box-shadow:0 0 0 2px var(--gold);
+  }
+  .tl-row:nth-child(4n) .tl-dot{background:var(--teal);box-shadow:0 0 0 2px var(--teal);}
+  .tl-row:nth-child(4n+1) .tl-dot{background:var(--red);box-shadow:0 0 0 2px var(--red);}
+  .tl-body{padding:16px 0 16px 22px;border-bottom:1px dashed var(--line);}
+  .tl-body .t1{
+    font-family:var(--serif);font-weight:700;font-size:17.5px;color:var(--ink);
+  }
+  .tl-body .t1 .phase{
+    display:inline-block;font-family:var(--sans);font-size:11px;font-weight:700;
+    color:#fff;background:var(--primary);border-radius:3px;padding:1px 8px;margin-left:10px;
+    vertical-align:2px;letter-spacing:.08em;
+  }
+  .tl-body .t1 .phase.p1{background:var(--ink-faint);}
+  .tl-body .t1 .phase.p2{background:var(--gold);}
+  .tl-body .t1 .phase.p3{background:var(--teal);}
+  .tl-body .t1 .phase.p4{background:var(--red);}
+  .tl-body .t2{font-size:13.5px;color:var(--ink-soft);margin-top:3px;}
+
+  /* ===== 阶段卡片 ===== */
+  .stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0 8px;}
+  .stage{border:1px solid var(--line);background:#FBF9F2;padding:20px 18px;position:relative;}
+  .stage .yr{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--gold);letter-spacing:.04em;}
+  .stage .nm{font-family:var(--serif);font-weight:900;font-size:19px;margin:6px 0 10px;line-height:1.35;}
+  .stage p{font-size:13px;color:var(--ink-soft);line-height:1.75;}
+  .stage .tag{
+    display:inline-block;font-size:11.5px;font-weight:600;color:var(--primary);
+    background:var(--primary-soft);border-radius:3px;padding:1px 8px;margin-bottom:8px;
+  }
+
+  /* ===== 预测卡片 ===== */
+  .forecast-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0 8px;}
+  .fc{border:1px solid var(--line);background:#FBF9F2;padding:18px 20px;border-left:4px solid var(--teal);}
+  .fc.red{border-left-color:var(--red);}
+  .fc h4{font-family:var(--serif);font-weight:700;font-size:16.5px;margin-bottom:6px;color:var(--ink);}
+  .fc p{font-size:13.5px;color:var(--ink-soft);}
+
+  /* ===== 答题要点 ===== */
+  .tip{border:1px solid var(--line);background:#FBF9F2;padding:20px 24px;margin:16px 0;}
+  .tip h4{font-family:var(--serif);font-weight:800;font-size:18px;margin-bottom:4px;color:var(--primary-deep);}
+  .tip .sub{font-size:13px;color:var(--ink-faint);margin-bottom:12px;}
+  .tip ul{list-style:none;}
+  .tip li{font-size:14px;padding:5px 0 5px 22px;position:relative;color:var(--ink);}
+  .tip li::before{content:"◆";position:absolute;left:0;top:6px;font-size:10px;color:var(--gold);}
+  .tip li b{color:var(--primary);}
+
+  /* ===== 金句库 ===== */
+  .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 8px;}
+  .qg{border:1px solid var(--line);background:#FBF9F2;padding:20px 22px;}
+  .qg h4{
+    font-family:var(--serif);font-weight:800;font-size:17px;color:#fff;background:var(--primary);
+    display:inline-block;padding:3px 12px;border-radius:3px;margin-bottom:12px;letter-spacing:.05em;
+  }
+  .qg .q{
+    font-family:var(--serif);font-size:15.5px;line-height:1.9;color:var(--ink);
+    padding:8px 0;border-bottom:1px dashed var(--line);
+  }
+  .qg .q:last-child{border-bottom:none;}
+  .qg .q em{font-style:normal;color:var(--gold);font-weight:700;}
+  .qg .use{font-family:var(--sans);font-size:12px;color:var(--ink-faint);}
+
+  /* ===== 表格 ===== */
+  table.data{width:100%;border-collapse:collapse;margin:18px 0 10px;font-size:13.5px;background:#FBF9F2;}
+  table.data th{
+    font-family:var(--serif);font-weight:700;background:var(--primary-deep);color:#fff;
+    padding:9px 10px;text-align:left;border:1px solid var(--primary-deep);
+  }
+  table.data td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;}
+  table.data tr:nth-child(even) td{background:#F4F0E4;}
+  table.data .c{text-align:center;}
+
+  /* ===== 页脚 ===== */
+  footer{margin-top:20px;padding:36px 0 56px;background:var(--paper2);border-top:3px solid var(--ink);}
+  footer .wrap{font-size:12.5px;color:var(--ink-soft);line-height:2;}
+  footer b{color:var(--ink);}
+
+  @media(max-width:860px){
+    .hero h1{font-size:30px;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .stage-grid{grid-template-columns:1fr 1fr;}
+    .cols2,.forecast-grid,.quote-grid{grid-template-columns:1fr;}
+    .chart.tall{height:640px;}
+    .tl-row{grid-template-columns:64px 26px 1fr;--col-time:64px;--col-line:26px;}
+    .tl-time{font-size:14px;padding-right:8px;}
+    .tl-body{padding-left:12px;}
+  }
+  @media(max-width:560px){
+    .hero{padding:52px 0 36px;}
+    .hero h1{font-size:25px;}
+    .stat-grid,.stage-grid{grid-template-columns:1fr;}
+    .sec-title{font-size:22px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">江苏公务员考试 · 申论 B 卷 · 十年真题语料研究</div>
+    <h1>从社会议题到执法深水区<br><span class="gold">江苏申论 B 卷（2016—2026）</span>纵向剖析</h1>
+    <p class="sub">以《江苏公务员考试〈申论〉（B 卷）（2016—2026）》12 份真题文件为语料，从字频结构、命题脉络、命题趋势三个维度展开纵向剖析，梳理命题热点演进逻辑、预测未来考察方向，并整理成体系的答题要点与规范金句库。</p>
+    <div class="meta">
+      <span class="chip">覆盖年度 <b>2016—2026</b>（11 个年度）</span>
+      <span class="chip">语料来源 <b>E:\江苏公务员考试真题申论</b></span>
+      <span class="chip">定位 <b>行政执法类 · B 卷</b></span>
+      <span class="chip">口径 <b>通读归纳</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#s1">01 命题坐标</a>
+    <a href="#s2">02 字频结构</a>
+    <a href="#s3">03 命题脉络</a>
+    <a href="#s4">04 演进逻辑</a>
+    <a href="#s5">05 未来预测</a>
+    <a href="#s6">06 答题要点</a>
+    <a href="#s7">07 金句库</a>
+    <a href="#s8">08 说明</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============================================================
+     01 命题坐标
+============================================================ -->
+<section class="block" id="s1">
+  <div class="sec-head"><span class="sec-no">01</span><h2 class="sec-title">命题坐标：一卷之变，十年之间</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    江苏申论 B 卷是三类试卷中<b>职业色彩最浓</b>的一卷——对应行政执法类、执法勤务类岗位。十年间，它的考察重心完成了从"宽泛社会话题"到"行政执法深水区"的收敛：早期谈家风、谈文化，后期专攻执法理念、执法规范、执法方式与执法难题；作文分值稳定为 <b>40 分</b>，概括、分析两类题型<b>年年必考</b>，应用文与对策题交替登场，命题从"考热点"逐步走向"考能力"。
+  </p>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">11<small> 年</small></div><div class="lab">2016—2026 连续样本，覆盖 12 份真题文件</div></div>
+    <div class="stat"><div class="num">40<small> 分</small></div><div class="lab">大作文分值十一年不变，始终是决胜题</div></div>
+    <div class="stat"><div class="num">4<small> 题</small></div><div class="lab">除 2022 年五题外，其余年份均为四题结构</div></div>
+    <div class="stat"><div class="num">11<small> 次</small></div><div class="lab">概括、分析两类题型十一年全勤</div></div>
+  </div>
+  <p class="lead" style="margin-top:18px;">
+    四个演进阶段清晰可辨：<b>泛主题期（2016—2017）→ 执法定调期（2018—2019）→ 规范化建设期（2020—2022）→ 深水区善治期（2023—2026）</b>。主题词从"家风、文化"一路演变为"科技、规范、温度、融合"，B 卷正成为观察基层行政执法改革的一面镜子。
+  </p>
+</section>
+
+<!-- ============================================================
+     02 字频结构
+============================================================ -->
+<section class="block" id="s2">
+  <div class="sec-head"><span class="sec-no">02</span><h2 class="sec-title">字频结构：语料的"高频词地图"</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    通读 11 个年度全部材料后，按<b>主题词在各年材料中的出现强度</b>（0＝未出现 / 1＝偶现 / 2＝常见 / 3＝高频）建立 20 词 × 11 年的二维矩阵。下方热力图揭示三组事实：<b>"执法、法治、服务、群众、创新"</b>是贯穿始终的底座词；<b>"科技、规范、温度、治理、监管"</b>是随阶段爬升的动能词；<b>"文明、民生、基层"</b>则从早期主角退为常驻背景。
+  </p>
+  <div class="chart-card">
+    <div id="heatmap" class="chart tall"></div>
+    <div class="cap">图 2-1　主题词 × 年度出现强度热力图（0-3 级，通读语料定性归纳，非机器词频统计）</div>
+  </div>
+
+  <h3 class="mini">高频词簇总排行</h3>
+  <p class="lead">
+    将热力图逐词按年度求和得到相对强度总分，前十位的词簇勾勒出 B 卷的"基因图谱"：<b>执法、法治、创新、服务、群众、治理</b>构成核心六词——执法是主语、法治是边界、创新是路径、服务与群众是价值原点、治理是场域。
+  </p>
+  <div class="chart-card">
+    <div id="words" class="chart short"></div>
+    <div class="cap">图 2-2　核心主题词相对强度排行（总分＝11 年强度之和，满分 33）</div>
+  </div>
+
+  <div class="cols2">
+    <div class="col-card">
+      <h4>底座词：十一年不变的"宪法级"词汇</h4>
+      <ul>
+        <li><b>执法</b>——2019 年起每年材料 3 级高频，是 B 卷的唯一主角；</li>
+        <li><b>法治</b>——从"依法治国"宏观叙事下沉为"法条、程序、裁量"微观操作；</li>
+        <li><b>服务、群众</b>——"执法为民"的价值主线，服务权重逐年压过管理；</li>
+        <li><b>创新</b>——2016 年后持续走高，2020 年起稳定在 3 级，是命题的"增长引擎"。</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h4>动能词：随阶段爬升的"时代变量"</h4>
+      <ul>
+        <li><b>科技 / 智慧 / 数字</b>——2020 年爆发（遥感、城市大脑），2024、2026 年再攀高峰（AI、行政行为码）；</li>
+        <li><b>温度 / 柔性</b>——2018 年"有温度的人生"定调，2023、2025 年成为主旋律（柔性监管、贴心服务）；</li>
+        <li><b>规范</b>——2021 年"执法规范化"后稳定高频，2024 年深化为"裁量权规范"；</li>
+        <li><b>联合 / 协同</b>——2023 年漾湖联合执法、2026 年"融合执法"接连登顶。</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">口径说明：本章为对 12 份真题语料的全文通读归纳，强度分级依据各年度材料中主题词的实际出现密度与结构权重作出，用于观察"结构"而非追求"精确频次"。</p>
+</section>
+
+<!-- ============================================================
+     03 命题脉络
+============================================================ -->
+<section class="block" id="s3">
+  <div class="sec-head"><span class="sec-no">03</span><h2 class="sec-title">命题脉络：年度主题与题型结构</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    年度主题时间轴显示：B 卷命题从不回避<b>当年最热的治理话题</b>，且题材高度<b>"江苏化"</b>——2025 年江苏评弹普法、2026 年南京"宁捷查"与鼓楼网红街区治理直接入卷。主题演进的同时，题型结构保持高度稳定：概括题、分析题年年必考，应用文七年登场，对策题近四年三考。
+  </p>
+
+  <h3 class="mini">年度主题演进时间轴（2016—2026）</h3>
+  <div class="timeline">
+    <div class="tl-row"><div class="tl-time">2016</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">社会风气 · 家风建设<span class="phase p1">泛主题期</span></div><div class="t2">德孝文化、磨刀老人、抢红包、乡村道德滑坡——以社会风气切入，执法仅为第四题背景</div></div></div>
+    <div class="tl-row"><div class="tl-time">2017</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">基层文化 · 文化供给侧<span class="phase p1">泛主题期</span></div><div class="t2">最美基层文化人、文化礼堂、"农家书屋＋电商"——公共文化服务，首次出现应用文（倡议书）</div></div></div>
+    <div class="tl-row"><div class="tl-time">2018</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">为民情怀 · 有温度的人生<span class="phase p2">执法定调期</span></div><div class="t2">崔法官、吕书记、刘医生、火车站晒谷——职业精神与执法温度并轨，执法事件评析登场</div></div></div>
+    <div class="tl-row"><div class="tl-time">2019</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">群众路线 · 善治达情<span class="phase p2">执法定调期</span></div><div class="t2">沈书记"三怕"、许厅长、王警官、白师傅修路——"行政执法"正式成为 B 卷唯一主角</div></div></div>
+    <div class="tl-row"><div class="tl-time">2020</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">科技执法 · 治理洁癖<span class="phase p3">规范化建设期</span></div><div class="t2">遥感、城市大脑、"你送我检"、"宜停车"——科技赋能与"一刀切"之问同卷并置</div></div></div>
+    <div class="tl-row"><div class="tl-time">2021</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">执法规范化 · 队伍建设<span class="phase p3">规范化建设期</span></div><div class="t2">执法记录仪、教科书式执法、累进式执法、街道综合执法大队——全链条规范执法</div></div></div>
+    <div class="tl-row"><div class="tl-time">2022</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">综合执法 · 高素养队伍<span class="phase p3">规范化建设期</span></div><div class="t2">博士城管、驻队律师、无人机执法、"砍香樟树被罚"——唯一五题年份，直指"良法善治"</div></div></div>
+    <div class="tl-row"><div class="tl-time">2023</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">柔性执法 · 共建共治<span class="phase p4">深水区善治期</span></div><div class="t2">"摊有序"、直播执法、柔性监管清单、信用修复、漾湖禁渔、外卖小哥志愿者</div></div></div>
+    <div class="tl-row"><div class="tl-time">2024</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">智慧执法 · 裁量权治理<span class="phase p4">深水区善治期</span></div><div class="t2">行政行为码、AI 小秘书、秦淮灯会安保、直播带货监管——数字执法与"类案不同罚"同考</div></div></div>
+    <div class="tl-row"><div class="tl-time">2025</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">服务型执法 · 花式普法<span class="phase p4">深水区善治期</span></div><div class="t2">直播带货式普法、评弹普法、体检式监管、卫片执法、综合查一次——服务意识全面压过管理思维</div></div></div>
+    <div class="tl-row"><div class="tl-time">2026</div><div class="tl-line"><span class="tl-dot"></span></div><div class="tl-body"><div class="t1">执法融合 · 融合治理<span class="phase p4">深水区善治期</span></div><div class="t2">交所合一、警民融合、宁捷查、AI 城管、网红街区治理——"和则一，一则多力"贯穿全卷</div></div></div>
+  </div>
+
+  <h3 class="mini">题型结构：四题定式下的轮换节奏</h3>
+  <p class="lead">
+    从分值构成看（堆叠柱状图），<b>大作文 40 分恒定</b>，其余 60 分在"概括 / 分析 / 应用文 / 对策"四类间轮换。2017—2021 年应用文近乎连年登场（倡议书、感谢信、公开信、PPT 提纲、宣讲提纲），2023—2026 年对策题后来居上，2026 年第四题更明确要求写"对策性文章"。
+  </p>
+  <div class="chart-card">
+    <div id="types" class="chart mid"></div>
+    <div class="cap">图 3-1　各年度题型分值构成（堆叠柱状；2022 年为五题年份）</div>
+  </div>
+
+  <div class="cols2">
+    <div class="col-card">
+      <h4>必考题型（十一年全勤）</h4>
+      <ul>
+        <li><b>归纳概括</b>：分值 10—20 分，考"做法／成效／现象／问题"的提炼归类，近年偏爱"用一段话归纳"；</li>
+        <li><b>综合分析</b>：分值 15—20 分，含句子理解、事件评析、启示启示三种变体，答题框架稳定为"表态—分析—小尾巴"；</li>
+        <li><b>大作文</b>：40 分，命题形式以"政策/精神＋主题"与"名言＋主题"为主。</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h4>轮换题型（交替登场）</h4>
+      <ul>
+        <li><b>应用文</b>：2017—2024 年 7 次，倡议书、感谢信、公开信、宣讲提纲、PPT 提纲、短评轮番出现，身份意识与格式是得分关键；</li>
+        <li><b>提出对策</b>：2016 年后沉寂，2022—2026 年五考其四（建议类、问题＋对策类），考察"解决真实治理难题"的能力。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 演进逻辑
+============================================================ -->
+<section class="block" id="s4">
+  <div class="sec-head"><span class="sec-no">04</span><h2 class="sec-title">演进逻辑：热点如何一路"下沉"</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    把十年主题串起来看，B 卷的命题逻辑不是"追热点"，而是<b>热点随治理实践下沉</b>：从社会风气（2016）→ 文化供给（2017）→ 职业精神（2018）→ 执法理念（2019）→ 执法方式（2020—2021）→ 执法队伍（2022）→ 执法温度（2023）→ 执法公平与数字（2024）→ 执法服务（2025）→ 执法融合（2026），一层层深入行政执法的内部肌理。
+  </p>
+  <div class="stage-grid">
+    <div class="stage"><span class="yr">2016 — 2017</span><span class="tag">泛主题期</span><div class="nm">社会议题<br>试水阶段</div><p>话题宽泛（家风、文化），执法只是众多社会现象之一；题型已定四题框架，但"行政执法"定位尚未固化。</p></div>
+    <div class="stage"><span class="yr">2018 — 2019</span><span class="tag">执法定调期</span><div class="nm">执法为民<br>价值确立</div><p>以"有温度的人生""善治须达情"完成价值定调；执法者形象、执法事件评析成为稳定素材类型。</p></div>
+    <div class="stage"><span class="yr">2020 — 2022</span><span class="tag">规范化建设期</span><div class="nm">方式与队伍<br>双线并进</div><p>科技执法、执法规范化、综合执法改革、高素养队伍接续登场，呼应《法治政府建设实施纲要》要求。</p></div>
+    <div class="stage"><span class="yr">2023 — 2026</span><span class="tag">深水区善治期</span><div class="nm">难题与平衡<br>深度治理</div><p>柔性执法、服务型执法、融合执法；考法理与情理平衡、部门协同、企业服务、新技术边界等"难而新"的课题。</p></div>
+  </div>
+
+  <h3 class="mini">三条主线：主题、题型、能力的三重递进</h3>
+  <div class="cols2">
+    <div class="col-card">
+      <h4>主线一 · 主题：从"管理"走向"治理"</h4>
+      <ul>
+        <li>执法对象从"被管理者"变为"服务对象"（摊贩→暖心摊位、企业→信用修复）；</li>
+        <li>执法主体从"单打独斗"变为"多元共治"（联合执法、驻队律师、外卖小哥志愿者、警民融合）；</li>
+        <li>执法手段从"人海战术"变为"数字赋能"（遥感、AI、行政行为码、无人机）。</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h4>主线二 · 题型：从"会套"走向"会用"</h4>
+      <ul>
+        <li>概括题从"罗列要点"升级为"一段话归纳"（2022 起高频）；</li>
+        <li>对策题从"工作思路"升级为"解决真实难题"（2026 网红街区治理，材料不给显性对策）；</li>
+        <li>作文从"议论文"升级为"对策性文章"（2026），分论点必须落在具体对策上。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-card" style="margin-top:16px;">
+    <h4>主线三 · 能力：从"阅读理解"走向"解决问题"</h4>
+    <ul>
+      <li>命题意图已明确转向：考生不仅要读懂材料，更要能站在执法岗位立场上，统筹<b>规范与效率、监管与服务、部门协同与群众参与、技术进步与人文温度</b>四对关系；</li>
+      <li>2026 年官方解读称"考查正在从'会套题型'进一步转向'能按指定角度处理问题'"——模板化备考空间被显著压缩。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     05 未来预测
+============================================================ -->
+<section class="block" id="s5">
+  <div class="sec-head"><span class="sec-no">05</span><h2 class="sec-title">未来考察方向预测</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    基于十年规律外推，未来 B 卷大概率延续"<b>行政执法＋江苏实践</b>"的命题主轴，在以下六个方向上持续取材；同时保持"四题定式"与"能力导向"。
+  </p>
+  <div class="forecast-grid">
+    <div class="fc"><h4>① 数字法治与 AI 治理边界</h4><p>算法执法、AI 城管、数据合规、个人信息保护，以及"技术赋能"与"算法偏见、过度监控"的平衡——2024 年 AI 小秘书、2026 年 AI 城管已两度叩门。</p></div>
+    <div class="fc red"><h4>② 营商环境法治化纵深</h4><p>涉企行政检查规范（"综合查一次"、检查码）、免罚轻罚清单、信用修复、合规指导（"三书同送"）、AEO 分级监管——服务型执法是近年最高频主线，大概率延续。</p></div>
+    <div class="fc"><h4>③ 新业态新模式监管</h4><p>直播电商、平台经济、低空经济、银发经济、网红街区/文旅流量治理——"新业态与旧规则"的冲突是命题富矿。</p></div>
+    <div class="fc red"><h4>④ 执法监督与裁量权治理</h4><p>类案不同罚、行政裁量权基准、行政执法监督、纠错与听证机制——2024 年"如意棒与紧箍咒"已点题，监督体系化是政策热点。</p></div>
+    <div class="fc"><h4>⑤ 多元共治与基层融合</h4><p>警民融合、社会力量参与（志愿者、行业自治）、矛盾多元化解、"枫桥经验"式基层治理——2026 年"融合"主题或将衍生新场景。</p></div>
+    <div class="fc red"><h4>⑥ 生态与安全执法</h4><p>长江大保护、耕地保护（卫片执法纠偏）、安全生产、应急管理——政策刚性最强、材料最"实"的备选方向。</p></div>
+  </div>
+
+  <h3 class="mini">题型预测</h3>
+  <table class="data">
+    <tr><th style="width:120px;">题型</th><th style="width:180px;">出现概率</th><th>趋势研判与备考提示</th></tr>
+    <tr><td><b>归纳概括</b></td><td class="c">必考</td><td>"一段话归纳做法与成效"的考法延续概率大，注意总起句＋分条并列的结构。</td></tr>
+    <tr><td><b>综合分析</b></td><td class="c">必考</td><td>句子理解、事件评析、启示三类轮换；"评析争议做法"（AI 城管、累进式执法、卫片执法）是高频变体。</td></tr>
+    <tr><td><b>提出对策</b></td><td class="c">高（≥80%）</td><td>2023—2026 年连考四年，且材料日趋不给显性对策；须储备治理类对策语言与江苏案例。</td></tr>
+    <tr><td><b>应用文</b></td><td class="c">中高（60%）</td><td>2025、2026 连续缺席后回归概率上升；倡议书、公开信、宣讲提纲已考过，<b>情况说明、整改方案、工作简报、调研报告提纲、回信</b>等新文种值得重点准备。</td></tr>
+    <tr><td><b>大作文</b></td><td class="c">必考（40 分）</td><td>命题形式以"政策/精神＋主题"和"名言＋主题"为主；<b>"对策性文章"可能延续</b>——分论点须为对策并配论证。备考应建立"服务/温度、规范/公平、科技/融合"三组主题词库。</td></tr>
+  </table>
+  <p class="note">预测为基于十年语料的规律性外推，具体以当年实际命题为准。</p>
+</section>
+
+<!-- ============================================================
+     06 答题要点
+============================================================ -->
+<section class="block" id="s6">
+  <div class="sec-head"><span class="sec-no">06</span><h2 class="sec-title">答题要点：五类题型的得分框架</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    结合十一年真题的作答要求与参考要点，归纳出五类题型的通用得分框架。要点不在多，而在<b>对准采分点、语言规范化、结构层次化</b>。
+  </p>
+
+  <div class="tip">
+    <h4>① 归纳概括题</h4>
+    <div class="sub">十一年全勤 · 分值 10—20 分 · 作答要求高频词：紧扣材料、准确全面、条理清楚</div>
+    <ul>
+      <li><b>审题四问</b>：概括对象（做法/成效/现象/问题）、材料范围、是否"一段话"、字数上限；</li>
+      <li><b>要点处理</b>：关键词全勾画、同类合并、异类并列；每条要点用"动词＋名词"的规范短语起头（如"推行……、建立……、开展……"）；</li>
+      <li><b>"一段话"题型</b>（2022—2025 高频）：总起句（"多地创新执法方式，成效显著"式）＋分号并列分句，不再分条编号；</li>
+      <li><b>踩分意识</b>：材料中的"做法＋成效"成对出现时，两条都要写全，避免只抄做法丢成效。</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <h4>② 综合分析题（理解 / 评析 / 启示）</h4>
+    <div class="sub">十一年全勤 · 分值 15—20 分 · 作答要求高频词：观点正确、分析透彻</div>
+    <ul>
+      <li><b>句子理解</b>：三步走——释义（点明关键词内涵）＋分层分析（结合材料论证）＋小尾巴（对策/展望）；</li>
+      <li><b>事件评析</b>（火车站晒谷、累进式执法、AI 城管）：先表态（合理/欠妥/<b>辩证看待</b>），再正反两面对照分析，最后给出改进之策；</li>
+      <li><b>启示题</b>（2019 沈书记三怕、2023 漾湖）：把案例经验<b>提炼为可迁移的普适对策</b>，不带入具体地名案例名；</li>
+      <li><b>观点前置</b>：第一句即亮明判断，切勿含混；"分析透彻"意味着原因/影响要说透，不满足于罗列现象。</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <h4>③ 提出对策题</h4>
+    <div class="sub">2022—2026 年五考其四 · 分值 20—25 分 · 作答要求高频词：针对性、可行性、条理清楚</div>
+    <ul>
+      <li><b>判断是否写问题</b>：要求含"准确"→先简梳问题再给对策；只要求"对策"→直接分条列对策（2026 网红街区题即此型）；</li>
+      <li><b>对策三要素</b>：主体（谁来做）＋手段（怎么做）＋目标（达到什么效果），如"执法部门＋开展联合专项整治＋杜绝占道经营"；</li>
+      <li><b>可行性检查</b>：有法律依据、有资源支撑、有技术手段、可落地；避免"加大力度、高度重视"式空话；</li>
+      <li><b>语料储备</b>：科技手段（无人机、大数据、非现场执法）、制度机制（联合执法、清单管理、信用修复）、社会力量（志愿者、行业自治、群众监督）、宣传引导（普法、以案释法）四组对策语言。</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <h4>④ 应用文写作</h4>
+    <div class="sub">2017—2024 年 7 次登场 · 分值 15—25 分 · 已考文种：倡议书、感谢信、公开信、宣讲提纲、PPT 提纲、短评</div>
+    <ul>
+      <li><b>格式三件套</b>：标题（居中）、称谓（顶格）、落款（单位＋日期）；提纲类可省落款但结构必须完整；</li>
+      <li><b>身份与对象</b>：你是谁（以……名义）、写给谁、达成什么目的——语气随文种变化：倡议书热忱、公开信诚恳、短评观点鲜明；</li>
+      <li><b>正文框架</b>：背景（为什么写）→ 主体（分条说清楚）→ 号召/承诺（结尾）；主体部分务必紧扣材料，不空喊口号；</li>
+      <li><b>重点准备新文种</b>：情况说明、整改方案、工作简报、调研报告提纲、回信——2025、2026 连续两年未考应用文，回归概率上升。</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <h4>⑤ 大作文（40 分 · 决胜题）</h4>
+    <div class="sub">命题形式："政策/讲话精神＋主题"（2025、2023、2020）或"名言＋主题"（2021、2019、2018、2026）</div>
+    <ul>
+      <li><b>审题锁定核心词</b>：把主题句拆成"价值原点＋行动路径"两组词，分论点从这两组词派生；</li>
+      <li><b>标题</b>：观点式或对仗式（如"贴心服务彰显执法温度　为民理念激活发展动能"），紧扣主题、宁实勿虚；</li>
+      <li><b>结构</b>：开头点题＋3 个分论点（并列或递进）＋结尾升华；<b>对策性文章</b>（2026）分论点必须落在具体对策上，且每个分论点先论证后落对策；</li>
+      <li><b>论证素材</b>：优先化用本卷材料案例（如"摊有序""综合查一次""AI 小秘书"），再引政策与名言；</li>
+      <li><b>语言</b>：规范书面语、短句为主、多使用执法领域规范表述（见下章金句库），字数 1000 字左右。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     07 规范金句库
+============================================================ -->
+<section class="block" id="s7">
+  <div class="sec-head"><span class="sec-no">07</span><h2 class="sec-title">规范金句库：按主题分类速查</h2></div>
+  <div class="sec-line"></div>
+  <p class="lead">
+    金句按八大主题分类，标注适用场景。使用时<b>选准场景、嵌入语境</b>，切忌堆砌。加 <em>◆</em> 者为十年真题中出现过的原句，其余为公考执法领域常用规范表述。
+  </p>
+
+  <div class="quote-grid">
+    <div class="qg">
+      <h4>法治 · 严格规范</h4>
+      <div class="q"><em>◆</em>法者，治之端也。<span class="use">谈法治前提、执法定位</span></div>
+      <div class="q">法无授权不可为，法定职责必须为。<span class="use">谈职权法定、执法边界</span></div>
+      <div class="q"><em>◆</em>其身正，不令而行；其身不正，虽令不从。<span class="use">谈执法者表率（2021 作文）</span></div>
+      <div class="q"><em>◆</em>徒法不足以自行。<span class="use">谈队伍素养、良法善治（2022 作文）</span></div>
+      <div class="q"><em>◆</em>让人民群众在每一个执法行为中都能看到风清气正，从每一项执法决定中都能感受到公平正义。<span class="use">执法总目标（2022 材料）</span></div>
+      <div class="q"><em>◆</em>行政执法是法治政府建设的"最后一公里"。<span class="use">谈执法地位（2024 材料）</span></div>
+      <div class="q">严格规范公正文明执法，是行政执法工作的生命线。<span class="use">论述段点题句</span></div>
+    </div>
+    <div class="qg">
+      <h4>为民 · 群众路线</h4>
+      <div class="q"><em>◆</em>以百姓之心为己心，以他人之心为己心。<span class="use">谈为民情怀（2018 作文）</span></div>
+      <div class="q"><em>◆</em>善治须达情，达情始近人。<span class="use">谈贴近群众（2019 作文）</span></div>
+      <div class="q"><em>◆</em>民心是最大的政治，百姓的事就是天大的事。<span class="use">谈民生分量（2018 参考答案）</span></div>
+      <div class="q"><em>◆</em>换条板凳坐坐，多替群众想想，事情就好办了。<span class="use">谈换位思考（2019 许厅长）</span></div>
+      <div class="q"><em>◆</em>站在群众的角度想问题，多做些"分外事"，"分内事"就好办了。<span class="use">谈服务意识（2019 王警官）</span></div>
+      <div class="q">群众利益无小事，一枝一叶总关情。<span class="use">开头/论述通用</span></div>
+      <div class="q">执法为民，是行政执法的出发点和落脚点。<span class="use">点题句</span></div>
+    </div>
+    <div class="qg">
+      <h4>温度 · 柔性执法</h4>
+      <div class="q"><em>◆</em>执法的琴键，只有随着群众的需求而跳动，才能奏出社会和谐的乐章。<span class="use">谈执法与需求（2020 作文）</span></div>
+      <div class="q">执法既有力度，又有温度。<span class="use">论述段高频金句</span></div>
+      <div class="q"><em>◆</em>包容审慎监管，让执法既有精度，也有温度。<span class="use">谈柔性监管（2023）</span></div>
+      <div class="q"><em>◆</em>执法不能"一罚了之"，而是要帮企业解决问题。<span class="use">谈服务型执法（2026）</span></div>
+      <div class="q"><em>◆</em>变"一刀切"为"边修边扶"。<span class="use">谈柔性监管理念（2023）</span></div>
+      <div class="q">寓服务于执法，融执法于服务，让法治更有温度。<span class="use">结尾升华句</span></div>
+    </div>
+    <div class="qg">
+      <h4>科技 · 智慧执法</h4>
+      <div class="q"><em>◆</em>用智慧给执法"加分"，以创新促执法"乘效"。<span class="use">谈智慧执法（2024 作文）</span></div>
+      <div class="q"><em>◆</em>一码关联、一码查询、一码追踪，让执法更加阳光高效。<span class="use">谈数字化留痕（2024）</span></div>
+      <div class="q">让数据多跑路，让群众少跑腿；让科技多出力，让执法更精准。<span class="use">科技类论述句</span></div>
+      <div class="q"><em>◆</em>以数字之"智"赋能执法之"治"。<span class="use">谈数字法治（2024 参考例文）</span></div>
+      <div class="q">科技赋能执法，让违法现象无处遁形。<span class="use">科技类结尾句</span></div>
+      <div class="q">科技是手段，为民是目的；善用科技，更要用好"人的温度"。<span class="use">谈科技与人文平衡</span></div>
+    </div>
+    <div class="qg">
+      <h4>队伍 · 素养</h4>
+      <div class="q"><em>◆</em>建设一支信念坚定、执法为民、敢于担当、清正廉洁的执法队伍。<span class="use">谈队伍建设（2021 材料）</span></div>
+      <div class="q"><em>◆</em>高素养的行政执法队伍，是从"有法可依"走向"良法善治"的可靠保障。<span class="use">谈队伍价值（2022 作文）</span></div>
+      <div class="q">打铁必须自身硬，执法者须先学法律、正其身。<span class="use">队伍类论述句</span></div>
+      <div class="q">为者常成，行者常至。<span class="use">结尾励志句</span></div>
+      <div class="q">刀要在石上磨，人要在事上练。<span class="use">谈培训历练</span></div>
+    </div>
+    <div class="qg">
+      <h4>共治 · 融合</h4>
+      <div class="q"><em>◆</em>和则一，一则多力，多力则强，强则胜物。<span class="use">谈融合治理（2026 作文）</span></div>
+      <div class="q"><em>◆</em>警力有限，民力无穷。<span class="use">谈社会参与（2026）</span></div>
+      <div class="q"><em>◆</em>行政执法不是简单的管与被管，执法者和被执法者只有相向而行、良性互动，才能不断开创善管善治的新局面。<span class="use">谈良性互动（2023 顾警官）</span></div>
+      <div class="q">共建共治共享，打造社会治理共同体。<span class="use">治理类点题句</span></div>
+      <div class="q"><em>◆</em>单打独斗"咸淡不济"，多手联弹方成合力。<span class="use">谈联合执法（2023 漾湖）</span></div>
+      <div class="q">进一次门、查多项事，对企业影响最小化、执法效能最大化。<span class="use">谈综合查一次（2025）</span></div>
+    </div>
+    <div class="qg">
+      <h4>营商环境 · 涉企服务</h4>
+      <div class="q">营商环境就是生产力、竞争力。<span class="use">营商类点题句</span></div>
+      <div class="q"><em>◆</em>"体检式监管、服务型执法"，为企业健康发展保驾护航。<span class="use">谈执法新模式（2025）</span></div>
+      <div class="q"><em>◆</em>三书同送：一决定、一告知、一建议，让企业看得明白、改得清楚。<span class="use">谈合规指导（2025）</span></div>
+      <div class="q">执法与服务有机结合，公平与效率统筹兼顾。<span class="use">谈涉企执法（2026）</span></div>
+      <div class="q">无事不扰、有求必应，为企业营造安心经营的环境。<span class="use">谈分级监管</span></div>
+      <div class="q">信用修复不是"松绑"，而是引导企业走上依法经营的正轨。<span class="use">谈信用修复（2023）</span></div>
+    </div>
+    <div class="qg">
+      <h4>大作文通用 · 开头与结尾</h4>
+      <div class="q">法治兴则国兴，法治强则国强。<span class="use">开头点题</span></div>
+      <div class="q">良法善治，乃治国之要。<span class="use">开头点题</span></div>
+      <div class="q"><em>◆</em>天下之事，不难于立法，而难于法之必行。<span class="use">论述执法落实（2023 参考答案）</span></div>
+      <div class="q"><em>◆</em>把"纸上的法治"变为"行动中的法治"。<span class="use">谈执法价值（2023 材料）</span></div>
+      <div class="q">道阻且长，行则将至；行而不辍，未来可期。<span class="use">结尾展望</span></div>
+      <div class="q"><em>◆</em>让法治成为护航发展、温暖民心的坚实力量。<span class="use">结尾升华（2025 参考例文）</span></div>
+    </div>
+  </div>
+  <p class="note">用法提示：每类金句先记住 2—3 句"场景锚定句"，练习作文时反复嵌入同一组句子，形成自己的稳定表达库；小题（概括/对策/应用文）慎用名言，以要点准确为主。</p>
+</section>
+
+<!-- ============================================================
+     08 说明
+============================================================ -->
+<section class="block" id="s8">
+  <div class="sec-head"><span class="sec-no">08</span><h2 class="sec-title">编制说明</h2></div>
+  <div class="sec-line"></div>
+  <div class="col-card">
+    <h4>语料与口径</h4>
+    <ul>
+      <li>语料为本地目录《江苏公务员考试真题申论》中 12 份真题文件（2016—2025 年度 PDF 及 2026 年度 PDF/DOCX），本报告通读了 2016—2025 十套全文并校核了 2026 年卷题目结构；</li>
+      <li>2026 年卷本地文件无法程序化解析，其主题与题目依据公开真题回忆版（从正公考、千寻申论等）交叉核对，材料细节以官方正式出版物为准；</li>
+      <li>字频结构（图 2-1、2-2）为通读语料的定性分级（0—3 级），反映"结构"而非机器级精确频次；年份、分值、题型均逐卷对照原文整理；</li>
+      <li>金句库中带 ◆ 者为真题原句（标注出处年份），其余为公考执法领域常用规范表述，建议在理解的基础上化用。</li>
+    </ul>
+  </div>
+  <p class="note">备考建议：本报告适合作为复习框架与语料库使用——先按"演进逻辑"把握 B 卷定位，再按"未来预测"圈定热点方向，最后用"答题要点＋金句库"做专项训练。</p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>数据与口径声明</b><br>
+    ① 语料：《江苏公务员考试〈申论〉（B 卷）（2016—2026）》，来源为本地目录 E:\江苏公务员考试真题申论 内 12 份真题文件；其中 2026 年卷本地 PDF/DOCX 无法程序化解析，主题与题目依据公开真题回忆版（从正公考、千寻申论等）校核。<br>
+    ② 字频结构为通读归纳的定性分级（0-3），非机器字符级统计；年份、分值、题型分布均逐一对照真题原文与作答要求整理。<br>
+    ③ 未来预测基于十年命题规律外推，属于备考参考意见，不构成任何考试承诺。金句库中的规范表述源自真题材料、参考答案及公考常用规范表达，标注了适用场景。
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script>
+(function(){
+  var years = ["2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"];
+  var words = ["执法","法治","创新","服务","群众","治理","科技/智慧/数字","温度/柔性","规范","基层","监管","处罚","企业/营商","普法","联合/协同","公平正义","队伍/人才","民生","文明/文化","生态/环境"];
+  var mat = [
+    [1,2,2,3,3,3,3,3,3,3,3],
+    [1,1,2,3,2,3,3,3,3,3,3],
+    [1,2,1,2,3,2,3,3,3,3,3],
+    [1,2,3,3,2,2,2,3,2,3,3],
+    [1,2,3,3,2,2,2,3,2,2,3],
+    [1,2,2,2,3,2,3,3,2,2,3],
+    [0,2,1,1,3,2,3,2,3,2,3],
+    [0,0,3,2,3,2,2,3,2,3,2],
+    [0,1,1,2,1,3,3,2,3,2,3],
+    [1,3,2,3,2,2,2,2,2,2,3],
+    [0,1,1,3,2,2,2,3,2,2,3],
+    [1,1,1,1,2,2,3,2,3,2,2],
+    [0,0,0,1,1,1,2,3,2,3,3],
+    [0,1,0,1,1,2,3,2,2,3,2],
+    [0,0,0,1,1,2,2,3,1,2,3],
+    [0,0,2,2,1,2,2,1,3,1,2],
+    [0,0,1,1,1,2,3,1,1,2,2],
+    [1,1,2,2,2,1,1,2,1,2,1],
+    [3,3,1,1,1,1,1,1,1,1,1],
+    [0,0,0,0,3,1,1,3,1,2,1]
+  ];
+  var heatData = [];
+  for(var i=0;i<words.length;i++){
+    for(var j=0;j<years.length;j++){
+      heatData.push([j,i,mat[i][j]]);
+    }
+  }
+  var hm = echarts.init(document.getElementById("heatmap"));
+  hm.setOption({
+    backgroundColor:"transparent",
+    tooltip:{trigger:"item",triggerOn:"click",renderMode:"richText",confine:true,
+      formatter:function(p){
+        var lv=["未出现","偶现","常见","高频"];
+        return words[p.value[1]]+" · "+years[p.value[0]]+"：<b>"+lv[p.value[2]]+"</b>";
+      }},
+    grid:{left:150,right:40,top:14,bottom:64,containLabel:false},
+    xAxis:{type:"category",data:years,splitArea:{show:true},axisLabel:{fontFamily:"Noto Sans SC",fontSize:12}},
+    yAxis:{type:"category",data:words,axisLabel:{fontFamily:"Noto Sans SC",fontSize:12.5}},
+    visualMap:{min:0,max:3,calculable:true,orient:"horizontal",left:"center",bottom:0,
+      inRange:{color:["#EDE8D9","#D9C9A8","#B08A4E","#26505F"]},
+      text:["高频","未出现"],textStyle:{fontFamily:"Noto Sans SC",fontSize:11}},
+    series:[{type:"heatmap",data:heatData,label:{show:false},
+      itemStyle:{borderColor:"#F5F2E9",borderWidth:2},
+      emphasis:{itemStyle:{shadowBlur:8,shadowColor:"rgba(0,0,0,.25)"}}}]
+  });
+
+  var totals = [];
+  for(var k=0;k<words.length;k++){
+    var s=0;for(var t=0;t<years.length;t++){s+=mat[k][t];}
+    totals.push({name:words[k],value:s});
+  }
+  totals.sort(function(a,b){return a.value-b.value;});
+  var wc = echarts.init(document.getElementById("words"));
+  wc.setOption({
+    backgroundColor:"transparent",
+    tooltip:{trigger:"axis",triggerOn:"click",renderMode:"richText",confine:true,
+      axisPointer:{type:"shadow"}},
+    grid:{left:8,right:50,top:10,bottom:10,containLabel:true},
+    xAxis:{type:"value",max:33,axisLabel:{fontFamily:"Noto Sans SC",fontSize:11}},
+    yAxis:{type:"category",data:totals.map(function(d){return d.name;}),
+      axisLabel:{fontFamily:"Noto Sans SC",fontSize:12.5}},
+    series:[{type:"bar",data:totals.map(function(d){return d.value;}),
+      barWidth:"62%",
+      itemStyle:{color:function(p){
+        var top8 = totals.slice(-8);
+        return top8.indexOf(totals[p.dataIndex])>=0 ? "#26505F" : "#B08A4E";
+      }},
+      label:{show:true,position:"right",fontFamily:"Noto Sans SC",fontSize:11,color:"#5C6A75"}}]
+  });
+
+  var tc = echarts.init(document.getElementById("types"));
+  var typeYears = ["2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026"];
+  var typeSeries = [
+    {name:"归纳概括",data:[20,20,15,20,20,15,10,20,15,20,20],color:"#26505F"},
+    {name:"综合分析",data:[15,15,20,15,15,20,15,15,20,15,15],color:"#B08A4E"},
+    {name:"提出对策",data:[25,0,0,0,0,0,20,25,0,25,25],color:"#A6402F"},
+    {name:"应用文",data:[0,25,25,25,25,25,15,0,25,0,0],color:"#3E7A68"},
+    {name:"大作文",data:[40,40,40,40,40,40,40,40,40,40,40],color:"#173A46"}
+  ];
+  tc.setOption({
+    backgroundColor:"transparent",
+    tooltip:{trigger:"axis",triggerOn:"click",renderMode:"richText",confine:true,
+      axisPointer:{type:"shadow"}},
+    legend:{bottom:0,textStyle:{fontFamily:"Noto Sans SC",fontSize:12}},
+    grid:{left:8,right:20,top:20,bottom:56,containLabel:true},
+    xAxis:{type:"category",data:typeYears,axisLabel:{fontFamily:"Noto Sans SC",fontSize:12}},
+    yAxis:{type:"value",max:100,axisLabel:{fontFamily:"Noto Sans SC",fontSize:11},
+      splitLine:{lineStyle:{color:"#E3DDCA"}}},
+    series:typeSeries.map(function(s){
+      return {name:s.name,type:"bar",stack:"t",data:s.data,barWidth:30,
+        itemStyle:{color:s.color,borderRadius:0},
+        emphasis:{focus:"series"}};
+    })
+  });
+
+  window.addEventListener("resize",function(){hm.resize();wc.resize();tc.resize();});
+})();
+</script>
+</body>
+</html>
