@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资料分析·错题病理诊断报告｜一刷185题失分漏斗与二刷90%执行手册</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F7F4EE'/%3E%3Cpath d='M8 20 L14 8 L18 14 L24 6' stroke='%23C0392B' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --paper:#F7F4EE; --paper2:#EFEAE0; --ink:#23272E; --ink2:#4A5568;
+  --red:#C0392B; --red-d:#9C2B1F; --red-bg:#F9E9E6;
+  --blue:#2F4156; --blue-bg:#E8EDF2;
+  --gold:#9A7B2F; --line:#D8D2C4;
+  --sans:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --serif:"Noto Serif SC","SimSun",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.75;
+  background-image:repeating-linear-gradient(0deg,rgba(120,110,90,.028) 0 1px,transparent 1px 4px)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+/* ===== header ===== */
+header.hero{background:var(--ink);color:#F2EFE8;padding:56px 0 40px;position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,57,43,.35),transparent 70%)}
+.hero .kicker{font-size:13px;letter-spacing:.35em;color:#C9A227;font-weight:500;margin-bottom:14px}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,4.6vw,46px);line-height:1.25;letter-spacing:.02em}
+.hero h1 em{font-style:normal;color:#E06C5B}
+.hero .sub{margin-top:14px;color:#C9C2B4;font-size:15px;max-width:760px}
+.hero .meta{margin-top:18px;font-size:12.5px;color:#8E887B;letter-spacing:.05em}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}
+.metric{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:16px 18px}
+.metric .v{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3vw,30px);color:#F2EFE8}
+.metric .v i{font-style:normal;color:#E06C5B}
+.metric .l{font-size:12.5px;color:#A9A294;margin-top:4px}
+/* ===== section ===== */
+section.block{margin:52px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:26px}
+.sec-no{font-family:var(--serif);font-weight:900;font-size:34px;color:var(--red);line-height:1}
+.sec-title{font-family:var(--serif);font-weight:700;font-size:22px;letter-spacing:.03em}
+.sec-tag{margin-left:auto;font-size:12px;color:var(--ink2);background:var(--paper2);padding:3px 12px;border-radius:99px}
+h3.sub3{font-family:var(--serif);font-weight:700;font-size:17px;margin:26px 0 10px;display:flex;align-items:center;gap:8px}
+h3.sub3::before{content:"";width:6px;height:18px;background:var(--red);border-radius:2px;flex:none}
+p.lead{color:var(--ink2);font-size:14.5px;margin:8px 0}
+.verdict{background:var(--red-bg);border-left:4px solid var(--red);padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14.5px}
+.verdict b{color:var(--red-d)}
+.callout{background:var(--blue-bg);border-left:4px solid var(--blue);padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.chart-box{background:#FCFAF5;border:1px solid var(--line);border-radius:10px;padding:14px 14px 6px}
+.chart-box .cap{font-size:13px;color:var(--ink2);padding:2px 6px 10px;text-align:center}
+.chart{width:100%;height:320px}
+table.tbl{width:100%;border-collapse:collapse;margin:14px 0;background:#FCFAF5;table-layout:fixed;font-size:13.5px}
+table.tbl th{background:var(--ink);color:#F2EFE8;font-weight:500;padding:9px 10px;text-align:left}
+table.tbl td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tbl tr:nth-child(even) td{background:#F7F4EE}
+/* ===== cases ===== */
+.case{background:#FCFAF5;border:1px solid var(--line);border-radius:12px;margin:18px 0;overflow:hidden}
+.case-top{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--paper2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.case-id{font-family:var(--serif);font-weight:900;font-size:15px;color:#fff;background:var(--red);border-radius:6px;padding:3px 10px}
+.case-title{font-weight:700;font-size:14.5px}
+.case-tag{font-size:12px;color:var(--ink2);background:var(--blue-bg);border-radius:99px;padding:2px 10px}
+.case-body{padding:14px 18px 16px}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.case-cell{background:#F8F5EE;border-radius:8px;padding:10px 13px;font-size:13.5px}
+.case-cell .h{font-size:12px;color:var(--red-d);font-weight:700;letter-spacing:.1em;margin-bottom:5px}
+.case-cell .h.gray{color:var(--blue)}
+.tag-red{color:var(--red-d);font-weight:700}
+.big-num{font-family:var(--serif);font-weight:900;font-size:26px}
+/* ===== sop ===== */
+.steps{counter-reset:step;margin:16px 0}
+.step{display:grid;grid-template-columns:64px 1fr;gap:16px;margin:12px 0;position:relative}
+.step::before{content:"";position:absolute;left:31px;top:52px;bottom:-16px;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step-no{width:64px;height:64px;border-radius:50%;background:var(--ink);color:#F2EFE8;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:900;font-size:20px;position:relative;z-index:1;flex:none}
+.step-no.red{background:var(--red)}
+.step-body{background:#FCFAF5;border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-size:14px}
+.step-body b{color:var(--red-d)}
+.time-table td:first-child{width:18%}
+.time-table td:nth-child(2){width:16%}
+.time-table td:nth-child(3){width:auto}
+.time-table td:nth-child(4){width:38%}
+.foot{margin:60px 0 30px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink2);font-size:12px;line-height:2}
+ul.list{margin:8px 0 8px 4px;padding-left:18px}
+ul.list li{margin:5px 0;font-size:14px;color:var(--ink2)}
+ul.list li b{color:var(--ink)}
+@media(max-width:860px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .case-grid{grid-template-columns:1fr}
+  .chart{height:280px}
+  .step{grid-template-columns:48px 1fr;gap:12px}
+  .step-no{width:48px;height:48px;font-size:16px}
+  .step::before{left:23px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">行测 · 资料分析 · 错题病理诊断</div>
+    <h1>一刷 <em>185 题</em>失分漏斗 → 二刷 <em>90%</em> 执行手册</h1>
+    <div class="sub">从宏观错题统计（md）、微观题库（json 185 条）、原书红笔扫描（book/）与配套图表（image/）四层证据出发，
+    给出「失分漏斗 → 视觉病理 → 认知盲区 → 魔鬼执行计划」四步诊断。</div>
+    <div class="meta">诊断对象：资料分析一刷全卷 ｜ 数据源：E:\资料分析 ｜ 有效错题：185 条（186 条记录，其中 1 条为误记）</div>
+    <div class="metrics">
+      <div class="metric"><div class="v">93<i> 题</i></div><div class="l">第四章综合资料错题，占总错题 50.3%</div></div>
+      <div class="metric"><div class="v">29.7<i>%</i></div><div class="l">提升进阶板块错误率（夯实仅 15.2%，翻倍）</div></div>
+      <div class="metric"><div class="v">12<i> 题</i></div><div class="l">全站正确率 ≥85% 的送分题仍然失分</div></div>
+      <div class="metric"><div class="v">110<i> / 176</i></div><div class="l">错误选项紧邻正确答案（63%＝估算精度问题）</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ===================== 模块一 ===================== -->
+<section class="block">
+  <div class="sec-head">
+    <div class="sec-no">01</div>
+    <div class="sec-title">宏观与微观的「失分漏斗」分析</div>
+    <div class="sec-tag">重灾区定位</div>
+  </div>
+
+  <p class="lead"><b>一句话结论：</b>绝对量上，第四章综合资料 93 题是重灾区；但真正杀死你的是 <b class="tag-red">「提升进阶」难度梯度（错误率翻倍）</b> 和 <b class="tag-red">「综合分析 + 比重家族」两个考点群</b>——不是多重数据查找。</p>
+
+  <div class="verdict">为什么第四章错了 93 题（占一半以上）？三个原因叠加：<br>
+  ① <b>基数大</b>：第四章占全书 400/1020 题（39.2%），错题自然多——但它的错误率 23.2% 只比文字资料 22.5% 略高，并非"四章中最难"；<br>
+  ② <b>每套材料多、图表杂</b>：综合资料＝表格＋图形＋文字混合，一次读题的信息切换成本最高；<br>
+  ③ <b>综合判断题密度大</b>：43 道综合分析错题中有 22 道落在第四章，第四章错题中有 35/93（37.6%）是"综合分析＋现期比重"。</div>
+
+  <div class="grid2">
+    <div class="chart-box"><div id="c_funnel" class="chart"></div><div class="cap">失分漏斗：1020 题 → 各章错题 → 核心失分点（题数）</div></div>
+    <div class="chart-box"><div id="c_chrate" class="chart"></div><div class="cap">各章错误率（错题数/该章总题量）</div></div>
+  </div>
+
+  <h3 class="sub3">进阶与基础的断崖：一刷真正的"重灾区"在难度梯度</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_part" class="chart"></div><div class="cap">夯实基础 vs 提升进阶错误率对比（错题数/题量）</div></div>
+    <div class="chart-box"><div id="c_kao" class="chart"></div><div class="cap">APP考点大类错题分布（前 10）</div></div>
+  </div>
+
+  <div class="callout"><b>关键数字：</b>提升进阶错误率 29.7%（95/320）＝夯实基础 15.2%（91/600）的约 2 倍。
+  其中错误率最高的板块不是综合，而是<b>文字资料·提升进阶 37.5%（30/80）</b>，其次表格提升 30.0%（12/40）、综合提升 29.4%（47/160）。
+  说明你的一刷缺口主要在「多步计算 + 术语复杂」的进阶题型，而不是入门题型没学会。</div>
+
+  <h3 class="sub3">微观定位：你到底死在哪个考点上？</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_zonghe" class="chart"></div><div class="cap">第四章综合资料内部考点细分（错题数）</div></div>
+    <div style="align-self:center">
+      <p class="lead">对照你问的三个嫌疑考点：</p>
+      <table class="tbl">
+        <colgroup><col style="width:26%"><col style="width:44%"><col style="width:30%"></colgroup>
+        <tr><th>嫌疑考点</th><th>实际错题数</th><th>结论</th></tr>
+        <tr><td><b>综合判断题（综合分析）</b></td><td>43 题（占比 23.2%，第一大失分点）</td><td class="tag-red">真凶</td></tr>
+        <tr><td><b>比重家族（现期/基期/两期/容斥）</b></td><td>约 41 题（现期比重 25 题为主）</td><td class="tag-red">真凶二号</td></tr>
+        <tr><td><b>平均数类（现期/基期/增长率）</b></td><td>25 题</td><td>次凶</td></tr>
+        <tr><td><b>多重数据查找（简单计算/查找）</b></td><td>仅 13 题</td><td>非主战场</td></tr>
+      </table>
+      <p class="lead" style="font-size:13px;color:var(--ink2)">特别注意：<b>现期比重错 25 题</b>（综合 13 + 文字 6 + 表格 3 + 其他 3），
+      是全站正确率 50~69% 的"中等题"里你失分最集中的单一公式——比"比重变化（两期）"多得多。</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ===================== 模块二 ===================== -->
+<section class="block">
+  <div class="sec-head">
+    <div class="sec-no">02</div>
+    <div class="sec-title">视觉病理诊断：5 个真实病例（红笔痕迹还原）</div>
+    <div class="sec-tag">核心重点</div>
+  </div>
+  <p class="lead">以下 5 例均取自你的原书扫描件（book/），结合红笔痕迹与配套图表（image/）还原作答时的真实动作变形。
+  每一例给出「病理定位 → 变形类型 → 处方」。</p>
+
+  <!-- 病例1 -->
+  <div class="case">
+    <div class="case-top">
+      <span class="case-id">病例 1</span>
+      <span class="case-title">ZL-001 ｜ P8·第 11 题 ｜ 现期平均数（统计表）</span>
+      <span class="case-tag">全站正确率 91%＝送分题</span>
+      <span class="case-tag">我选 D(95)｜标准 B(87)</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:14px">题干：2025 年 1~5 月，全国新能源乘用车月均销售多少万辆？表格 2025 列 7 个价位销量：11.0、30.2、87.9、58.3、146.7、66.9、34.0 万辆。</p>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">视觉证据（book/8.webp）</div>
+        第 11 题选项区有<b>红笔圈注落在 D</b>；表格 2025 列多值被圈画（红点分布于表格中下部与 Q11 区域）。正确列式：Σ=435，435÷5=87。
+        <br><b>D=95 的成因</b>：95×5=475，说明你的求和比正确值多出约 40——典型的<b>誊抄/加总环节数字错位</b>（某个价位值被错抄或加错），而非公式错误。</div>
+        <div class="case-cell"><div class="h gray">变形类型</div>
+        <span class="tag-red">计算执行层错误（数据誊抄/加总）</span>：公式 现期平均数＝总量÷月数 本身没问题，输在执行细节。
+        <br><br><b>处方</b>：① 求和多位数改用「分列竖式」并两两配对凑整复核（11+30+88+58+147+67+34）；② 平均数自我校验：结果必须落在数据区间内且与直觉总量吻合（435÷5 应一眼看出≈87，D=95 时总量 475 与各值量级明显不符）。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 病例2 -->
+  <div class="case">
+    <div class="case-top">
+      <span class="case-id">病例 2</span>
+      <span class="case-title">ZL-120 ｜ P194·第 14 题 ｜ 简单查找（综合资料）</span>
+      <span class="case-tag">全站正确率 90%＝送分题</span>
+      <span class="case-tag">我选 D(2019)｜标准 C(2017)</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:14px">题干：2015-2019 年，G 省农业科研和科技开发机构发表科学论文篇数最多的一年是？表格「科学论文合计」行：1519 / 1680 / <b>1891</b> / 1383 / 1862。</p>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">视觉证据（book/194.webp + image/综合_题79_材料图.png）</div>
+        第 14 题选项区有<b>划改痕迹，订正后用红笔勾选 C</b>（＝错后订正）。关键陷阱：2017=1891 与 2019=1862 仅差 29；
+        而同表下方「国外发表 605」「课题经费 68810」「课题数 2286」三行的最大值<b>全部落在 2019 列</b>——末列视觉引力极强。</div>
+        <div class="case-cell"><div class="h gray">变形类型</div>
+        <span class="tag-red">眼动/数据定位错误</span>：行找对了，但列扫描只看了后半段（2018、2019 两列）就下结论，没回扫 2017。
+        <br><br><b>处方</b>：① 查找题「先锁行、再逐列用笔尖划行」，最大/最小题养成「候选值圈出 + 两两 PK」动作；② 读到"最多/最少"立即标记所有候选，不许只看末列。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 病例3 -->
+  <div class="case">
+    <div class="case-top">
+      <span class="case-id">病例 3</span>
+      <span class="case-title">ZL-041 ｜ P98·第 14 题 ｜ 综合分析（文字资料）</span>
+      <span class="case-tag">全站正确率 93%＝送分题</span>
+      <span class="case-tag">我选 B(①③)｜标准 A(①②)</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:14px">题干：2015、2016 连续两年均实现增长的是：①国产多关节机器人销量 ②搬运与上下料机器人销量 ③圆柱坐标机器人销量 ④并联机器人销量占总销量比例。</p>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">视觉证据（book/96~98.webp）</div>
+        P98 第 13-15 题区手写解题标记密集（红点覆盖 y=80~507 全段），说明此篇你在反复核对。
+        材料原文：②「同比增长 22.0%，<b>增速放缓</b>」——即 2015 年增速仍高于 22%，两年都增长（正确）；
+        ③「圆柱坐标机器人的销售则出现<b>超过 30% 的下降</b>」——2016 明显不增长（错误）。选 B=①③ 意味着同时误判 ②、③。</div>
+        <div class="case-cell"><div class="h gray">变形类型</div>
+        <span class="tag-red">术语理解偏差 ＋ 综合分析核对不全</span>："增速放缓"被误读为"增长放缓＝不增长"；同时对 ③ 只扫到"超过 30%"就条件反射当成"增速超 30%"，没看到"下降"二字。
+        <br><br><b>处方</b>：① 建立术语黑名单：<b>增速放缓/回落/收窄＝仍正增长</b>，只有"下降/减少/负增长"才是负；② 综合分析逐条在题干旁标注「✓/✗/？」，先排除铁定错的（③），再逐个验证存疑的（②）。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 病例4 -->
+  <div class="case">
+    <div class="case-top">
+      <span class="case-id">病例 4</span>
+      <span class="case-title">ZL-185 ｜ P275·第 11 题 ｜ 增长量计算（综合资料）</span>
+      <span class="case-tag">全站正确率 93%＝送分题</span>
+      <span class="case-tag">我选 B(11427)｜解析结论 C(≈10436)</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:14px">题干：2018 年全国房地产开发投资比上年增长多少亿元？材料：2019 年投资 132194 亿元，同比增 9.9%，增速比上年加快 0.4 个百分点 → 2018 年增速 = 9.5%，2018 年投资 ≈ 132194÷1.099 ≈ 120000。</p>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">视觉证据（book/275.webp + image/综合_题68_材料图1.png）</div>
+        P275 第 11 题区有手写圈画（红点密集于 Q11 行）。<b>你选的 B=11427 ≈ 120000 × 9.5%</b>——
+        这是「现期 × r」的直接乘积（120000×0.095≈11400），少了关键一步：增长量必须再 ÷(1+r)。
+        正确：120000×9.5%÷(1+9.5%) ≈ 10436（C）。</div>
+        <div class="case-cell"><div class="h gray">变形类型</div>
+        <span class="tag-red">公式执行错误（截位估算丢分母）</span>：增长率 r 较小时用"现期×r"粗算，忘了增长量的完整式是 现期×r/(1+r)。
+        <br><br><b>处方</b>：① 增长量口诀「<b>现期乘 r 再除 (1+r)</b>」，落笔先写完整式再截位；② 反推校验：增长率 9.5% 时增长量必小于 120000×9.5%，B=11427 明显偏大即可排除。</div>
+      </div>
+      <div class="callout" style="margin-top:12px"><b>数据质量提示（重要）：</b>本题 json 的「APP标准答案」字段为 D(10278)，但其「APP解析」最终结论是"最接近 C 项，故正确答案为 C(≈10436)"——字段自相矛盾。
+      这正是宏观 md 中"约 3 条残余答案差异"之一。二刷以<b>解析结论 C</b> 为准，并建议你后续对全部 185 条用 APP 标准答案做一次全量复核。</div>
+    </div>
+  </div>
+
+  <!-- 病例5 -->
+  <div class="case">
+    <div class="case-top">
+      <span class="case-id">病例 5</span>
+      <span class="case-title">ZL-119 ｜ P193·第 10 题 ｜ 综合分析（综合资料·卫星产业）</span>
+      <span class="case-tag">全站正确率 67%＝中等偏难</span>
+      <span class="case-tag">我选 B｜标准 A</span>
+    </div>
+    <div class="case-body">
+      <p style="font-size:14px">题干：关于 2019 年全球卫星产业，能够推出的是？B 项：卫星发射服务业收入比 2017 年提高 13.8 个百分点。
+      图表：2018 年发射服务业增速 34.8%，2019 年增速 -21%。</p>
+      <div class="case-grid">
+        <div class="case-cell"><div class="h">视觉证据（book/193.webp + image/综合_题78_材料图.png）</div>
+        P193 第 10 题选项 B/C/D 区<b>红笔痕迹最密（406 个红点）</b>，说明你在 B 上反复比划。
+        B 的完整验证：间隔增长率 = r₁+r₂+r₁×r₂ = (-21%)+34.8%+(-21%)×34.8% ≈ 13.8%-7.3% = <b>6.5%</b>，远低于"提高 13.8 个百分点" → B 错。
+        正确选项 A(-2.4%) 需复用本篇前一小问的现成计算结果。</div>
+        <div class="case-cell"><div class="h gray">变形类型</div>
+        <span class="tag-red">间隔增长率公式漏项（漏 r₁×r₂）＋ 综合分析验证不全</span>：你很可能直接算了 (-21%)+34.8%=13.8% 就判定 B 对，漏掉交叉项；
+        且 A 有现成结果却优先去验计算量最大的 B。
+        <br><br><b>处方</b>：① 间隔增长率必须三项齐算；② 综合分析验证顺序「先易后难」：优先验有现成结果的选项（A），跳过需现场重算的（D）再做判断。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">五例变形归类小结：<b>誊抄/加总错（1 例）· 眼动滑行错（1 例）· 术语误读（1 例）· 公式丢分母（1 例）· 公式漏项+验证不全（1 例）</b>。
+  没有一例是"完全不会"，全部是<b>执行层动作变形</b>——这意味着二刷提升空间极大，90% 完全可达。</div>
+
+</section>
+
+<!-- ===================== 模块三 ===================== -->
+<section class="block">
+  <div class="sec-head">
+    <div class="sec-no">03</div>
+    <div class="sec-title">认知盲区：你意识不到的失分维度</div>
+    <div class="sec-tag">陷阱 + 心理</div>
+  </div>
+
+  <h3 class="sub3">3.1 出题人陷阱：你是"顺着大众走"还是"独创错法"？</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_trap" class="chart"></div><div class="cap">我的选项 vs 全站易错项：大众陷阱命中 / 个人独特错法</div></div>
+    <div class="chart-box"><div id="c_trapkao" class="chart"></div><div class="cap">各考点「陷阱命中率」（我选的＝全站易错项 的占比）</div></div>
+  </div>
+  <div class="callout"><b>解读：</b>185 题中 85 题（46%）你的选项恰好＝全站最多人选错的项，93 题（54%）是你的个人错法。
+  陷阱命中率最高的考点：<b>倍数类 8/12（67%）、增长率 13/27（48%）、综合分析 20/43（47%）、比重 18/41（44%）</b>——
+  这些题你是被选项设计（间隔、公式陷阱）牵着走，属于"可被预判的错"；其余 93 题个人错法，则与估算精度、誊抄、眼动相关。</div>
+
+  <h3 class="sub3">3.2 选项距离：63% 的错是"差一点点"</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_adj" class="chart"></div><div class="cap">错误选项与正确答案的位置关系</div></div>
+    <div style="align-self:center">
+      <p class="lead">176 道有明确选项作答的错题中，<b>110 题（63%）你选的选项紧邻正确答案</b>（A/B/C/D 序列相邻），
+      只有 66 题（37%）是思路性偏差（选到相隔选项）。</p>
+      <p class="lead">结论：<b>你最大的系统性失分不是"不会做"，而是"会做但没做对"</b>——
+      截位估算太粗糙（增长率、增长量、平均数的"近失"）、单一数据小错、最后一步取舍偏差。二刷的核心战场在"计算精度控制"，不在"知识点补课"。</p>
+      <div class="verdict" style="margin-top:10px">换算成得分：110 题若每题省 1 次复核，按资料分析平均正确率提升空间测算，<b>仅"近失题"就足以把正确率从 81.9%（185 错题反推）推向 90%+</b>。</div>
+    </div>
+  </div>
+
+  <h3 class="sub3">3.3 心理性失分：不是"后 5 题疲劳"，是两个独立病灶</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_pos" class="chart"></div><div class="cap">错题在套内题号（1-20）的分布，虚线＝均匀分布期望 9.25 题</div></div>
+    <div style="align-self:center">
+      <table class="tbl">
+        <colgroup><col style="width:30%"><col style="width:24%"><col style="width:46%"></colgroup>
+        <tr><th>假设</th><th>数据检验</th><th>结论</th></tr>
+        <tr><td>错题集中在每套后 5 题（16-20）</td><td>16-20＝47 题（25.4%），与均匀期望 25% 持平</td><td>不成立</td></tr>
+        <tr><td>第 20 题是单点重灾位</td><td>第 20 题错 19 题（10.3%）＝均匀期望 5% 的 2 倍</td><td class="tag-red">成立：套末综合判断题</td></tr>
+        <tr><td>综合分析题（材料收官题）系统性失分</td><td>43 题中 42 题位于位置 5/10/15/20（每篇材料第 5 题）</td><td class="tag-red">成立：第一大病灶</td></tr>
+      </table>
+      <p class="lead" style="font-size:13.5px;margin-top:8px"><b>心理性失分修正结论：</b>你的失分不是"大脑疲劳导致后 5 题信息提取下降"，而是：<br>
+      ① <b>每篇材料的收官综合判断题</b>（5/10/15/20 位）——需要四项验证、选项设计密集，是你的能力缺口而非体力问题；<br>
+      ② <b>套末放弃</b>：8 道未作答题中有 4 道集中在 P159-165 一带（ZL-098~102），且 2 道在位置 20——存在"某次练习时间失控、整段战略性放弃"的痕迹。</p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_diff" class="chart"></div><div class="cap">错题按全站正确率分层（难度分布）——送分/基础题占 40%</div></div>
+    <div style="align-self:center">
+      <p class="lead">你的一刷错题平均全站正确率 63.2%（中等偏易）。其中：</p>
+      <ul class="list">
+        <li><b>送分题（≥85%）12 题 + 基础题（70-84%）62 题＝74 题（40%）</b>——这些是 7~9 成考生都对、你失分的题，属于纯执行力问题，二刷第一优先清空；</li>
+        <li>中等题（50-69%）78 题——提升进阶的主战场，是二刷涨分的核心库存；</li>
+        <li>较难/极难（&lt;50%）34 题——学会取舍，只留方法论。</li>
+      </ul>
+      <div class="verdict" style="margin-top:10px"><b>最该先清零的 12 道送分题（编号）：</b>ZL-001、ZL-041、ZL-042、ZL-056、ZL-060、ZL-096、ZL-120、ZL-137、ZL-151、ZL-171、ZL-174、ZL-185。
+      其中 ZL-120（简单查找 90%）与 ZL-151（现期比重 90%）暴露的是"读完题就抢答"的习惯。</div>
+    </div>
+  </div>
+
+  <h3 class="sub3">3.4 数据质量提醒（影响二刷核对）</h3>
+  <p class="lead">宏观 md 已裁定原书答案 6 处错误（集中在第四章提升进阶第 6、8 套）并修正 1 条误记错题；
+  本次又发现 ZL-185 的「APP标准答案」字段与「APP解析」矛盾（解析结论 C）。<b>二刷对答案时以「APP解析」的最终结论为准</b>，
+  不要盲信选项速览表；md 亦提示仍有约 3 条残余答案差异未被捕获，建议对 185 条做一次全量复核后再开始二刷。</p>
+
+</section>
+
+<!-- ===================== 模块四 ===================== -->
+<section class="block">
+  <div class="sec-head">
+    <div class="sec-no">04</div>
+    <div class="sec-title">通往 90% 的「二刷」魔鬼执行计划（SOP）</div>
+    <div class="sec-tag">行动指南</div>
+  </div>
+
+  <h3 class="sub3">4.1 每日时间安排（100 分钟方案，可按碎片拆成 2 段）</h3>
+  <table class="tbl time-table">
+    <colgroup><col style="width:18%"><col style="width:16%"><col style="width:auto"><col style="width:38%"></colgroup>
+    <tr><th>时段</th><th>时长</th><th>任务</th><th>动作要点</th></tr>
+    <tr><td>热身</td><td>5 分钟</td><td>1 篇简单材料（4-5 题）</td><td>只练「读题→定位→列式」三连，限时 5 分钟，不追求算完</td></tr>
+    <tr><td>错题复做</td><td>30 分钟</td><td>当日 15-20 道旧错题</td><td>盖答案重做（见 4.2 五步法），错题按 A/B/C 级轮动</td></tr>
+    <tr><td>专项补弱</td><td>30 分钟</td><td>按考点日轮换（下表）</td><td>同类考点 10 题连做，做一题讲一题逻辑</td></tr>
+    <tr><td>限时小测</td><td>20 分钟</td><td>1 套完整 20 题计时</td><td>严格 28 分钟模拟，训练时间盒（见 4.4）</td></tr>
+    <tr><td>当日小结</td><td>5 分钟</td><td>错误类型打卡</td><td>六大类计数：数据定位/誊抄/公式/估算精度/术语/综合分析核对</td></tr>
+  </table>
+  <div class="callout"><b>考点日轮换（专项补弱 30 分钟的内容）：</b>周一综合分析（43 题库存）· 周二比重家族（41 题）· 周三增长率（27 题）· 周四平均数（25 题）·
+  周五增长量+倍数（21 题）· 周六全套模考计时 · 周日只复盘不做新题。</div>
+
+  <h3 class="sub3">4.2 错题复盘「标准动作」：五步法（每题 ≤90 秒，不许超）</h3>
+  <div class="steps">
+    <div class="step"><div class="step-no red">1</div><div class="step-body"><b>盖答案重做</b>：不看任何标注，独立重读题干→定位数据→列式→算出选项。这一步决定你是"真会"还是"背会"。</div></div>
+    <div class="step"><div class="step-no">2</div><div class="step-body"><b>红笔差异比对</b>：翻开一刷红笔痕迹，把「我这次的算式」与「一刷的算式」「标准解析」三方并排，圈出第一个分叉点：<b>数据取错？公式用错？截位丢分母？</b></div></div>
+    <div class="step"><div class="step-no">3</div><div class="step-body"><b>错误类型打卡</b>：归入六大类之一，计入当日小结。同类型连错 3 次＝触发一次 10 题专项。</div></div>
+    <div class="step"><div class="step-no">4</div><div class="step-body"><b>反向验证</b>：用答案反推合理性（平均数须落在区间内；增长量须小于现期×r；比重之和须≈100%）。验证不过＝一定算错。</div></div>
+    <div class="step"><div class="step-no">5</div><div class="step-body"><b>60 秒讲题</b>：把解题逻辑讲给"空气学生"听，60 秒内讲不清＝没真懂，标记为明日复做对象。</div></div>
+  </div>
+
+  <h3 class="sub3">4.3 错题分级管理与 30 天里程碑</h3>
+  <div class="grid3">
+    <div style="background:var(--red-bg);border-radius:10px;padding:14px 16px"><b style="color:var(--red-d)">A 级 · 送分题（12 题）</b>
+    <p style="font-size:13px;margin-top:6px">全站正确率 ≥85%。一周内清完，归因"低级失误"，用"答题节奏＋双检"消灭。</p></div>
+    <div style="background:var(--blue-bg);border-radius:10px;padding:14px 16px"><b style="color:var(--blue)">B 级 · 基础题（62 题）</b>
+    <p style="font-size:13px;margin-top:6px">70-84%。二刷主力，逐题走五步法，目标重错率 ≤10%。</p></div>
+    <div style="background:#F5EFE0;border-radius:10px;padding:14px 16px"><b style="color:#7A6320">C/D 级 · 中等及以上（112 题）</b>
+    <p style="font-size:13px;margin-top:6px">按考点分组轰炸；D 级（&lt;50% 共 34 题）只取方法论，考场直接划入舍弃名单。</p></div>
+  </div>
+  <table class="tbl" style="margin-top:14px">
+    <colgroup><col style="width:14%"><col style="width:44%"><col style="width:42%"></colgroup>
+    <tr><th>阶段</th><th>内容</th><th>通关标准（达到才进入下一阶段）</th></tr>
+    <tr><td>第 1 周</td><td>A 级 12 题清空 ＋ 综合分析专项 43 题</td><td>综合分析正确率 ≥60%，A 级 0 失分</td></tr>
+    <tr><td>第 2 周</td><td>比重家族 41 题 ＋ 倍数 12 题</td><td>比重/倍数正确率 ≥80%，陷阱命中率降为 0</td></tr>
+    <tr><td>第 3 周</td><td>增长率 27 ＋ 平均数 25 ＋ 增长量 9</td><td>计算类正确率 ≥85%，近失题占比降到 &lt;30%</td></tr>
+    <tr><td>第 4 周</td><td>提升进阶四章混刷 ＋ 每周 2 次全套计时（第五~八章新题）</td><td>全卷正确率 ≥90%（18/20），其中送分题 0 失分、综合判断题 ≤1 错</td></tr>
+  </table>
+
+  <h3 class="sub3">4.4 考场「舍弃策略」与「时间分配」（进考场前背下来）</h3>
+  <div class="grid2">
+    <div class="chart-box"><div id="c_time" class="chart"></div><div class="cap">资料分析 20 题时间预算（分钟）——前 4 题快、收官题留余量</div></div>
+    <div style="align-self:center">
+      <ul class="list">
+        <li><b>总预算 28 分钟</b>：材料 1-4 每题 ≤70 秒；每篇材料第 5 题（综合分析）≤90 秒；最后留 3 分钟兜底回扫。</li>
+        <li><b>做题顺序</b>：先表格/图形（查找型）→ 后文字/综合（计算型）；每篇先做前 4 题，第 5 题放该篇最后。</li>
+        <li><b>时间盒</b>：每篇 5 题限时 6 分钟，超时即停；未完成题按"高频选项"蒙选并标记，绝不恋战。</li>
+        <li><b>综合分析两分钟规则</b>：2 分钟内验证 ≤2 个选项仍无定论 → 立即蒙选跳过，回头有时间再验。</li>
+        <li><b>计算超时规则</b>：同一题列式后计算超过 90 秒无进展 → 放弃。资料分析 1 题 1.4 分钟，90 秒是止损线。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="verdict"><b>90% 的量化路径：</b>185 错题二刷后重错率 ≤20%（≤37 题）→ 全卷 20 题错 ≤2 题（90%）。
+  三个硬校验点：① 12 道送分题 0 失分；② 综合判断题（每套 4 道）错误 ≤1；③ 计算类"近失"降到可接受范围。
+  按你现有基础（错题全部为执行层变形），这个目标不是冲刺，是执行纪律问题。</div>
+
+</section>
+
+<!-- ===================== 附录 ===================== -->
+<section class="block">
+  <div class="sec-head">
+    <div class="sec-no">附</div>
+    <div class="sec-title">数据口径与已知缺口</div>
+  </div>
+  <div class="foot">
+    <b>数据来源：</b>E:\资料分析\资料分析_题库.json（186 条记录，其中 ZL-015 裁定为误记，有效 185 条）；
+    资料分析_题库综合分析.md（全书 51 套 1020 题结构、错题分布、7 处答案裁定）；book/ 原书红笔扫描件；image/ 配套数据图表。<br>
+    <b>口径：</b>错误率＝该板块错题数/总题量；全站正确率＝题库 APP 来源平台的题目全站正确率；相邻选项＝我的选项与正确答案在选项序列（A/B/C/D）中相邻；陷阱命中＝我的选项恰好等于 APP易错项。<br>
+    <b>已知缺口：</b>① 60 条错题套次无法精确定位（已按页码线性插值推算，7 条标注"不吻合"待人工复核）；② ZL-185 答案字段与解析矛盾（以解析 C 为准）；③ md 提示残余约 3 条答案差异未被捕获，建议二刷前全量复核；④ 部分书页红笔为圈划痕迹，无法逐字还原草稿，病理判断基于选项数字反推与页面痕迹位置交叉验证。
+  </div>
+</section>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script>
+window.addEventListener('error',function(e){var s=e.target;if(s&&s.tagName==='SCRIPT'){var d=document.createElement('script');d.src='https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js';d.onload=init;document.head.appendChild(d);}},true);
+var G={red:'#C0392B',blue:'#2F4156',gold:'#9A7B2F',gray:'#B9B2A4',ink:'#23272E'};
+function base(){return {color:[G.red,G.blue,G.gold,'#7A8B99','#C9A227','#A66B4E','#6B8E6B','#8B6B9E','#C76B6B','#5B7B8C'],tooltip:{trigger:'item',triggerOn:'click',renderMode:'richText',confine:true},textStyle:{fontFamily:'Noto Sans SC,Microsoft YaHei,sans-serif'}}}
+function init(){
+  // 漏斗
+  echarts.init(document.getElementById('c_funnel')).setOption(Object.assign(base(),{
+    series:[{type:'funnel',left:'12%',width:'76%',top:10,bottom:10,sort:'descending',gap:3,
+      label:{position:'inside',formatter:function(p){return p.name+'  '+p.value},color:'#fff',fontSize:12},
+      data:[{name:'全书总题量 1020',value:1020,itemStyle:{color:G.gray}},{name:'全书错题 185',value:185,itemStyle:{color:'#8B5E5A'}},
+        {name:'综合资料错题 93',value:93,itemStyle:{color:G.red}},{name:'综合判断+现期比重 35',value:35,itemStyle:{color:G.red}},
+        {name:'综合分析题 22（综合内）',value:22,itemStyle:{color:'#E06C5B'}}]}]}));
+  // 章节错误率
+  echarts.init(document.getElementById('c_chrate')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:50,right:60,top:30,bottom:30,containLabel:true},
+    xAxis:{type:'category',data:['表格资料','图形资料','文字资料','综合资料'],axisLabel:{fontSize:12}},
+    yAxis:{type:'value',name:'错误率 %',max:30,axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:44,data:[{value:13.1,itemStyle:{color:G.blue}},{value:11.2,itemStyle:{color:G.blue}},{value:22.5,itemStyle:{color:G.gold}},{value:23.2,itemStyle:{color:G.red}}],
+      label:{show:true,position:'top',formatter:function(p){return p.value+'%'+'\n('+(p.name==='表格资料'?21:p.name==='图形资料'?9:p.name==='文字资料'?63:93)+'题)'},fontSize:12,color:G.ink}}]}));
+  // 进阶vs夯实
+  echarts.init(document.getElementById('c_part')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:50,right:30,top:40,bottom:30,containLabel:true},
+    xAxis:{type:'category',data:['夯实基础','提升进阶'],axisLabel:{fontSize:13}},
+    yAxis:{type:'value',name:'错误率 %',max:35,axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:56,data:[{value:15.2,itemStyle:{color:G.blue}},{value:29.7,itemStyle:{color:G.red}}],
+      label:{show:true,position:'top',formatter:function(p){return p.value+'%（'+(p.dataIndex===0?'91/600':'95/320')+'）'},fontSize:12,color:G.ink}}]}));
+  // 考点大类
+  echarts.init(document.getElementById('c_kao')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:110,right:40,top:20,bottom:30,containLabel:true},
+    xAxis:{type:'value',axisLabel:{fontSize:11}},
+    yAxis:{type:'category',data:['容斥类','比值计算','其他','增长量类','简单计算/查找','倍数类','平均数类','增长率类','比重类','综合分析'],axisLabel:{fontSize:12}},
+    series:[{type:'bar',barWidth:16,data:[1,6,9,9,13,12,25,27,41,43].map(function(v,i){return {value:v,itemStyle:{color:i>6?G.red:i>3?G.gold:G.blue}}}),
+      label:{show:true,position:'right',fontSize:11}}]}));
+  // 综合考点细分
+  echarts.init(document.getElementById('c_zonghe')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:120,right:40,top:20,bottom:30,containLabel:true},
+    xAxis:{type:'value',axisLabel:{fontSize:11}},
+    yAxis:{type:'category',data:['两期比重','基期计算','基期平均数','简单查找','简单加减计算','年均增长率','简单计算','简单比较','增长量比较','基期和差','比值计算','一般增长率比较','两集合容斥','现期倍数','现期平均数','一般增长率','现期比重','综合分析'],axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:13,data:[1,1,1,2,2,2,2,2,2,2,4,5,3,6,6,8,13,22].map(function(v){return {value:v,itemStyle:{color:v>=10?G.red:v>=5?G.gold:G.blue}}}),
+      label:{show:true,position:'right',fontSize:10.5}}]}));
+  // 陷阱 vs 个人
+  echarts.init(document.getElementById('c_trap')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'item',triggerOn:'click',renderMode:'richText',confine:true},
+    legend:{bottom:0,textStyle:{fontSize:12}},
+    series:[{type:'pie',radius:['38%','68%'],center:['50%','44%'],
+      label:{formatter:'{b}\n{d}%',fontSize:12},
+      data:[{name:'命中大众陷阱\n(我的选项=全站易错项)',value:85,itemStyle:{color:G.red}},
+        {name:'个人独特错法',value:93,itemStyle:{color:G.blue}},
+        {name:'未作答',value:7,itemStyle:{color:G.gray}}]}]}));
+  // 陷阱按考点
+  var tk=[['倍数类','8/12','67%'],['增长率类','13/27','48%'],['综合分析','20/43','47%'],['比重类','18/41','44%'],['平均数类','9/25','36%'],['增长量类','6/11','55%'],['简单计算/查找','2/13','15%']];
+  echarts.init(document.getElementById('c_trapkao')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'item',triggerOn:'click',renderMode:'richText',confine:true,formatter:function(p){return p.name+'\n陷阱命中 '+p.value+'%'}},
+    grid:{left:100,right:46,top:20,bottom:26,containLabel:true},
+    xAxis:{type:'value',max:80,axisLabel:{formatter:'{value}%',fontSize:11}},
+    yAxis:{type:'category',data:tk.map(function(t){return t[0]+'  ('+t[1]+')'}),axisLabel:{fontSize:11.5}},
+    series:[{type:'bar',barWidth:15,data:[67,48,47,44,36,55,15].map(function(v){return {value:v,itemStyle:{color:v>=50?G.red:v>=40?G.gold:G.blue}}}),
+      label:{show:true,position:'right',formatter:'{c}%',fontSize:11}}]}));
+  // 相邻
+  echarts.init(document.getElementById('c_adj')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'item',triggerOn:'click',renderMode:'richText',confine:true},
+    legend:{bottom:0,textStyle:{fontSize:12}},
+    series:[{type:'pie',radius:['40%','68%'],center:['50%','44%'],
+      label:{formatter:'{b}\n{d}%',fontSize:12},
+      data:[{name:'紧邻正确答案\n(估算精度问题)',value:110,itemStyle:{color:G.red}},
+        {name:'相隔选项\n(思路性偏差)',value:66,itemStyle:{color:G.blue}}]}]}));
+  // 位置分布
+  var pos=[3,7,9,11,9,7,9,11,13,15,4,12,6,12,11,4,9,7,8,19];
+  echarts.init(document.getElementById('c_pos')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:40,right:20,top:30,bottom:30,containLabel:true},
+    xAxis:{type:'category',data:Array.from({length:20},function(_,i){return i+1}),name:'套内题号',axisLabel:{fontSize:11}},
+    yAxis:{type:'value',name:'错题数',axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:'60%',data:pos.map(function(v,i){return {value:v,itemStyle:{color:i===19?G.red:(i===9?G.gold:G.blue)}}}),
+      label:{show:true,position:'top',fontSize:10}},
+      {type:'line',data:Array(20).fill(9.25),lineStyle:{type:'dashed',width:1.5,color:G.gray},symbol:'none',tooltip:{show:false}}]}));
+  // 难度分布
+  echarts.init(document.getElementById('c_diff')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:44,right:30,top:30,bottom:36,containLabel:true},
+    xAxis:{type:'category',data:['送分题 ≥85%','基础 70-84%','中等 50-69%','较难 30-49%','极难 <30%'],axisLabel:{fontSize:11.5,interval:0}},
+    yAxis:{type:'value',name:'错题数',axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:42,data:[12,62,78,30,4].map(function(v,i){return {value:v,itemStyle:{color:i===0?G.red:i===1?G.gold:G.blue}}}),
+      label:{show:true,position:'top',formatter:function(p){return p.value+(p.dataIndex===0?'题\n(必清零)':'题')},fontSize:11}}]}));
+  // 时间预算
+  echarts.init(document.getElementById('c_time')).setOption(Object.assign(base(),{
+    tooltip:{trigger:'axis',triggerOn:'click',renderMode:'richText',confine:true},
+    grid:{left:44,right:30,top:30,bottom:30,containLabel:true},
+    xAxis:{type:'category',data:['材料1\n(1-5题)','材料2\n(6-10题)','材料3\n(11-15题)','材料4\n(16-20题)','兜底回扫'],axisLabel:{fontSize:11.5,interval:0}},
+    yAxis:{type:'value',name:'分钟',max:9,axisLabel:{fontSize:11}},
+    series:[{type:'bar',barWidth:44,data:[{value:6,itemStyle:{color:G.blue}},{value:6,itemStyle:{color:G.blue}},{value:6,itemStyle:{color:G.gold}},{value:7,itemStyle:{color:G.gold}},{value:3,itemStyle:{color:G.red}}],
+      label:{show:true,position:'top',formatter:'{c} 分钟',fontSize:11.5}}]}));
+}
+if(window.echarts){init()}
+</script>
+</body>
+</html>
