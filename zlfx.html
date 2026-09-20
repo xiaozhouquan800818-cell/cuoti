@@ -68,7 +68,8 @@ main{padding:12px;max-width:920px;margin:0 auto}
 .opt.cross{background:var(--bad-bg);border-color:#f3cec8}
 .opt b{color:var(--brand)}
 details{border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fbfcfe;margin-top:8px}
-details summary{cursor:pointer;font-size:14px;color:var(--brand);font-weight:600}
+details summary{cursor:pointer;font-size:14px;color:var(--brand);font-weight:600;min-height:28px;list-style-position:inside}
+details[open] summary{margin-bottom:6px;border-bottom:1px dashed var(--line);padding-bottom:6px}
 .sol{white-space:pre-wrap;font-size:14px;color:var(--ink2);margin-top:8px}
 .answerline{font-size:14px;margin:6px 0}
 .filters{display:flex;gap:8px;margin-bottom:12px}
@@ -399,13 +400,15 @@ function reviewCard(r){
     h += '</div>';
   }
   if (r.bimgs && r.bimgs.length){
-    h += '<div class="imgtip">原书批注图 ' + r.bimgs.length + ' 张 · 点击图片可全屏放大（双指缩放 / 双击放大）</div>';
+    h += '<details class="fold"><summary>原书批注图 ' + r.bimgs.length + ' 张（点击展开）</summary>';
+    h += '<div class="imgtip">点击图片可全屏放大（双指缩放 / 双击放大）</div>';
     h += '<div class="imgs">';
     r.bimgs.forEach(function(p){ h += imgHtml(p); });
     h += '</div>';
+    h += '</details>';
   }
   if (r.sol){
-    h += '<details><summary>查看解析</summary><div class="sol">' + esc(prettySol(r.sol)) + '</div>';
+    h += '<details class="fold" open><summary>APP解析</summary><div class="sol">' + esc(prettySol(r.sol)) + '</div>';
     if (r.src) h += '<div class="meta" style="margin-top:8px"><span class="tag">' + esc(r.src) + '</span></div>';
     h += '</details>';
   }
@@ -588,7 +591,7 @@ function submitGroup(gid){
     }
     var solBox = $("sol" + gid + "_" + qi);
     if (solBox && r.sol){
-      solBox.innerHTML = '<details><summary>查看解析</summary><div class="sol">' + esc(prettySol(r.sol)) + '</div></details>';
+      solBox.innerHTML = '<details class="fold" open><summary>APP解析</summary><div class="sol">' + esc(prettySol(r.sol)) + '</div></details>';
     }
   });
 
