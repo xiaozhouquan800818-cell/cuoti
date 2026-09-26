@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>言语理解：中心理解-分述句特征 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《言语理解：中心理解-分述句特征 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 言语理解模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 7 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">言语理解：中心理解-分述句特征 核心错题 · 共 7 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY012 (50-2)</b><span class="q-page">书本第 50 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 分述句特征-引入铺垫</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">文艺评价是评价主体拥有对文艺作品的鉴赏能力，结合自己的价值观念表达自己对作品的感受。从本质上来说，文艺评价是一种以人类的价值判断为基础的审美行为，审美产生的根本原因是人类的社会实践活动，人的感觉和认知必须和人所处的身体和环境相结合，这构成审美判断的有机组成部分。人工智能应用于文艺评价，是将评价的主体由人变成了智能机器。人工智能通过机器学习、自然语言处理等技术，对文艺作品的评论只能是一种认知性的识别，机器需要通过对人类以往文艺作品的学习而产生评判标准。关于人工智能应用于文艺评价，作者的观点是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">人工智能可为文艺评价提供技术性标准但无法产生审美</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人工智能可以从整体意识的层面来评价和鉴赏文艺作品</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">人工智能进行的文艺评价会比以人为主体的评价更科学</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">人工智能评价会对大众的审美标准和评价尺度产生影响</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY013 (51-4)</b><span class="q-page">书本第 51 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 分述句特征-多角度论述</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">汉字从产生的那一刻起，就担负起承载中华文化的重任。几千年来，汉字一直顽强地坚持自己独特的表意性，始终没有割断同文化的联系，与中华文化相伴而行，共同谱写了中华文明的不朽篇章。中国自古以来就十分重视汉字作为文化载体的重要社会作用。早在东汉时期，许慎在《说文解字·叙》里就作出了"文字者，经艺之本，王政之始，前人所以垂后，后人所以识古"的著名论断。文字是一切经典文献赖以存在的基础，是社会政治得以实施的首要凭借，是前人将知识和智慧传给后人、后人了解和学习古人的最重要的工具。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">汉字是传承中华文化的重要载体</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">文字是经典文献赖以存在的基础</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">汉字是中华文明的重要组成部分</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">文字是传播中华文化的重要工具</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY014 (51-5)</b><span class="q-page">书本第 51 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-因果</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">大家知道，我们常见的小贝壳通常是开口向下，可以通过肌肉移动。但砗磲一般都是开口向上固定在珊瑚礁盘上，一辈子都不会移动。这个固定不动的特征对于我们做古天气研究非常重要。如果砗磲不停地移动，那么所记录的气候环境信息就会随位置的改变而受到干扰。好在砗磲一辈子不移动，就像一个海洋气象站一样，在同一个位置不停地记录周边的海洋、天气、气候信息，简直就是天生的"地质气象站"。这段文字旨在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">砗磲进化出了一种极为罕见的生物特性</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">利用砗磲可以进行气候历史的理论研究</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">砗磲是一种非常理想的古天气研究载体</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">砗磲化石中留存着古代天气变化的秘密</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY015 (53-10)</b><span class="q-page">书本第 53 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 分述句特征-其他、关联词-转折、主题词、分述句特征-引入铺垫</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在市场经济时期，劳动密集型制造工厂普遍采用流水线技术，工人被高度"去技能化"，几乎不需要技能便可完成装配操作，企业没有需求也没有动力去培养中高级技术工人。但是，当一个国家的产业结构向中高端迈进时，高水平职业教育的支撑作用就会显现出来。技术进步与人力资本相互影响、相互促进：企业引进的高端生产线，需要技术工人去操作和维护，否则技术改造和升级就无法实现；如果没有配套的职业技能培训体系，企业的转型升级就难以达到预期效果。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">产业结构转型升级需要职业教育的支撑</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">技术进步对人力资本提出了更高要求</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"技工荒"会随产业结构升级更趋严重</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">职业技能培训需求与经济增长有相关性</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY016 (57-2)</b><span class="q-page">书本第 57 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-对策、分述句特征-引入铺垫、分述句特征-多角度论述</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">从行政管理链条看，制度建设处于前端，行政复议处于末端。行政复议案件的产生，必然经过一般性行政管理规定、行政机关具体实施、产生具体行政行为、不服行政行为申请行政复议等环节。每个复议案件或多或少反映了行政管理中存在的问题。行政机关，特别是作为行政复议被申请人的行政机关，要善于"抓末端、治已病"。如果是个案具体实施问题，可以个案纠正；如果是制度性、普遍性问题，则要对制度进行查漏补缺；如果是制定制度时不曾预见的新问题，更要予以关注，适时进行规范，避免小问题变成大问题。作者通过这段文字想说的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">善用行政复议可以提升行政管理水平</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">对行政复议案件要具体问题具体分析</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">行政管理链条是环环相扣的有机整体</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">行政复议案件是行政管理问题的外化</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY017 (58-5)</b><span class="q-page">书本第 58 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词、分述句特征-引入铺垫</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">与工业经济、数字经济相比，生物经济最大的特点是打破了数字经济"赢者通吃"的商业模式，具有资源依赖性强、技术多样性高、市场垄断程度低等特点，为生物资源丰富、生物技术相对落后的国家提供了一次难得的、可能实现跨越式发展的机遇。我国生物资源丰富、市场潜力大，生物技术已有良好基础，做强做大生物经济，不仅能有效缓解甚至最终解决粮食安全、能源安全、环境安全、生物安全等问题，而且能够大幅度提高人民健康水平，推进新一轮经济增长。这段文字旨在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">我国生物经济的发展现状与前景研判</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">全球生物经济演进的规律和发展布局</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">中国面临生物经济的巨大机遇和挑战</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">生物经济对构建新发展格局意义重大</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY018 (59-7)</b><span class="q-page">书本第 59 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">中国艺术中的色彩大致可分为三个子系统：官方系统，侧重于观念与象征性；民间系统，侧重于装饰与审美；文人士大夫系统，有意弱化色彩的视觉冲击力，偏向黑白素雅。南宋诗人陈与义写水墨梅花的名句"意足不求颜色似"，成为许多文人重水墨、轻彩色的理论表述，文人话语也似乎逐渐成为中国艺术史的主旋律。不过，这其实只是部分人的审美倾向造成的史实遮蔽。在中国人生活的各个方面，在中国艺术更广大的领域，包括建筑装饰、宫廷艺术、服饰、陶瓷等，色彩的探索和应用从未停止，只是缺乏相应的理论探讨而已。这段文字意在强调：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">中国艺术中的色彩子系统</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">中国艺术中色彩丰富的事实</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">中国艺术理论富有诗意的特点</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">文人审美倾向对中国艺术的影响</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

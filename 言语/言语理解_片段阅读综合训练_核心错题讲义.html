@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>言语理解：片段阅读综合训练 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《言语理解：片段阅读综合训练 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 言语理解模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 24 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">言语理解：片段阅读综合训练 核心错题 · 共 24 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY026 (108-7)</b><span class="q-page">书本第 108 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">配音在当下是有市场的。有些人不喜欢看书，却喜欢"听书"；有些时候没办法解放双手双眼，却可以通过"听书"提高时间利用效率。有的人夜跑时听书，半年里也能听完十来本文学名著。一些地方设立"声音图书馆"，即使不识字也能"看书"；越来越多的阅读平台推出听书功能，实现"可听化"；一些有声小说不满足于"一人读"的传统配音，为每个角色和旁白招募配音者。移动互联时代，多元的阅读场景增加了人们对配音人员的需求，雨后春笋般涌现的配音兼职招聘信息自然也就不足为奇了。根据这段文字，听书配音市场需求增加的原因不包括：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">有听书功能的平台与日俱增</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">有些人对"听书"有特别的偏好</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"听书"可以降低时间成本</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">一人配多角时很难自如切换</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY027 (108-9)</b><span class="q-page">书本第 108 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">随着时代发展，匠人制作漆器使用的材料也不断突破。如今，人工合成材料已被运用到漆器制造领域。脱胎工艺是漆艺中的重要一环。我国科研人员尝试使用人工合成材料制作葫芦瓶母胎，用高密度EPS材料替代笨重的木胎，并用三维雕刻机将EPS材料雕刻成大葫芦造型。使用三维雕刻机加工EPS材料，获得的造型更精准，成本也更低。造型完成后，再继续进行传统手工裱布刮灰步骤，重复该步骤5次制成夹纻胎。最后，利用EPS材料遇到稀释剂或汽油会溶解的特性，便能轻松从夹纻胎中取出大葫芦造型。这段文字旨在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">我国漆器制造技术创新兼顾传统核心技艺传承</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">我国漆器脱胎工艺运用人工合成材料技术成熟</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">高密度EPS材料在漆器脱胎工艺中有多种优势</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">高密度EPS材料已被应用于漆器制造的全流程</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY028 (109-10)</b><span class="q-page">书本第 109 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">"梅瓶"一词，最早见于宋代，多是当时文人对瓶中插梅审美意象的吟咏，与今人习称的"梅瓶"无关。宿白先生指出，今人所称的宋代"梅瓶"，宋人称"经瓶"，并称这种长腹瓶为"经瓶"的原因，重在用"经"道出其深细长腹的特点。故宋人又称其为"长瓶"。明人并无"梅瓶"称谓，所谓明代"梅瓶"，实为明人流行的盛酒之具，明人多以酒樽、酒瓶名之。今人"梅瓶"之称谓，多援引清未许之衡《饮流斋说瓷》中"梅瓶……口径之小仅与梅之瘦骨相称，故名曰梅瓶也"的说法。不过，"梅瓶"插花在晚明已成风尚，而且，从文献来看，今人"梅瓶"之概念，至迟在清康熙年间已形成。对这段文字理解正确的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">今人所称的"梅瓶"最早为宋代文人吟咏插梅之物</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">宋人称"经瓶"为"长瓶"是据其深细长腹的特点</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">明代多用于盛酒的"梅瓶"到清代始为插花的器皿</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">清康熙以前"梅瓶"的外形和功用一直处于发展中</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY029 (113-2)</b><span class="q-page">书本第 113 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-因果、主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人工智能所带来的智能化和自动化社会发展趋势提升了社会生产效率，并对传统公共管理者的决策和服务角色带来挑战。人工智能作为新型的权利所有者逐渐代替传统公共管理者，作为基于计算逻辑、算法规则和数据的公共管理者参与到社会治理过程之中，从而使未来人工智能场景下的公共管理者角色由"事务性供给"转向"公共性维护"，这一趋势在将传统的公共管理者从社会事务管理中解放出来的同时，也淡化了传统公共管理者在社会中的管理者角色，使社会治理逐渐呈现出由自由平等的生产者联合治理的特点。这段话所要表达的中心思想是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">人工智能消除公共权利</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人工智能加速生产者联合</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">人工智能提高技术治理能力</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">人工智能推动社会自主管理的实现</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY030 (114-4)</b><span class="q-page">书本第 114 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-对策、主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">文化重在化人，但能否真正用文化引导人们坚定理想、塑造灵魂、涵育品德、砥砺人格等，要看"化"的水平。如何使以文化人"化"得合情理、"化"得受欢迎、"化"得效果好，考验着我们的文化工作水平。习近平总书记强调："要润物细无声，运用各类文化形式，生动具体地表现社会主义核心价值观，用高质量高水平的作品形象地告诉人们什么是真善美，什么是假恶丑，什么是值得肯定和赞扬的，什么是必须反对和否定的。"根据这段文字，作者意在强调：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">文化工作的目的和意义</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">文化工作水平的重要性</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">以文化人要注重文化传播的方式方法</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">以文化人要坚持社会主义核心价值观</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY031 (114-6)</b><span class="q-page">书本第 114 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">生活在网络环境中，没有所谓的"空闲时间"，通勤时刷短视频、吃饭时看直播，甚至洗澡时也要戴着耳机听播客。人们即使在休憩或旅行中，也难以找到独处的状态：度假时，朋友圈定位与九宫格照片发布的优先级高于欣赏日出日落；户外运动时，隔十分钟就想看看手机，生怕错过"重要"信息。安静让他们变得烦躁不安，仿佛独处意味着被世界抛弃，必须用持续的信息输入填满每分钟。这种对"空闲"的恐惧，本质上是对自我的陌生——当剥离了网络标签和社交互动，我们是否还能认识那个独处的自己？文中"对'空闲'的恐惧"指的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">担心错过网络世界的重要信息</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">害怕在独处中暴露真实自我</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">无法适应没有即时反馈的生活</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">因网络社交中断而迷失自我</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY032 (116-10)</b><span class="q-page">书本第 116 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">相对同时代诗人，李商隐的特殊之处在于倾注相当的心力于人的内心，运用隐喻、暗示、象征，跳跃性意象的采用和堆叠，突破了从上古到当代文坛上"直抒胸臆、文以载道"的传统主流，定义了新的诗歌逻辑。这种"现代意识"在当时是独创且超前的，并且后世模仿者中再无超越者，直到二十世纪以后被重新研究。一个古典诗人，提前几个世纪就注意到语言、意象、潜意识、超现实这些富有价值的领域，付之爱情命题并凝固成诗的琥珀，是十分厉害的。对这段内容理解正确的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">"直抒胸臆、文以载道"的传统主流只有李商隐在努力突破</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">李商隐的诗歌创作，具有独创且非常超前的"现代意识"</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">李商隐的诗歌主要成就集中在他的爱情诗，后世再无超越者</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">语言、意象、潜意识、超现实这些领域是现代诗歌的特质</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY033 (117-14)</b><span class="q-page">书本第 117 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">美学经济时代，伴随着消费需求与消费体验的不断升级，以美学价值为核心的生产要素在产品的价值生产、企业的品牌建设以及产业价值链的提升中发挥着越来越重要的作用。电影产业作为当前经济中吸附资本能力最强、生产时效最快、引爆审美迭代和文化价值翻新变异的内容产业，对产业升级和经济增长的重要性不言而喻。电影是当代新文化、新时尚、新美感、新神话、新观念的重要策源地，牢牢占据着内容产业的头部位置，既对社会整体风尚与价值发挥引领作用，也会优化赋能全经济产业链。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">电影产业长期处于内容产业的龙头位置</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">电影对中国产业的转型升级具有重要推动作用</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">电影产业的发展引领着美学经济时代的整体风尚</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">美学经济时代以价值为核心的生产要素愈发重要</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY034 (117-15)</b><span class="q-page">书本第 117 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">传统的文明标准有三个，即文字、青铜器和城市。但后来许多考古学家发现，由于区域不同，文明的差异也很大，这个判断标准不但行不通，还会给考古工作带来阻碍。现如今，国际上对文明的判断标准主要是：已进入国家社会形态，具有一套礼仪系统和统治管理制度。良渚文化虽没有青铜器和较为成熟的文字，但具有早期国家社会形态和较为完整的礼仪系统以及管理制度，还具有许多东方文明的因素。有良渚文化考古研究员甚至认为，良渚文化是东方早期一个集大成的文明。这段文字意在强调：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">城市应该成为认定文明的首要标准</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">良渚文化符合通行的文明判断标准</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">传统的文明评判标准仍具有现实意义</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">良渚文化颠覆了传统上对文明的认识</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY035 (119-18)</b><span class="q-page">书本第 119 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-对策</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在何尊的铭文中，有一句话是"恭德裕天"。其中的"德"字，相较甲骨文，底部多出"心"字部首。有专家认为，有"心"方为"德"，表明在三千多年前"德政"这一政治理念业已出现，这为人们理解中国的政治传统提供了有益启示。不同时代、地域青铜器之间的关系"图谱"，青铜器的材质分析、工艺重建和产地溯源，青铜器不同器型与纹饰的来源、演变……亟待破译的"青铜密码"还有很多，需要我们拓宽视野，运用多种研究方法、技术手段进行综合分析，进一步推动相关学科发展。这段文字意在强调：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">青铜器的研究领域十分广阔</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">青铜器亟待进一步深入研究</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">青铜器研究有益于挖掘传统文化</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">青铜器研究具有极其重要的价值</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY036 (119-19)</b><span class="q-page">书本第 119 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-对策、主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">钙钛矿太阳能电池属于新概念太阳能电池。经过多年发展，这类电池的效率得到显著提升，但是稳定性仍是一道难题。最近，科学家首次发现钙钛矿阳离子面外分布不均匀是影响电池性能的主要原因。研究团队通过研究设计制备出均匀化的钙钛矿薄膜，获得了最高达26.1%的光电转换效率。这一研究开辟了提升电池器件稳定性的新途径，为进一步得到高效、稳定的钙钛矿太阳能电池提供了明确方向。对这段文字主旨概括最恰当的一项是（ ）</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">钙钛矿太阳能电池研发已取得突破性进展</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">钙钛矿太阳能电池稳定性差的原因被发现</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">钙钛矿太阳能电池稳定性难题被有效破解</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">钙钛矿太阳能电池发展前景将更高效稳定</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY037 (122-9)</b><span class="q-page">书本第 122 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-因果、主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">火星大气稀薄，表面沙尘易形成尘暴。尘暴大小不一，小的只覆盖一小块区域；大的能席卷整个火星，持续数周甚至数月。尘暴发生时，大量沙尘颗粒高速运动，相互摩擦产生静电。火星沙尘以硅酸盐矿物为主，本身易带电；同时，火星大气稀薄，缺乏足够气体分子中和电荷，使沙尘颗粒能积累大量静电。当电荷积累到一定程度，就会引发大气放电——类似地球闪电，但规模更小、更频繁，被称为"静电放电"。火星沙尘颗粒在缺氧、低气压环境下发生静电放电时，会引发一系列电化学反应。这个反应可以将大气中的二氧化碳和含水矿物中的水结合在一起形成甲烷。这段文字主要介绍了火星上：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">沙尘暴静电放电的化学机制</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">大气环境与静电放电的关系</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">静电放电如何促成甲烷生成</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">放电现象及其潜在化学效应</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY038 (123-11)</b><span class="q-page">书本第 123 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人们一般都喜欢追逐日出或日落景观，但绝大部分人可能没意识到，其实在与太阳相反一侧的天空，也隐藏着鲜为人知的景观，比如说人们能看到的两种大尺度影子景观——"山影"和"地影"。日出或日落前后，在太阳照射下，高大山峰投射出巨大阴影。此时站在该山峰的观测者观察这个阴影，阴影看起来像金字塔，这就是山影。除了登山家或摄影师，几乎很少有人注意到山影和地影，并将它们作为一种景观来欣赏。对这段文字理解正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">大多数人不喜欢欣赏"山影""地影"景观</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人们不把"山影""地影"作为景观来欣赏</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"山影"和"地影"是鲜为人知的山上景观</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">只有极少数人能发现和欣赏"山影"和"地影"</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY039 (124-13)</b><span class="q-page">书本第 124 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-对策、分述句特征-引入铺垫</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">汉服不是静态的出土文物，而是活态的社会习俗。如果说传统汉服是汉民族的服饰，新时代汉服则是以传统汉服为基本规范，吸收其他民族服饰元素，适合当代人着装需要，承载中华民族共同体的文化基因、象征整个中华民族共同符号的服饰。当前，汉服穿戴还属于在特定文化空间展示艺术美的范畴。要加强汉服研究阐释工作，着力构建有中国底蕴、中国特色的汉服理论体系和话语体系，将汉服作为礼服向国家、社会、人生仪式，以及文化、教育、科技等方面推广，最后推向人民群众的日常生活起居。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">当前应加强汉服理论研究和推广</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">新时代汉服设计应体现时代精神</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">汉服是体现中国传统文化的典型符号</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">汉服理论研究要形成自己的话语体系</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY040 (124-14)</b><span class="q-page">书本第 124 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 关联词-因果、主题词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在海洋中，人们一直认为固氮作用多是通过蓝细菌完成的，但实际上也有其他的固氮菌在大海中进行固氮作用。研究人员在固氮作用活跃海域的海水样本中发现了编码固氮酶的基因片段，不过，这些基因并不属于蓝细菌，反而与在陆地上能和豆科共生的根瘤菌关系密切。因此研究人员推测，这些基因所属的固氮菌很可能也是一种共生根瘤菌。这种固氮菌总是集中出现在硅藻体内的同一位置。新发现成功地将根瘤菌的宿主范围从陆地上的豆科植物扩展至海洋中的硅藻，进一步观测发现，这种共生现象在海洋中广泛存在。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">大海中存在着很多共生的固氮菌</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">海洋中的硅藻是根瘤菌的主要宿主</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">根瘤菌-硅藻共生体也是海洋固氮的主要参与者</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">除蓝细菌外，海洋中还有其他固氮菌进行固氮作用</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY041 (125-15)</b><span class="q-page">书本第 125 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 标题填入题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一款智能手机就可能把相当一部分老年人"甩出"现代世界，更何况现代社会的介质不仅仅是手机。随时刷新着的节奏日益把很多老年人变成"局外人"，他们的生活很难对接时代，对接社会上无数个点和面，而一个个生命可以顺畅对接的社会才是真正的友好型社会。要想实现无障碍对接，仅仅从居住场所、城市公共设施等方面进行适老化改造是远远不够的，因为我们首先要做的，其实是拆除"心墙"：改变我们的内心理念和价值观，改变老年人社会语境处于弱势的现状，消除数字化带给老年人的"不友好"感觉。我们都将老去，今日社区花坛边、农家墙根下那些孤独的身影，其实正是我们未来的画像。对现实友好，就是与未来和解，与我们自己和解。以下各项中，最适合作为上述语段标题的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">让老年人更好地安放"暮年"</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">适老化改造需先拆"心墙"</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">与未来和解，请从现在做起</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">创建无障碍"友好型社会"</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY042 (126-18)</b><span class="q-page">书本第 126 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 标题填入题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">体育文化是我国传统文化的重要组成部分，随着科技革命的不断深入，体育文化传承发展迎来了新的机遇。数字科技能够提供新的体育文化传播发展平台，将先进的数字设备应用到体育赛事活动中，通过云数据平台进行赛事活动宣传，丰富赛事的文化内涵。数字体育还可通过技术创新，不断推出数字化的体育文化产品，进一步达到普及体育运动的目的。最适合做这段文字标题的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">数字技术：促进体育文化繁荣的新媒介</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">数字体育：体育产业高质量发展新动能</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">体育文化：普及全民体育运动的新抓手</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">体育传播：数字技术带来发展的新机遇</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY043 (126-20)</b><span class="q-page">书本第 126 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 句子</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">举行祭孟大典，就是要进一步发掘和丰富孟子博大精深的思想内涵，使之不断完善与创新，以"徒善不足以为政，徒法不足以自行"的标准完善公共治理。文中"徒善不足以为政，徒法不足以自行"的寓意是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">治理国家必须把行善政与行法令结合起来</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">只有善德不足以处理国家的政务，只有法令不足以自己发生效力</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">中华民族传统文化的精髓所在</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">强调"善"与"法"相结合的重要性</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY044 (128-3)</b><span class="q-page">书本第 128 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 主题词、分述句特征-引入铺垫</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人体需要的碳水化合物主要靠谷类提供。碳水化合物进入体内后转化为糖分，再进一步转化为维持人体机能的热量。糖分与热量之间的转化需要胰岛素的参与，胰岛素对葡萄糖有降解的作用。如果长期不吃或者少吃米饭，转化的葡萄糖量减少，胰岛素分泌就会减少，胰岛素的工作节奏被打乱，久而久之会给糖尿病提供可乘之机。这段文字意在说明：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">碳水化合物是人体所必需的</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">不吃谷类食物可能会得糖尿病</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">改善饮食结构可有效治疗糖尿病</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">糖尿病的病因是胰岛素分泌紊乱</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY045 (130-11)</b><span class="q-page">书本第 130 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">数据正在成为新型的生产要素，一些科技巨头因为拥有巨大的平台优势，掌握大量数据，有可能成为数据寡头，带来数据垄断。数据垄断比技术垄断更难突破，容易产生所谓的数字鸿沟问题。随着数字经济时代的到来，数字鸿沟正呈现出多样化的特征，既有微观主体视角下个人、企业层面的数字鸿沟，也有宏观地理范围视角下地区、国家层面的数字鸿沟。如何避免数据垄断造成的新数字鸿沟，是我们在数据经济时代必须要思考的问题。下列选项中与文意不符合的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">数据利用是一把双刃剑，要避免数字鸿沟可能带来的危害</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">数据垄断正呈现出多样化特征，因而比技术垄断更难突破</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">科技巨头拥有数据优势可能在数据经济时代处于垄断地位</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">数据垄断未必造成数字鸿沟，但这是我们需要避免的问题</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY046 (133-20)</b><span class="q-page">书本第 133 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 代词</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">造纸术是中国四大发明之一，也是人类文明史上一项杰出的发明创造。中国是世界上最早养蚕织丝的国家。中国古代劳动人民以上等蚕茧抽丝织绸，剩下的恶茧、病茧等则用漂絮法制取丝绵。漂絮完毕，篾席上会遗留一些残絮。当漂絮的次数多了，篾席上的残絮便积成一层纤维薄片，经晾干之后剥离下来，可用于书写。这种漂絮的副产物数量不多，在古书上称它为赫蹏或方絮。这表明了中国造纸术的起源同丝絮有着渊源关系。文中的"它"所指的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">漂絮完毕，篾席上遗留的残絮</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">漂絮的副产物</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">篾席上的纤维薄片</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">篾席上的副产物</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY047 (135-5)</b><span class="q-page">书本第 135 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">竹秆质地坚硬，其堪与木材媲美的木质特性，来自于初生结构中发达的机械组织和细胞壁木质化的基本组织；木材的木质特性，则来自于年轮式样分布的次生木质部。竹秆外形与其他禾本科草本植物的茎相似，具有明显的节和节间，节数和粗细在出笋时就已基本固定；节附近分布有居间分生组织，节间伸长时，各节分生组织同时活动，竹子迅速拔高；缺少形成层，不能长粗，只能保持"婴儿时期的身材"。竹壁分为竹青、竹肉、竹黄三个部分，竹青含叶绿素呈绿色，可以进行光合作用。根据这段文字，下列说法错误的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">竹秆只能长高不能长粗</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">竹子能够进行光合作用</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">竹秆的节数在出笋时就已基本固定</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">竹子的木质特性来自于次生木质部</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY048 (137-10)</b><span class="q-page">书本第 137 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 细节判断题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">我们看到的海面上的波浪似乎只有凸起的波峰和凹下的波谷。其实，水质点并不是在做简单的上下振动，而是做圆周运动或者椭圆运动，甚至是水平往复振动。对于水深很大的情况，波浪水质点做圆周运动，并在水面时运动半径达到最大。在水面以下随着深度的增加，半径迅速减小，在水面以下约半个波长位置处，水质点基本上已不再运动。对于水深比较浅的情形，靠近水面的水质点不做圆周运动，其运动轨迹是一个椭圆，随着深度的增加，椭圆逐渐变扁，到达水底时，那里的水质点已经仅有水平的往复振动了。对上述文段理解正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">水平的往复振动才是水质点的运动轨迹</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">水深时，水质点的运动轨迹由椭圆变扁</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">水质点的运动轨迹随水深的减少而趋圆</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">波峰与波谷只是水质点的运动表象</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY049 (138-15)</b><span class="q-page">书本第 138 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 标题填入题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">数据安全和数据共享是数据治理的基本目标。受数据赋权观念的影响，现行刑法采用了控制模式，重在禁止"获取""泄漏""窃取"数据的行为，并借此对滥用行为进行事前防范。控制模式忽视了数据的公共产品属性，无法全面、有效保护数据法益，导致既无法有效维护数据安全，亦难以实现数据共享。旨在规制滥用行为的利用模式，是刑法数据治理模式调整的现实方向。利用模式可基于以下路径实现：刑法总则中设置专门条款，指导分则数据法益的解释；适当限制控制模式立法，发挥数据的独立价值；增加滥用算法罪、非法提供算法服务罪，弥补现行刑法规范供给不足的缺憾；积极探索涉数据犯罪的违法阻却事由，避免因刑法介入过度而抑制数据共享目标的实现。这是一篇论文的摘要，这篇论文的标题最有可能是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">数据治理的传统观念及其更新</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">让数据安全为数据共享保驾护航</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">数据滥用——刑法数据治理的靶向</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">从控制到利用：刑法数据治理的模式转换</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公考言语理解与表达错题归纳与薄弱点分析系统</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E3A5F'/%3E%3Cpath d='M20 44V20l24-6v26l-24 4Z' fill='none' stroke='%23E8B64C' stroke-width='3'/%3E%3Cpath d='M32 30l4 6 8-4' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+    <style>
+        :root {
+            --navy: #12243d; --navy2: #1e3a5f; --navy3: #2b527f;
+            --gold: #e8b64c; --gold2: #ffd166; --goldbg: #fff6e3;
+            --ink: #1a1d24; --sub: #5a6473; --line: #e3e7ee; --bg: #f6f8fb;
+            --blue: #1a5fb4; --bluebg: #eaf2fd;
+            --teal: #1f7a4d; --tealbg: #e9f7ef;
+            --orange: #d97706; --orangebg: #fff7ed;
+            --red: #c62828; --redbg: #fdecec;
+            --shadow-sm: 0 1px 2px rgba(18,36,61,.05);
+            --shadow-md: 0 8px 24px rgba(18,36,61,.09);
+            --shadow-lg: 0 20px 50px rgba(18,36,61,.28);
+        }
+        * { box-sizing: border-box; }
+        ::selection { background: #e0d9c0; color: #12243d; }
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #b9c6d6; border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8fa3bd; }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Source Han Sans SC", sans-serif;
+            background: linear-gradient(180deg, #e9eef5 0%, var(--bg) 40%, var(--bg) 100%);
+            background-attachment: fixed;
+            color: var(--ink);
+            margin: 0;
+            padding: 28px 16px 60px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 32px 36px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--line);
+        }
+
+        .container > h1 {
+            text-align: center;
+            margin: 0 0 26px;
+            font-size: 27px;
+            font-weight: 800;
+            color: var(--navy);
+            letter-spacing: .4px;
+        }
+        .container > h1::after {
+            content: '';
+            display: block;
+            width: 130px;
+            height: 3px;
+            margin: 14px auto 0;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--navy2), var(--gold));
+        }
+
+        code { background: var(--bluebg); padding: 2px 7px; border-radius: 6px; font-size: 13px; color: var(--blue); }
+
+        /* ===== 统计卡片 ===== */
+        .summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 28px; }
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 22px 18px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform .15s, box-shadow .15s;
+        }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .card.warning { border-top: 4px solid var(--orange); }
+        .card.danger { border-top: 4px solid var(--red); background: linear-gradient(180deg, var(--redbg) 0%, #ffffff 60%); }
+        .card h3 { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--sub); }
+        .card .number { font-size: 40px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+        .card.warning .number { color: var(--orange); }
+        .card.danger .number { color: var(--red); }
+
+        .section { margin-bottom: 40px; }
+        .section > h2 {
+            font-size: 18px;
+            margin: 0 0 4px;
+            color: var(--navy2);
+            padding-left: 12px;
+            border-left: 4px solid currentColor;
+            font-weight: 800;
+        }
+        .deadly-box {
+            background: linear-gradient(180deg, var(--orangebg) 0%, #ffffff 70%);
+            border-left: 5px solid var(--orange);
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== 表格 ===== */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        th, td { padding: 14px 15px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+        thead th { background: var(--navy2); color: #fff; font-weight: 700; font-size: 13px; border-bottom: 2px solid var(--navy); letter-spacing: .3px; }
+        tbody tr:hover { background: #f4f7fb; }
+        tbody tr:nth-child(even) { background: #fcfdff; }
+
+        /* ===== 题号标签 ===== */
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 13px; margin: 3px; border: 1px solid transparent; line-height: 1.5; }
+        .tag-w1 { background: var(--bluebg); color: var(--blue); border-color: #c9dcf2; }
+        .tag-w2 { background: var(--orangebg); color: var(--orange); border-color: #fcd9a8; font-weight: 700; }
+        .tag-deadly { background: var(--redbg); color: var(--red); border-color: #f6c4c4; font-weight: 700; margin-bottom: 8px; font-size: 14px; box-shadow: var(--shadow-sm); }
+        .question-list { display: flex; flex-wrap: wrap; gap: 4px; }
+
+        .tag-click { cursor: pointer; transition: transform .15s, box-shadow .15s, filter .15s; }
+        .tag-click:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(18,36,61,.16); filter: brightness(.97); }
+        .tag-click:active { transform: translateY(0); }
+        .click-hint { color: var(--sub); font-size: 13px; margin: 6px 0 0; }
+
+        /* ===== 顶部工具条 ===== */
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--navy), var(--navy2));
+            border: none;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin-bottom: 22px;
+            color: #fff;
+        }
+        .toolbar-info { font-size: 14px; color: #dbe7f5; }
+        .toolbar-info strong { color: var(--gold2); }
+        .json-chips { display: flex; flex-wrap: wrap; gap: 8px; flex: 1 1 100%; }
+        .json-chip { cursor: pointer; background: #fff; border: 1px solid #cbd5e1; color: var(--sub); padding: 6px 13px; border-radius: 999px; font-size: 13px; transition: all .15s; }
+        .json-chip:hover { border-color: var(--navy2); color: var(--navy2); }
+        .json-chip.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 700; box-shadow: 0 2px 8px rgba(232,182,76,.35); }
+        .mini-btn { margin-left: auto; background: #fff; border: 1px solid #cbd5e1; color: var(--sub); padding: 8px 15px; border-radius: 9px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all .15s; }
+        .mini-btn:hover { border-color: var(--navy2); color: var(--navy2); background: var(--bluebg); }
+        .muted { color: var(--sub); }
+
+        /* ===== 加载遮罩 ===== */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: rgba(246,248,251,.88);
+            backdrop-filter: blur(2px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 14px;
+            font-size: 17px;
+            color: var(--ink);
+            font-weight: 600;
+            z-index: 2000;
+        }
+        .loading.show { display: flex; }
+        .loading::before {
+            content: '';
+            width: 34px;
+            height: 34px;
+            border: 3px solid #e2e8f0;
+            border-top-color: var(--navy2);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ===== 题目详情弹窗 ===== */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15,23,42,.55); backdrop-filter: blur(3px); z-index: 1000; padding: 24px; }
+        .modal-overlay.show { display: flex; align-items: flex-start; justify-content: center; }
+        .modal { width: 100%; max-width: 920px; max-height: calc(100vh - 48px); background: #fff; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; box-shadow: var(--shadow-lg); }
+        .modal-header { flex: 0 0 auto; padding: 16px 22px; background: linear-gradient(135deg, var(--navy), var(--navy2)); color: #fff; display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+        .modal-header h2 { margin: 0; font-size: 19px; color: #fff; font-weight: 800; }
+        .modal-sub { font-size: 13px; color: #b9cde4; margin-top: 4px; }
+        .modal-close { flex: 0 0 auto; background: rgba(255,255,255,.16); border: none; color: #fff; font-size: 22px; line-height: 1; width: 34px; height: 34px; border-radius: 9px; cursor: pointer; transition: background .15s; }
+        .modal-close:hover { background: rgba(255,255,255,.32); }
+        .modal-body { padding: 24px; overflow-y: auto; }
+
+        .q-meta { font-size: 13px; color: var(--sub); }
+        .q-chapter { font-size: 13px; color: var(--teal); background: var(--tealbg); border-left: 3px solid var(--teal); padding: 7px 12px; border-radius: 0 8px 8px 0; margin: 8px 0 18px; }
+        .q-block { margin-bottom: 22px; }
+        .q-label { font-size: 13px; font-weight: 700; color: var(--navy2); background: var(--bluebg); display: inline-block; padding: 4px 12px; border-radius: 999px; margin-bottom: 10px; }
+        .qt-text { margin: 6px 0; line-height: 1.9; font-size: 15px; white-space: pre-wrap; word-break: break-word; color: var(--ink); }
+        .q-img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; cursor: zoom-in; background: #fff; box-shadow: var(--shadow-sm); }
+        .img-missing { color: var(--red); background: var(--redbg); border: 1px dashed #f6c4c4; padding: 9px 14px; border-radius: 8px; font-size: 13px; margin: 6px 0; }
+        .q-sep { border: none; border-top: 2px dashed var(--line); margin: 26px 0; }
+
+        .option-row { display: flex; gap: 10px; align-items: flex-start; padding: 9px 12px; border-radius: 8px; margin: 6px 0; line-height: 1.75; font-size: 15px; }
+        .option-row .opt-key { font-weight: 700; flex: 0 0 auto; color: var(--ink); }
+        .option-row .opt-text { flex: 1 1 auto; }
+        .option-row .opt-mark { flex: 0 0 auto; font-size: 13px; font-weight: 700; white-space: nowrap; }
+        .opt-ph { color: var(--sub); font-style: italic; }
+        .option-correct { background: var(--tealbg); border-left: 4px solid var(--teal); }
+        .option-trap { background: var(--orangebg); border-left: 4px solid var(--orange); }
+
+        .answer-box { background: #f4f7fb; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14px; color: var(--sub); }
+        .answer-box b { color: var(--ink); }
+        .badge-right { color: var(--teal); font-weight: 700; }
+        .badge-wrong { color: var(--red); font-weight: 700; }
+        .attempt-table { width: 100%; border-collapse: collapse; margin-top: 0; font-size: 14px; border-radius: 10px; overflow: hidden; }
+        .attempt-table th, .attempt-table td { border: 1px solid var(--line); padding: 9px 12px; }
+        .attempt-table th { background: var(--navy2); color: #fff; }
+        .attempt-table tr:hover { background: #f4f7fb; }
+
+        /* ===== 解析内的数学公式与简单 Markdown ===== */
+        .math { font-family: "Cambria Math", "Times New Roman", "STIXGeneral", Georgia, serif; font-size: 1.04em; }
+        .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; }
+        .frac-num { display: block; padding: 0 5px 1px; border-bottom: 1.3px solid currentColor; font-size: .9em; line-height: 1.25; }
+        .frac-den { display: block; padding: 1px 5px 0; font-size: .9em; line-height: 1.25; }
+        .sqrt-arg { border-top: 1.2px solid currentColor; padding: 0 3px; }
+        .md-list { margin: 6px 0 6px 2px; padding-left: 22px; line-height: 1.9; font-size: 15px; }
+        .md-list li { margin: 3px 0; }
+        .qt-text strong { color: var(--navy); }
+
+        /* ===== 搜索功能 ===== */
+        .search-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .search-bar input[type="text"] {
+            flex: 1 1 300px;
+            padding: 11px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--ink);
+            background: #fff;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .search-bar input[type="text"]:focus { outline: none; border-color: var(--navy2); box-shadow: 0 0 0 3px rgba(30,58,95,.14); }
+        .search-bar select { padding: 11px 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background: #fff; color: var(--ink); cursor: pointer; }
+        .search-bar select:focus { outline: none; border-color: var(--navy2); }
+        .search-clear { background: #fff; border: 1px solid #cbd5e1; color: var(--sub); padding: 11px 16px; border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 600; transition: all .15s; }
+        .search-clear:hover { border-color: var(--navy2); color: var(--navy2); background: var(--bluebg); }
+        .search-hint { color: var(--sub); font-size: 13px; margin: 10px 0 0; line-height: 1.9; background: #f4f7fb; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+        .search-hint b { color: var(--red); }
+        .search-result-card {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transition: border-color .18s, box-shadow .18s, transform .18s;
+        }
+        .search-result-card:hover { border-color: var(--navy3); box-shadow: 0 8px 20px rgba(30,58,95,.14); transform: translateY(-2px); filter: none; }
+        .search-result-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 7px; }
+        .search-result-num { font-weight: 700; color: var(--navy2); font-size: 16px; }
+        .search-result-meta { font-size: 13px; color: var(--sub); }
+        .search-result-snippet { font-size: 14px; color: var(--ink); line-height: 1.8; word-break: break-word; }
+        .search-result-snippet mark { background: #fde047; color: #1f2937; padding: 0 2px; border-radius: 3px; }
+        .search-no-result { color: var(--sub); font-size: 14px; padding: 12px 2px; }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            body { padding: 12px 8px 40px; }
+            .container { padding: 20px 16px; }
+            .summary-cards { grid-template-columns: 1fr; }
+            .modal-overlay { padding: 10px; }
+        }
+    
+        /* ===== 标题区 Hero（首页风格） ===== */
+        .title-hero{
+            position:relative;display:flex;align-items:center;gap:16px;
+            background:linear-gradient(135deg,#0f1e33 0%,#1e3a5f 55%,#2b527f 100%);
+            border-radius:16px;padding:20px 26px 20px 22px;margin-bottom:22px;color:#fff;
+            overflow:hidden;transition:max-height .3s ease,padding .3s ease,margin .3s ease;
+            box-shadow:0 10px 26px rgba(18,36,61,.16);
+        }
+        .title-hero::before{
+            content:'';position:absolute;inset:0;pointer-events:none;
+            background:radial-gradient(560px 220px at 88% 0%, rgba(232,182,76,.14), transparent 60%),
+                       radial-gradient(420px 200px at 4% 100%, rgba(96,165,250,.10), transparent 60%);
+        }
+        .th-fold{
+            position:absolute;top:12px;right:13px;z-index:2;
+            width:28px;height:28px;border-radius:9px;border:1px solid rgba(255,255,255,.28);
+            background:rgba(255,255,255,.10);color:#fff;font-size:17px;line-height:1;
+            cursor:pointer;transition:background .15s,transform .15s;
+        }
+        .th-fold:hover{background:rgba(255,255,255,.28);}
+        .th-badge{
+            flex:0 0 auto;width:52px;height:52px;border-radius:14px;
+            background:rgba(232,182,76,.16);border:1px solid rgba(232,182,76,.45);
+            display:flex;align-items:center;justify-content:center;font-size:25px;
+        }
+        .th-body{flex:1 1 auto;min-width:0;padding-right:46px;}
+        .th-body h1{margin:0;font-size:21px;font-weight:800;color:#fff;letter-spacing:.3px;line-height:1.4;}
+        .th-sub{margin-top:5px;font-size:13.5px;color:#b9cde4;}
+        .th-sub strong{color:var(--gold2);}
+        .th-sub .muted{color:#9fb6d0;}
+        .title-hero.collapsed{
+            max-height:38px;padding:6px 14px;margin-bottom:14px;border-radius:12px;
+            align-items:center;justify-content:center;cursor:pointer;
+        }
+        .title-hero.collapsed .th-badge,.title-hero.collapsed .th-body{display:none;}
+        .title-hero.collapsed .th-fold{position:static;margin:0;}
+        @media (max-width:640px){
+            .title-hero{padding:16px 16px;gap:12px;}
+            .th-body h1{font-size:17px;}
+            .th-badge{width:44px;height:44px;font-size:21px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-hero" id="titleHero">
+            <button class="th-fold" id="thFold" type="button" title="隐藏 / 显示标题区">−</button>
+            <div class="th-badge">🎯</div>
+            <div class="th-body">
+                <h1>公考言语理解与表达错题归纳与薄弱点分析系统</h1>
+                <div class="th-sub">📦 内置 <strong id="current-file-name">-</strong> <span class="muted" id="current-file-meta"></span></div>
+            </div>
+        </div>
+
+        <div class="dashboard" id="dashboard">
+
+            <div class="summary-cards">
+                <div class="card warning">
+                    <h3>一刷错题总数</h3>
+                    <div class="number" id="brush1-count">0</div>
+                </div>
+                <div class="card warning">
+                    <h3>一二刷连错数</h3>
+                    <div class="number" id="brush2-count">0</div>
+                </div>
+                <div class="card danger">
+                    <h3>硬骨头 (三刷及以上依然错)</h3>
+                    <div class="number" id="deadly-count">0</div>
+                </div>
+            </div>
+
+            <div class="section" id="searchSection">
+                <h2>🔍 题目搜索</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="输入关键词，支持按考点、题干、编号、题号、材料、解析等搜索…">
+                    <select id="searchField">
+                        <option value="all">全部字段</option>
+                        <option value="考点">考点</option>
+                        <option value="题干">题干</option>
+                        <option value="编号">编号</option>
+                        <option value="题号">题号</option>
+                        <option value="材料">材料</option>
+                        <option value="解析">解析</option>
+                        <option value="来源">来源</option>
+                        <option value="章节">章节</option>
+                        <option value="部分">部分</option>
+                        <option value="页码">页码</option>
+                    </select>
+                    <button class="search-clear" id="searchClear" type="button">清空</button>
+                </div>
+                <p class="search-hint">
+                    💡 搜索范围：全部字段 / 考点 / 题干 / 编号 / 题号 / 材料 / 解析 / 来源 / 章节 / 部分 / 页码。<br>
+                    📌 <b>题号命名逻辑</b>：题号 = 原书籍的<b>页码</b> + 该页上的<b>题号</b>（例如「4-3」表示第 4 页的第 3 题）。
+                </p>
+                <p id="searchCount" class="click-hint"></p>
+                <div id="searchResults"></div>
+            </div>
+
+            <div class="section deadly-box">
+                <h2 style="color: #d35400; margin-top: 0;">🔥 考前最后冲刺：死磕题单</h2>
+                <p style="color: #7f8c8d; font-size: 14px;">以下题目经历了三刷、四刷或五刷依然做错，属于最终收敛下来的顽固考点，建议进考场前重点翻阅溯源：</p>
+                <div id="deadly-list" class="question-list">
+                    <!-- 死磕题列表将渲染在这里 -->
+                </div>
+                <p class="click-hint">💡 点击题号可查看该题完整图文</p>
+            </div>
+
+            <div class="section">
+                <h2>📊 知识薄弱点归纳 (按考点分类)</h2>
+                <p style="color: #7f8c8d; font-size: 14px;">已根据连错率和一刷错题量进行降序排列，排名越靠前越需要回炉补基础。(特别是二刷依然做错的题”就是你整个备考题库里优先级绝对排第一的最高价值资产)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="25%">考点名称</th>
+                            <th width="10%">一刷错</th>
+                            <th width="10%">连错</th>
+                            <th width="55%">错题题号清单 (一刷错题溯源回归教材/考点：不要在题目本身打转，去找题目所属的知识点源头)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="knowledge-points-body">
+                        <!-- 考点统计将渲染在这里 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" id="loading">正在解析题库与索引图片，请稍候…</div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">题目详情</h2>
+                    <div class="modal-sub" id="modalSub"></div>
+                </div>
+                <button class="modal-close" id="modalClose" title="关闭 (Esc)">×</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============ 内置题库数据（已封装，无需选择目录） ============
+        const EMBEDDED_DATA = [{"编号": "YY001", "原编号": "YY001", "题号": "10-9", "书籍页码": 10, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "人工智能属于数据科学。相较于实验科学、理论科学、计算科学，数据科学强调利用仪器收集或仿真计算产生的大量数据进行分析与知识提取，更加突出数据在发现规律和形成理论中的作用。实际上，自动驾驶、可穿戴设备、智能机器人等都具有典型的数据密集型特征。因此，应进一步支持建设人工智能领域基础数据库和专题数据库，扩大面向人工智能应用的公共数据供给范围，鼓励引导相关主体开展高质量数据的采集、存储、交易及其与人工智能技术的协同研发，服务算法设计、模型训练、产品验证、场景应用等实际需求。这段文字意在说明：", "选项": {"A": "数据驱动是智能技术创新关键支撑", "B": "人工智能产业依赖数据密集型发展", "C": "数据科学重塑知识发现与理论构建", "D": "强化数据建设是人工智能发展基石"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "80%", "APP易错项": "B", "APP解析": "文段首先引出人工智能和数据科学的话题，随后通过比较指出数据科学强调通过大量数据分析提取知识，突出数据的作用，接着通过\"自动驾驶、可穿戴设备\"等举例说明人工智能具有数据密集型特征，最后以\"因此\"进行总结并提出对策，即要支持建设人工智能领域的数据库，来扩大公共数据供给范围，鼓励高质量数据采集与协同研发等，以服务实际需求。故文段的重点在于强调加强数据建设，助力人工智能发展，对应D项。\nA项，\"数据驱动\"和\"智能技术\"偷换话题，与文段核心话题不符，排除；\nB项，\"数据密集型\"对应结论前，非重点，排除；\nC项，缺少主题词\"人工智能\"，排除。\n故正确答案为D。\n【文段出处】光明网-光明日报《人工智能与现代化产业体系建设》", "APP考点": "关联词-对策、关联词-因果、主题词", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第44题", "书籍配图": "yyimage\\book\\10.webp"}, {"编号": "YY002", "原编号": "YY002", "题号": "27-8", "书籍页码": 27, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "中华民族自古崇尚读书，讲究格物致知、诚意正心。我们走过书信时代，经过电邮时代，来到读\"屏\"时代，网页挤占书页，\"输写\"代替书写。我们无法回到\"从前慢\"的过去，但也不能丢失知识的传承、文化的涵养、精神的赓续。加强数字资源平台建设，开展青少年学生读书活动，是把数字技术这一\"最大变量\"转化为阅读提质\"最大增量\"的关键一招。这段文字意在强调：", "选项": {"A": "提供优质数字化阅读资源势在必行", "B": "数字阅读是青少年阅读的重要方式", "C": "数字化阅读时代更要重视文化传承", "D": "数字化技术是影响阅读的最大变量"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "58%", "APP易错项": "C", "APP解析": "文段首先引出读书的话题并介绍时代环境已经发生了变化，接下来通过转折词\"但\"说明新的时代我们也不能丢失知识的传承、文化的涵养、精神的赓续，最后通过\"关键\"一词强调要加强数字资源平台建设，开展青少年读书活动，通过数字技术促进阅读提质。故文段意在强调要加强数字资源平台建设促进阅读质量提升，对应A项。\nB项，\"青少年阅读的重要方式\"偏离文段重点，排除；\nC项，\"更要重视文化传承\"未体现数字化阅读资源，表述不明确，排除；\nD项，\"最大变量\"属于重点句中的内容，非重点，排除。\n故正确答案为A。\n【文段出处】《最是书香能致远（教育时评）》", "APP考点": "关联词-对策、关联词-转折", "APP来源": "2024年山东省公务员录用考试《行测》试题（网友回忆版）第50题", "书籍配图": "yyimage\\book\\27.webp"}, {"编号": "YY003", "原编号": "YY004", "题号": "29-12", "书籍页码": 29, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "非物质文化遗产的\"非物质\"属性，决定了非遗不能仅被宣之于展板、陈列于展架，更需要活态的保护、传承与发展。活态保护的重要出发点之一，就是从非遗所处的社会文化系统出发，更好地涵养滋生其上、浸润其中的一方水土。无论是美术、曲艺等艺术形式，玉雕、刺绣等精绝艺，还是礼仪、节庆等民俗活动，非遗保护的背后应该是文化生态的保护，如此才能让非遗在活的土壤中生生不息。上述文段主要说的是（ ）。", "选项": {"A": "非遗的\"非物质\"属性决定了其保护方式的独特性", "B": "文化生态保护是非物质文化遗产保护的必要方面", "C": "社会文化系统是非遗活态保护的重要出发点", "D": "非物质文化遗产离不开其背后的文化生态"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "59%", "APP易错项": "C", "APP解析": "文段开头引出\"非物质文化遗产\"这一话题，并通过\"更需要\"强调需要对其进行活态保护，接着指出活态保护的出发点之一就是从非遗所处的社会文化系统出发，尾句通过\"应该……才能……\"进一步提出对策，指出保护非遗就要保护其背后的文化生态，故文段的重点是尾句的对策，重点强调要保护非遗的文化生态，对应B项。\nA项\"保护方式的独特性\"表述不明确，且没有提及\"文化生态\"，排除；\nC项\"社会文化系统\"非重点，文段重点强调的是\"保护文化生态\"，排除；\nD项，未提及核心话题\"保护\"，偏离文段中心，排除。\n故正确答案为B。\n【文段出处】人民日报《非遗保护，以活态激发活力》", "APP考点": "关联词-对策、主题词", "APP来源": "2025年广东省公务员录用考试《行测》题（网友回忆版）第30题", "书籍配图": "yyimage\\book\\29.webp"}, {"编号": "YY004", "原编号": "YY005", "题号": "31-18", "书籍页码": 31, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "西风带原本是条近乎平直的稳定东行的纬向气流，当气流发生波动时，我们把向南凹的部分称为\"槽\"，向北凸的部分称作\"脊\"。西风带上\"槽\"的形成与冷空气的向南移动有关，而\"脊\"的形成往往意味着中纬度地区有暖空气向北发展。当\"脊\"不断向北发展，其南部与南方暖空气的联系被中高纬度冷空气截断后，将会形成一个闭合的暖中心，称为\"阻塞高压\"。这种阻塞高压稳定少动，持续时间长，它破坏了西风带环流，有利于波动的形成和发展，即南北向气流的发展，从而给冷空气的南下打开了\"通道\"。这段文字意在说明：", "选项": {"A": "西风带是如何流动的", "B": "冷空气是如何南下的", "C": "\"阻塞高压\"是如何形成的", "D": "\"槽\"和\"脊\"是如何波动的"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "69%", "APP易错项": "C", "APP解析": "文段开篇引出话题\"西风带\"且介绍了\"槽\"与\"脊\"，接着指出西风带上\"槽\"的形成与冷空气南下有关，后文说明\"脊\"的运动会形成\"阻塞高压\"，尾句通过指代词指出\"阻塞高压\"给冷空气的南下打开了\"通道\"，文段层层递进，强调冷空气南下的具体过程，对应B项。\nA项\"西风带是如何流动的\"对应文段首句，C项\"'阻塞高压'是如何形成的\"及D项\"'槽'和'脊'是如何波动的\"均对应尾句之前的内容，为前文冷空气南下过程中的具体内容，非文段重点，排除。\n故正确答案为B。\n【文段出处】《关于寒潮的那些事》", "APP考点": "关联词-因果", "APP来源": "2022年重庆市选调优秀大学生到基层工作考试《行测》题第46题", "书籍配图": "yyimage\\book\\31.webp"}, {"编号": "YY005", "原编号": "YY006", "题号": "31-19", "书籍页码": 31, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "浪漫主义文学强调个人情感与自由的表达，追求超越现实的理想境界。但浪漫主义的超越性，并非脱离现实世界的无稽之谈，也非纯粹的幻想和空想，而是基于对现实世界的深刻洞察和反思，是作家对生活理想化的一种表达。浪漫主义追求的美，是对自然、人性、爱情等美好事物的赞美和向往。文学作品若缺乏美的追求，便失去了其独特的魅力。作家只有深入体验生活、感悟人生，将个人情感与社会现实相结合，其作品才能引起读者的共鸣，实现其超越现实的理想追求。下列说法与上文观点一致的是（ ）。", "选项": {"A": "浪漫主义文学注重自由表达对美好事物的主观感受", "B": "浪漫主义的超越性在于作家对现实世界的观察与认识", "C": "浪漫主义文学追求一切美好的事物，有其独特的魅力", "D": "深刻的生活体验与人生感悟成就浪漫主义文学精品"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "50%", "APP易错项": "D", "APP解析": "文段开篇论述浪漫主义追求超越现实的理想境界，接着通过转折词\"但\"指出浪漫主义的超越性是基于对现实的洞察和反思，随后具体说明浪漫主义对美的追求及其在文学作品中的重要性，尾句通过\"只有……才……\"再次指出将个人情感与社会现实相结合才能实现浪漫主义文学超越现实的理想追求，故文段重在强调只有洞察和感悟现实世界才能实现浪漫主义的超越性，对应B项。\nA项，缺少文段主题词\"超越性\"，偏离文段重点，排除；\nC项，\"追求一切美好的事物\"无中生有，文段并未提及，排除；\nD项，缺少文段主题词\"超越性\"，偏离文段重点，排除。\n故正确答案为B。", "APP考点": "关联词-对策、主题词", "APP来源": "2025年深圳市考公务员录用考试《行测》试题（网友回忆版）第78题", "书籍配图": "yyimage\\book\\31.webp"}, {"编号": "YY006", "原编号": "YY007", "题号": "32-23", "书籍页码": 32, "书籍章节": "第一章片段阅读-第一节中心理解题-考点1关联词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "步兵融入联合作战，是指在联合作战体系架构下，以指挥信息系统为平台，根据作战需求，及时对接指挥关系，合理区分作战行动和保障路径，以实现步兵作战与联合作战的无缝对接。在联合作战中，可以采取火力打、远程击、空中炸、地面围等手段，歼灭敌方有生力量。步兵持有轻武器，善于近战歼敌，且机动灵活，适应性强，是直达战场、一线冲锋的优选力量。因此，近战歼灭敌方是步兵在联合作战体系内的首要任务。这意味着步兵将在其他军兵种力量的支援配合下，发挥夜战、近战和灵活机动的特长，实现歼灭据守之敌、驱逐进犯之敌、围捕空降之敌等目标。这段文字主要分析联合作战中：", "选项": {"A": "步兵的独特优势", "B": "步兵的主要任务", "C": "歼灭敌方的重要手段", "D": "步兵武器装备的特点"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "47%", "APP易错项": "A", "APP解析": "文段开篇介绍步兵融入联合作战的定义，接着指出在联合作战中歼灭敌方有生力量的手段，后文介绍了步兵作战的优势。随后通过\"因此\"总结前文得出结论，强调步兵在联合作战体系内的首要任务是近战歼灭敌方，尾句通过指代词\"这\"指代前文的首要任务，后文对步兵如何完成近战歼灭敌方的任务进行进一步阐述。故文段重点围绕步兵在联合作战中的首要任务进行论述，对应B项。\nA项，\"独特优势\"对应结论前的内容，非重点，排除；\nC项，\"重要手段\"表述不明确，且缺少文段主题词\"步兵\"，偏离文段核心话题，排除；\nD项，\"武器装备\"对应结论前的内容，非重点，排除。\n故正确答案为B。\n【文段出处】《把准步兵融入联合作战的任务定位》", "APP考点": "关联词-因果", "APP来源": "2023年国家公务员录用考试《行测》题（副省级网友回忆版）第43题", "书籍配图": "yyimage\\book\\32.webp"}, {"编号": "YY007", "原编号": "YY008", "题号": "42-15", "书籍页码": 42, "书籍章节": "第一章片段阅读-第一节中心理解题-考点2主题词-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "阿尔茨海默病分为家族性和散发性，特征均为大脑中有毒蛋白质的积累。前者与基因突变引起的相关蛋白质积累有关，而在更普遍的散发性阿尔茨海默病中，有毒蛋白质积累的触发机制尚不清楚。研究人员提出一种假设，即大脑中有毒蛋白质的积累是被称为泛素-蛋白酶体系统的蛋白质清除机制失效造成的。为了验证假设，他们建立了人类神经元模型系统，用以观察泛素-蛋白酶体系统在阿尔茨海默病发展过程中的参与情况。结果表明，该系统对清除\"缺陷\"蛋白质、维持细胞健康具有重要作用。这段文字主要介绍：", "选项": {"A": "阿尔茨海默病的分型与典型特征", "B": "大脑中蛋白质清除机制失效的原因", "C": "基因突变对泛素-蛋白酶体系统的影响", "D": "散发性阿尔茨海默病致病机制的新发现"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "80%", "APP易错项": "C", "APP解析": "文段开篇指出阿尔茨海默病分为家族性和散发性，并说明其特征均为大脑中有毒蛋白质的积累，接着指出在散发性阿尔茨海默病中，有毒蛋白质积累的触发机制不明，随后介绍研究人员提出假设，即大脑中有毒蛋白质积累是泛素-蛋白酶体系统失效造成的，并进行验证，尾句通过\"结果表明\"得出结论，指出泛素-蛋白酶体系统对清除\"缺陷\"蛋白质和维持细胞健康有重要作用，解释了散发性阿尔茨海默病中有毒蛋白质积累的触发机制，对应D项。\nA项：\"分型与典型特征\"对应文段首句引出话题的部分，非重点，排除。\nB项\"蛋白质清除机制失效的原因\"、C项\"基因突变对泛素-蛋白酶体系统的影响\"文段均未提及，无中生有，且缺少文段主题词\"散发性阿尔茨海默病\"，排除。\n故正确答案为D。\n【文段出处】新华社《新研究发现散发性阿尔茨海默病深层致病机制》", "APP考点": "关联词-因果、主题词", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第37题", "书籍配图": "yyimage\\book\\42.webp"}, {"编号": "YY008", "原编号": "YY009", "题号": "43-20", "书籍页码": 43, "书籍章节": "第一章片段阅读-第一节中心理解题-考点2主题词-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "放射状胶质是一种细长柱状的细胞，有两个从细胞核上下延伸的突起，具有顶端和基底的细胞极性。多个放射状神经胶质附着在每个细胞顶端，形成类似上皮细胞的片状结构。这种片状结构是大脑发育的基本结构。在大脑发育时，放射状胶质通过对称分裂的自我复制来增加数量，然后通过非对称分裂形成放射状神经胶质和分化细胞。非对称分裂中，首先会产生各种各样的神经细胞，之后会产生辅佐神经细胞工作的胶质细胞，最终形成复杂的大脑。这段文字主要讲的是：", "选项": {"A": "动物大脑发育形成的基本阶段", "B": "动物大脑中不同神经细胞的分工", "C": "放射状胶质的基本结构和进化特点", "D": "放射状胶质在大脑形成过程中的作用"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "75%", "APP易错项": "C", "APP解析": "文段开篇引出话题\"放射状胶质\"，并介绍其形状等性质，随后指出多个放射状胶质形成的片状结构是大脑发育的基本结构，最后介绍了在大脑发育过程中，放射状胶质起到的具体作用，即放射状胶质通过对称分裂和非对称分裂，最终形成复杂的大脑。故整个文段围绕\"放射状胶质\"和\"大脑\"两个话题展开论述，强调\"放射状胶质\"在\"大脑\"发育形成过程中的重要作用，对应D项。\nA、B两项，均缺少核心话题\"放射状胶质\"，且文段强调\"大脑\"，\"动物大脑\"概念缩小，排除；\nC项，缺少核心话题\"大脑\"，排除。\n故正确答案为D。\n【文段出处】中国科学院网《神经干细胞再生机制揭示：细胞\"形状\"灵活性对大脑至关重要》", "APP考点": "主题词", "APP来源": "2023年北京市公务员录用考试《行测》题（网友回忆版）第34题", "书籍配图": "yyimage\\book\\43.webp"}, {"编号": "YY009", "原编号": "YY010", "题号": "45-3", "书籍页码": 45, "书籍章节": "第一章片段阅读-第一节中心理解题-考点2主题词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "水墨作为民族文化的重要象征，是历代国人观察和表现世界的一种独特方式。有别于传统绘画，当代水墨更为贴近这个时代，有着对艺术更为深入的思考。当代水墨艺术家更注重反映当下人的生存状态和精神指向，他们既了悟中国传统文化的艺术灵蕴，又深谙西方先锋艺术语言，同时兼具人文关怀和独立品格，其作品往往能够从传统中汲取精华，又能在西方美学中吸收养分，进而创造出一种新的当代语言、形成自己特有的笔墨方式来表达艺术理想，具有鲜活的时代特征和生命力量。这段文字主要介绍了：", "选项": {"A": "传统水墨与当代水墨之间的差异", "B": "水墨作为民族文化象征的重要地位", "C": "当代水墨艺术家及其作品的独特造诣", "D": "水墨艺术折射出的人文关怀和文化精华"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "72%", "APP易错项": "D", "APP解析": "文段开篇引出\"水墨\"的话题，接着指出\"当代水墨\"更贴近时代且有更深入的艺术思考。随后阐述\"当代水墨艺术家\"更注重反映当下人的生存状态与精神指向，他们有其自身的优势，进而强调他们的作品能从传统和西方美学中汲取养分，创造新语言、形成独特笔墨方式来表达艺术理想，具有鲜活时代特征和生命力量。故文段主题词为\"当代水墨艺术家\"，重点讨论当代水墨艺术家及其作品的特点，对应C项。\nA项，\"传统水墨\"为引出主题词\"当代水墨艺术家\"的铺垫，非重点，排除；\nB项，\"水墨的重要地位\"为开篇引入部分，非重点，排除；\nD项，\"水墨艺术折射出的人文关怀和文化精华\"为当代水墨艺术家及其作品的具体特点，未重点突出\"当代水墨艺术家\"，偏离文段重点，排除。\n故正确答案为C。\n【文段出处】雅昌新闻《贾廷峰：当代水墨是未来艺术投资的潜力股》", "APP考点": "主题词", "APP来源": "2025年云南省公务员录用考试《行测》题（网友回忆版）第38题", "书籍配图": "yyimage\\book\\45.webp"}, {"编号": "YY010", "原编号": "YY011", "题号": "45-4", "书籍页码": 45, "书籍章节": "第一章片段阅读-第一节中心理解题-考点2主题词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "经济是肌体，金融是血脉，两者共生共荣。银行利润建立在企业发展的基础上，实体经济如果没有足够的利润率或者盈利能力，银行是没有办法获得持续发展和盈利空间的。而当前净息差的降低，使企业从银行获得了低成本贷款，能够极大减轻企业经营发展负担，把更多资金投入科研创新、转型升级、设备更新等领域，进而实现高质量发展。唯有实体经济规模扩大、效益改善、质量提升，银行才能获得自身高质量发展的坚实基础。这段文字意在说明：", "选项": {"A": "银行的盈利空间与企业盈利能力相辅相成", "B": "经济的稳定与繁荣是金融持续发展的根基", "C": "银行要稳健发展须保持合理的净息差水平", "D": "降低净息差有助于促进企业和银行的共赢"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "A", "APP解析": "文段开篇指出经济与金融是共生共荣的关系，接着说明银行利润建立在企业发展的基础上，随后指出目前净息差的降低减轻了企业经营发展负担，使得企业能够把更多资金投入科研创新等领域，实现高质量发展，而企业高质量发展能为银行高质量发展打下坚实的基础。故文段重点强调降低净息差既能够促使企业发展，也能够推动银行发展，对应D项。\nA、B两项：均对应文段开篇话题引入部分的内容，非重点，且缺少文段核心话题\"降低净息差\"，排除。\nC项：缺少文段核心话题\"企业\"，且\"合理的净息差水平\"与文段\"降低净息差\"表述不一致，排除。\n故正确答案为D。\n【文段出处】人民日报《净息差20年来最低，背后是银行让利实体经济》", "APP考点": "关联词-对策、主题词", "APP来源": "2025年国家公务员录用考试《行测》题（地市级网友回忆版）第65题", "书籍配图": "yyimage\\book\\45.webp"}, {"编号": "YY011", "原编号": "YY012", "题号": "46-8", "书籍页码": 46, "书籍章节": "第一章片段阅读-第一节中心理解题-考点2主题词-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "莲子心发育过程中，多数叶绿素生物合成结构基因的表达是显著上调的，与叶绿素的积累模式一致。原叶绿素酸酯氧化还原酶参与催化的原叶绿素酸酯转化为叶绿素酸酯是一个关键步骤，生成的叶绿素酸酯进一步转化形成叶绿素。光依赖的原叶绿素酸酯氧化还原酶（LPOR）是被子植物中参与这一反应的关键酶，并且此过程是被子植物中叶绿素合成唯一需要光的反应。而一些裸子植物和微生物可以采用不依赖光的原叶绿素酸酯氧化还原酶（DPOR）完成这一反应；莲子心中并不存在DPOR编码基因，但鉴定到两个LPOR编码基因，且其表达模式与叶绿素的积累模式一致。这段文字意在说明：", "选项": {"A": "叶绿素的形成有两种不同的模式", "B": "裸子植物依赖光反应形成叶绿素", "C": "莲子心的叶绿素合成需要光参与", "D": "莲子有裸子植物的两个编码基因"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B", "D"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "50%", "APP易错项": "A", "APP解析": "文段开篇指出莲子心发育过程中多数叶绿素生物合成结构基因的表达与叶绿素的积累模式一致，接着具体分析叶绿素的形成过程，并指出被子植物中叶绿素合成过程中需要光，然后说明一些裸子植物和微生物可以不依赖光形成叶绿素，最后通过转折词\"但\"强调在莲子心中LPOR编码基因的表达模式与叶绿素的积累模式一致，故整个文段讨论的核心话题是\"莲子心\"和\"叶绿素\"，重点强调莲子心的发育过程中叶绿素的形成需要光，对应C项。\nA、B两项，均未提及核心话题\"莲子心\"，排除；\nD项，未提及核心话题\"叶绿素\"，缺少文段主题词，排除。\n故正确答案为C。\n【文段出处】《你知道莲心是如何发育的吗？》", "APP考点": "关联词-转折、主题词", "APP来源": "2023年湖南省公务员录用考试《行测》题（网友回忆版）第45题", "书籍配图": "yyimage\\book\\46.webp"}, {"编号": "YY012", "原编号": "YY013", "题号": "50-2", "书籍页码": 50, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "文艺评价是评价主体拥有对文艺作品的鉴赏能力，结合自己的价值观念表达自己对作品的感受。从本质上来说，文艺评价是一种以人类的价值判断为基础的审美行为，审美产生的根本原因是人类的社会实践活动，人的感觉和认知必须和人所处的身体和环境相结合，这构成审美判断的有机组成部分。人工智能应用于文艺评价，是将评价的主体由人变成了智能机器。人工智能通过机器学习、自然语言处理等技术，对文艺作品的评论只能是一种认知性的识别，机器需要通过对人类以往文艺作品的学习而产生评判标准。关于人工智能应用于文艺评价，作者的观点是：", "选项": {"A": "人工智能可为文艺评价提供技术性标准但无法产生审美", "B": "人工智能可以从整体意识的层面来评价和鉴赏文艺作品", "C": "人工智能进行的文艺评价会比以人为主体的评价更科学", "D": "人工智能评价会对大众的审美标准和评价尺度产生影响"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "90%", "APP易错项": "B", "APP解析": "文段开篇给出\"文艺评价\"的定义，即需要结合自己价值观念表达自身感受的一种主观行为。随后进一步揭示其本质是一种以人类价值判断为基础的审美行为，且这种审美行为在根本上与人类的社会实践活动、人的感觉认知、人所处的身体和环境紧密结合。而人工智能应用于文艺评价后，只能通过机器学习等技术对文艺作品进行评论，这仅仅是一种认知性的识别，而完全没有社会实践活动、人类的感觉认知等主观感受的参与介入，因此这只是一种机械的评价而未产生主观的审美。针对该结论，可对应A项，重在强调人工智能在文艺评价领域的不足。\nB项，文段强调人工智能无法对文艺作品产生自主评判，\"从整体意识的层面\"表述与文意不符，排除；\nC项，\"会比以人为主体的评价更科学\"，对人工智能的评价过于积极，与文意相悖，排除；\nD项，\"对大众的审美标准和评价尺度产生影响\"文段并未提及，无中生有，排除。\n故正确答案为A。\n【文段出处】光明网-《光明日报》《人工智能文艺创作更需要以人为本》", "APP考点": "分述句特征-引入铺垫", "APP来源": "2024年辽宁省公务员录用考试《行测》题（网友回忆版）第55题", "书籍配图": "yyimage\\book\\50.webp"}, {"编号": "YY013", "原编号": "YY014", "题号": "51-4", "书籍页码": 51, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "汉字从产生的那一刻起，就担负起承载中华文化的重任。几千年来，汉字一直顽强地坚持自己独特的表意性，始终没有割断同文化的联系，与中华文化相伴而行，共同谱写了中华文明的不朽篇章。中国自古以来就十分重视汉字作为文化载体的重要社会作用。早在东汉时期，许慎在《说文解字·叙》里就作出了\"文字者，经艺之本，王政之始，前人所以垂后，后人所以识古\"的著名论断。文字是一切经典文献赖以存在的基础，是社会政治得以实施的首要凭借，是前人将知识和智慧传给后人、后人了解和学习古人的最重要的工具。这段文字意在说明：", "选项": {"A": "汉字是传承中华文化的重要载体", "B": "文字是经典文献赖以存在的基础", "C": "汉字是中华文明的重要组成部分", "D": "文字是传播中华文化的重要工具"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "85%", "APP易错项": "D", "APP解析": "文段开篇指出汉字担负着承载中华文化的重任，接下来论述几千年来汉字与中华文化相伴而行，共同谱写了中华文明的不朽篇章，对首句进行具体论述。随后进一步强调中国自古以来就十分重视汉字作为文化载体的重要社会作用，后文通过东汉时期许慎的论断及其释义进行举例说明。故文段重点强调汉字是中华文化的重要载体，对应A项。\nB、D两项，\"文字\"范围扩大，文段重点论述的核心话题为\"汉字\"，且对应尾句解释说明的部分，非文段重点，均排除；\nC项，文段重点强调的是汉字作为传承中华文化的载体，而非\"组成部分\"，偏离文段中心，排除。\n故正确答案为A。\n【文段出处】《呵护汉字 传承文明》", "APP考点": "分述句特征-多角度论述", "APP来源": "2022年四川省公务员录用考试《行测》题（网友回忆版）第35题", "书籍配图": "yyimage\\book\\51.webp"}, {"编号": "YY014", "原编号": "YY015", "题号": "51-5", "书籍页码": 51, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "大家知道，我们常见的小贝壳通常是开口向下，可以通过肌肉移动。但砗磲一般都是开口向上固定在珊瑚礁盘上，一辈子都不会移动。这个固定不动的特征对于我们做古天气研究非常重要。如果砗磲不停地移动，那么所记录的气候环境信息就会随位置的改变而受到干扰。好在砗磲一辈子不移动，就像一个海洋气象站一样，在同一个位置不停地记录周边的海洋、天气、气候信息，简直就是天生的\"地质气象站\"。这段文字旨在说明：", "选项": {"A": "砗磲进化出了一种极为罕见的生物特性", "B": "利用砗磲可以进行气候历史的理论研究", "C": "砗磲是一种非常理想的古天气研究载体", "D": "砗磲化石中留存着古代天气变化的秘密"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "79%", "APP易错项": "B", "APP解析": "文段开篇引出\"砗磲\"这一话题，指出砗磲一辈子固定在珊瑚礁盘上，不会移动，随后提出观点，即砗磲这一固定不动的特征对于我们做古天气研究非常重要，后文对这一观点进行解释说明，进一步论证了砗磲一辈子不移动，可以不停地记录周边的气象信息，故文段重在强调砗磲对古天气研究非常重要，C项为其同义表述，当选。\nA项，\"极为罕见的生物特性\"这一表述不明确，文段已明确指出这一特征为\"一辈子都不会移动\"，且文段重点强调的是这一特征对于古天气研究很重要，故选项表述非重点，排除；\nB项，文段的主题词为\"古天气研究\"，并非\"气候历史\"，且文段并未提及\"理论研究\"，无中生有，排除；\nD项，文段的主题词为\"砗磲\"，而非\"砗磲化石\"，偏离文段中心，排除。\n故正确答案为C。\n【文段出处】《砗磲化石里，竟藏着这么多古代天气秘密》", "APP考点": "关联词-因果", "APP来源": "2022年青海省公务员录用考试《行测》题（网友回忆版）第42题", "书籍配图": "yyimage\\book\\51.webp"}, {"编号": "YY015", "原编号": "YY016", "题号": "53-10", "书籍页码": 53, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "在市场经济时期，劳动密集型制造工厂普遍采用流水线技术，工人被高度\"去技能化\"，几乎不需要技能便可完成装配操作，企业没有需求也没有动力去培养中高级技术工人。但是，当一个国家的产业结构向中高端迈进时，高水平职业教育的支撑作用就会显现出来。技术进步与人力资本相互影响、相互促进：企业引进的高端生产线，需要技术工人去操作和维护，否则技术改造和升级就无法实现；如果没有配套的职业技能培训体系，企业的转型升级就难以达到预期效果。这段文字意在说明：", "选项": {"A": "产业结构转型升级需要职业教育的支撑", "B": "技术进步对人力资本提出了更高要求", "C": "\"技工荒\"会随产业结构升级更趋严重", "D": "职业技能培训需求与经济增长有相关性"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D", "D"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "84%", "APP易错项": "B", "APP解析": "文段开篇介绍了在市场经济时期，流水线上的工人几乎不需要技能便可完成装配操作，企业无需去培养中高级技术工人，随后通过转折词\"但是\"提出观点，即在产业结构向中高端升级时，高水平职业教育会起着支撑作用。尾句通过对技术进步和人力资本的双向作用进行阐述，进一步支撑论证了转折后的观点。故文段重点在转折之后，强调高水平职业教育对于产业结构升级的支撑作用，对应A项。\nB项，缺少主题词\"职业教育\"和\"产业结构\"，偏离文段核心话题，排除；\nC项，\"技工荒\"无中生有，且缺少主题词\"职业教育\"，偏离文段核心话题，排除；\nD项，\"经济增长\"偷换概念，文段重在强调职业教育对于产业结构升级的支撑作用，排除。\n故正确答案为A。\n【文段出处】《向上的阶梯——经济转型时期新技术工人的社会流动》", "APP考点": "分述句特征-其他、关联词-转折、主题词、分述句特征-引入铺垫", "APP来源": "2023年国家公务员录用考试《行测》题（行政执法卷网友回忆版）第42题", "书籍配图": "yyimage\\book\\53.webp"}, {"编号": "YY016", "原编号": "YY017", "题号": "57-2", "书籍页码": 57, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "从行政管理链条看，制度建设处于前端，行政复议处于末端。行政复议案件的产生，必然经过一般性行政管理规定、行政机关具体实施、产生具体行政行为、不服行政行为申请行政复议等环节。每个复议案件或多或少反映了行政管理中存在的问题。行政机关，特别是作为行政复议被申请人的行政机关，要善于\"抓末端、治已病\"。如果是个案具体实施问题，可以个案纠正；如果是制度性、普遍性问题，则要对制度进行查漏补缺；如果是制定制度时不曾预见的新问题，更要予以关注，适时进行规范，避免小问题变成大问题。作者通过这段文字想说的是：", "选项": {"A": "善用行政复议可以提升行政管理水平", "B": "对行政复议案件要具体问题具体分析", "C": "行政管理链条是环环相扣的有机整体", "D": "行政复议案件是行政管理问题的外化"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B", "B", "D"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "46%", "APP易错项": "B", "APP解析": "文段开篇指出行政复议处于行政管理链条的末端，并介绍行政复议案件产生必然经过的环节，随后指出行政复议案件反映了行政管理中存在的问题，接着通过对策标志词\"要\"提出对策，即行政机关要善于\"抓末端、治已病\"，利用行政复议这一行政管理链条的末端来解决行政管理中存在的问题，后文对不同情况下如何\"治已病\"进行具体的解释说明，故文段重在强调要善于利用行政复议提升行政管理水平，对应A项。\nB项，\"对行政复议案件要具体问题具体分析\"仅强调要针对每个行政复议案件给出特殊的分析和解决，但并未体现出\"治已病\"即解决行政管理过程中的种种问题，非重点，排除；\nC项，\"行政管理链条\"对应文段开头话题引出部分的内容，非重点，且\"环环相扣的有机整体\"文段并未提及，无中生有，排除；\nD项，\"行政管理问题的外化\"属于问题表述，非重点，排除。\n故正确答案为A。\n【文段出处】《用好行政复议这一\"过滤器\"，需要注意这几点》", "APP考点": "关联词-对策、分述句特征-引入铺垫、分述句特征-多角度论述", "APP来源": "2024年国家公务员录用考试《行测》题（行政执法卷网友回忆版）第55题", "书籍配图": "yyimage\\book\\57.webp"}, {"编号": "YY017", "原编号": "YY018", "题号": "58-5", "书籍页码": 58, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "与工业经济、数字经济相比，生物经济最大的特点是打破了数字经济\"赢者通吃\"的商业模式，具有资源依赖性强、技术多样性高、市场垄断程度低等特点，为生物资源丰富、生物技术相对落后的国家提供了一次难得的、可能实现跨越式发展的机遇。我国生物资源丰富、市场潜力大，生物技术已有良好基础，做强做大生物经济，不仅能有效缓解甚至最终解决粮食安全、能源安全、环境安全、生物安全等问题，而且能够大幅度提高人民健康水平，推进新一轮经济增长。这段文字旨在说明：", "选项": {"A": "我国生物经济的发展现状与前景研判", "B": "全球生物经济演进的规律和发展布局", "C": "中国面临生物经济的巨大机遇和挑战", "D": "生物经济对构建新发展格局意义重大"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C", "D"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "68%", "APP易错项": "D", "APP解析": "文段开篇引出\"生物经济\"的话题，详细介绍了生物经济的特点，并指出生物经济\"为生物资源丰富、生物技术相对落后的国家提供了一次难得的、可能实现跨越式发展的机遇\"。接着指出我国有良好的生物基础，并点明做大做强生物经济，不仅能有效缓解甚至最终解决粮食安全、能源安全、环境安全、生物安全等问题，而且能够大幅度提高人民健康水平，推进新一轮经济增长。故文段重在围绕\"生物经济\"及\"我国\"展开论述，强调我国发展生物经济有良好的基础，及做大做强生物经济的好处，对应A项。\nB项，缺少文段核心话题\"我国\"，且\"全球生物经济演进的规律和发展布局\"无中生有，排除；\nC项，\"中国面临生物经济的挑战\"无中生有，排除；\nD项，缺少文段核心话题\"我国\"，且\"新发展格局\"无中生有，排除。\n故正确答案为A。\n【文段出处】光明网《我国生物经济发展现状与前景研判》", "APP考点": "主题词、分述句特征-引入铺垫", "APP来源": "2025年新疆公务员录用考试《行测》试题（网友回忆版）第32题", "书籍配图": "yyimage\\book\\58.webp"}, {"编号": "YY018", "原编号": "YY019", "题号": "59-7", "书籍页码": 59, "书籍章节": "第一章片段阅读-第一节中心理解题-考点3分述句特征-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "中国艺术中的色彩大致可分为三个子系统：官方系统，侧重于观念与象征性；民间系统，侧重于装饰与审美；文人士大夫系统，有意弱化色彩的视觉冲击力，偏向黑白素雅。南宋诗人陈与义写水墨梅花的名句\"意足不求颜色似\"，成为许多文人重水墨、轻彩色的理论表述，文人话语也似乎逐渐成为中国艺术史的主旋律。不过，这其实只是部分人的审美倾向造成的史实遮蔽。在中国人生活的各个方面，在中国艺术更广大的领域，包括建筑装饰、宫廷艺术、服饰、陶瓷等，色彩的探索和应用从未停止，只是缺乏相应的理论探讨而已。这段文字意在强调：", "选项": {"A": "中国艺术中的色彩子系统", "B": "中国艺术中色彩丰富的事实", "C": "中国艺术理论富有诗意的特点", "D": "文人审美倾向对中国艺术的影响"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "69%", "APP易错项": "D", "APP解析": "文段开篇指出中国艺术中的色彩分为官方、民间、文人士大夫三个子系统，并论述许多文人重水墨、轻彩色，且文人话语似乎成为中国艺术史的主旋律。接着通过转折对前文进行否认，指出这一理论表述是史实遮蔽。最后通过尾句强调中国艺术的色彩探索和应用从未停止，只是理论探讨相对不足。故文段重点强调中国艺术的色彩还是很丰富的，对应B项。\nA项，对应文段首句引入话题部分，非重点，排除；\nC、D两项，文段讨论的核心话题为\"中国艺术中的色彩\"，C项的\"中国艺术理论\"、D项\"中国艺术\"，均偏离文段的核心话题，排除。\n故正确答案为B。\n【文段出处】《\"国色\"是什么颜色？》", "APP考点": "主题词", "APP来源": "2021年甘肃公务员录用考试《行测》题（网友回忆版）第42题", "书籍配图": "yyimage\\book\\59.webp"}, {"编号": "YY019", "原编号": "YY020", "题号": "68-5", "书籍页码": 68, "书籍章节": "第一章片段阅读-第二节标题填入题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "一个完善的生活垃圾分类处理流程，至少要经历五个环节：严格分类、准确投放、分类运输、分类利用、对难以利用者的无害化处理。五个环节相互衔接回收利用的效果一直不够理想。要破解这个难题，我们首先必须做好规划设计，强化环保意识，明确各方责任，落实各环节的具体措施，唯有如此，才能让这项工作真正收到实效。最适合做这段文字标题的是：", "选项": {"A": "入户宣传零距离，垃圾分类入人心", "B": "垃圾分类我先行，绿色环保伴我行", "C": "明确各方责任，让垃圾分类有章可循", "D": "做好规划设计，让生活垃圾各归其位"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "61%", "APP易错项": "C", "APP解析": "文段开篇指出完善的生活垃圾分类处理流程需要经历五个环节，并对各个环节进行介绍，接着指出问题，即五个环节相互衔接回收利用的效果不够理想，后通过\"必须\"强调我们应做好规划设计，并论述了规划设计的具体内容，最后文段通过\"唯有……才\"进一步论证应做好规划设计，故文段重点强调应做好规划设计，解决生活垃圾分类问题，对应D项。\nA项，\"入户宣传\"文段并未提及，无中生有，且缺少文段核心话题\"生活垃圾\"，排除；\nB项，偏离文段中心，文段强调应做好规划设计来解决生活垃圾分类问题，且缺少文段核心话题\"生活垃圾\"，排除；\nC项，\"明确各方责任\"为文段解释说明部分内容，非重点，且缺少文段核心话题\"生活垃圾\"，排除。\n故正确答案为D。\n【文段出处】中国循环经济协会网《温宗国：生活垃圾分类处理必备的5个环节》", "APP考点": "标题填入题", "APP来源": "2026年四川省考/选调公务员录用考试《行测》试题（网友回忆版）第35题", "书籍配图": "yyimage\\book\\68.webp"}, {"编号": "YY020", "原编号": "YY021", "题号": "71-12", "书籍页码": 71, "书籍章节": "第一章片段阅读-第二节标题填入题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "《论语》\"学而时习之\"，其实是对\"学\"\"习\"这两种意思既有区别、但又密切相关的人类知识增进行为的表达，其外延远超过今天双音节合成词基础上形成的\"学习\"一词。《论语》中大量使用到\"学\"和\"习\"，\"学\"强调对典籍的理解与吸收、\"习\"强调在实践中去检验印证，故\"学习\"义为\"学习并实践\"。但是，汉代以后随着汉语词汇构成规律的变化，诸如《史记》《后汉书》等典籍所载\"学习\"一语已由先秦两个意义递进的单音节词组演变为双音并列式合成词，从而导致\"学习\"词义的缩小。讨论\"学习\"在《论语》中的原始本义，对于今天中国的教育振兴以及建构终身学习型社会将有所裨益。这是一篇文章的摘要，最适合做这篇文章标题的是：", "选项": {"A": "《论语》在当代的传承策略", "B": "词汇演变与社会发展的关系", "C": "《论语》中的\"学\"\"习\"观", "D": "汉代在经典传承中的重要地位"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "86%", "APP易错项": "B", "APP解析": "文段开篇介绍《论语》当中的\"学\"和\"习\"，指出两者既有区别又密切相关，其外延远超过今天的\"学习\"一词，接着针对《论语》中的\"学\"和\"习\"进行具体介绍，并通过转折词\"但是\"指出随着汉语词汇构成规律的变化，导致\"学习\"词义的缩小。最后强调讨论\"学习\"在《论语》中的原始本义的重要性，所以整个文段主要围绕《论语》中的\"学\"和\"习\"进行论述，故文章的标题应包含核心话题，对应C项。\nA项\"《论语》\"、B项\"词汇\"、D项\"汉代\"均偏离文段核心话题\"《论语》中的'学'和'习'\"，不能很好地概括文段，排除。\n故正确答案为C。\n【文段出处】《〈论语〉中的\"学\"\"习\"观》", "APP考点": "标题填入题", "APP来源": "2022年四川省公务员录用考试《行测》题（网友回忆版）第32题", "书籍配图": "yyimage\\book\\71.webp"}, {"编号": "YY021", "原编号": "YY022", "题号": "76-6", "书籍页码": 76, "书籍章节": "第一章片段阅读-第二节标题填入题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "在广大基层，人们对话剧、戏曲、音乐会等文艺形式的欣赏愿望不断高涨。可是，基层能够提供的文化产品数量与质量有限。这背后存在着地方剧团生存难的问题。日前，一些基层政府以购买公共服务或是引入社会力量等方式给予剧院补贴，公众则以一块钱的投入就能看一场文艺演出。此举不仅使群众欣赏到优质的精神文化\"大餐\"，也使地方剧团得以进一步发展。这既提高了公共文化服务的普惠性与可及性，又在潜移默化中培养了公众的文化消费习惯，挖掘了新生的消费市场，释放出文化惠民的叠加效应。最适合做这段文字标题的是：", "选项": {"A": "文化下乡：让群众共享精彩", "B": "惠民演出：托起文化新热潮", "C": "一元剧场：好戏在基层开场", "D": "政府补贴：激活文艺新市场"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "45%", "APP易错项": "D", "APP解析": "文段开篇指出在基层百姓对话剧等文艺形式的欣赏愿望不断高涨，随后以\"可是\"进行转折，指出基层文化产品在数量与质量上均存在短板，而这一问题的背后，是地方剧团面临的生存困境。接着文段提出对策，指出基层政府通过为剧院提供补贴，推出\"一元看演出\"的惠民举措，后文以\"此举\"指代该举措，详细阐述了其多重积极意义，即让基层百姓享受文化福利、助力地方剧团发展、释放文化惠民叠加效应等。故文段核心在于强调基层政府\"一元看演出\"的补贴举措，以及其带来的多元利好。C项\"一元剧场\"指代文段政府采取的惠民举措，\"好戏在基层开场\"既体现了优质文艺演出下沉基层，也暗含了地方剧团借此实现发展、基层文化市场焕发活力的双重成效，能够全面且生动地概括文段核心内容，当选。\nA项，\"文化下乡\"仅对应基层百姓享受文化福利的层面，却未体现政府的补贴举措以及地方剧团借此发展的关键信息，表述片面，排除；\nB项，\"文化新热潮\"无中生有，文段重点是\"一元看演出\"所带来的惠民与行业发展的多元利好，而非\"新热潮\"的兴起，偏离文段核心内容，排除；\nD项，\"激活文艺新市场\"仅对应举措带来的\"挖掘了新生的消费市场\"这一成效，未能涵盖群众受益、助力地方剧团发展等内容，表述片面，排除。\n故正确答案为C。\n【文段出处】光明日报《\"一元剧场\"：好戏在基层开场》", "APP考点": "标题填入题", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第47题", "书籍配图": "yyimage\\book\\76.webp"}, {"编号": "YY022", "原编号": "YY023", "题号": "81-4", "书籍页码": 81, "书籍章节": "第一章片段阅读-第三节细节判断题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "新研究发现，向日葵花粉能帮助熊蜂抵抗一种常见寄生虫感染。实验中，将向日葵花粉的外壳与其内部的代谢物分离，分别添加到美洲东部熊蜂的食物中。结果显示，仅添加花粉所含的代谢物对抵抗熊蜂短膜虫感染没有效果；添加花粉外壳的抗感染效果与添加完整的向日葵花粉颗粒相当，感染率可降低87%。苍耳、蒲公英的花粉也能降低感染率。下列哪项说法不能从文中得到支持？", "选项": {"A": "可以使用向日葵花粉内部代谢物来减少蜜蜂寄生虫感染", "B": "向日葵花粉外壳物质在帮助蜜蜂抵抗寄生虫感染上有效果", "C": "向日葵花粉外壳和内部代谢物的作用是不同的", "D": "苍耳、蒲公英的花粉有类似向日葵花粉的作用"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "82%", "APP易错项": "C", "APP解析": "A项，根据\"仅添加花粉所含的代谢物对抵抗熊蜂短膜虫感染没有效果\"可知，花粉内部代谢物对感染没有效果，与文意相悖，当选；\nB项，根据\"添加花粉外壳的抗感染效果与添加完整的向日葵花粉颗粒相当，感染率可降低87%\"可知，表述正确，排除；\nC项，根据\"仅添加花粉所含的代谢物……感染率可降低87%\"可知，花粉内部代谢物对感染没有效果，花粉外壳可以降低感染率，故二者作用不同，表述正确，排除；\nD项，根据\"向日葵花粉能帮助熊蜂抵抗一种常见寄生虫感染\"及\"苍耳、蒲公英的花粉也能降低感染率\"可知，三者的花粉均可降低感染率，有类似的作用，表述正确，排除。\n本题为选非题，故正确答案为A。\n【文段出处】《研究揭示向日葵花粉如何帮助熊蜂抵御寄生虫》", "APP考点": "细节判断题", "APP来源": "2024年山东省公务员录用考试《行测》试题（网友回忆版）第46题", "书籍配图": "yyimage\\book\\81.webp"}, {"编号": "YY023", "原编号": "YY024", "题号": "82-7", "书籍页码": 82, "书籍章节": "第一章片段阅读-第三节细节判断题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "图书作为文化产品，如非珍本、藏本，其价格发展是有一定规律的。长期以来，我国图书市场一直在薄利状态下运转，然而，最近读者却大呼\"买不起\"，图书市场的高定价成为人们诟病的因素，进而网络书店的低折扣满足了读者的期待。但是，网络书店的低折扣是否真给读者带来了实惠，是值得商榷的。这一场奇特的博弈，说到底，是图书市场的价格调控失灵所导致的。下列说法与这段文字不相符的是：", "选项": {"A": "我国图书市场长期处于薄利状态", "B": "珍贵图书的价格发展具有一定特殊性", "C": "图书市场中出现的低折扣不一定给读者带来实惠", "D": "读者对低折扣的期待是图书市场价格调控失灵的主因"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "67%", "APP易错项": "B", "APP解析": "A项：根据\"长期以来，我国图书市场一直在薄利状态下运转\"可知，该项表述正确，排除。\nB项：根据\"图书作为文化产品，如非珍本、藏本，其价格发展是有一定规律的\"可知，相对于普通图书，珍本、藏本等珍贵图书的价格发展有特殊规律，该项表述正确，排除。\nC项：根据\"网络书店的低折扣是否真给读者带来了实惠，是值得商榷的\"可知，该项表述正确，排除。\nD项：根据\"网络书店的低折扣满足了读者的期待\"\"这一场奇特的博弈，说到底，是图书市场的价格调控失灵所导致的\"可知，文段并未论述\"读者对低折扣的期待\"与\"图书市场价格调控失灵\"之间的因果关系，该项强加因果，当选。\n本题为选非题，故正确答案为D。\n【文段出处】光明网《图书价值之殇：图书市场的价格体系是如何混乱的》", "APP考点": "细节判断题", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第48题", "书籍配图": "yyimage\\book\\82.webp"}, {"编号": "YY024", "原编号": "YY025", "题号": "101-14", "书籍页码": 101, "书籍章节": "第一章片段阅读-第四节词句理解题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "环境保护主义是一种信念，是一种重建人与自然关系的强烈愿望。要实现这一愿望，就必须树立一种自然共同体的意识，即将人类在共同体中的征服者角色，变为这一共同体中的普通一员。它暗含着对每个成员的尊敬，也包括对这个共同体本身的尊敬。只有树立了这样的一种道德意识，人们才有可能在运用其在这一共同体中的权利时，感到所负有的对这个共同体的义务。这不仅依赖对自然本质的科学理解，也依赖在了解基础上建立起的对自然的感情。这段文字最后一句话中的\"这\"指的是：", "选项": {"A": "热爱自然的感情", "B": "自然共同体意识的树立", "C": "重建人与自然关系的愿望", "D": "对自然共同体的义务"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "77%", "APP易错项": "D", "APP解析": "\"这\"出现在文段尾句，需要结合前文内容理解。文段首先介绍了环境保护主义是一种愿望，并给出实现愿望的对策——要树立自然共同体的意识，接下来对其进行具体解释，继而通过\"只有……才……\"再次强调要树立自然共同体的意识，尾句出现\"这\"，所以\"这\"指代的对象是\"树立自然共同体的意识\"，对应B项。\nA项是尾句中\"这\"依赖的对象，而非\"这\"的指代内容，排除；\nC项是第二句\"这\"的指代内容，和尾句代词无关，排除；\nD项对应\"才\"后的内容，即树立自然共同体的意识可能带来的结果，并非\"这\"的指代内容，排除。\n故正确答案为B。", "APP考点": "代词", "APP来源": "2019年国家公务员录用考试《行测》题（副省级网友回忆版）第49题", "书籍配图": "yyimage\\book\\101.webp"}, {"编号": "YY025", "原编号": "YY027", "题号": "103-6", "书籍页码": 103, "书籍章节": "第一章片段阅读-第四节词句理解题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "要让机器听清、听懂人类语言并不是一件容易的事。语音识别研究中有一道最具挑战性的典型难题被称为\"鸡尾酒会\"效应，即远场环境、噪声干扰、多人语音叠现象导致的语音识别困难。针对这一难题，研发团队提出了多通道语音信号时空分离建模方法，即先将人声和不同的噪音分离，再进行建模。同时，团队还提出多维度语音属性解耦表征方法。简单来说就是解耦、提取内容、韵律、音色等语音属性，以便更准确地识别和传达语音信息，使得复杂场景下语音识别准确率得到显著提升。根据上下文，画线词\"解耦表征\"的意思是：", "选项": {"A": "更准确地识别和传达语音信息的方法", "B": "根据语音属性将不同声源的语音分离出来", "C": "利用技术降低噪音影响、加强语音识别的方法", "D": "多维度分析以提升复杂场景下语音识别准确率"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "55%", "APP易错项": "D", "APP解析": "画线词\"解耦表征\"出现在文段中间，后文通过\"简单来说就是\"对\"解耦表征\"进行解释说明，尾句重点强调\"解耦表征\"这种方法能够根据语音属性将不同声源的语音识别出来，最终实现在复杂场景下提升语音识别准确率的效果。故\"解耦表征\"指根据语音属性将不同声源的语音分离出来，对应B项。\nA项：对应尾句中\"以便更准确地识别和传达语音信息\"，这是\"解耦表征\"想要达到的效果，而非其含义，排除。\nC项：\"解耦表征\"重点强调的是根据语音属性在复杂场景下将不同声源的语音识别出来，而非降低噪音影响，排除。\nD项：对应尾句中\"使得复杂场景下语音识别准确率得到显著提升\"，这是\"解耦表征\"想要达到的效果，而非其含义，且\"多维度分析\"表述不明确，排除。\n故正确答案为B。\n【文段出处】科技日报《智能语音技术让人机交互更\"丝滑\"》", "APP考点": "实词", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第42题", "书籍配图": "yyimage\\book\\103.webp"}, {"编号": "YY026", "原编号": "YY028", "题号": "108-7", "书籍页码": 108, "书籍章节": "第一章片段阅读-综合训练一", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "配音在当下是有市场的。有些人不喜欢看书，却喜欢\"听书\"；有些时候没办法解放双手双眼，却可以通过\"听书\"提高时间利用效率。有的人夜跑时听书，半年里也能听完十来本文学名著。一些地方设立\"声音图书馆\"，即使不识字也能\"看书\"；越来越多的阅读平台推出听书功能，实现\"可听化\"；一些有声小说不满足于\"一人读\"的传统配音，为每个角色和旁白招募配音者。移动互联时代，多元的阅读场景增加了人们对配音人员的需求，雨后春笋般涌现的配音兼职招聘信息自然也就不足为奇了。根据这段文字，听书配音市场需求增加的原因不包括：", "选项": {"A": "有听书功能的平台与日俱增", "B": "有些人对\"听书\"有特别的偏好", "C": "\"听书\"可以降低时间成本", "D": "一人配多角时很难自如切换"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "68%", "APP易错项": "A", "APP解析": "本题为选非细节判断题，主要讲述配音在当下的发展。根据文段内容讲述配音市场需求增加的原因论述，未提及一个人配多个角色时很难自如切换，文段讲述的是有声小说不满足于\"一人读\"，二者意思不一致，D项当选。\nA项，根据\"越来越多的阅读平台推出听书功能，实现'可听化'\"可知，文段已提及，排除；\nB项，根据\"有些人不喜欢看书，却喜欢'听书'\"可知，文段已提及，排除；\nC项，根据\"有些时候没办法解放双手双眼，却可以通过'听书'提高时间利用效率\"可知，文段已提及，排除。\n本题为选非题，故正确答案为D。\n【文段出处】人民日报《理性对待配音兼职（金台随笔）》", "APP考点": "细节判断题", "APP来源": "2023年辽宁省公务员录用考试《行测》题（网友回忆版）第39题", "书籍配图": "yyimage\\book\\108.webp"}, {"编号": "YY027", "原编号": "YY029", "题号": "108-9", "书籍页码": 108, "书籍章节": "第一章片段阅读-综合训练一", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "随着时代发展，匠人制作漆器使用的材料也不断突破。如今，人工合成材料已被运用到漆器制造领域。脱胎工艺是漆艺中的重要一环。我国科研人员尝试使用人工合成材料制作葫芦瓶母胎，用高密度EPS材料替代笨重的木胎，并用三维雕刻机将EPS材料雕刻成大葫芦造型。使用三维雕刻机加工EPS材料，获得的造型更精准，成本也更低。造型完成后，再继续进行传统手工裱布刮灰步骤，重复该步骤5次制成夹纻胎。最后，利用EPS材料遇到稀释剂或汽油会溶解的特性，便能轻松从夹纻胎中取出大葫芦造型。这段文字旨在说明：", "选项": {"A": "我国漆器制造技术创新兼顾传统核心技艺传承", "B": "我国漆器脱胎工艺运用人工合成材料技术成熟", "C": "高密度EPS材料在漆器脱胎工艺中有多种优势", "D": "高密度EPS材料已被应用于漆器制造的全流程"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "45%", "APP易错项": "B", "APP解析": "文段首句引出人工合成材料进入漆器制造领域的话题，接着通过\"重要一环\"强调了漆器脱胎工艺的重要性，接下来介绍高密度EPS材料在脱胎工艺中的应用情况，并且指出利用高密度EPS材料制作母胎具有造型更精准、成本更低，制成夹纻胎之后可利用其材料特性实现轻松脱胎等多重优势。故文段围绕\"脱胎工艺\"和\"高密度EPS材料\"展开论述，强调高密度EPS材料在漆器脱胎工艺中具备的多重优势，对应C项。\nA项，\"兼顾传统核心技艺传承\"仅对应文中\"传统手工裱布刮灰步骤\"，并非文段重点，排除；\nB项，文中仅强调\"尝试使用\"，\"技术成熟\"无中生有，排除；\nD项，文段只介绍了\"脱胎工艺\"这一个环节，\"应用于漆器制造的全流程\"文段并未体现，无中生有，排除。\n故正确答案为C。\n【文段出处】科技日报《扬州漆器厂：千年漆艺焕新彩》", "APP考点": "主题词", "APP来源": "2025年辽宁省公务员录用考试《行测》题（网友回忆版）第44题", "书籍配图": "yyimage\\book\\108.webp"}, {"编号": "YY028", "原编号": "YY030", "题号": "109-10", "书籍页码": 109, "书籍章节": "第一章片段阅读-综合训练一", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "\"梅瓶\"一词，最早见于宋代，多是当时文人对瓶中插梅审美意象的吟咏，与今人习称的\"梅瓶\"无关。宿白先生指出，今人所称的宋代\"梅瓶\"，宋人称\"经瓶\"，并称这种长腹瓶为\"经瓶\"的原因，重在用\"经\"道出其深细长腹的特点。故宋人又称其为\"长瓶\"。明人并无\"梅瓶\"称谓，所谓明代\"梅瓶\"，实为明人流行的盛酒之具，明人多以酒樽、酒瓶名之。今人\"梅瓶\"之称谓，多援引清未许之衡《饮流斋说瓷》中\"梅瓶……口径之小仅与梅之瘦骨相称，故名曰梅瓶也\"的说法。不过，\"梅瓶\"插花在晚明已成风尚，而且，从文献来看，今人\"梅瓶\"之概念，至迟在清康熙年间已形成。对这段文字理解正确的是（ ）。", "选项": {"A": "今人所称的\"梅瓶\"最早为宋代文人吟咏插梅之物", "B": "宋人称\"经瓶\"为\"长瓶\"是据其深细长腹的特点", "C": "明代多用于盛酒的\"梅瓶\"到清代始为插花的器皿", "D": "清康熙以前\"梅瓶\"的外形和功用一直处于发展中"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "68%", "APP易错项": "D", "APP解析": "A项，根据\"'梅瓶'一词，最早见于宋代，多是当时文人对瓶中插梅审美意象的吟咏，与今人习称的'梅瓶'无关\"可知，表述错误，排除；\nB项，根据\"今人所称的宋代'梅瓶'，宋人称'经瓶'，并称这种长腹瓶为'经瓶'的原因，重在用'经'道出其深细长腹的特点\"可知，表述正确，当选；\nC项，根据\"'梅瓶'插花在晚明已成风尚\"可知，\"清代始为插花的器皿\"表述错误，排除；\nD项，\"'梅瓶'的外形和功用一直处于发展中\"无中生有，文段并未介绍\"梅瓶\"的外形的发展，排除。\n故正确答案为B。\n【文段出处】深圳博物馆《大明·官窑｜玉壶春瓶、梅瓶、鸡心扁壶、杏圆扁壶……傻傻分不清楚？》", "APP考点": "细节判断题", "APP来源": "2023年深圳市考公务员录用考试《行测》试题（网友回忆版）第82题", "书籍配图": "yyimage\\book\\109.webp"}, {"编号": "YY029", "原编号": "YY031", "题号": "113-2", "书籍页码": 113, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "人工智能所带来的智能化和自动化社会发展趋势提升了社会生产效率，并对传统公共管理者的决策和服务角色带来挑战。人工智能作为新型的权利所有者逐渐代替传统公共管理者，作为基于计算逻辑、算法规则和数据的公共管理者参与到社会治理过程之中，从而使未来人工智能场景下的公共管理者角色由\"事务性供给\"转向\"公共性维护\"，这一趋势在将传统的公共管理者从社会事务管理中解放出来的同时，也淡化了传统公共管理者在社会中的管理者角色，使社会治理逐渐呈现出由自由平等的生产者联合治理的特点。这段话所要表达的中心思想是：", "选项": {"A": "人工智能消除公共权利", "B": "人工智能加速生产者联合", "C": "人工智能提高技术治理能力", "D": "人工智能推动社会自主管理的实现"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C", "C"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "71%", "APP易错项": "B", "APP解析": "文段开篇指出人工智能提升了社会生产效率，同时也为传统公共管理带来了挑战，接着指出人工智能参与到社会治理过程之中，使传统公共管理者角色由\"事务性供给\"转向\"公共性维护\"，之后通过\"这一趋势\"总结前文，指出人工智能对传统公共管理者带来的影响，最后通过因果标志词\"使\"得出结论，强调人工智能使得社会治理呈现出新特点，即社会治理由自由生产者联合治理，对应D项。\nA项，\"消除公共权利\"文段并未提及，无中生有，且\"消除\"程度过重，文段仅为\"淡化了传统公共管理者在社会中的管理者角色\"，排除；\nB项，文段强调\"社会治理\"模式的转变，而不是单纯强调生产者联合这一现象本身，偏离文段核心话题，排除；\nC项，\"技术治理能力\"文段并未提及，无中生有，且文段核心话题为\"社会治理\"，\"技术治理\"概念偷换，排除。\n故正确答案为D。", "APP考点": "关联词-因果、主题词", "APP来源": "2025年河北省公务员录用考试《行测》题（网友回忆版）第40题", "书籍配图": "yyimage\\book\\113.webp"}, {"编号": "YY030", "原编号": "YY032", "题号": "114-4", "书籍页码": 114, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "文化重在化人，但能否真正用文化引导人们坚定理想、塑造灵魂、涵育品德、砥砺人格等，要看\"化\"的水平。如何使以文化人\"化\"得合情理、\"化\"得受欢迎、\"化\"得效果好，考验着我们的文化工作水平。习近平总书记强调：\"要润物细无声，运用各类文化形式，生动具体地表现社会主义核心价值观，用高质量高水平的作品形象地告诉人们什么是真善美，什么是假恶丑，什么是值得肯定和赞扬的，什么是必须反对和否定的。\"根据这段文字，作者意在强调：", "选项": {"A": "文化工作的目的和意义", "B": "文化工作水平的重要性", "C": "以文化人要注重文化传播的方式方法", "D": "以文化人要坚持社会主义核心价值观"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "47%", "APP易错项": "B", "APP解析": "文段开篇指出以文化人的效果关键在于\"化\"的水平，接着指出如何让以文化人合情理、受欢迎、效果好，考验着我们的文化工作水平，之后引用总书记的话给出对策，即以文化人要\"润物细无声\"，运用各类文化形式，以高质量作品生动表现价值观，实现潜移默化的引导，故整个文段重在强调做好以文化人的方法，对应C项。\nA、B两项，均缺少\"以文化人\"的核心话题，偏离文段重点，排除；\nD项，文段重点强调的是做好以文化人的方法，而\"社会主义核心价值观\"为以文化人要传递的内容，非文段重点，排除。\n故正确答案为C。\n【文段出处】人民日报《离开人，文化建设就会失去最根本的意义（思想纵横）》", "APP考点": "关联词-对策、主题词", "APP来源": "2026年广东省公务员录用考试《行测》题（网友回忆版）第27题", "书籍配图": "yyimage\\book\\114.webp"}, {"编号": "YY031", "原编号": "YY033", "题号": "114-6", "书籍页码": 114, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "生活在网络环境中，没有所谓的\"空闲时间\"，通勤时刷短视频、吃饭时看直播，甚至洗澡时也要戴着耳机听播客。人们即使在休憩或旅行中，也难以找到独处的状态：度假时，朋友圈定位与九宫格照片发布的优先级高于欣赏日出日落；户外运动时，隔十分钟就想看看手机，生怕错过\"重要\"信息。安静让他们变得烦躁不安，仿佛独处意味着被世界抛弃，必须用持续的信息输入填满每分钟。这种对\"空闲\"的恐惧，本质上是对自我的陌生——当剥离了网络标签和社交互动，我们是否还能认识那个独处的自己？文中\"对'空闲'的恐惧\"指的是：", "选项": {"A": "担心错过网络世界的重要信息", "B": "害怕在独处中暴露真实自我", "C": "无法适应没有即时反馈的生活", "D": "因网络社交中断而迷失自我"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "40%", "APP易错项": "B", "APP解析": "定位原文，\"对'空闲'的恐惧\"出现在文段末尾，后文通过\"本质上是\"进行解释说明，说明了恐惧来源于对自我的陌生，人们可能不认识剥离了网络标签和社交互动后的自己。故文段\"对'空闲'的恐惧\"是指人们对脱离网络后的自己感到陌生，对应D项。\nA项，\"担心错过网络世界的重要信息\"是人们为自己没有空闲时间找的借口，并非\"对'空闲'的恐惧\"的本质含义，排除；\nB项，\"暴露真实自我\"无中生有，且文段强调恐惧与网络有关，未提及网络，排除；\n故正确答案为D。", "APP考点": "实词", "APP来源": "2026年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第35题", "书籍配图": "yyimage\\book\\114.webp"}, {"编号": "YY032", "原编号": "YY034", "题号": "116-10", "书籍页码": 116, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "相对同时代诗人，李商隐的特殊之处在于倾注相当的心力于人的内心，运用隐喻、暗示、象征，跳跃性意象的采用和堆叠，突破了从上古到当代文坛上\"直抒胸臆、文以载道\"的传统主流，定义了新的诗歌逻辑。这种\"现代意识\"在当时是独创且超前的，并且后世模仿者中再无超越者，直到二十世纪以后被重新研究。一个古典诗人，提前几个世纪就注意到语言、意象、潜意识、超现实这些富有价值的领域，付之爱情命题并凝固成诗的琥珀，是十分厉害的。对这段内容理解正确的一项是：", "选项": {"A": "\"直抒胸臆、文以载道\"的传统主流只有李商隐在努力突破", "B": "李商隐的诗歌创作，具有独创且非常超前的\"现代意识\"", "C": "李商隐的诗歌主要成就集中在他的爱情诗，后世再无超越者", "D": "语言、意象、潜意识、超现实这些领域是现代诗歌的特质"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "95%", "APP易错项": "D", "APP解析": "A项，根据\"相对同时代诗人，李商隐的特殊之处在于倾注相当的心力于人的内心，运用隐喻、暗示、象征，跳跃性意象的采用和堆叠，突破了从上古到当代文坛上'直抒胸臆、文以载道'的传统主流，定义了新的诗歌逻辑\"可知，文段论述了李商隐对于传统主流在努力突破，选项\"只有李商隐在努力突破\"表述过于绝对，排除；\nB项，根据\"这种'现代意识'在当时是独创且超前的，并且后世模仿者中再无超越者，直到二十世纪以后被重新研究\"可知，表述正确，当选；\nC项，根据\"这种'现代意识'……付之爱情命题并凝固成诗的琥珀，是十分厉害的\"可知，文段仅提及李商隐将这些富有价值的领域付之爱情命题，但并未表明李商隐诗歌的主要成就集中在爱情诗，无中生有，排除；\nD项，\"现代诗歌的特质\"文段并未提及，无中生有，排除。\n故正确答案为B。", "APP考点": "细节判断题", "APP来源": "2025年上海市公务员录用考试《行测》题（B类）（网友回忆版）第50题", "书籍配图": "yyimage\\book\\116.webp"}, {"编号": "YY033", "原编号": "YY035", "题号": "117-14", "书籍页码": 117, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "美学经济时代，伴随着消费需求与消费体验的不断升级，以美学价值为核心的生产要素在产品的价值生产、企业的品牌建设以及产业价值链的提升中发挥着越来越重要的作用。电影产业作为当前经济中吸附资本能力最强、生产时效最快、引爆审美迭代和文化价值翻新变异的内容产业，对产业升级和经济增长的重要性不言而喻。电影是当代新文化、新时尚、新美感、新神话、新观念的重要策源地，牢牢占据着内容产业的头部位置，既对社会整体风尚与价值发挥引领作用，也会优化赋能全经济产业链。这段文字意在说明：", "选项": {"A": "电影产业长期处于内容产业的龙头位置", "B": "电影对中国产业的转型升级具有重要推动作用", "C": "电影产业的发展引领着美学经济时代的整体风尚", "D": "美学经济时代以价值为核心的生产要素愈发重要"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "59%", "APP易错项": "B", "APP解析": "文段开篇指出在美学经济时代，以美学价值为核心的生产要素发挥着越来越重要的作用，紧接着通过程度词\"最强\"、\"最快\"、\"引爆\"强调\"电影产业\"这一话题，并指出电影产业在美学经济时代的重要性，尾句进一步指出电影是新时尚、新美感的策源地，对于社会整体风尚和经济产业链都发挥重要作用。故文段重点强调\"电影产业\"对\"美学经济时代\"的重要性，对应C项。\nA项，\"处于内容产业的龙头位置\"非重点，排除；\nB项，没有提及文段的核心话题\"美学\"，排除；\nD项，没有提及文段的核心话题\"电影产业\"，排除。\n故正确答案为C。\n【文段出处】光明网《美学经济助力发展电影产业》", "APP考点": "主题词", "APP来源": "2022年天津市公务员录用考试《行测》试题（网友回忆版）第24题", "书籍配图": "yyimage\\book\\117.webp"}, {"编号": "YY034", "原编号": "YY036", "题号": "117-15", "书籍页码": 117, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "传统的文明标准有三个，即文字、青铜器和城市。但后来许多考古学家发现，由于区域不同，文明的差异也很大，这个判断标准不但行不通，还会给考古工作带来阻碍。现如今，国际上对文明的判断标准主要是：已进入国家社会形态，具有一套礼仪系统和统治管理制度。良渚文化虽没有青铜器和较为成熟的文字，但具有早期国家社会形态和较为完整的礼仪系统以及管理制度，还具有许多东方文明的因素。有良渚文化考古研究员甚至认为，良渚文化是东方早期一个集大成的文明。这段文字意在强调：", "选项": {"A": "城市应该成为认定文明的首要标准", "B": "良渚文化符合通行的文明判断标准", "C": "传统的文明评判标准仍具有现实意义", "D": "良渚文化颠覆了传统上对文明的认识"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "59%", "APP易错项": "D", "APP解析": "文段首句引出传统文明的三个标准，接下来通过转折词\"但\"强调传统文明的标准已不适用。接着\"现如今\"与前文对比，论述现今国际的文明判断标准。后面引出\"良渚文化\"，转折词\"但\"强调\"良渚文化\"符合现今国际上对文明的判断标准，结尾用\"甚至\"进一步论述\"良渚文化\"是可定义为文明的，故文段强调\"良渚文化\"是符合现今文明判断标准的，对应B项。\nA项，\"城市应该成为……首要标准\"属于无中生有，且未提及主题词\"良渚文化\"，排除；\nC项，\"仍具有现实意义\"属于无中生有，且未提及主题词\"良渚文化\"，排除；\nD项，\"颠覆了传统上对文明的认识\"属于无中生有，文段重点强调\"良渚文化\"符合现今文明的标准，偏离文段核心，排除。\n故正确答案为B。\n【文段出处】新京报《申遗成功的良渚古城遗址，因何而特别？》", "APP考点": "主题词", "APP来源": "2021年国家公务员录用考试《行测》题（副省级网友回忆版）第42题", "书籍配图": "yyimage\\book\\117.webp"}, {"编号": "YY035", "原编号": "YY037", "题号": "119-18", "书籍页码": 119, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "在何尊的铭文中，有一句话是\"恭德裕天\"。其中的\"德\"字，相较甲骨文，底部多出\"心\"字部首。有专家认为，有\"心\"方为\"德\"，表明在三千多年前\"德政\"这一政治理念业已出现，这为人们理解中国的政治传统提供了有益启示。不同时代、地域青铜器之间的关系\"图谱\"，青铜器的材质分析、工艺重建和产地溯源，青铜器不同器型与纹饰的来源、演变……亟待破译的\"青铜密码\"还有很多，需要我们拓宽视野，运用多种研究方法、技术手段进行综合分析，进一步推动相关学科发展。这段文字意在强调：", "选项": {"A": "青铜器的研究领域十分广阔", "B": "青铜器亟待进一步深入研究", "C": "青铜器研究有益于挖掘传统文化", "D": "青铜器研究具有极其重要的价值"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "71%", "APP易错项": "D", "APP解析": "文段开篇以何尊的铭文中\"德\"字的变化引出\"德政\"理念，阐述了青铜器研究对理解中国政治传统的意义，接着介绍了一些亟待破译的\"青铜密码\"，并提出对策，强调需要运用多种方法、手段进行综合分析，从而推动相关学科发展。故文段重在强调青铜器亟待进一步深入研究，对应B项。\nA项：文段重点强调要对青铜器进行深入研究，而非强调青铜器的研究领域广阔，该项偏离文段重点，排除。\nC、D两项：C项\"有益于挖掘传统文化\"，D项\"具有极其重要的价值\"均为意义表述，文段重点强调对策，排除。\n故正确答案为B。\n【文段出处】人民网《打开青铜器这本\"大书\"》", "APP考点": "关联词-对策", "APP来源": "2025年江苏省公务员录用考试《行测》题（B类）（网友回忆版）第26题", "书籍配图": "yyimage\\book\\119.webp"}, {"编号": "YY036", "原编号": "YY038", "题号": "119-19", "书籍页码": 119, "书籍章节": "第一章片段阅读-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "钙钛矿太阳能电池属于新概念太阳能电池。经过多年发展，这类电池的效率得到显著提升，但是稳定性仍是一道难题。最近，科学家首次发现钙钛矿阳离子面外分布不均匀是影响电池性能的主要原因。研究团队通过研究设计制备出均匀化的钙钛矿薄膜，获得了最高达26.1%的光电转换效率。这一研究开辟了提升电池器件稳定性的新途径，为进一步得到高效、稳定的钙钛矿太阳能电池提供了明确方向。对这段文字主旨概括最恰当的一项是（ ）", "选项": {"A": "钙钛矿太阳能电池研发已取得突破性进展", "B": "钙钛矿太阳能电池稳定性差的原因被发现", "C": "钙钛矿太阳能电池稳定性难题被有效破解", "D": "钙钛矿太阳能电池发展前景将更高效稳定"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "D", "APP解析": "文段开篇引出\"钙钛矿太阳能电池\"的话题，随后通过转折词\"但是\"指出其在稳定性上存在问题，并分析了问题的原因，随后给出对策\"均匀化的钙钛矿薄膜\"，尾句指出该做法能提升电池器件稳定性，为进一步得到高效、稳定的钙钛矿太阳能电池提供了明确方向。故文段重在强调科学家解决了钙钛矿太阳能电池稳定性难题，对应C项。\nA项，\"已取得突破性进展\"表述不明确，缺少\"稳定性\"这一核心话题，排除；\nB项，\"稳定性差的原因被发现\"非重点，排除；\nD项，文段仅提及当前的研究为实现高效、稳定的钙钛矿太阳能电池提供了方向，\"发展前景将更高效稳定\"无中生有，排除。\n故正确答案为C。\n【文段出处】迷你科普知识《科学家破解钙钛矿电池稳定性难题》", "APP考点": "关联词-对策、主题词", "APP来源": "2025年黑龙江公务员录用考试《行测》题（网友回忆版）第52题", "书籍配图": "yyimage\\book\\119.webp"}, {"编号": "YY037", "原编号": "YY039", "题号": "122-9", "书籍页码": 122, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "火星大气稀薄，表面沙尘易形成尘暴。尘暴大小不一，小的只覆盖一小块区域；大的能席卷整个火星，持续数周甚至数月。尘暴发生时，大量沙尘颗粒高速运动，相互摩擦产生静电。火星沙尘以硅酸盐矿物为主，本身易带电；同时，火星大气稀薄，缺乏足够气体分子中和电荷，使沙尘颗粒能积累大量静电。当电荷积累到一定程度，就会引发大气放电——类似地球闪电，但规模更小、更频繁，被称为\"静电放电\"。火星沙尘颗粒在缺氧、低气压环境下发生静电放电时，会引发一系列电化学反应。这个反应可以将大气中的二氧化碳和含水矿物中的水结合在一起形成甲烷。这段文字主要介绍了火星上：", "选项": {"A": "沙尘暴静电放电的化学机制", "B": "大气环境与静电放电的关系", "C": "静电放电如何促成甲烷生成", "D": "放电现象及其潜在化学效应"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "45%", "APP易错项": "D", "APP解析": "文段首先介绍火星表面沙尘易形成尘暴，接着介绍了尘暴的特点，后文指出尘暴发生时会产生静电并解释了原因，接着指出电荷积累到一定程度会引发\"静电放电\"，进而引发一系列电化学反应，尾句通过指代词总结前文，强调最终会形成甲烷，故文段主要介绍火星上的静电放电最终会促成甲烷的生成，对应C项。\nA项，缺少文段主题词\"甲烷\"，偏离文段核心，排除；\nB项，\"大气环境与静电放电的关系\"仅为前文引入部分的内容，非重点，且缺少文段主题词\"甲烷\"，偏离文段核心，排除；\nD项，\"潜在化学效应\"表述不明确，文段重点强调形成甲烷，偏离文段核心，排除。\n故正确答案为C。\n【文段出处】光明日报《谁在\"偷偷\"为火星制造甲烷？》", "APP考点": "关联词-因果、主题词", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第43题", "书籍配图": "yyimage\\book\\122.webp"}, {"编号": "YY038", "原编号": "YY040", "题号": "123-11", "书籍页码": 123, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "人们一般都喜欢追逐日出或日落景观，但绝大部分人可能没意识到，其实在与太阳相反一侧的天空，也隐藏着鲜为人知的景观，比如说人们能看到的两种大尺度影子景观——\"山影\"和\"地影\"。日出或日落前后，在太阳照射下，高大山峰投射出巨大阴影。此时站在该山峰的观测者观察这个阴影，阴影看起来像金字塔，这就是山影。除了登山家或摄影师，几乎很少有人注意到山影和地影，并将它们作为一种景观来欣赏。对这段文字理解正确的是：", "选项": {"A": "大多数人不喜欢欣赏\"山影\"\"地影\"景观", "B": "人们不把\"山影\"\"地影\"作为景观来欣赏", "C": "\"山影\"和\"地影\"是鲜为人知的山上景观", "D": "只有极少数人能发现和欣赏\"山影\"和\"地影\""}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "66%", "APP易错项": "C", "APP解析": "A项，根据\"除了登山家或摄影师，几乎很少有人注意到山影和地影，并将它们作为一种景观来欣赏\"可知，大部分人只是没有注意到\"山影\"\"地影\"，故\"大多数人不喜欢\"无中生有，排除；\nB项，根据\"除了登山家或摄影师，几乎很少有人注意到山影和地影，并将它们作为一种景观来欣赏\"可知，登山家和摄影师还是会欣赏\"山影\"和\"地影\"的，表述过于绝对，排除；\nC项，根据\"在与太阳相反一侧的天空，也隐藏着鲜为人知的景观……'山影'和'地影'\"可知，\"山影\"和\"地影\"是天空中的景观，故\"山上景观\"表述错误，排除；\nD项，根据\"除了登山家或摄影师，几乎很少有人注意到山影和地影，并将它们作为一种景观来欣赏\"可知，表述正确，当选。\n故正确答案为D。\n【文段出处】中国地理网《山影地影 只有极少数人在欣赏它们》", "APP考点": "细节判断题", "APP来源": "2022年湖北省公务员录用考试《行测》题（网友回忆版）第50题", "书籍配图": "yyimage\\book\\123.webp"}, {"编号": "YY039", "原编号": "YY041", "题号": "124-13", "书籍页码": 124, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "汉服不是静态的出土文物，而是活态的社会习俗。如果说传统汉服是汉民族的服饰，新时代汉服则是以传统汉服为基本规范，吸收其他民族服饰元素，适合当代人着装需要，承载中华民族共同体的文化基因、象征整个中华民族共同符号的服饰。当前，汉服穿戴还属于在特定文化空间展示艺术美的范畴。要加强汉服研究阐释工作，着力构建有中国底蕴、中国特色的汉服理论体系和话语体系，将汉服作为礼服向国家、社会、人生仪式，以及文化、教育、科技等方面推广，最后推向人民群众的日常生活起居。这段文字意在说明：", "选项": {"A": "当前应加强汉服理论研究和推广", "B": "新时代汉服设计应体现时代精神", "C": "汉服是体现中国传统文化的典型符号", "D": "汉服理论研究要形成自己的话语体系"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "72%", "APP易错项": "D", "APP解析": "文段开篇引出\"汉服\"这一话题，接着通过对比介绍新时代汉服已成为象征中华民族的服饰，并指出当前汉服穿戴的范畴比较狭窄。最后尾句通过\"要\"提出对策，强调我们应当加强对汉服的研究与推广，故文段意在强调需要对汉服加强研究和推广，对应A项。\nB项，\"汉服设计应体现时代精神\"无中生有，排除；\nC项，\"体现中国传统文化的典型符号\"对应对策前的内容，非重点，排除；\nD项，\"要形成自己的话语体系\"表述片面，排除。\n故正确答案为A。\n【文段出处】《汉服\"热\"起来也要\"冷\"思考》", "APP考点": "关联词-对策、分述句特征-引入铺垫", "APP来源": "2022年四川下半年公务员录用考试《行测》试题（网友回忆版）第21题", "书籍配图": "yyimage\\book\\124.webp"}, {"编号": "YY040", "原编号": "YY042", "题号": "124-14", "书籍页码": 124, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "在海洋中，人们一直认为固氮作用多是通过蓝细菌完成的，但实际上也有其他的固氮菌在大海中进行固氮作用。研究人员在固氮作用活跃海域的海水样本中发现了编码固氮酶的基因片段，不过，这些基因并不属于蓝细菌，反而与在陆地上能和豆科共生的根瘤菌关系密切。因此研究人员推测，这些基因所属的固氮菌很可能也是一种共生根瘤菌。这种固氮菌总是集中出现在硅藻体内的同一位置。新发现成功地将根瘤菌的宿主范围从陆地上的豆科植物扩展至海洋中的硅藻，进一步观测发现，这种共生现象在海洋中广泛存在。这段文字意在说明：", "选项": {"A": "大海中存在着很多共生的固氮菌", "B": "海洋中的硅藻是根瘤菌的主要宿主", "C": "根瘤菌-硅藻共生体也是海洋固氮的主要参与者", "D": "除蓝细菌外，海洋中还有其他固氮菌进行固氮作用"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "49%", "APP易错项": "D", "APP解析": "文段开篇指出人们一直以来认为固氮作用多是通过蓝细菌完成的，随后通过转折\"但实际上\"指出还有其他的固氮菌。接下来介绍了研究人员发现了编码固氮酶的基因片段，并通过转折\"不过\"强调这些基因和根瘤菌关系密切，随后通过\"因此\"进行总结，指出这些基因所属的固氮菌很可能也是一种共生根瘤菌，随后指出这种固氮菌出现在硅藻体内的同一位置，尾句进一步论述该发现的意义。故文段重在说明研究人员的新发现，即在硅藻体内的这一共生根瘤菌也能参与海洋的固氮作用，对应C项。\nA项，对应文段尾句，非重点，且未提及文段主题词\"根瘤菌\"，排除；\nB项，未提及根瘤菌\"固氮\"这一重要作用，偏离文段重点，排除；\nD项，\"还有其他固氮菌\"表述不及C项明确，排除。\n故正确答案为C。", "APP考点": "关联词-因果、主题词", "APP来源": "2025年新疆公务员录用考试《行测》试题（网友回忆版）第36题", "书籍配图": "yyimage\\book\\124.webp"}, {"编号": "YY041", "原编号": "YY043", "题号": "125-15", "书籍页码": 125, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "一款智能手机就可能把相当一部分老年人\"甩出\"现代世界，更何况现代社会的介质不仅仅是手机。随时刷新着的节奏日益把很多老年人变成\"局外人\"，他们的生活很难对接时代，对接社会上无数个点和面，而一个个生命可以顺畅对接的社会才是真正的友好型社会。要想实现无障碍对接，仅仅从居住场所、城市公共设施等方面进行适老化改造是远远不够的，因为我们首先要做的，其实是拆除\"心墙\"：改变我们的内心理念和价值观，改变老年人社会语境处于弱势的现状，消除数字化带给老年人的\"不友好\"感觉。我们都将老去，今日社区花坛边、农家墙根下那些孤独的身影，其实正是我们未来的画像。对现实友好，就是与未来和解，与我们自己和解。以下各项中，最适合作为上述语段标题的是（ ）。", "选项": {"A": "让老年人更好地安放\"暮年\"", "B": "适老化改造需先拆\"心墙\"", "C": "与未来和解，请从现在做起", "D": "创建无障碍\"友好型社会\""}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "83%", "APP易错项": "D", "APP解析": "文段开篇指出社会节奏的加快使老年人变成\"局外人\"的问题，随后提出对策，即首先要做的就是拆除\"心墙\"，并进行具体解释说明，尾句进一步补充其意义，故文段的重点为拆除\"心墙\"这一对策，对应B项。\nA项，\"让老年人更好地安放'暮年'\"为对策的意义表述，非重点，排除；\nC项，\"请从现在做起\"偏离文段重点，且缺少文段核心话题\"老年人\"，排除；\nD项，表述不明确，且缺少文段核心话题\"老年人\"，排除。\n故正确答案为B。\n【文段出处】《适老化改造要先拆\"心墙\"》", "APP考点": "标题填入题", "APP来源": "2021年湖北省选调生招录考试综合知识和行政职业能力测验试卷（网友回忆版）第65题", "书籍配图": "yyimage\\book\\125.webp"}, {"编号": "YY042", "原编号": "YY044", "题号": "126-18", "书籍页码": 126, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "体育文化是我国传统文化的重要组成部分，随着科技革命的不断深入，体育文化传承发展迎来了新的机遇。数字科技能够提供新的体育文化传播发展平台，将先进的数字设备应用到体育赛事活动中，通过云数据平台进行赛事活动宣传，丰富赛事的文化内涵。数字体育还可通过技术创新，不断推出数字化的体育文化产品，进一步达到普及体育运动的目的。最适合做这段文字标题的是：", "选项": {"A": "数字技术：促进体育文化繁荣的新媒介", "B": "数字体育：体育产业高质量发展新动能", "C": "体育文化：普及全民体育运动的新抓手", "D": "体育传播：数字技术带来发展的新机遇"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "57%", "APP易错项": "B", "APP解析": "文段首先引出\"体育文化\"的话题，并说明体育文化发展迎来了新机遇，接着阐述数字科技为体育文化提供新的传播发展平台，即通过数字设备进行赛事活动宣传，丰富文化内涵，还可通过技术创新推出数字化的体育文化产品以普及体育运动。故文段重在强调数字技术对体育文化繁荣发展的促进作用，对应A项。\nB项：文段重在强调\"数字技术对体育文化繁荣发展的促进作用\"，\"体育产业高质量发展\"偏离文段中心，排除。\nC项：\"普及全民体育运动\"只对应数字技术对体育运动的作用的一部分，表述片面，且未提及\"数字技术\"这一主题词，排除。\nD项：\"体育传播\"只对应数字技术对体育运动的作用的一部分，表述片面，排除。\n故正确答案为A。\n【文段出处】知网《数字体育助推体育强国建设的价值、困境与路径》", "APP考点": "标题填入题", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第44题", "书籍配图": "yyimage\\book\\126.webp"}, {"编号": "YY043", "原编号": "YY045", "题号": "126-20", "书籍页码": 126, "书籍章节": "第一章片段阅读-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "举行祭孟大典，就是要进一步发掘和丰富孟子博大精深的思想内涵，使之不断完善与创新，以\"徒善不足以为政，徒法不足以自行\"的标准完善公共治理。文中\"徒善不足以为政，徒法不足以自行\"的寓意是：", "选项": {"A": "治理国家必须把行善政与行法令结合起来", "B": "只有善德不足以处理国家的政务，只有法令不足以自己发生效力", "C": "中华民族传统文化的精髓所在", "D": "强调\"善\"与\"法\"相结合的重要性"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "53%", "APP易错项": "D", "APP解析": "\"徒善不足以为政，徒法不足以自行\"指的是只有善德不足以处理国家的政务，只有法令不能使之自己发生效力。文段论述以该标准来完善公共治理，即提出对策。故其深层寓意应为治理国家必须把行善政与行法令结合起来，对应A项。\nB项，仅为句子的表面意思，排除；\nC项，\"中华民族传统文化的精髓\"无中生有，排除；\nD项，文段并未论述其重要性，且没有突出\"公共治理\"这一话题，排除。\n故正确答案为A。", "APP考点": "句子", "APP来源": "2018年辽宁省公务员录用考试《行测》题（网友回忆版）第52题", "书籍配图": "yyimage\\book\\126.webp"}, {"编号": "YY044", "原编号": "YY046", "题号": "128-3", "书籍页码": 128, "书籍章节": "第一章片段阅读-综合训练四", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "人体需要的碳水化合物主要靠谷类提供。碳水化合物进入体内后转化为糖分，再进一步转化为维持人体机能的热量。糖分与热量之间的转化需要胰岛素的参与，胰岛素对葡萄糖有降解的作用。如果长期不吃或者少吃米饭，转化的葡萄糖量减少，胰岛素分泌就会减少，胰岛素的工作节奏被打乱，久而久之会给糖尿病提供可乘之机。这段文字意在说明：", "选项": {"A": "碳水化合物是人体所必需的", "B": "不吃谷类食物可能会得糖尿病", "C": "改善饮食结构可有效治疗糖尿病", "D": "糖尿病的病因是胰岛素分泌紊乱"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "61%", "APP易错项": "D", "APP解析": "文章开篇引出话题，说明谷类是人体所需碳水化合物的主要来源，接着具体讲述了碳水化合物转化为热量的过程，并指出其中需要胰岛素的参与；尾句引出重点，即长期不吃或少吃米饭，会导致胰岛素分泌减少、工作节奏被打乱，进而可能会给糖尿病可乘之机。故文章重点论述了长期不吃或少吃米饭（谷物）可能会得糖尿病，对应B项。\nA项，\"碳水化合物是人体所必需的\"对应文中首句引出话题的内容，非重点，排除；\nC项，\"有效治疗糖尿病\"文中并未提及，且改善饮食结构充其量只能\"预防\"糖尿病，排除；\nD项，\"胰岛素分泌紊乱\"非重点，其根本原因还是因为\"谷物\"摄取不足，排除。\n故正确答案为B。\n【文段出处】《不吃米饭更容易得糖尿病》", "APP考点": "主题词、分述句特征-引入铺垫", "APP来源": "2023年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第78题", "书籍配图": "yyimage\\book\\128.webp"}, {"编号": "YY045", "原编号": "YY047", "题号": "130-11", "书籍页码": 130, "书籍章节": "第一章片段阅读-综合训练四", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "数据正在成为新型的生产要素，一些科技巨头因为拥有巨大的平台优势，掌握大量数据，有可能成为数据寡头，带来数据垄断。数据垄断比技术垄断更难突破，容易产生所谓的数字鸿沟问题。随着数字经济时代的到来，数字鸿沟正呈现出多样化的特征，既有微观主体视角下个人、企业层面的数字鸿沟，也有宏观地理范围视角下地区、国家层面的数字鸿沟。如何避免数据垄断造成的新数字鸿沟，是我们在数据经济时代必须要思考的问题。下列选项中与文意不符合的一项是：", "选项": {"A": "数据利用是一把双刃剑，要避免数字鸿沟可能带来的危害", "B": "数据垄断正呈现出多样化特征，因而比技术垄断更难突破", "C": "科技巨头拥有数据优势可能在数据经济时代处于垄断地位", "D": "数据垄断未必造成数字鸿沟，但这是我们需要避免的问题"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "65%", "APP易错项": "D", "APP解析": "A项，根据\"数据正在成为新型的生产要素，一些科技巨头因为拥有巨大的平台优势，掌握大量数据，有可能成为数据寡头，带来数据垄断\"\"如何避免数据垄断造成的新数字鸿沟，是我们在数据经济时代必须要思考的问题\"可知，表述正确，排除；\nB项，根据\"数字鸿沟正呈现出多样化的特征\"可知，文段仅提到数字鸿沟的多样化，并未提及数据垄断是否多样化，选项偷换概念，且文段并未论述多样化特征导致了数据垄断比技术垄断更难突破，选项强加因果，当选；\nC项，根据\"一些科技巨头因为拥有巨大的平台优势，掌握大量数据，有可能成为数据寡头，带来数据垄断\"可知，表述正确，排除；\nD项，根据\"数据垄断……容易产生所谓的数字鸿沟问题\"和\"如何避免数据垄断造成的新数字鸿沟，是我们在数据经济时代必须要思考的问题\"可知，表述正确，排除。\n本题为选非题，故正确答案为B。\n【文段出处】清华金融评论《〈数据安全法〉正式表决通过｜洪小文：探索数据要素的赋能作用》", "APP考点": "细节判断题", "APP来源": "2025年上海市公务员录用考试《行测》题（B类）（网友回忆版）第49题", "书籍配图": "yyimage\\book\\130.webp"}, {"编号": "YY046", "原编号": "YY048", "题号": "133-20", "书籍页码": 133, "书籍章节": "第一章片段阅读-综合训练四", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "造纸术是中国四大发明之一，也是人类文明史上一项杰出的发明创造。中国是世界上最早养蚕织丝的国家。中国古代劳动人民以上等蚕茧抽丝织绸，剩下的恶茧、病茧等则用漂絮法制取丝绵。漂絮完毕，篾席上会遗留一些残絮。当漂絮的次数多了，篾席上的残絮便积成一层纤维薄片，经晾干之后剥离下来，可用于书写。这种漂絮的副产物数量不多，在古书上称它为赫蹏或方絮。这表明了中国造纸术的起源同丝絮有着渊源关系。文中的\"它\"所指的是：", "选项": {"A": "漂絮完毕，篾席上遗留的残絮", "B": "漂絮的副产物", "C": "篾席上的纤维薄片", "D": "篾席上的副产物"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "58%", "APP易错项": "C", "APP解析": "\"它\"出现在文段倒数第二句，需要结合所在语句前文内容进行理解。前文讲到\"这种漂絮的副产物数量不多\"，故\"它\"指的是漂絮的副产物，对应B项。\nA项：\"漂絮完毕，篾席上遗留的残絮\"不一定是漂絮的副产物，只有当漂絮的次数多了，才会成为漂絮的副产物，排除。\nC项：文段讲的是\"篾席上的残絮\"而非\"篾席上的纤维薄片\"，排除。\nD项：文段并未讲到篾席上的残絮就是篾席上的副产物，排除。\n故正确答案为B。", "APP考点": "代词", "APP来源": "2019年江西省法检统一考录公务员笔试《行测》题（网友回忆版）第26题", "书籍配图": "yyimage\\book\\133.webp"}, {"编号": "YY047", "原编号": "YY049", "题号": "135-5", "书籍页码": 135, "书籍章节": "第一章片段阅读-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "竹秆质地坚硬，其堪与木材媲美的木质特性，来自于初生结构中发达的机械组织和细胞壁木质化的基本组织；木材的木质特性，则来自于年轮式样分布的次生木质部。竹秆外形与其他禾本科草本植物的茎相似，具有明显的节和节间，节数和粗细在出笋时就已基本固定；节附近分布有居间分生组织，节间伸长时，各节分生组织同时活动，竹子迅速拔高；缺少形成层，不能长粗，只能保持\"婴儿时期的身材\"。竹壁分为竹青、竹肉、竹黄三个部分，竹青含叶绿素呈绿色，可以进行光合作用。根据这段文字，下列说法错误的是：", "选项": {"A": "竹秆只能长高不能长粗", "B": "竹子能够进行光合作用", "C": "竹秆的节数在出笋时就已基本固定", "D": "竹子的木质特性来自于次生木质部"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "64%", "APP易错项": "A", "APP解析": "A项，根据\"节附近分布有居间分生组织，节间伸长时，各节分生组织同时活动，竹子迅速拔高；缺少形成层，不能长粗，只能保持'婴儿时期的身材'\"可知，竹秆只能长高不能长粗，表述正确，排除；\nB项，根据\"竹壁分为竹青、竹肉、竹黄三个部分，竹青含叶绿素呈绿色，可以进行光合作用\"可知，竹子可以通过竹青进行光合作用，表述正确，排除；\nC项，根据\"竹秆外形与其他禾本科草本植物的茎相似，具有明显的节和节间，节数和粗细在出笋时就已基本固定\"可知，表述正确，排除；\nD项，根据\"竹秆质地坚硬，其堪与木材媲美的木质特性，来自于初生结构中发达的机械组织和细胞壁木质化的基本组织；木材的木质特性，则来自于年轮式样分布的次生木质部\"可知，竹秆的木质特性来自于初生结构中发达的机械组织和细胞壁木质化的基本组织，木材的木质特性来自于次生木质部，并不是竹子，偷换概念，当选。\n本题为选非题，故正确答案为D。\n【文段出处】人民网《竹子是草还是树？（把自然讲给你听）》", "APP考点": "细节判断题", "APP来源": "2024年甘肃公务员录用考试《行测》题（网友回忆版）第51题", "书籍配图": "yyimage\\book\\135.webp"}, {"编号": "YY048", "原编号": "YY050", "题号": "137-10", "书籍页码": 137, "书籍章节": "第一章片段阅读-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "我们看到的海面上的波浪似乎只有凸起的波峰和凹下的波谷。其实，水质点并不是在做简单的上下振动，而是做圆周运动或者椭圆运动，甚至是水平往复振动。对于水深很大的情况，波浪水质点做圆周运动，并在水面时运动半径达到最大。在水面以下随着深度的增加，半径迅速减小，在水面以下约半个波长位置处，水质点基本上已不再运动。对于水深比较浅的情形，靠近水面的水质点不做圆周运动，其运动轨迹是一个椭圆，随着深度的增加，椭圆逐渐变扁，到达水底时，那里的水质点已经仅有水平的往复振动了。对上述文段理解正确的是：", "选项": {"A": "水平的往复振动才是水质点的运动轨迹", "B": "水深时，水质点的运动轨迹由椭圆变扁", "C": "水质点的运动轨迹随水深的减少而趋圆", "D": "波峰与波谷只是水质点的运动表象"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "51%", "APP易错项": "B", "APP解析": "A项，由\"水质点并不是在做简单的上下振动，而是做圆周运动或者椭圆运动，甚至是水平往复振动\"可知，水质点的运动轨迹并非只有\"水平的往复振动\"，还有\"圆周运动或者椭圆运动\"，表述错误，排除；\nB项，由\"对于水深很大的情况，波浪水质点做圆周运动\"可知，在水深很大的情况下，水质点的运动轨迹并非椭圆，表述错误，排除；\nC项，由\"对于水深很大的情况，波浪水质点做圆周运动，并在水面时运动半径达到最大。在水面以下随着深度的增加，半径迅速减小\"可知，在水深很大的情况下，水质点的运动轨迹一直都是圆周运动，\"随水深的减少而趋圆\"表述错误，排除；\nD项，由\"我们看到的海面上的波浪似乎只有凸起的波峰和凹下的波谷。其实，水质点并不是在做简单的上下振动\"可知，表述正确，当选。\n故正确答案为D。", "APP考点": "细节判断题", "APP来源": "2022年青海省公务员录用考试《行测》题（网友回忆版）第46题", "书籍配图": "yyimage\\book\\137.webp"}, {"编号": "YY049", "原编号": "YY051", "题号": "138-15", "书籍页码": 138, "书籍章节": "第一章片段阅读-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "数据安全和数据共享是数据治理的基本目标。受数据赋权观念的影响，现行刑法采用了控制模式，重在禁止\"获取\"\"泄漏\"\"窃取\"数据的行为，并借此对滥用行为进行事前防范。控制模式忽视了数据的公共产品属性，无法全面、有效保护数据法益，导致既无法有效维护数据安全，亦难以实现数据共享。旨在规制滥用行为的利用模式，是刑法数据治理模式调整的现实方向。利用模式可基于以下路径实现：刑法总则中设置专门条款，指导分则数据法益的解释；适当限制控制模式立法，发挥数据的独立价值；增加滥用算法罪、非法提供算法服务罪，弥补现行刑法规范供给不足的缺憾；积极探索涉数据犯罪的违法阻却事由，避免因刑法介入过度而抑制数据共享目标的实现。这是一篇论文的摘要，这篇论文的标题最有可能是：", "选项": {"A": "数据治理的传统观念及其更新", "B": "让数据安全为数据共享保驾护航", "C": "数据滥用——刑法数据治理的靶向", "D": "从控制到利用：刑法数据治理的模式转换"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "75%", "APP易错项": "C", "APP解析": "文段开篇提出数据治理的基本目标是数据安全和数据共享，随后指出现行刑法采用的控制模式既无法有效维护数据安全，也难以实现数据共享，即提出问题。接下来指出利用模式是刑法数据治理模式的现实调整方向，即利用模式可以解决问题，后文通过实现利用模式的路径进行具体解释说明，文段核心话题为\"刑法数据治理的利用模式\"，对应D项。\nA项，\"传统观念及其更新\"表述不明确，文段重点强调刑法数据治理模式的利用模式，排除；\nB项，\"数据安全为数据共享保驾护航\"强调\"数据安全\"对\"数据共享\"的作用，文段重点强调的是\"利用模式\"对\"数据安全\"和\"数据共享\"的作用，并未论述\"数据安全\"和\"数据共享\"两者的关系，无中生有，排除；\nC项，\"数据滥用\"仅对应文段\"数据安全\"部分内容，表述片面，且\"刑法数据治理的靶向\"表述不明确，排除。\n故正确答案为D。\n【文段出处】《从控制到利用：刑法数据治理的模式转换》", "APP考点": "标题填入题", "APP来源": "2023年内蒙古公务员录用考试《行测》题（网友回忆版）第39题", "书籍配图": "yyimage\\book\\138.webp"}, {"编号": "YY050", "原编号": "YY052", "题号": "145-5", "书籍页码": 145, "书籍章节": "第二章语句表达-第一节语句排序题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "①当前，我国荒漠化、沙化土地治理呈现出\"整体好转、改善加速\"的良好态势，但沙化土地面积大、分布广、程度重、治理难的基本面尚未根本改变\n②现实表明，我国荒漠化防治和防沙治沙工作形势依然严峻\n③我国是世界上荒漠化最严重的国家之一，荒漠化土地主要分布在三北地区，而且荒漠化地区与经济欠发达区、少数民族聚居区等高度耦合\n④荒漠化、风沙危害和水土流失导致的生态灾害，制约着三北地区经济社会发展，对中华民族的生存、发展构成挑战\n⑤我们要充分认识防沙治沙工作的长期性、艰巨性、反复性和不确定性，进一步提高站位，增强使命感和紧迫感\n⑥这两年，受气候变化异常影响，我国北方沙尘天气次数有所增加\n将以上6个句子重新排列，语序正确的一项是：", "选项": {"A": "①③⑥⑤②④", "B": "②⑤⑥①④③", "C": "④①③②⑥⑤", "D": "③④①⑥②⑤"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "86%", "APP易错项": "C", "APP解析": "对比选项，确定首句。①句和②句均介绍我国的荒漠化、沙化土地的防治情况。③句介绍我国是荒漠化最严重的国家之一及我国荒漠化土地的主要分布地区，引出我国\"荒漠化\"这一话题。根据逻辑顺序，应先引出\"荒漠化\"的话题，再论述其防治的情况，故③句应在①句和②句之前，锁定D项。\n验证D项的逻辑，③句引出\"我国是荒漠化最严重的国家之一\"这一话题，接着④句介绍荒漠化影响着生态及经济等的发展，随后①句介绍荒漠化经过治理虽有好转，但根本问题依然存在，⑥句通过近两年我国北方沙尘天气次数增加对前文进行论证，接着通过②句再次指出我国的荒漠化及沙化防治形势严峻，最后⑤句给出对策，我们要认识到防沙治沙工作的特性，提高站位，增强使命感和紧迫感，逻辑通顺，当选。\n故正确答案为D。\n【文段出处】国家林业和草原局《习近平在内蒙古巴彦淖尔考察并主持召开加强荒漠化综合防治和推进\"三北\"等重点生态工程建设座谈会》", "APP考点": "确定顺序", "APP来源": "2024年国家公务员录用考试《行测》题（副省级网友回忆版）第46题", "书籍配图": "yyimage\\book\\145.webp"}, {"编号": "YY051", "原编号": "YY053", "题号": "159-14", "书籍页码": 159, "书籍章节": "第二章语句表达-第一节语句排序题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "①这会使病情恶化，并最终导致相关的关节功能障碍\n②大量临床及基础研究显示，软骨病理性钙化是导致骨关节病软骨退变的关键致病机制之一\n③软骨病理性钙化通过诱导软骨细胞表型改变，最终呈现出一种病理状态\n④关节软骨渐进性退变是骨关节病最主要的病理改变\n⑤这些病态的软骨细胞通过有丝分裂增加自身数量，并通过分泌炎症因子、降解软骨基质引发组织炎症，最终发生凋亡\n⑥凋亡小体在吸收钙离子后，又会成为新的病理性矿化结晶，循环往复，致使软骨退变加重、剥脱\n将以上6个句子重新排列，语序正确的是：", "选项": {"A": "④②③⑤⑥①", "B": "④③⑤①②⑥", "C": "②③⑤⑥④①", "D": "②⑤④③①⑥"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "65%", "APP易错项": "C", "APP解析": "对比选项，确定首句。②句指出骨关节病软骨退变的致病机制，④句通过\"最主要\"引出关节软骨渐进性退变这一话题，按照逻辑顺序，应先引出话题，再具体论述其致病机制，故④句更适合作为首句，排除C、D两项。\n继续对比选项，A、B两项的区别在于④句之后接②句还是③句，②句是对④句的具体论述，符合逻辑。③句围绕话题\"软骨病理性钙化\"展开论述，与④句话题不一致，无法衔接，排除B项。\n故正确答案为A。\n【文段出处】科技日报《导致关节软骨病理性钙化的元凶找到了》", "APP考点": "确定顺序", "APP来源": "2023年国家公务员录用考试《行测》题（地市级网友回忆版）第51题", "书籍配图": "yyimage\\book\\159.webp"}, {"编号": "YY052", "原编号": "YY054", "题号": "170-14", "书籍页码": 170, "书籍章节": "第二章语句表达-第二节语句填空题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "智能防撞系统可开启碰撞警示，必要时还将自动刹车；借助AR，智能头盔抬头显示技术把导航等信息\"虚拟成像\"，骑乘者可提前看到导航路线指引；自平衡技术与辅助驾驶技术，可帮助降低摩托车操控难度；智能骑行服、手套，可集成一些控制按钮或传感器，达成智能化人车交互；手机投屏、赛道模式、弹射起步功能……随着新一代信息技术深入应用，摩托骑行变得更加________。填入画横线部分最恰当的一项是：", "选项": {"A": "智能、自如、自由", "B": "安全、便捷、炫酷", "C": "简单、洒脱、风驰电掣", "D": "方便、轻松、随心所欲"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "63%", "APP易错项": "A", "APP解析": "横线位于文段结尾，需结合前文内容分析。文段开篇指出智能防撞系统可通过碰撞警示、自动刹车保障骑乘安全，接着介绍借助AR，智能头盔抬头显示技术可显示导航、自平衡技术与辅助驾驶技术能降低摩托车操控难度、智能骑行服与手套的集成控制功能，可实现人机交互，都使得骑行更加便捷；最后列举了手机投屏、赛道模式、弹射起步等特色功能，凸显骑乘的科技感与体验感。尾句对前文内容进行总结，重点强调新一代信息技术的深入应用，让摩托骑行在安全、便捷及体验感上实现升级，对应B项。\nA项，\"自由\"文段未提及骑乘\"不受限制\"的相关表述，无中生有，排除；\nC项，\"洒脱\"侧重骑乘者的气质，文段未对骑乘者姿态进行描述，无中生有，且\"风驰电掣\"只能对应\"弹射起步功能\"，表述片面，排除；\nD项，\"随心所欲\"强调\"不受约束\"，与智能防撞系统的\"安全约束\"逻辑冲突，同时未提及\"安全\"\"炫酷\"的特点，排除。\n故正确答案为B。\n【文段出处】半月谈《科技催生\"成年人的智能玩具\"》", "APP考点": "横线在结尾", "APP来源": "2026年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第30题", "书籍配图": "yyimage\\book\\170.webp"}, {"编号": "YY053", "原编号": "YY055", "题号": "177-12", "书籍页码": 177, "书籍章节": "第二章语句表达-第二节语句填空题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "在中华文明滋养的神州大地上，________。袁隆平院士一生扎根稻田，用\"粒粒皆辛苦\"的执着培育出杂交水稻；\"时代楷模\"张玉滚坚守深山小学二十余载，以\"桃李不言\"的奉献点亮山村孩子的未来；\"大国工匠\"高凤林焊接火箭发动机，用\"毫厘不差\"的精准诠释工匠精神；\"人民楷模\"王继才32年坚守开山岛，用\"孤岛不孤\"的信念诠释守岛人的担当……一位位先进典型、一次次精神洗礼，不断激发全社会的思想认同、情感共鸣和效仿意愿，营造出崇德向善、见贤思齐、德行天下的浓厚氛围。据材料内容，填入横线处最合适的句子是（ ）。", "选项": {"A": "处处可见光彩绽放的职业道德之花", "B": "职业道德建设开创新局面、展现新气象", "C": "\"敬事而信\"\"鞠躬尽瘁\"的敬业精神代代相传", "D": "每个行业都践行着用心钻研、追求极致的工匠精神"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "64%", "APP易错项": "C", "APP解析": "横线出现在文段开头，且为首句中的分句，需结合首句及后文内容分析。文段开篇引出神州大地这一背景，后文以袁隆平院士、\"时代楷模\"张玉滚等先进典型为例，涉及农业、教育、工业等不同职业领域，最后强调这些榜样激发全社会的认同和效仿意愿，最终促成\"崇德向善、见贤思齐、德行天下\"的正向社会氛围。根据后文内容可知，这些不同行业的事例共同彰显了敬业、奉献、担当等高尚职业道德，故横线处应体现神州大地上各行业普遍存在践行良好职业道德的典型，A项\"职业道德之花\"与前文\"神州大地\"构成形象表达，\"光彩绽放\"呼应后文人物的光辉事迹，当选。\nB项，\"开创新局面、展现新气象\"强调职业道德建设的阶段性突破与发展成果，但文段仅客观罗列各行业先进典型的职业操守与精神风貌，未提及\"创新突破\"\"局面革新\"等相关表述，与后文衔接不当，排除；\nC项，\"敬业精神代代相传\"，一方面仅强调\"敬业\"，例子中的精神不限于\"敬业\"，还包括奉献、担当等，表述片面；另一方面\"代代相传\"强调代际传承，而后文内容未体现精神的传承脉络，仅聚焦当下典型的示范效应，与后文衔接不当，排除；\nD项，\"用心钻研、追求极致的工匠精神\"仅对应\"大国工匠\"高凤林这一个例子，表述片面，排除。\n故正确答案为A。\n【文段出处】光明日报《培厚职业道德，增强人民精神力量》", "APP考点": "横线在开头", "APP来源": "2026年广东省公务员录用考试《行测》题（网友回忆版）第28题", "书籍配图": "yyimage\\book\\177.webp"}, {"编号": "YY054", "原编号": "YY056", "题号": "186-7", "书籍页码": 186, "书籍章节": "第二章语句表达-第三节接语选择题-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "长期以来，人民调解员队伍以兼职为主。兼职人民调解员的优势是容易发挥基层社会各行各业的力量，国家投入人力成本和财政成本比较低。但同时，由于兼职调解员在时间精力、专业素质等方面受限，制约了调解工作的有效开展。在现阶段，一方面，矛盾纠纷主体更加多元、类型更加多样，调解难度不断加大；另一方面，人民群众的权利意识、法治意识不断增强，对矛盾纠纷化解质效提出了更高要求。这些都需要人民调解员投入更多的时间和精力，具备较高的政策水平、法律素养和专业知识。这段文字接下来最可能说的是：", "选项": {"A": "兼职人民调解员的局限性", "B": "人民调解制度的发展过程", "C": "人民调解员应当具备的专业素养", "D": "建立人民调解员专职队伍的举措"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "75%", "APP易错项": "C", "APP解析": "文段开篇介绍背景，指出人民调解员队伍以兼职为主，接着介绍了兼职人民调解员的优势，然后通过转折词\"但\"指出问题，接着指出现阶段矛盾调解难度大且要求更高，这些需要人民调解员投入更多时间和精力，并具备更高的政策水平、法律素养和专业知识，即兼职人民调解员已不能够解决所有纠纷问题，需要更加专业的团队。故后文应围绕解决兼职人民调解员所存在的问题，建立人民调解员专职队伍展开，对应D项。\nA项，\"兼职人民调解员的局限性\"前文已经论述，接下来不会继续论述，排除；\nB项，\"人民调解制度\"文段并未提及，衔接不当，排除；\nC项，\"专业素养\"对应\"法律素养\"，仅为尾句的其中一部分对策，表述片面，排除。\n故正确答案为D。\n【文段出处】《用法理情守护千家万户的安宁祥和》", "APP考点": "接语选择题", "APP来源": "2022年国家公务员录用考试《行测》题（地市级网友回忆版）第43题", "书籍配图": "yyimage\\book\\186.webp"}, {"编号": "YY055", "原编号": "YY057", "题号": "192-4", "书籍页码": 192, "书籍章节": "第二章语句表达-第三节接语选择题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "目前的全球治理体系是现代文明的产物，是经过长时间博弈和磨合后逐渐形成的。当前的全球治理体系存在两方面问题：一是这一体系仍存在许多合理性，对人类和平与发展有十分重要的作用，但随着时代的发展，这一治理体系及其体制机制未能适应新情况，出现了许多问题，亟需进行改革；二是现代化先发国家在这一体系中仍占据主导地位，长期把控国际外交话语权，将以资本为中心的逻辑贯穿于全球治理体系和治理体制机制。因此，要将构建人类命运共同体理念融入既有的全球治理体系及其相应体制机制，就必须正视上述两方面。这段文字接下来最可能讲的是：", "选项": {"A": "我国参与全球治理体系改革的路径", "B": "人类命运共同体理念的形成与发展", "C": "全球治理体系所面临的机遇与挑战", "D": "当前全球治理体系存在的制度缺陷"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "56%", "APP易错项": "B", "APP解析": "文段开篇介绍当前全球治理体系如何形成，接下来指出当前全球治理体系存在两方面的问题，即\"不适应新情况\"以及\"在现代化先发国家长期主导下，以资本为中心带来诸多弊端\"。尾句\"因此\"总结前文提出\"必须正视上述两方面\"的问题。故接下来应围绕解决\"当前的全球治理体系\"存在的问题提出对策，即\"全球治理体系改革\"，对应A项。\nB项，\"人类命运共同体理念\"偏离文段最后论述的核心话题\"全球治理体系\"，排除；\nC项，文段尾句主要强调如何正视问题，故下文不可能围绕\"机遇\"进行论述，排除；\nD项，当前存在的\"制度缺陷\"文段已经论述过，排除。\n故正确答案为A。\n【文段出处】《郑长忠：为世界谋大同而凝聚共识——中国外交话语权提升的逻辑与路径》", "APP考点": "接语选择题", "APP来源": "2021年国家公务员录用考试《行测》题（地市级网友回忆版）第44题", "书籍配图": "yyimage\\book\\192.webp"}, {"编号": "YY056", "原编号": "YY058", "题号": "194-9", "书籍页码": 194, "书籍章节": "第二章语句表达-第三节接语选择题-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "文化遗产保护体系，是针对与保护对象有关的内部、外部考察范围，所确定的定性、定量、定形态的科学研究体系，也是一个发展着的动态体系。伴随着人类社会价值观念的演变，有关文化遗产资源的观念也不断发生变化，对文化多样性和生物多样性的尊重必然更加突出，文化遗产的外延种类和评价体系也必然不断丰富。接下来最有可能介绍：", "选项": {"A": "要重视文化遗产的保护方向", "B": "要建立新的文化遗产资源观", "C": "要将更多文化遗产资源纳入保护范畴", "D": "在着力保护文化遗产物质载体的同时，还要重视发掘和保存非物质文化遗产"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "46%", "APP易错项": "C", "APP解析": "本题为接语选择题，需通读全文，重点关注文段最后谈论的核心话题。文段首先围绕\"文化遗产保护体系\"的概念进行详细介绍，随后指出\"文化遗产资源的观念\"随着人类社会价值观念的演变也在不断发生变化，并从两方面进行具体论述。因此文段接下来应继续围绕\"文化遗产资源的观念\"的话题展开论述，对应B项。\nA项\"文化遗产的保护方向\"、D项\"文化遗产物质载体\"\"非物质文化遗产\"均与文段最后谈论的核心话题不一致，与前文衔接不当，排除；\nC项，\"将更多文化遗产资源纳入保护范畴\"仅能对应尾句\"文化遗产的外延种类不断丰富\"，表述片面，且\"更多文化遗产资源纳入\"这一举措的实施，应在树立正确的观念之后，即文化遗产的观念发生变化，建立全新的文化遗产资源观，故与前文衔接不够紧密，排除。\n故正确答案为B。\n【文段出处】知网《全球视野下中国文化遗产保护新发展》", "APP考点": "接语选择题", "APP来源": "2024年青海省公务员录用考试《行测》题（网友回忆版）第56题", "书籍配图": "yyimage\\book\\194.webp"}, {"编号": "YY057", "原编号": "YY059", "题号": "198-5", "书籍页码": 198, "书籍章节": "第二章语句表达-综合训练一", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "事实上，教育方法从来不是\"铁板一块\"，关键要因材施教。因此对打击式教育的效果和影响也不能一概而论。对家长来说，教育子女更是充满个性化选择的过程。比如有的孩子容易骄傲自满，适时\"敲打\"实属必须；有的孩子缺乏自信，则需要多一些鼓励与肯定。当然，凡事都要掌握好分寸，不能过度打击，误伤了孩子的自信心。从这段文字可推知前文谈论的话题是：", "选项": {"A": "家庭教育", "B": "因材施教", "C": "打击式教育", "D": "鼓励式教育"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "57%", "APP易错项": "B", "APP解析": "本题为接语选择题，需通读全文，重点关注文段最后谈论的核心话题。文段首先通过转折词\"事实上\"引出教育方法要因材施教这一话题，紧接着指出对打击式教育的效果和影响不能一概而论，后文通过\"容易骄傲自满\"和\"缺乏自信\"两种不同性格的孩子来举例说明，最后补充说明不能过度打击孩子，要掌握好分寸，故由文段可推知前文应是围绕\"打击式教育\"展开，对应C项。\nA项\"家庭教育\"、B项\"因材施教\"、D项\"鼓励式教育\"均不是前文谈论的核心话题\"打击式教育\"，排除。\n故正确答案为C。\n【文段出处】大江晚报《适时\"敲打\"多些鼓励》", "APP考点": "接语选择题", "APP来源": "2023年辽宁省公务员录用考试《行测》题（网友回忆版）第47题", "书籍配图": "yyimage\\book\\198.webp"}, {"编号": "YY058", "原编号": "YY061", "题号": "200-7", "书籍页码": 200, "书籍章节": "第二章语句表达-综合训练一", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "锂离子电池已在便携式电子设备和新能源汽车中占据主导地位。然而，锂丰度低，资源分布不均，约70%集中在南美洲，我国80%的锂资源依赖进口。另外，锂离子电池由于安全隐患，难以满足大规模储能的需求。鉴于对原材料储量以及电池安全性、稳定性的担忧，人们努力寻找能够替代锂离子电池、可大规模应用且环境友好的下一代电化学储能技术。钠与锂位于同一主族，具有很多相似的物理化学性质，且钠资源丰富、分布广泛、成本低廉，钠离子电池快速充放电时负极不易析钠，安全性高。因此，________。填入画横线部分最恰当的一项是：", "选项": {"A": "物美价廉的钠离子电池或将成为中国能源超车新赛道", "B": "钠离子电池被认为是极具潜力的下一代电化学储能技术", "C": "新能源汽车的电池相关研究有望迈上一个新的台阶", "D": "我们要积极应对电化学储能技术领域的巨大挑战与机遇"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "71%", "APP易错项": "A", "APP解析": "横线出现在文段尾句，且由结论词\"因此\"引导，故横线处所填内容是对前文的概括总结。文段首先指出锂离子电池在便携式电子设备和新能源汽车中占据主导地位，紧接着通过\"然而\"进行转折，转折之后通过并列关联词\"另外\"强调了锂离子电池目前存在的问题，随后引出寻找锂离子电池替代品的必要性，最后介绍了钠及钠离子电池与锂相比所具有的优点。故前文重在强调钠离子电池是可以替代锂离子电池的电化学储能技术，对应B项。\nA项，\"中国能源超车新赛道\"侧重强调我国利用钠离子电池实现超越，而文段重点强调钠离子电池是下一代电化学储能技术，偏离文段中心，且\"物美价廉\"仅能对应钠的部分优势，表述片面，排除；\nC项，\"新能源汽车\"并非文段强调的重点，排除；\nD项，\"电化学储能技术领域\"相较于文段所强调的\"钠离子电池\"范围扩大，排除。\n故正确答案为B。\n【文段出处】《有望替代锂离子电池 钠离子电池储能技术迈上新台阶》", "APP考点": "横线在结尾", "APP来源": "2022年国家公务员录用考试《行测》题（地市级网友回忆版）第58题", "书籍配图": "yyimage\\book\\200.webp"}, {"编号": "YY059", "原编号": "YY062", "题号": "202-3", "书籍页码": 202, "书籍章节": "第二章语句表达-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "①南至广东、北至陕北，甚至甘肃、青海、宁夏等西北地区，都出土了具有长江下游地区鲜明特征的玉器\n②不论是四川成都的三星堆遗址，还是殷墟妇好墓，都出土了良渚人的玉琮，证明其与良渚有着密切的联系\n③由此可见，中华文化经历了一个从多元发展融合而成文化共同体的过程\n④良渚文化不是\"灭亡\"了，而是融入了更大的中华文化里\n⑤良渚人五千年前发明玉琮，随后其影响力开始向四周扩散\n⑥良渚文化和后来的文明是有关联的\n将上述6个句子重新排列，语序正确的是：", "选项": {"A": "⑥①③⑤②④", "B": "⑤②④⑥①③", "C": "⑥①⑤②③④", "D": "⑤①⑥②④③"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "47%", "APP易错项": "C", "APP解析": "对比选项，确定首句。选项中首句为⑤句和⑥句。⑤句论述良渚人发明的玉琮影响力向四周扩散，⑥句论述良渚文化和后来的文明有关联，均可做首句，无法排除。\n继续观察句子，寻找线索，发现③句出现\"由此可见\"，可考虑对比尾句。选项中尾句为③句和④句。③句通过\"由此可见\"引导结论，即中华文化是多元发展融合而成的文化共同体，④句论述良渚文化融入了更大的中华文化里，故③句是对④句的总结，③句更适合作为尾句，排除A、C两项，保留B、D两项。\n对比B、D两项，发现B项为⑤②两句衔接、⑥①两句衔接，D项为⑤①两句衔接、⑥②两句衔接。⑤句论述良渚人发明的玉琮影响力向四周扩散，根据\"向四周扩散\"可知，该句论述的是文化影响力在空间上的分布，⑥句论述良渚文化和后来的文明有关联，根据\"后来\"可知，其论述的是文化影响力在时间上的延续，①句中\"南至广东、北至陕北，甚至甘肃、青海、宁夏等西北地区\"，是围绕玉器在空间上的分布展开论述的，②句提到\"不论是四川成都的三星堆遗址，还是殷墟妇好墓，都出土了良渚人的玉琮\"，根据\"三星堆\"\"殷墟妇好墓\"可知，该句能够体现文化影响力在时间上的延续，故⑤①两句围绕文化影响力在空间上的分布展开，⑥②两句围绕文化影响力在时间上的延续展开，衔接更为准确，因此D项比B项更优，D项当选。\n故正确答案为D。\n【文段出处】光明网《良渚文化与中华五千年文明》", "APP考点": "确定顺序、确定尾句", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第33题", "书籍配图": "yyimage\\book\\202.webp"}, {"编号": "YY060", "原编号": "YY063", "题号": "202-4", "书籍页码": 202, "书籍章节": "第二章语句表达-综合训练二", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "________，最能代表一个时代的风貌，最能引领一个时代的风气。\"文变染乎世情，兴废系乎时序。\"在欧洲文艺复兴运动中，但丁、彼特拉克、薄伽丘、达·芬奇、拉斐尔、米开朗琪罗、蒙田、塞万提斯、莎士比亚等文艺巨人，发出了新时代的啼声，开启了人们的心灵。在谈到文艺复兴运动时，恩格斯说，这\"是一个需要巨人而且产生了巨人——在思维能力、热情和性格方面，在多才多艺和学识渊博方面的巨人的时代\"。在我国发展史上，包括文艺在内的文化发展同样与中华民族发展紧紧联系在一起。先秦时期，我国出现了百家争鸣的兴盛局面，开创了我国古代文化的一个鼎盛期。20世纪初，在五四新文化运动中，发端于文艺领域的创新风潮对社会变革产生了重大影响，成为全民族思想解放运动的重要引擎。填入画横线部分最恰当的一项是：", "选项": {"A": "文艺是铸造灵魂的工程", "B": "文艺是时代前进的号角", "C": "文化是民族生存和发展的重要力量", "D": "文艺创新是与时代脉搏同频共振的"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "57%", "APP易错项": "D", "APP解析": "横线在文段开头，与\"最能代表一个时代的风貌，最能引领一个时代的风气\"做衔接，且需结合后文对横线内容做出判断。后文先引用名言，接着分别以欧洲文艺复兴、我国先秦时期和五四新文化运动时期为例，具体阐述文艺对时代的代表与引领，充分体现出文艺对时代进步的重要性，对应B项。\nA项，\"铸造灵魂\"无中生有，文段强调文艺可推动时代发展，帮助人类打开新世界的大门，排除；\nC项，\"民族生存\"文段未体现，无中生有，排除；\nD项，\"同频共振\"侧重于共存，但文段强调的是文艺对时代的代表与引领，偏离文段中心，且\"文艺创新\"主题词范围缩小，不够精准，排除。\n故正确答案为B。\n【文段出处】《在文艺工作座谈会上的讲话》", "APP考点": "横线在开头", "APP来源": "2022年国家公务员录用考试《行测》题（副省级网友回忆版）第38题", "书籍配图": "yyimage\\book\\202.webp"}, {"编号": "YY061", "原编号": "YY064", "题号": "206-5", "书籍页码": 206, "书籍章节": "第二章语句表达-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "农谚说：\"山上多栽树，等于修水库，雨多它能吞，雨少它能吐。\"可见，森林的涵养水源功能，很早就被人们重视和利用了。实际上，森林的这一功能不仅指拦蓄降水或调节径流的能力，还体现在森林各结构层次在各水文过程中的作用，包括产水、净水、拦洪、补枯等各方面的具体效应之中。因此，________。填入画横线部分最恰当的一句是：", "选项": {"A": "森林是许多河流湖泊的发源地", "B": "森林的生态服务功能值得珍视", "C": "保护好森林也就保护了水资源", "D": "森林是另一种意义上的\"水库\""}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "52%", "APP易错项": "C", "APP解析": "横线在文段结尾，由\"因此\"可知，横线处内容应总结前文。文段开篇通过农谚引出话题，并通过结论词\"可见\"指出，森林具备涵养水源的功能。后文从两个方面对森林涵养水源的功能进行具体分析，一方面是拦蓄降水、调节径流；另一方面是能够作用于各水文过程中。故整个文段意在强调森林具有涵养水源功能的重要作用，D项\"另一种意义上的'水库'\"，即强调森林涵养水源的作用，当选。\nA项，\"河流湖泊的发源地\"文段并未涉及，无中生有，排除；\nB项，\"生态服务功能\"表述不够明确，文段强调森林涵养水源的作用，排除；\nC项，\"保护了水资源\"的表述不够准确，文段强调森林具有涵养水源的作用，即森林通过其自身的特点与水相互作用，实现对水资源循环、调控等作用，且文段并未提及保护水资源的对策，排除。\n故正确答案为D。\n【文段出处】光明网《森林为什么是\"水库\"？》", "APP考点": "横线在结尾", "APP来源": "2023年辽宁省公务员录用考试《行测》题（网友回忆版）第42题", "书籍配图": "yyimage\\book\\206.webp"}, {"编号": "YY062", "原编号": "YY065", "题号": "220-24", "书籍页码": 220, "书籍章节": "第三章逻辑填空-考点1词语辨析-搭配对象-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "一切器具都需要经历一个从原材料到终端器件的加工过程，其间材料会根据需要在不同物态间____。传统上，这些过程可能需要高温条件，并且依赖于____的物理化学反应，操作起来十分繁琐。这样就引申出一个极为重要的技术概念——常温制造。依次填入画横线部分最恰当的一项是：", "选项": {"A": "转换 纷繁复杂", "B": "切换 不计其数", "C": "变化 眼花缭乱", "D": "转变 难以捉摸"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "87%", "APP易错项": "D", "APP解析": "第一空，搭配\"材料\"，且根据\"一切器具都需要经历一个从原材料到终端器件的加工过程\"可知，横线处所填词语需体现\"材料\"在不同物态间发生变化之意。A项\"转换\"指改变、改换，从一种能量形式变成另一种能量形式；C项\"变化\"指事物在形态上或本质上产生新的状况；D项\"转变\"指从一种情况变为另一种情况。三项均与\"材料\"搭配恰当，且符合文意，保留。B项\"切换\"指影视片等从某一个镜头或画面迅速换到另一个镜头或画面，与\"材料\"搭配不当，排除。\n第二空，根据\"操作起来十分繁琐\"可知，横线处所填成语需体现物理化学反应繁琐之意。A项\"纷繁复杂\"指事物或情况多而杂，头绪繁多，难以理清，符合文意，当选。C项\"眼花缭乱\"指现象复杂，无法辨清，使人感到迷乱或困惑，正确用法为\"物理化学反应令人眼花缭乱\"，置于此处用法不当，排除。D项\"难以捉摸\"指很难让人摸索、揣测清楚，侧重无法掌握，与文意无关，排除。\n故正确答案为A。\n【文段出处】微信公众号《液态金属：无尽的科学与技术前沿》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、混搭填空", "APP来源": "2025年四川省考/选调公务员录用考试《行测》试题（网友回忆版）第24题", "书籍配图": "yyimage\\book\\220.webp"}, {"编号": "YY063", "原编号": "YY066", "题号": "224-6", "书籍页码": 224, "书籍章节": "第三章逻辑填空-考点1词语辨析-搭配对象-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "当前不少城市对文化遗产的保护进入了旅游驱动的误区。过度地商业化，将原始居民全部迁出，充满活力的生产、生活场景____，文化遗产成为____的遗址，失去鲜活的魅力。依次填入画横线部分最恰当的一项是：", "选项": {"A": "转瞬即逝 停滞", "B": "无影无踪 陈腐", "C": "消失殆尽 静态", "D": "烟消云散 呆板"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A", "A", "D"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "56%", "APP易错项": "D", "APP解析": "第一空，根据\"将原始居民全部迁出\"可知，横线处所填成语应体现生产、生活场景消失之意。B项\"无影无踪\"指没有一点踪影，形容完全消失，不知去向；C项\"消失殆尽\"指逐渐消失至没有；D项\"烟消云散\"比喻事物消失得无影无踪。三者均符合文意，保留。A项\"转瞬即逝\"指一转眼就消逝，形容时间过得飞快，与文意不符，排除。\n第二空，搭配\"遗址\"。根据后文\"失去鲜活的魅力\"可知，横线处所填词语应表达文化遗产变成失去动态活力的遗址之意。C项\"静态\"指相对静止的、不活动的状态，能表达出失去动态活力之意，当选。B项\"陈腐\"比喻人思想和观念陈旧、生活行为堕落、制度败坏腐朽，多用来形容观念、思想、制度等；D项\"呆板\"形容人的样子、做事等不灵活、死板。二者均与\"遗址\"搭配不当，排除。\n故正确答案为C。\n【文段出处】光明网《解析文化遗产保护的\"泉州样本\"》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、混搭填空", "APP来源": "2025年天津市公务员录用考试《行测》题（网友回忆版）第19题", "书籍配图": "yyimage\\book\\224.webp"}, {"编号": "YY064", "原编号": "YY067", "题号": "225-12", "书籍页码": 225, "书籍章节": "第三章逻辑填空-考点1词语辨析-搭配对象-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "我国十四亿多人口整体迈向现代化社会，规模超过现有发达国家人口的总和，艰巨性和复杂性____，发展途径和推进方式也必然具有自己的特点。我们始终从国情出发想问题、作决策、办事情，既不好高骛远，也不因循守旧，保持历史____，坚持稳中求进、循序渐进、持续推进。依次填入画横线部分最恰当的一项是：", "选项": {"A": "无与伦比 清醒", "B": "前所未有 耐心", "C": "无以复加 自信", "D": "异乎寻常 主动"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "51%", "APP易错项": "A", "APP解析": "本题从第二空入手，根据横线后内容\"坚持稳中求进、循序渐进、持续推进\"可知，横线处表达不急于求成，B项\"耐心\"指不急躁，不厌烦，与文意相符，保留。A项\"清醒\"指清楚、明白，侧重不糊涂，C项\"自信\"指自己相信自己，侧重不自馁，D项\"主动\"指不待外力推动而行动，侧重不被动，三者均与文意不符，排除。\n第一空，代入验证，B项\"前所未有\"指以前从来没有过，可以体现\"艰巨性和复杂性\"在以往的历史上不曾出现，与前文\"规模超过现有发达国家人口的总和\"对应恰当，当选。\n故正确答案为B。\n【文段出处】瞭望《以中国式现代化全面推进中华民族伟大复兴》", "APP考点": "对应关系-前后呼应、混搭填空", "APP来源": "2023年国家公务员录用考试《行测》题（地市级网友回忆版）第24题", "书籍配图": "yyimage\\book\\225.webp"}, {"编号": "YY065", "原编号": "YY068", "题号": "226-16", "书籍页码": 226, "书籍章节": "第三章逻辑填空-考点1词语辨析-搭配对象-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "探索浩瀚宇宙，是中华民族数千年来____的追求。中国航天承载了一个大国的斑斓梦想，也____了新时代中国人的骄傲与情怀。依次填入画横线部分最恰当的一项是：", "选项": {"A": "矢志不渝 寄寓", "B": "志在必得 铭刻", "C": "亘古不变 映射", "D": "孜孜不倦 彰显"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "54%", "APP易错项": "D", "APP解析": "第一空，根据\"中华民族数千年来\"可知，横线处所填成语应体现坚持了很长时间之意。A项\"矢志不渝\"指立志不会改变，表示永远不变心，C项\"亘古不变\"指从古到今，没有变化，D项\"孜孜不倦\"指工作或学习勤奋刻苦不知疲倦，形容勤勉不懈怠的一种状态，均符合文意，保留。B项\"志在必得\"指立志要得到或完成某种愿望，未能体现坚持了很长时间之意，排除。\n第二空，由\"也\"和前后句的相同句式可知，横线处所填词语与\"承载\"构成并列，应体现背负、寄托之意。A项\"寄寓\"指依附，寄托，符合文意，当选。C项\"映射\"指反射反映，不能体现背负、寄托之意，排除；D项\"彰显\"指鲜明地显示，侧重于\"将……显示出来\"，不能体现背负、寄托之意，且横线前搭配\"中国航天\"，而\"彰显\"的主语多为成果、事迹等，横线后搭配\"骄傲与情怀\"，\"骄傲\"是一种内在的情绪状态，无需鲜明地显示出来，\"彰显\"与前后搭配均不恰当，排除。\n故正确答案为A。\n【文段出处】《中国航天，新任务新征程》", "APP考点": "对应关系-前后呼应、关联关系-并列关系、混搭填空", "APP来源": "2023年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第57题", "书籍配图": "yyimage\\book\\226.webp"}, {"编号": "YY066", "原编号": "YY069", "题号": "233-2", "书籍页码": 233, "书籍章节": "第三章逻辑填空-考点2词语辨析-词义侧重感情色彩程度轻重-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "大数据、人工智能、虚拟现实等新兴技术不断改写信息传播____，\"融媒\"\"智媒\"快速迭代升级。在万物皆媒、虚实同构的传播语境下，融会贯通不同传播主体、不同传播方式，实现资源跨国配置、价值跨界创造，尤其是要____各国青年群体的媒介使用习惯和内容选择偏好，研究他们在视听文本、审美旨趣方面的特点，才能有效地增强中华文明的国际影响力。依次填入画横线部分最恰当的一项是：", "选项": {"A": "模式 认清", "B": "版图 熟悉", "C": "格局 洞悉", "D": "形式 明确"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["D", "D", "D", "D"], "作答次数": 4}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "37%", "APP易错项": "D", "APP解析": "第一空，根据\"大数据、人工智能、虚拟现实等新兴技术不断改写信息传播\"及\"'融媒''智媒'快速迭代升级\"可知，横线处所填词语应体现新兴技术改变了信息传播的方式、状态。A项\"模式\"指某种事物的标准形式或使人可以照着做的标准样式，C项\"格局\"指结构和格式，D项\"形式\"指事物的形状、结构等，均符合文意，保留。B项\"版图\"原指户籍和地图，今借指国家的领土、疆域，与文意无关，且与\"信息传播\"搭配不当，排除。\n第二空，\"尤其\"表递进，且根据\"有效地增强中华文明的国际影响力\"可知，横线处所填词语程度较重，体现出要深入了解各国青年群体的媒介使用习惯和内容选择偏好，C项\"洞悉\"指很清楚地知道，强调深入、透彻地了解，程度轻重与文段相符，当选。A项\"认清\"指认识清楚，D项\"明确\"指清晰明白而确定不移，与\"洞悉\"相比，均程度较轻，排除。\n故正确答案为C。\n【文段出处】人民日报《提升中华文明的传播效能（新论）》", "APP考点": "实词填空、词的辨析-搭配对象、对应关系-前后呼应、词的辨析-程度轻重", "APP来源": "2025年湖南省公务员录用考试《行测》题（网友回忆版）第26题", "书籍配图": "yyimage\\book\\233.webp"}, {"编号": "YY067", "原编号": "YY070", "题号": "238-6", "书籍页码": 238, "书籍章节": "第三章逻辑填空-考点3语境分析-关联关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "作为一种求助手段，大病网络众筹发挥了互联网快速、灵活、高效的特点，解了一些困难家庭的____，给患者带来了希望，不失为社会医疗保障之外的有益补充。但是，平台对善款的抽成也广受____，最近又有媒体报道，除了平台之外，部分工作人员也在协助筹集善款的过程中抽取佣金，再次引发了网民对众筹平台的信任危机。依次填入画横线部分最恰当的一项是：", "选项": {"A": "燃眉之急 诟病", "B": "当务之急 争议", "C": "不时之需 责难", "D": "无米之炊 非议"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "84%", "APP易错项": "B", "APP解析": "第一空，根据\"给患者带来了希望\"可知，横线处应表达大病网络众筹能够帮助困难家庭解决难题之意。A项\"燃眉之急\"形容事情像火烧眉毛那样紧急，多指事情非常急迫，B项\"当务之急\"指当前任务中最急切要办的事，均符合文意，保留。C项\"不时之需\"指说不定什么时候会出现的需要，强调意外的需求，文段中困难家庭的需求已经产生，并非意外之需，排除；D项\"无米之炊\"比喻缺少必要条件而无法办成的事，与文意不符，排除。\n第二空，根据\"但是\"可知，横线前后构成转折关系，且根据\"再次引发了网民对众筹平台的信任危机\"可知，横线处应表达出人们对平台抽成行为的不满。A项\"诟病\"指责或嘲骂，与文意相符，当选。B项\"争议\"指尚有争论，未达成一致结论，文段体现的是人们对于抽取佣金的行为都是不支持的，并没有产生不一致的看法，与文意不符，排除。\n故正确答案为A。\n【文段出处】经济日报《莫把善意当生意》", "APP考点": "对应关系-前后呼应、关联关系-转折关系、混搭填空", "APP来源": "2025年甘肃公务员录用考试《行测》题（网友回忆版）第33题", "书籍配图": "yyimage\\book\\238.webp"}, {"编号": "YY068", "原编号": "YY071", "题号": "241-20", "书籍页码": 241, "书籍章节": "第三章逻辑填空-考点3语境分析-关联关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "京剧与中医、武术、国画并称中国的\"四大国粹\"，半个世纪前，那些名角、\"头牌\"演出时，往往____，一票难求。而在当今，年轻一代往往对本土传统文化弃之如敝履，对带洋字的文化则____。填入横线处的成语最恰当的一组是：", "选项": {"A": "万人空巷 趋之若鹜", "B": "洛阳纸贵 炙手可热", "C": "门庭若市 众星拱月", "D": "万头攒动 敬而远之"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B", "C", "C", "C", "C"], "作答次数": 5}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "78%", "APP易错项": "C", "APP解析": "第一空，由横线后\"一票难求\"可知，\"名角\"\"头牌\"的演出极其受欢迎，观看的人很多。A项\"万人空巷\"指街巷里的人都出来了，形容庆祝、欢迎等盛况，可体现演出受欢迎之意，保留；D项\"万头攒动\"形容群众聚集的景象，可体现出人多，符合文意，保留。B项\"洛阳纸贵\"比喻著作有价值，流传广，C项\"门庭若市\"形容往来人多，十分热闹，多用于修饰地点，均与\"演出\"搭配不当，排除。\n第二空，依据文段可知当今和以前的情况是不一样的，年轻一代对传统文化弃之如敝履，故横线处应体现出对\"带洋字的文化\"追捧的语义。A项\"趋之若鹜\"比喻许多人争着去追逐某些不好的事物，符合语境，且感情色彩偏消极，与文段感情色彩相符，当选。D项\"敬而远之\"表示尊敬却有所顾虑不愿接近，与文意不符，排除。\n故正确答案为A。\n【文段出处】《文化自信与创造性姿态》", "APP考点": "词的辨析-感情色彩、词的辨析-搭配对象、对应关系-前后呼应、成语填空、关联关系-并列关系", "APP来源": "2023年上海市公务员录用考试《行测》题（A类）（网友回忆版）第5题", "书籍配图": "yyimage\\book\\241.webp"}, {"编号": "YY069", "原编号": "YY072", "题号": "245-7", "书籍页码": 245, "书籍章节": "第三章逻辑填空-考点3语境分析-关联关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "在普通人看来，法律都是____的，自己一辈子都不会和法律打交道。但在瞬息万变的社会里，人们随时可能触及法律的红线。很多人平时法律观念和意识不强，柔性执法不仅可以起到____作用，而且有利于提高群众的学法懂法意识。依次填入画横线部分最恰当的一项是：", "选项": {"A": "高高在上 教育", "B": "高深莫测 预防", "C": "遥不可及 警戒", "D": "事不关己 提醒"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "58%", "APP易错项": "D", "APP解析": "第一空，横线后出现关联词\"但\"表示转折，前后语义相反。根据后文\"自己一辈子都不会和法律打交道\"、\"人们随时可能触及法律的红线\"可知，横线处所填成语应体现普通人认为与\"法律\"存在距离感，法律离生活很遥远。C项\"遥不可及\"指非常遥远而不可到达，D项\"事不关己\"指事情同自己没有关系，均符合文意，保留。A项\"高高在上\"形容领导者脱离群众，不深入实际，与\"法律\"搭配不当，排除；B项\"高深莫测\"指高深的程度无法揣测，形容使人难以理解，与\"距离遥远\"无关，与后文无法构成转折，排除。\n第二空，所填词语表示\"柔性执法\"的作用，C项\"警戒\"表示警示告诫，使人注意，D项\"提醒\"表示从旁指点，引起注意，\"执法\"对于可能触及法律红线的行为不是通过语言提醒，而是起到警示的作用，\"警戒\"填入文段更加恰当，排除D项。\n故正确答案为C。\n【文段出处】《柔性执法兼容法理与人情》", "APP考点": "词的辨析-搭配对象、关联关系-转折关系、混搭填空", "APP来源": "2023年国家公务员录用考试《行测》题（地市级网友回忆版）第34题", "书籍配图": "yyimage\\book\\245.webp"}, {"编号": "YY070", "原编号": "YY073", "题号": "249-6", "书籍页码": 249, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "从物质形态上看，广义的历史典籍版本包括甲骨文、金文、简帛、石刻、唐宋元明清及近代的手写本、印刷品等，可谓____。此外，还有大量的出土文物、地上地下遗址、文化遗存，以及祖祖辈辈____的历史传说、民风民俗、家风家训等，这些共同构成\"广阔的文化空间\"，也是一座巨大的____的文化宝藏，蕴藏着中华文明生生不息的密码。依次填入画横线部分最恰当的一项是：", "选项": {"A": "琳琅满目 一脉相承 独一无二", "B": "汗牛充栋 口耳相传 无与伦比", "C": "浩如烟海 倾囊相授 包罗万象", "D": "卷帙浩繁 言传身教 价值连城"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A", "D", "D"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "63%", "APP易错项": "A", "APP解析": "第一空，搭配\"历史典籍版本\"，根据前文可知，横线处所填成语应表达历史典籍版本很多之意，B项\"汗牛充栋\"形容藏书非常多，C项\"浩如烟海\"形容书籍、资料等数量繁多，十分丰富，D项\"卷帙浩繁\"形容书籍或篇章多而繁琐，均可体现历史典籍版本很多，符合文意，保留。A项\"琳琅满目\"形容满眼都是珍贵的东西，多指商品和工艺品，与\"历史典籍版本\"搭配不当，排除。\n第二空，搭配\"历史传说\"\"民风民俗\"\"家风家训\"，B项\"口耳相传\"指口说耳听地往下传授，与\"历史传说\"\"民风民俗\"\"家风家训\"均搭配恰当，保留。C项\"倾囊相授\"指把所有的技能和知识都传授给学生，与\"家风家训\"搭配不当，排除；D项\"言传身教\"指一面口头上传授，一面行动上以身作则，与\"历史传说\"搭配不当，排除。\n第三空，代入验证，B项\"无与伦比\"指事物非常完美，没有能跟它相比的，侧重指事物的完美，可以用于形容\"文化宝藏\"，当选。\n故正确答案为B。\n【文段出处】人民网《做好历史典籍版本的研究和挖掘》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、成语填空、对应关系-解释说明", "APP来源": "2024年山东省公务员录用考试《行测》试题（网友回忆版）第29题", "书籍配图": "yyimage\\book\\249.webp"}, {"编号": "YY071", "原编号": "YY074", "题号": "254-25", "书籍页码": 254, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "作为一项革新性的技术，自动驾驶技术的商用落地，除了技术的成熟度外，还需要考虑法规、基础设施、社会接受度等诸多方面的问题。因此它必定不是一蹴而就的事情，必然要经历一个复杂而漫长的过程。只有解决好上述诸多问题，自动驾驶的健康发展和广泛应用才不会是\"____\"。填入画横线部分最恰当的一项是：", "选项": {"A": "空中楼阁", "B": "海市蜃楼", "C": "明日黄花", "D": "无中生有"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "73%", "APP易错项": "C", "APP解析": "根据前文\"除了技术的成熟度外，还需要考虑法规、基础设施……必然要经历一个复杂而漫长的过程\"可知，横线处需体现只有解决好上述诸多问题，自动驾驶的健康发展与广泛应用才能得到切实保障，又因横线前存在否定表述\"不会是\"，故所填成语需表达缺乏根基、脱离实际之意。A项\"空中楼阁\"比喻虚幻的事物或脱离实际的空想，置于横线处可体现自动驾驶如果解决好很多现实问题，就不会成为脱离现实的空想，符合文意，当选。\nB项\"海市蜃楼\"指光线经过不同密度的空气层，发生显著折射或全反射时，把远处景物显示在空中或地面而形成的各种奇异景象，常发生在海上或沙漠地区。比喻虚幻的事物或变幻莫测的情态，一般更多用在自然现象的语境当中，与文意不符，排除；\nC项\"明日黄花\"表示迟暮之感，也比喻过时或无意义的事物，与文意不符，排除；\nD项\"无中生有\"常用来形容虚构或捏造不存在的事物，与文意不符，排除。\n故正确答案为A。\n【文段出处】中国科普网《自动驾驶需要更高的社会接受度》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2025年辽宁省公务员录用考试《行测》题（网友回忆版）第31题", "书籍配图": "yyimage\\book\\254.webp"}, {"编号": "YY072", "原编号": "YY075", "题号": "258-45", "书籍页码": 258, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "癌症是细胞层面上的进化。总有那么一些基因突变，会让细胞突破身体的监管，开始肆意分裂，留下大量的后代，而这些后代又会在原来的基础上积累更多基因突变。人类有千千万万的基因，细胞就能有远多于千千万万的突变，这____的突变彼此再排列组合就会有恒河沙数的变化。无论是人体自身的抗癌机制，还是现代医学技术的____，对癌细胞来说都不过是某种\"____\"而已，杀死的都是弱者，而杀不死的必定会更强大。依次填入横线处最恰当的一项是：", "选项": {"A": "形形色色 疗愈 隔靴搔痒", "B": "旷日持久 介入 优胜劣汰", "C": "高深莫测 应用 弱肉强食", "D": "不计其数 干预 物竞天择"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "79%", "APP易错项": "B", "APP解析": "第一空，根据\"人类有千千万万的基因，细胞就能有远多于千千万万的突变\"可知，横线处应体现突变很多之意。A项\"形形色色\"形容事物种类繁多，各式各样，D项\"不计其数\"形容极多，均符合文意，保留。B项\"旷日持久\"指长期持续下去或耗费时间过久，侧重时间长，与文意不符，排除。C项\"高深莫测\"形容估摸不透，与文意无关，排除。\n第二空，根据文意可知，横线处应体现现代医学技术对癌细胞的作用。D项\"干预\"指对某种事物、现象或行为进行干涉、调整和控制，符合文意，保留。A项\"疗愈\"指通过一系列方法和实践，促使身体、心理、情绪或社交层面的康复与平衡，与后文\"杀不死的必定会更强大\"矛盾，排除。\n第三空，代入验证。根据\"杀死的都是弱者，而杀不死的必定会更强大\"可知，横线处应体现淘汰弱者、保留强者之意。D项\"物竞天择\"指生物相互竞争，能适应自然者存留下来，不适者淘汰的客观规律，符合文意，当选。\n故正确答案为D。\n【文段出处】搜狐《癌细胞太狡猾？这一次，科学家决定主动出击！》", "APP考点": "对应关系-前后呼应、混搭填空", "APP来源": "2024年吉林省公务员录用考试《行测》题（网友回忆版）第30题", "书籍配图": "yyimage\\book\\258.webp"}, {"编号": "YY073", "原编号": "YY076", "题号": "262-62", "书籍页码": 262, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "关注受众、研究受众、服务受众，是互联网思维的一个鲜明特点。这与政治工作倡导以人为本的理念____。政治工作本质上是做人的工作，其实质就是一种受众至上的思维理念。填入画横线部分最恰当的一项是：", "选项": {"A": "一脉相承", "B": "相辅相成", "C": "不谋而合", "D": "并行不悖"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "76%", "APP易错项": "A", "APP解析": "横线前的指代词\"这\"指代前文中重视受众是互联网思维的鲜明特点，后文提到政治工作的实质同样也是一种受众至上的思维。由此可知，互联网思维和政治工作倡导以人为本的理念是一致的，二者是相契合的，均是在强调受众至上。C项\"不谋而合\"意为事前没有商量过而彼此意见或行动却完全一致，能够体现出互联网思维和政治工作的理念的高度一致性，符合文意，当选。\nA项\"一脉相承\"意为由一个血统或一个派别世代相传承袭下来，强调人或事物间的传承关系，文段中互联网思维与政治工作是在同一时期内进行探讨，未体现时间上的代际传承，与文意不符，排除；\nB项\"相辅相成\"强调两种事物互相辅助，互相促成，缺一不可，文中并未体现，排除；\nD项\"并行不悖\"指的是同时实行，互相之间不冲突，\"不冲突\"与\"高度一致\"并非同一概念，排除。\n故正确答案为C。\n【文段出处】人民网《互联网时代政治工作的思维转换》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2022年云南公务员录用考试《行测》题（网友回忆版）第22题", "书籍配图": "yyimage\\book\\262.webp"}, {"编号": "YY074", "原编号": "YY077", "题号": "263-68", "书籍页码": 263, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "人类文明史是一部不断克服灾难、危机和挑战，探寻人类生存和发展之路的历史。____是人类共同应对挑战、跨越逆境、取得突破和进步的出路。当前，人类面对着复杂交织的传统和非传统安全问题，各类问题呈现出联动性、跨国性等特征。同处一个地球村，没有一个国家能凭一己之力谋求自身的绝对安全，也没有一个国家可以从别国的动荡中收获稳定。填入画横线部分最恰当的一项是：", "选项": {"A": "海纳百川", "B": "和衷共济", "C": "惺惺相惜", "D": "安危与共"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A", "D"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "73%", "APP易错项": "D", "APP解析": "根据后文\"人类共同应对挑战、跨越逆境、取得突破和进步的出路\"以及\"各类问题呈现出联动性、跨国性等特征\"\"没有一个国家能凭一己之力谋求自身的绝对安全，也没有一个国家可以从别国的动荡中收获稳定\"可知，横线处所填成语强调人类应携手合作、共同努力。B项\"和衷共济\"比喻同心协力，共同克服困难，符合文意，当选。\nA项\"海纳百川\"比喻包容的东西非常广泛，而且数量很大，侧重包容性，C项\"惺惺相惜\"指性格、志趣、境遇相同的人互相爱护、同情、支持，侧重互相欣赏、情感共鸣，均无法体现合作、共同努力之意，排除。\nD项\"安危与共\"意思是共同享受安乐，共同承担危难，形容关系密切，利害相连，侧重关系密切的状态而非主动团结合作的对策，排除。\n故正确答案为B。\n【文段出处】人民日报《坚持人类文明发展的正确道路》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2025年甘肃公务员录用考试《行测》题（网友回忆版）第38题", "书籍配图": "yyimage\\book\\263.webp"}, {"编号": "YY075", "原编号": "YY078", "题号": "264-70", "书籍页码": 264, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "水流与冰川的____，会碰撞出一个神奇的景观——冰川洞穴。冰岛的冰川洞穴更是一个独特存在，与世界其他地方的冰川洞穴相比，它们晶莹透明，极尽美妙。然而，在冰岛温和的海洋性气候和独特的地热环境下，它们几乎随时____，这使每个镜头都成为唯一的瞬间。依次填入划横线部分最恰当的一项是：", "选项": {"A": "接触 消失", "B": "会合 止息", "C": "聚积 融化", "D": "相遇 消融"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "81%", "APP易错项": "A", "APP解析": "本题可从第二空入手，横线前\"它们\"指代前文冰岛的冰川洞穴，且由后文\"这使每个镜头都成为唯一的瞬间\"可知，冰川洞穴不会长久存在，C项\"融化\"指（冰、雪等）变成水，D项\"消融\"指（冰、雪）融化，均符合文意，保留。A项\"消失\"指（人或事物）逐渐减少以至没有，不复存在，B项\"止息\"指停止，均不能精准地对应\"冰川洞穴\"的特点，排除。\n第一空，根据\"会碰撞出一个神奇的景观\"可知，横线处所填词语要与\"碰撞\"相呼应，强调水流冰川相碰撞，D项\"相遇\"指遇见，碰到，符合文意，当选。C项\"聚积\"强调累积，经年累月，一点一滴地累积，而非二者相碰撞，不符合文意，排除。\n故正确答案为D。\n【文段出处】中国国家地理《冰岛冰洞 冰与水之歌》", "APP考点": "实词填空、对应关系-前后呼应、关联关系-因果关系", "APP来源": "2022年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第49题", "书籍配图": "yyimage\\book\\264.webp"}, {"编号": "YY076", "原编号": "YY079", "题号": "264-74", "书籍页码": 264, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "一个超级工程，就是一件____的工业艺术品，凝结着工程师们非凡的想象力。超级工程纪录片将其中的科技术语转化为日常语言，以____的表达诠释复杂问题，打破专业隔阂，赋予硬核科技以浪漫诗意。依次填入画横线处的词语，最恰当的一项是：", "选项": {"A": "别出心裁 言简意赅", "B": "气势恢宏 有条不紊", "C": "独一无二 精益求精", "D": "精美绝伦 通俗易懂"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "87%", "APP易错项": "A", "APP解析": "第一空，根据\"凝结着工程师们非凡的想象力\"可知，横线处要体现超级工程十分出色和突出之意。A项\"别出心裁\"意为与众不同的新观念或办法，用来形容诗文、美术、建筑等的构思设想独具一格，与众不同，D项\"精美绝伦\"指精致美妙得没有东西可以比得上，均符合文意，保留。B项\"气势恢宏\"意为气势磅礴，场面大气，C项\"独一无二\"指没有相同的或没有可以相比的，形容十分稀少，均与文意不符，排除。\n第二空，根据横线前\"将其中的科技术语转化为日常语言\"可知，纪录片的表达较为日常化，普通观众也能看懂，D项\"通俗易懂\"意为广大人民群众都能懂得，与文意相符，当选。A项\"言简意赅\"形容说话、写文章简明扼要，与文意不符，排除。\n故正确答案为D。\n【文段出处】人民网《纪录片赋予硬核科技以浪漫诗意》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2023年湖北省选调生招录考试综合知识和行政职业能力测验试卷（网友回忆版）第53题", "书籍配图": "yyimage\\book\\264.webp"}, {"编号": "YY077", "原编号": "YY080", "题号": "265-75", "书籍页码": 265, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "近400年来，人类在探索宇宙方面取得了长足的进步。我们知道了地球上再壮观的烟火表演与超新星爆发相比，都____；一颗方糖大小的中子星就有数亿吨重；宇宙中充满着____的物质，包括难以捉摸的黑洞、暗物质、引力波等。依次填入画横线部分最恰当的一项是：", "选项": {"A": "相形见绌 林林总总", "B": "不值一提 莫名其妙", "C": "大相径庭 千奇百怪", "D": "黯然失色 不可思议"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "75%", "APP易错项": "A", "APP解析": "第一空，根据\"再壮观的烟火表演与超新星爆发相比\"可知，横线处所填成语表示\"不如、比不上\"的意思。A项\"相形见绌\"指两相比较之下显得不如对方，D项\"黯然失色\"比喻相比之下有很大差距，远远不如，均符合文意，保留。B项\"不值一提\"意思是不值得提起，形容事情很轻微或者不重要，侧重事物不重要，与文意不符，排除；C项\"大相径庭\"比喻彼此差别很大，极为不同，体现不出\"比不上\"之意，排除。\n第二空，根据\"包括难以捉摸的黑洞、暗物质、引力波等\"可知，横线处所填成语与\"难以捉摸\"形成对应。D项\"不可思议\"指无法想象，难以理解，与\"难以捉摸\"对应恰当，符合文段语境，当选。A项\"林林总总\"形容事物繁多，仅强调数量多，与\"难以捉摸\"无法形成对应，排除。\n故正确答案为D。\n【文段出处】《揭开宇宙重要天体活动的秘密》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2022年国家公务员录用考试《行测》题（地市级网友回忆版）第24题", "书籍配图": "yyimage\\book\\265.webp"}, {"编号": "YY078", "原编号": "YY081", "题号": "265-77", "书籍页码": 265, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "太阳能、风能是产生电力的主要可再生新能源，但都具有随机性、____、波动性等特点。太阳能光板在晴天、白天时能发电，阴天、夜晚时就\"罢工\"了，风能发电也跟风力和天气息息相关。因此，目前迫切需要大规模储能装置，将富余的电能储存起来，在发电不足的时间用，以保证电力的____供给。依次填入画横线部分最恰当的一项是：", "选项": {"A": "地域性 持续", "B": "阶段性 弹性", "C": "间歇性 平稳", "D": "周期性 高效"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "76%", "APP易错项": "A", "APP解析": "第一空，由顿号引导，横线处与\"随机性\"\"波动性\"构成近义并列，且由后文\"阴天、夜晚时就'罢工'\"\"也跟风力和天气息息相关\"可知，横线处应体现太阳能、风能发电的不稳定性。C项\"间歇性\"强调动作、变化等隔一定时间就停息一会，符合文意，保留。A项\"地域性\"指地方性，B项\"阶段性\"指事物发展过程中根据一定的标准划分的段落，如人生可以划分为少年、青年、中年、老年四个阶段，D项\"周期性\"指物体的周期运动、持续循环的性质，均与不稳定的语义无关，排除。\n第二空，代入验证，横线处应体现\"将富余的电能储存起来\"给电力供给带来良好结果，C项\"平稳\"符合文意，当选。\n故正确答案为C。\n【文段出处】《物美价廉，钠离子电池或成我国能源超车新赛道》（科技日报）", "APP考点": "实词填空、对应关系-前后呼应、关联关系-因果关系、关联关系-并列关系", "APP来源": "2022年国家公务员录用考试《行测》题（地市级网友回忆版）第26题", "书籍配图": "yyimage\\book\\265.webp"}, {"编号": "YY079", "原编号": "YY082", "题号": "266-80", "书籍页码": 266, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "革命文物见证光荣历史，传承红色基因。技术的进步，给革命文物传播带来了全新的____。通过网上博物馆，观众可以突破时间空间的限制，随时随地参观游览。通过多媒体情景展示，观众可以____，重温当年情境。依次填入画横线部分最恰当的一项是：", "选项": {"A": "契机 设身处地", "B": "载体 感同身受", "C": "形式 抚今追昔", "D": "机遇 身临其境"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B", "B"], "作答次数": 2}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "72%", "APP易错项": "C", "APP解析": "本题可从第二空入手，根据\"重温当年情境\"可知，横线处所填词语应体现通过多媒体情景展示，观众可以回到当年那个情景当中，D项\"身临其境\"指亲自到了那个环境，符合文意，保留。A项\"设身处地\"是指设想自己处在别人的地位或环境，侧重替别人着想，与文意不符，排除；B项\"感同身受\"指心里很感激，就像自己亲身感受到恩惠一样，与\"重温当年情境\"无关，排除；C项\"抚今追昔\"指面对眼前景物追思往事，文段是通过多媒体情景展示，看到革命文物，就像回到当时的那个情景当中，而不是说看着现在的景物回想过去的事，与文意不符，排除。\n第一空，代入验证，D项\"机遇\"指机会，有利的境遇，可以体现技术进步给革命文物传播带来的积极作用，符合文意，当选。\n故正确答案为D。\n【文段出处】人民日报《增强革命文化的吸引力》", "APP考点": "对应关系-前后呼应、混搭填空", "APP来源": "2024年江苏省公务员录用考试《行测》题（B类）（网友回忆版）第31题", "书籍配图": "yyimage\\book\\266.webp"}, {"编号": "YY080", "原编号": "YY083", "题号": "267-7", "书籍页码": 267, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "快递业并非一般的行业，它就像一个\"超级连接器\"，可连接生产消费、打通千城百业、连通线上线下、畅通内外循环。正因此，它被称为反映经济活力的\"____\"。填入画横线部分最恰当的一项是：", "选项": {"A": "风向标", "B": "试金石", "C": "放大镜", "D": "显色剂"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D", "D", "D", "D"], "作答次数": 4}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "D", "APP解析": "由\"连接生产消费、打通千城百业、连通线上线下、畅通内外循环\"可知，快递业涉及经济的各个方面。结合横线前的\"反映经济活力\"可知，横线处强调快递业涉及面广，能够显示出经济发展的情况。A项\"风向标\"本意为一种测定风向的设备，可以用来形容某种事物的发展方向或趋势，符合文意，当选。\nB项：\"试金石\"指检验事物、方法或人的可靠标准，文段强调的是\"反映经济活力\"，而非\"检验经济活力\"，与文意不符，排除。\nC项：\"放大镜\"是一种用来观察物体微小细节的光学器件，侧重强调放大作用，与文意无关，排除。\nD项：\"显色剂\"指一种将生化反应后产生的复合物显色以达到实验目的的试剂，可以用来形容凸显事物特征的方法或手段。此处并非要凸显经济活力的特点，与文意不符，排除。\n故正确答案为A。\n【文段出处】广州日报《从快递增速感知活力中国》", "APP考点": "实词填空、对应关系-前后呼应、关联关系-因果关系、对应关系-形象表达", "APP来源": "2025年天津市公务员录用考试《行测》题（网友回忆版）第17题", "书籍配图": "yyimage\\book\\267.webp"}, {"编号": "YY081", "原编号": "YY084", "题号": "268-9", "书籍页码": 268, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "在科技-产业-金融新循环长效机制下，天津金融机构广泛开展了产品创新。比如中国邮政储蓄银行天津分行配套了\"技术流评价\"体系，对技术实力强、发展前景好的企业，提供更有竞争力的优惠利率，以及无还本续贷等增值服务。目的就是真正让科技企业____，加速把科技成果转化为生产力，推动产业升级。填入画横线部分最恰当的一项是：", "选项": {"A": "破茧成蝶", "B": "游刃有余", "C": "脱颖而出", "D": "轻装上阵"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "69%", "APP易错项": "A", "APP解析": "根据\"天津金融机构广泛开展了产品创新……无还本续贷等增值服务\"及\"加速把科技成果转化为生产力，推动产业升级\"可知，横线处所填成语应体现金融机构的产品创新为科技企业减少资金压力、降低经营负担之意。D项\"轻装上阵\"原指战士穿着轻便装备投入战斗以提升行动灵活性，后引申为解除思想负担全身心投入工作的行为状态，符合文意，当选。\nA项\"破茧成蝶\"指肉虫或者毛虫通过痛苦的挣扎和不懈地努力，化为蝴蝶的过程，比喻重获新生，走出困境，文段未提及当下科技企业发展存在困境，与文意不符，排除；\nB项\"游刃有余\"指肢解牛体时能对准骨节间的空隙下刀，刀刃运行于空隙之间还有回旋的余地，形容技艺熟练，做事轻松利落，侧重企业自身能力强、应对自如，而文段重点是金融服务助力企业发展，与文意不符，排除；\nC项\"脱颖而出\"原指锥尖穿透囊袋显露，比喻有才能者遇时机展现全部本领，侧重在竞争中凸显优势，而文段重点是金融服务助力企业发展，而非企业在竞争中胜出，与文意不符，排除。\n故正确答案为D。\n【文段出处】经济参考报《金融\"活水\"润\"津沽\"——金融支持天津高质量发展观察》", "APP考点": "对应关系-前后呼应、成语填空、词的辨析-词义侧重", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第26题", "书籍配图": "yyimage\\book\\268.webp"}, {"编号": "YY082", "原编号": "YY085", "题号": "270-18", "书籍页码": 270, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "人才振兴是乡村全面振兴的____，加强乡村人才队伍建设是推进乡村全面振兴的题中应有之义。要聚焦\"引、留、育\"关键环节，在\"引贤、留才、育苗\"上____发力，凝聚人才扎根美丽乡村，高效培育融入乡村全面振兴，激活动能赋能乡村全面振兴，让现代化人才在乡村全面振兴的____中建功立业。依次填入画横线部分最恰当的一项是：", "选项": {"A": "标杆 集中 温床", "B": "源头 精准 蓝图", "C": "核心 切实 画卷", "D": "基础 持续 沃土"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["C", "C", "C", "C"], "作答次数": 4}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "61%", "APP易错项": "B", "APP解析": "第一空，根据\"加强乡村人才队伍建设是推进乡村全面振兴的题中应有之义\"可知，横线处应体现人才振兴的重要性。B项\"源头\"指水流的发源地，引申为事物的本源，C项\"核心\"本义为中心或主要部分，可指事物关系的枢纽部分，D项\"基础\"原指建筑物底部与地基接触的承重构件，承担传递上部荷载至地基的作用，后引申为事物发展的根本或起点，均能够体现出人才振兴的基础性作用，保留。A项\"标杆\"指学习的榜样，文段并无此意，排除。\n第二空，搭配\"发力\"，B项\"精准\"指非常准确、精确，C项\"切实\"指符合事实，D项\"持续\"指延续、继续、无间隔、连续不断，均与\"发力\"搭配得当，且符合语境，保留。\n第三空，根据文意，横线处意在指出通过\"引、留、育\"一系列措施，让乡村环境更利于人才建功立业。D项\"沃土\"指肥沃的土壤，在文中把\"乡村\"比喻成\"沃土\"，指乡村能够成为人才发展的土壤，且与\"育\"构成形象对应，当选。B项\"蓝图\"借指建设计划，C项\"画卷\"比喻壮丽的自然或人文场景，侧重场景壮丽动人，相比\"沃土\"均无法体现出乡村环境有利于人才建功立业的特点，也无法与\"育\"构成形象对应，排除。\n故正确答案为D。\n【文段出处】人民论坛网《\"引、留、育\"筑牢乡村全面振兴人才基础》", "APP考点": "实词填空、词的辨析-搭配对象、对应关系-前后呼应、对应关系-形象表达", "APP来源": "2026年四川省考/选调公务员录用考试《行测》试题（网友回忆版）第26题", "书籍配图": "yyimage\\book\\270.webp"}, {"编号": "YY083", "原编号": "YY086", "题号": "270-19", "书籍页码": 270, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "____的布局模式早已被实践证明是行不通的。部分地区曾陷入\"撒胡椒面\"式的发展误区，同时布局未来产业多个领域，结果研发力量分散，投资巨大却未能取得一项核心突破。与新兴产业相比，未来产业发展____更低，产业成长的不确定性更大，只有精心选择赛道，方能集中资源攻克核心技术。依次填入画横线部分最恰当的一项是：", "选项": {"A": "齐头并进 支撑力", "B": "贪大求全 可行性", "C": "面面俱到 成熟度", "D": "沙里淘金 体系化"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["C"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "51%", "APP易错项": "B", "APP解析": "第一空，搭配\"布局模式\"，且应体现行不通的一种错误方式。后文通过举例子指出该模式类似于\"撒胡椒面\"，即不分主次将资源平均分散到各个方面，缺乏集中投入，最终导致效果不显著。B项\"贪大求全\"指过分追求规模宏大和全面，C项\"面面俱到\"比喻办事周详或过于泛泛反而抓不住要害，均与\"布局模式\"搭配得当，且可与文段形成对应，保留。A项\"齐头并进\"多形容几件事情或几项工作同时进行，侧重于工作的进度相同，排除；D项\"沙里淘金\"比喻从大量的材料里选择精华，与文意无关，排除。\n第二空，根据\"产业成长的不确定性更大\"可知，横线处应体现\"未来产业发展\"目前还缺少一定的基础，未来可能会面临各种风险问题，C项\"成熟度\"指个体或事物在特定领域内从初始状态逐步发展至完善的过程，既衡量发展水平，也反映成长动态，语义符合，当选。B项\"可行性\"指一个具体想法、项目或方案在现实条件下是否值得推进，若\"可行性低\"则证明该产业最后无法落实，与后文\"只有精心选择赛道，方能集中资源攻克核心技术\"相悖，排除。\n故正确答案为C。\n【文段出处】经济日报《发展未来产业不可面面俱到》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、混搭填空、对应关系-解释说明", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第29题", "书籍配图": "yyimage\\book\\270.webp"}, {"编号": "YY084", "原编号": "YY087", "题号": "270-20", "书籍页码": 270, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "未来特战力量可通过智能辅助，直接干扰或控制敌方指挥控制系统，造成敌方思想混乱、心理受挫甚至出现幻觉；或者通过伴随无人平台实施网络作战，篡改指控系统指令和数据实现\"____\"，致使敌方指挥失灵、协同失效、人员失能，____地失去战斗力，从而实现\"不战而屈人之兵\"。依次填入画横线部分最恰当的一项是：", "选项": {"A": "移花接木 彻头彻尾", "B": "釜底抽薪 无声无息", "C": "暗度陈仓 潜移默化", "D": "反客为主 浑然不觉"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "51%", "APP易错项": "D", "APP解析": "第一空，根据\"通过伴随无人平台实施网络作战，篡改指控系统指令和数据实现'____'\"\"致使敌方指挥失灵、协同失效、人员失能，____地失去战斗力，从而实现'不战而屈人之兵'\"可知，横线处应表达通过篡改指令和数据，彻底使敌方丧失战斗能力之意。B项\"釜底抽薪\"比喻从根本上解决问题，此处指从根本上使敌方指挥系统失效，符合文意，保留。A项\"移花接木\"比喻使用手段暗中更换，虽与\"篡改\"相关，但更侧重\"替换\"而非\"根本性破坏\"，与后文\"致使敌方指挥失灵、协同失效、人员失能\"这种彻底瓦解战斗力的语境相比，程度不足，排除；C项\"暗度陈仓\"强调用假象迷惑对方、暗中行动，文段未提及迷惑性假象，排除；D项\"反客为主\"指变被动为主动，与篡改指令的语义关联不强，排除。\n第二空，代入验证。B项\"无声无息\"比喻没什么动静，与\"不战而屈人之兵\"相呼应，体现让敌人在毫无察觉中丧失战斗力，符合智能作战和网络攻击的特点，当选。\n故正确答案为B。\n【文段出处】解放军报《试析未来特种作战行动样式》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2026年国家公务员录用考试《行测》题（地市级网友回忆版）第44题", "书籍配图": "yyimage\\book\\270.webp"}, {"编号": "YY085", "原编号": "YY088", "题号": "271-23", "书籍页码": 271, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "通常深度大于6000米的深海被称为深渊，科学家认为其有着____的科考和科研价值。下潜到1万米深度，相当于在1个手指甲大小的面积上承受约1吨的重量。气压、光照、盐度的逐级变化，造就了地球这个最深处的特殊性。在此开展科学研究，能够获取地球物理、地质构造等____的科学资料。依次填入画横线部分最恰当的一项是：", "选项": {"A": "不可替代 独一无二", "B": "无与伦比 不胜枚举", "C": "难以估量 丰富多彩", "D": "前所未有 错综复杂"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "52%", "APP易错项": "C", "APP解析": "本题可从第二空入手，搭配\"科学资料\"，且根据前文\"气压、光照、盐度的逐级变化，造就了地球这个最深处的特殊性\"可知，横线处需体现在深渊获取的科学资料具有\"特殊性\"之意。A项\"独一无二\"指没有相同的，没有可以相比的，与文意相符，保留。B项\"不胜枚举\"指无法一一全举出来，形容数量很多，C项\"丰富多彩\"形容内容丰富，花色繁多，D项\"错综复杂\"形容头绪多，情况复杂，均体现不出\"特殊性\"，与文意无关，排除。\n第一空，代入验证，搭配\"科考和科研价值\"，A项\"不可替代\"指某人或某物是不能够用他人或他物来进行代替的，与\"科考和科研价值\"搭配得当，且与后文形容深渊特点的\"特殊性\"对应恰当，当选。\n故正确答案为A。\n【文段出处】人民日报《着力发掘深海科研富矿》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2024年四川省公务员录用考试《行测》试题（网友回忆版）第23题", "书籍配图": "yyimage\\book\\271.webp"}, {"编号": "YY086", "原编号": "YY089", "题号": "272-25", "书籍页码": 272, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "中华法系形成于秦朝，至隋唐日趋成熟，宋元明清时期____形成了影响深远的成文法典，在历史发展中____而成的中华法系彰显了中华优秀传统法律文化自我发展、回应挑战的主体性与生命力，也反映了中华文明____的延续性。依次填入画横线部分最恰当的一项是：", "选项": {"A": "陆续 积淀 源远流长", "B": "相继 淬炼 一脉相承", "C": "渐次 聚集 薪火相传", "D": "稳步 嬗变 生生不息"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "A", "APP解析": "第一空，根据\"中华法系形成于秦朝……形成了影响深远的成文法典\"\"延续性\"可知，横线处所填词语应体现时间的连续性。A项\"陆续\"表示前后相继，时断时续，B项\"相继\"指一个跟着一个，连续不断，C项\"渐次\"指逐步、渐渐，均符合文意，保留。D项\"稳步\"比喻有把握地按一定步骤进行，与文意不符，排除。\n第二空，根据文意可知，横线处所填词语应体现中华法系不断完善的形成过程。A项\"积淀\"指积累沉淀，B项\"淬炼\"指反复经受考验，磨炼，均符合文意，保留。C项\"聚集\"指集合、凑在一起，多指不同空间的事物聚合在一块儿，无法体现前文所述的不断完善的过程，与文意不符，排除。\n第三空，根据\"中华法系形成于秦朝……形成了影响深远的成文法典\"\"中华法系彰显了中华优秀传统法律文化自我发展……的延续性\"可知，横线处所填成语应体现连贯性、连续性。B项\"一脉相承\"指从同一个血统或派别世代承接流传下来，符合文意，当选。A项\"源远流长\"比喻历史悠久，根底深厚，与文意不符，排除。\n故正确答案为B。\n【文段出处】光明日报《从优秀传统法律文化看中华文明的突出特性》", "APP考点": "对应关系-前后呼应、混搭填空", "APP来源": "2025年江苏省公务员录用考试《行测》题（C类）（网友回忆版）第41题", "书籍配图": "yyimage\\book\\272.webp"}, {"编号": "YY087", "原编号": "YY090", "题号": "272-28", "书籍页码": 272, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "注册制改革越包容，市场主体越要____。随着注册制全面推进，新股上市数量势必增多，上市公司\"____\"的时代一去不返。将自身相关信息说完整、说清楚，既是上市公司的法定责任，也是逐浪资本市场的立身之本。因此，企业应提升____和竞争意识，高度负责、抱诚守真地\"自我介绍\"。依次填入画横线部分最恰当的一项是：", "选项": {"A": "自律 待价而沽 紧迫感", "B": "自重 滥竽充数 使命感", "C": "自觉 奇货可居 危机感", "D": "自强 一枝独秀 责任感"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B", "B", "B"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "D", "APP解析": "本题可从第二空入手。根据\"新股上市数量势必增多\"\"……的时代一去不返\"可知，横线处所填成语应与\"数量势必增多\"语义相反，体现随着新股上市数量不断增多，上市公司变得不再少有、稀缺，C项\"奇货可居\"指把少有的货物囤积起来，等待高价出售，也比喻拿某种专长或独占的东西作为资本，等待时机，以捞取名利地位，D项\"一枝独秀\"指其他花都没有开放，只有这一枝在开着，比喻技高一筹，优势明显，均符合文意，保留。A项\"待价而沽\"原比喻等待时机出来做官，后多比喻等待有好的待遇、条件才肯答应任职或做事，侧重强调等待，无法体现上市公司变得不再稀有之意，与文意不符，排除；B项\"滥竽充数\"比喻无本领的冒充有本领，次货冒充好货，与文意无关，排除。\n第一空，根据\"将自身相关信息说完整、说清楚……也是逐浪资本市场的立身之本\"\"企业应……高度负责、抱诚守真地'自我介绍'\"可知，市场主体将相关信息说完整、说清楚是其能够安身立命的资本，横线处所填词语应体现注册制改革越包容，市场主体越要主动、负责、诚实地介绍相关信息，C项\"自觉\"指自己有所认识而主动去做，符合文意，保留。D项\"自强\"指自己努力图强，与文意无关，排除。\n第三空，代入验证。横线处所填词语与\"竞争意识\"构成并列关系，应体现企业要认识到竞争增加，保有忧患意识，C项\"危机感\"指认识到已经发生或者预见到将要发生的问题或困难，并感到紧迫担心的一种忧患意识，符合文意，当选。\n故正确答案为C。\n【文段出处】经济日报《金观平：给投资者一个真实的上市公司》", "APP考点": "对应关系-前后呼应、关联关系-因果关系、关联关系-并列关系、混搭填空", "APP来源": "2023年国家公务员录用考试《行测》题（副省级网友回忆版）第33题", "书籍配图": "yyimage\\book\\272.webp"}, {"编号": "YY088", "原编号": "YY091", "题号": "274-35", "书籍页码": 274, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "所谓环境影响评价，是指对规划和建设项目实施后可能造成的环境影响进行分析、预测和评估，提出预防或减轻不良环境影响的对策和措施，进行跟踪监测的方法与制度。可以说，环境影响评价是控制环境风险的\"____\"，也是在发展中守住绿水青山的第一道防线，对协同推进经济高质量发展和生态环境高水平保护发挥着重要作用。填入画横线部分最恰当的一项是：", "选项": {"A": "预警机", "B": "安全阀", "C": "试金石", "D": "缓冲器"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["A", "A", "A"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "47%", "APP易错项": "A", "APP解析": "根据横线前\"可以说\"可知，横线处词语与前文构成因果关系，根据横线后\"也是\"可知，横线处词语与后文构成并列关系。前文提及\"提出预防或减轻不良环境影响的对策和措施\"，后文提及\"也是在发展中守住绿水青山的第一道防线\"，故横线处词语表达\"环境影响评价\"能够预防、减轻环境风险，对环境起到保护作用。B项\"安全阀\"比喻保障安全的措施，与文意相符，当选。\nA项\"预警机\"比喻能够提醒不好情况的事物，\"环境影响评价\"并非单纯的起到提醒作用，还能够\"提出预防或减轻不良环境影响的对策和措施\"，起到保护环境的作用，与文意对应不够准确，排除；\nC项\"试金石\"比喻可靠的考验人或事物的方法，文段并未提及考验人或事物，与文意不符，排除；\nD项\"缓冲器\"比喻能够起到缓和冲突作用的事物，无法与后文的\"防线\"构成并列关系，与文意不符，排除。\n故正确答案为B。\n【文段出处】法制日报《环评文件弄虚作假要不得》", "APP考点": "实词填空、关联关系-因果关系、关联关系-并列关系", "APP来源": "2024年国家公务员录用考试《行测》题（地市级网友回忆版）第21题", "书籍配图": "yyimage\\book\\274.webp"}, {"编号": "YY089", "原编号": "YY092", "题号": "275-38", "书籍页码": 275, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "数字经济健康发展，有利于推动构建新发展格局。当前，世界百年未有之大变局持续____，新一轮科技变革____，全球产业链趋向本土化重构。作为以数据为核心要素、以数字技术为主要手段、以互联网为重要载体的新型经济形态，数字经济正全面融入人类社会各领域。依次填入画横线部分最恰当的一项是：", "选项": {"A": "深化 方兴未艾", "B": "加重 如火如荼", "C": "更迭 愈演愈烈", "D": "演变 风起云涌"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["D", "D", "D"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "44%", "APP易错项": "D", "APP解析": "第一空，搭配\"变局\"，且根据文意可知，横线处应体现世界百年未有之大变局持续发展之意。A项\"深化\"指向更深处发展，D项\"演变\"指发展变化，均与\"变局\"搭配恰当，且符合文意，保留。B项\"加重\"指增加重量或程度，常搭配\"负担\"\"语气\"等，与\"变局\"搭配不当，且文段强调世界百年未有之大变局持续发展，而非程度增加，与文意不符，排除；C项\"更迭\"指轮流更替，常搭配\"政权\"\"技术\"\"产品\"等，与\"变局\"搭配不当，且\"更迭\"强调不同事物的轮流更替，而文段强调世界局势自身变化大，与文意不符，排除。\n第二空，搭配\"新一轮科技变革\"。A项\"方兴未艾\"指事物刚刚兴起、发展，一时不会终止，最常与\"新事物\"进行搭配，对应\"新一轮\"的科技变革最为准确，且\"未艾\"指一时不会终止，与前文\"持续\"和后文\"正全面融入人类社会各领域\"对应准确，衔接得当，当选。D项\"风起云涌\"形容事物迅速发展，声势浩大，无法体现出\"新\"，与前后文的对应不及A项准确，排除。\n故正确答案为A。\n【文段出处】《数字经济赋能新发展格局》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、混搭填空", "APP来源": "2024年浙江省公务员录用考试《行测》题（A类）（网友回忆版）第23题", "书籍配图": "yyimage\\book\\275.webp"}, {"编号": "YY090", "原编号": "YY093", "题号": "275-42", "书籍页码": 275, "书籍章节": "第三章逻辑填空-考点4语境分析-对应关系-高难进阶", "书籍部分": "高难进阶", "材料": null, "配图": null, "题干": "五彩滩是一处著名的雅丹地貌景观，位于新疆维吾尔自治区，中国唯一一条注入北冰洋的河流额尔齐斯河穿其而过。南岸有绿洲、沙漠，北岸则是____的泥岩、砂岩及砂砾组成的奇石怪岩，这两种____的地貌遥相辉映，\"一河隔两岸，胜似两重天\"。依次填入画横线部分最恰当的一项是：", "选项": {"A": "鳞次栉比 大相径庭", "B": "千姿百态 别具一格", "C": "色彩斑斓 截然不同", "D": "绚丽多姿 各有千秋"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["A", "A", "B"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "48%", "APP易错项": "A", "APP解析": "第一空，根据\"五彩滩是一处著名的雅丹地貌景观\"\"北岸则是……泥岩、砂岩及砂砾组成的奇石怪岩\"可知，横线处要体现出五彩滩的\"多彩\"特点，C项\"色彩斑斓\"指颜色绚丽多彩，D项\"绚丽多姿\"指色彩华丽灿烂、形态或风貌丰富多样，均符合文意，保留。A项\"鳞次栉比\"指像鱼鳞和梳子的齿一样，一个挨着一个地排列着，多形容房屋等密集，B项\"千姿百态\"形容姿态多种多样，各不相同，均与文意不符，排除。\n第二空，根据\"南岸有绿洲、沙漠，北岸则是……的泥岩、砂岩及砂砾组成的奇石怪岩\"\"一河隔两岸，胜似两重天\"可知，横线处要体现出南北两岸风貌差距极大，C项\"截然不同\"形容两种事物没有一点共同之处，符合文意，当选。D项\"各有千秋\"指各有各的存在价值，各有所长，各有优点，与文意不符，且用法错误，可以表达为\"两种地貌各有千秋\"，排除。\n故正确答案为C。\n【文段出处】中国国家地理《布尔津五彩滩——\"一河隔两岸，胜似两重天\"》", "APP考点": "对应关系-主题词、对应关系-前后呼应、成语填空", "APP来源": "2026年国家公务员录用考试《行测》题（地市级网友回忆版）第42题", "书籍配图": "yyimage\\book\\275.webp"}, {"编号": "YY091", "原编号": "YY094", "题号": "278-6", "书籍页码": 278, "书籍章节": "第三章逻辑填空-创新考法", "书籍部分": "创新考法", "材料": null, "配图": null, "题干": "正如林语堂先生所言，\"中国人的性情，往往安放在那些器物之中\"。年轻人对中国传统物件____生活方式的钟爱、追求，不仅仅是在盘扣、丝绸、茶叶等符号化的单品上，更在于\"留白\"\"写意\"\"含蓄\"\"天人合一\"等精神____，形成了文化和哲学上的逻辑，在更深层面引起共振共鸣。依次填入画横线部分最恰当的一项是：", "选项": {"A": "乃至 内核", "B": "以及 世界", "C": "包括 层面", "D": "甚至 境界"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "56%", "APP易错项": "B", "APP解析": "第一空，根据文意可知，横线前后表达的是年轻人钟爱、追求的对象从\"中国传统物件\"拓展到\"生活方式\"，是一种范围上的递进，故横线处所填词语应体现递进关系。A项\"乃至\"、D项\"甚至\"均表示递进关系，符合文段逻辑，保留。B项\"以及\"表示并列关系，C项\"包括\"表示包含关系，均与文段逻辑不符，排除。\n第二空，搭配\"精神\"。根据横线前\"不仅仅……更在于……\"可知，横线处应与前文\"符号化的单品\"构成递进关系，且根据横线后\"在更深层面引起共振共鸣\"可知，横线处应体现这些是内在的、深层次的精神。A项\"内核\"比喻事物的实质或核心部分，置于此处可以体现\"留白\"\"写意\"\"含蓄\"\"天人合一\"等都是内在的、深层次的核心精神，符合文意，当选。D项\"境界\"指事物所达到的程度或表现的情况，置于此处更多强调精神达到的高度等，不符合文意，排除。\n故正确答案为A。\n【文段出处】半月谈内部版《年轻人为何纷纷\"血脉觉醒\"》", "APP考点": "对应关系-前后呼应、混搭填空", "APP来源": "2025年浙江省公务员录用考试《行测》题（C类）（网友回忆版）第24题", "书籍配图": "yyimage\\book\\278.webp"}, {"编号": "YY092", "原编号": "YY096", "题号": "290-6", "书籍页码": 290, "书籍章节": "第三章逻辑填空-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "灵动活泼的方言往往成为点睛之笔。鲁迅的作品中不乏源自绍兴方言的重叠词\"白历历\"\"寒颤颤\"，事物性状模态____。周立波在《山乡巨变》中写道：\"她的脚力有些来不及，鞋子流水踢着路上的石头\"，用了湖南益阳方言\"流水\"，表示\"经常地、不间断地\"，简练准确而____。依次填入画横线部分最恰当的一项是：", "选项": {"A": "跃然纸上 不落窠臼", "B": "呼之欲出 妙趣横生", "C": "纤毫毕现 恰到好处", "D": "惟妙惟肖 一语中的"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["C", "C", "C"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "39%", "APP易错项": "B", "APP解析": "第一空，搭配\"事物性状模态\"，根据\"灵动活泼的方言往往成为点睛之笔\"可知，横线处所填成语应该表达方言的运用使得事物的性状模态更加生动形象之意。A项\"跃然纸上\"形容描写或刻画得十分生动逼真，D项\"惟妙惟肖\"形容描写或模仿的非常逼真，均符合文意，保留。B项\"呼之欲出\"形容所描绘的人物形象生动逼真，多搭配具体形象，而横线处搭配\"事物性状模态\"为宏观抽象表达，搭配不当，排除；C项\"纤毫毕现\"形容完全显现出来或暴露无遗，未体现生动形象，与文意不符，排除。\n第二空，根据\"用了湖南益阳方言'流水'，表示'经常地、不间断地'\"可知，周立波并没有用常规的词语表示\"经常地、不间断地\"，横线处所填成语应体现独特之意。A项\"不落窠臼\"指不落俗套，有独创风格，符合文意，当选。D项\"一语中的\"指一句话就说中要害，横线前\"而\"表示前后词语应有不同侧重，\"一语中的\"与前文\"简练准确\"重复，排除。\n故正确答案为A。\n【文段出处】光明日报《【改进文风大家谈】妙用方言塑造好文风》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、成语填空", "APP来源": "2026年天津市公务员录用考试《行测》题（网友回忆版）第28题", "书籍配图": "yyimage\\book\\290.webp"}, {"编号": "YY093", "原编号": "YY097", "题号": "293-17", "书籍页码": 293, "书籍章节": "第三章逻辑填空-综合训练三", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "不同国家和民族之间的对话，很大一部分是建立在世界意识的基础之上。世界之大，个人只能涉足有限的处所；作为一种彼此相知的语汇，文学可以帮助不同民族的人们____，乃至共同参与世界。所以，世界范围____的文学经典展示了\"人类\"的存在。\"人类\"生活在地球的各个角落，然而，他们是相互联系的共同体——不论他们自己能否意识到这一点。依次填入画横线部分最恰当的一项是：", "选项": {"A": "心中有数 形形色色", "B": "心心相印 跃然纸上", "C": "心领神会 林林总总", "D": "融会贯通 多姿多彩"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["A"], "作答次数": 1}, "二刷": {"原始记录": ["B", "B", "B"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "45%", "APP易错项": "D", "APP解析": "第一空，根据前文\"不同国家和民族之间的对话\"以及\"作为一种彼此相知的语汇，文学可以帮助不同民族的人们……\"可知，横线处要表达出文学能帮助不同民族的人们相互理解的意思，C项\"心领神会\"指对方没有明说，心里已经领会，符合文意，保留。A项\"心中有数\"指对情况和问题有基本的了解，处理事情有一定把握，无法体现出不同民族的人们相互理解的意思，与文意不符，排除；B项\"心心相印\"指彼此的心意不用说出，就可以互相了解，形容彼此的思想感情完全一致，置于此处程度过重，排除；D项\"融会贯通\"指各方面的知识或道理融合贯穿起来，从而得到系统透彻的理解，与文意无关，排除。\n第二空，代入验证，横线处与\"文学经典\"搭配，且根据前文\"世界范围\"可知，横线处要表达出世界上众多文学经典的意思，C项\"林林总总\"形容人或事物众多，与文意相符，当选。\n故正确答案为C。\n【文段出处】光明日报《以文学这门\"世界语言\"沟通心灵》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、成语填空、词的辨析-程度轻重", "APP来源": "2025年湖南省公务员录用考试《行测》题（网友回忆版）第25题", "书籍配图": "yyimage\\book\\293.webp"}, {"编号": "YY094", "原编号": "YY098", "题号": "297-16", "书籍页码": 297, "书籍章节": "第三章逻辑填空-综合训练四", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "司马迁说：\"余读孔氏书，想见其为人。适鲁，观仲尼庙堂……祗回留之，不能去。\"\"余读《离骚》……悲其志。适长沙，观屈原所自沉渊……想见其为人。\"《史记》的\"太史公曰\"据信有120余篇，大多____，彰显客观公正的史学观。唯有对孔子和屈原则是带着浓烈的个人情感，以基本相同的笔调，发出了触动人们心灵的赞叹。填入画横线部分最恰当的一项是：", "选项": {"A": "隐晦曲折", "B": "直言不讳", "C": "秉笔直评", "D": "光明正大"}, "APP标准答案": "C", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "87%", "APP易错项": "B", "APP解析": "横线后\"彰显客观公正的史学观\"对横线处进行解释说明，且需要与后文\"唯有对孔子和屈原则是带着浓烈的个人情感\"形成语义相反，因此横线处应体现《史记》的\"太史公曰\"是秉持客观公正的态度、不带有过多个人情感来进行书写。C项\"秉笔直评\"指拿起笔不加隐讳地径直写出，置于文段可体现出《史记》的\"太史公曰\"不隐瞒、不夸大、真实地反映情况之意，符合文意，当选。\nA项\"隐晦曲折\"指写文章或说话时用隐隐约约、转弯抹角的方式来表达某种思想，无法体现出客观公正之意，与文意不符，排除；\nB项\"直言不讳\"指说话坦率，毫无顾忌，侧重表达方式的直白坦率，与文段强调《史记》\"太史公曰\"的内容客观公正无关，与文意不符，排除；\nD项\"光明正大\"形容襟怀坦白，行为正派，而横线处修饰《史记》\"太史公曰\"的写作内容，并非行为，搭配不当，排除。\n故正确答案为C。\n【文段出处】《屈原的文化高度：与日月同辉》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、成语填空", "APP来源": "2025年湖南省公务员录用考试《行测》题（网友回忆版）第23题", "书籍配图": "yyimage\\book\\297.webp"}, {"编号": "YY095", "原编号": "YY099", "题号": "298-19", "书籍页码": 298, "书籍章节": "第三章逻辑填空-综合训练四", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "中生代寄生蠕虫的化石数量并不稀少，但由于其地质年代相较于寒武纪、奥陶纪等更年轻，常被认为难以____深层次的生物演化奥秘。其次，这些蠕虫往往体型微小，化石保存状况不佳。再者，它们形态单调、特征____，使得分类鉴定难度极高。因此，中生代寄生蠕虫的相关研究仍然____。依次填入画横线部分最恰当的一项是：", "选项": {"A": "阐释 相似 凤毛麟角", "B": "蕴含 泛化 停滞不前", "C": "探寻 统一 无从下手", "D": "揭示 模糊 屈指可数"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["A", "A", "A"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "46%", "APP易错项": "B", "APP解析": "第一空，根据横线前\"由于其地质年代相较于寒武纪、奥陶纪等更年轻\"可知，横线处所填词语应表达由于中生代寄生蠕虫的地质年代较年轻，难以通过其化石探明清深层次的生物演化奥秘之意。A项\"阐释\"指通过说明、陈述对事物进行深入解释，C项\"探寻\"指探求，寻找，D项\"揭示\"指使人看见原来不容易看出的事物，均符合文意，保留。B项\"蕴含\"指包含，文段处意在强调难以通过化石了解奥秘，而非化石本身难以\"包含\"奥秘，与文意不符，排除。\n第二空，根据横线后\"使得分类鉴定难度极高\"可知，横线处所填词语应表达特征不清晰之意。A项\"相似\"指相像，特征相像也可能导致鉴定难，C项\"统一\"指整体的，一致的，无差别的，D项\"模糊\"指不分明，不清楚，均符合文意，保留。\n第三空，根据前文\"地质年代……更年轻\"\"化石保存状况不佳\"\"分类鉴定难\"的多重原因可知，横线处所填成语应表达中生代寄生蠕虫的相关研究数量很少之意。D项\"屈指可数\"指数量少，符合文意，当选。A项\"凤毛麟角\"比喻珍贵稀有的人才或事物，文段并未体现研究很珍贵之意，且与\"相关研究\"搭配不当，排除；C项\"无从下手\"指事物头绪繁复导致无法找到处理途径，置于此处程度太重，排除。\n故正确答案为D。\n【文段出处】科学大院-《采到一块神秘的化石，7年后才知道是什么》", "APP考点": "词的辨析-搭配对象、关联关系-因果关系、混搭填空、词的辨析-程度轻重", "APP来源": "2026年国家公务员录用考试《行测》题（地市级网友回忆版）第46题", "书籍配图": "yyimage\\book\\298.webp"}, {"编号": "YY096", "原编号": "YY100", "题号": "300-6", "书籍页码": 300, "书籍章节": "第三章逻辑填空-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "数字技术开启了图像和视频时代，极大拓展了各类人群参与文化创作和消费的规模。消费者以较低费用甚至免费登录一个平台，文化服务就会____，能够听到或试听世界各地的音乐，看到或试看全球的电影，____地欣赏博物馆中珍贵的藏品。手机和平板电脑的便携性和移动性，更加____现代社会快节奏、时间碎片化、空间移动频繁的特点，更利于创作和欣赏文化产品。依次填入画横线处最恰当的一项是：", "选项": {"A": "触手可及 酣畅淋漓 符合", "B": "应有尽有 足不出户 契合", "C": "扑面而来 无拘无束 贴合", "D": "信手拈来 赏心悦目 切合"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["A", "C", "C"], "作答次数": 3}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "76%", "APP易错项": "A", "APP解析": "第一空，搭配\"文化服务\"，且根据后文\"能够听到……音乐，看到……电影……博物馆中珍贵的藏品\"可知，横线处表达平台内容很丰富，全面，获取方便，A项\"触手可及\"指近在手边，一伸手就可以接触到，形容获取方便，B项\"应有尽有\"指应该有的都有，形容很全面，均符合文意，保留。C项\"扑面而来\"表示事物从正对着自己的方向急促地赶来，多形容感觉、味道或者某种状态，可搭配\"气息\"\"香味\"等，与\"文化服务\"搭配不当，排除；D项\"信手拈来\"指随手拿来，多形容写文章时词汇或材料丰富，不费思索，就能写出来，与文意不符，排除。\n第二空，根据文意可知，横线处意在突出数字技术的作用，且根据\"平台\"\"便携性\"\"博物馆中珍贵的藏品\"可知，横线处体现出有了数字技术，我们通过手机等产品，在平台上可以很轻松容易地欣赏到博物馆中的藏品，B项\"足不出户\"指脚不跨出大门一步，形容不与外界接触，置于此处可体现数字技术的作用，与文意相符，保留。A项\"酣畅淋漓\"形容非常畅快，多指文艺作品中刻画人物形象或抒发感情很充分，与文意不符，排除。\n第三空，代入验证，B项\"契合\"指投合，符合，置于此处表达手机和平板电脑的便携性和移动性与现代社会的快节奏等特点相符，符合文意，当选。\n故正确答案为B。\n【文段出处】《数字时代的技术与文化》", "APP考点": "词的辨析-搭配对象、对应关系-前后呼应、混搭填空", "APP来源": "2022年江苏省公务员录用考试《行测》题（A类）（网友回忆版）第37题", "书籍配图": "yyimage\\book\\300.webp"}, {"编号": "YY097", "原编号": "YY101", "题号": "302-14", "书籍页码": 302, "书籍章节": "第三章逻辑填空-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "\"巴赫金对话\"理论的概念经过西方社会学的发展，被____成一种克服现代性危机、重构认同与共同体的有效手段。具体到政治传播的____里，强调政府与公众的\"垂直对话\"，其本质是政府紧密围绕民生民意与社会需求，通过及时的信息公开____不确定性，弥合不同意见并最终确认共同价值的手段。依次填入划横线部分最恰当的一项是：", "选项": {"A": "推演 领域 消灭", "B": "演绎 语境 消弭", "C": "论证 情境 消损", "D": "归纳 环境 消解"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "42%", "APP易错项": "A", "APP解析": "第一空，根据横线前后语义可知，横线处需体现出将\"巴赫金对话\"这一理论发展成一种克服现代性危机、重构认同与共同体的有效手段，即将理论具体应用的过程，A项\"推演\"指把原理等加以说明并推广运用，B项\"演绎\"指铺陈、表现，均符合文意，保留。C项\"论证\"指论述并证明，与横线后\"成\"搭配不当，排除；D项\"归纳\"指由一系列具体的事实概括出一般的原理，与文意相反，排除。\n第二空，横线处搭配\"政治传播\"，且强调政府与公众的\"垂直对话\"，B项\"语境\"指使用语言的环境，与文段中的\"对话\"对应恰当，保留。A项\"领域\"指一种特定的范围或区域，语义尚可，但对比\"语境\"，不如\"语境\"与\"对话\"对应更为恰当，排除。\n第三空，代入验证，横线处搭配\"不确定性\"，根据后文\"弥合不同意见\"可知，此处需体现出使\"不确定性\"消失之意，B项\"消弭\"指清除、消除某些不好的事情，符合文意，当选。\n故正确答案为B。\n【文段出处】光明网《政府新闻发布可更精准》", "APP考点": "实词填空、词的辨析-搭配对象、对应关系-前后呼应", "APP来源": "2024年湖北省公务员录用考试《行测》题（网友回忆版）第34题", "书籍配图": "yyimage\\book\\302.webp"}, {"编号": "YY098", "原编号": "YY102", "题号": "303-20", "书籍页码": 303, "书籍章节": "第三章逻辑填空-综合训练五", "书籍部分": "综合训练", "材料": null, "配图": null, "题干": "新业态快速发展，既为经济社会发展提供了新的增长点，也成为公共安全新的风险点。对新业态发展中的问题，既不能____，也不能____，重在找准鼓励创新和防控风险的平衡点，坚持在发展中规范、在规范中发展。依次填入画横线部分最恰当的一项是:", "选项": {"A": "小题大做 一叶障目", "B": "因小失大 因循守旧", "C": "坐以待毙 熟视无睹", "D": "因噎废食 视而不见"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "45%", "APP易错项": "A", "APP解析": "第一空，根据\"对新业态发展中的问题\"以及\"重在找准鼓励创新……的平衡点\"可知，横线处所填成语应体现出不要害怕在发展中出现问题，要继续鼓励创新之意，D项\"因噎废食\"比喻因为出了一点问题或怕出问题，就把本来应该做的事情停下来不干，符合文意，保留。A项\"小题大做\"比喻人不恰当地把小事情当作大事来处理，文段未提及\"夸大\"的意思，排除；B项\"因小失大\"指为了小的利益，却造成大的损失，文段并未提大小利益之间的关系，与文意不符，排除；C项\"坐以待毙\"指处在困难或危险的境地，没有办法或不积极设法而采取消极的态度，听其自然，文段并未提及采取消极的手段或态度来对待新业态发展中的问题，与文意不符，排除。\n第二空，代入验证，根据\"重在找准……防控风险的平衡点，坚持在发展中规范、在规范中发展\"可知，横线处所填成语应体现出不能无视问题的存在，而应该找准问题所在并解决问题之意，D项\"视而不见\"表示不关心，不重视，不注意或假装没看见，符合文意，当选。\n故正确答案为D。\n【文段出处】《深入推进社会治理创新 切实提高维护公共安全能力水平》", "APP考点": "对应关系-前后呼应、成语填空", "APP来源": "2023年山东省公务员录用考试《行测》试题（网友回忆版）第16题", "书籍配图": "yyimage\\book\\303.webp"}, {"编号": "YY099", "原编号": "YY103", "题号": "315-20", "书籍页码": 315, "书籍章节": "第四章篇章阅读-普通题材-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "最适合做这篇文章标题的是：", "选项": {"A": "人类的祖先是猎人还是猎物", "B": "你从哪里来？化石知道答案", "C": "人类的攻击性来自远古狩猎生活", "D": "智慧大脑帮助人类走出非洲草原"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["B"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "85%", "APP易错项": "D", "APP解析": "文章第①段引出\"狩猎的生活方式最终塑造了我们目前熟悉的人类\"的传统观点；第②段通过转折词\"然而\"指出传统观点可能存在漏洞，并说明在原始人类究竟是否为狩猎者这个问题上，学界始终有不同意见。随后介绍\"人类猎物假说\"，即\"猿人不是猎人，而是各种食肉动物的猎物\"；第③段对上述假说进行分析，具体介绍了它的意义以及在该假说基础上人体大脑功能是如何形成的；第④段介绍\"人类长跑者假说\"，认为原始人类很可能属于一种本着\"机会主义\"生存原则的食腐动物；第⑤段通过\"实际上\"转折指出，上述假说都不全面，引出\"真正的人类故事很可能是古老的猿类从猎物和食腐动物向猎人演变的过程\"，即人类祖先不只具备一种身份，可能有过猎物、食腐动物、猎人多重身份，之后对该观点进行解释说明。故整篇文章主要围绕人类到底是否为猎人展开，结尾给出作者观点，强调\"真正的人类故事很可能是古老的猿类从猎物和食腐动物向猎人演变的过程\"，对应A项。\nB项，该项重点为\"从哪里来\"与\"化石\"的关系，并非文段讨论重点，且\"化石\"无中生有，排除；\nC项，\"人类的攻击性\"文段并未提及，第③段中只涉及\"食肉动物的攻击\"，排除；\nD项，\"智慧大脑\"可对应第③段的尾句，属于对\"人类猎物假说\"的具体分析，非重点，且\"走出非洲草原\"无中生有，文章并未提及，排除。\n故正确答案为A。\n【文段出处】《人类祖先是猎人还是猎物》", "APP考点": "标题填入题、普通篇章", "APP来源": "2022年国家公务员录用考试《行测》题（副省级网友回忆版）第55题", "书籍配图": null}, {"编号": "YY100", "原编号": "YY104", "题号": "330-14", "书籍页码": 330, "书籍章节": "第四章篇章阅读-公文题材-夯实基础", "书籍部分": "夯实基础", "材料": null, "配图": null, "题干": "《在全国复制推广借鉴的京沪两地优化营商环境改革举措清单》是所选公文的附件，关于附件的说法不正确的是", "选项": {"A": "附件是公文正文的说明、补充或者参考资料", "B": "一篇公文可以有多个附件", "C": "公文正文中的附件名称之后不加标点符号", "D": "公文正文中的附件名称位置是发文机关署名之后"}, "APP标准答案": "D", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["D"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "54%", "APP易错项": "C", "APP解析": "本题主要考查公文常识。公文附件是公文正文的说明、补充或者参考资料，A项表述正确，排除；一篇公文可以有多个附件，只要各个附件之间做好区分，标明序号即可，B项表述正确，排除；公文正文中的附件名称之后不需要加标点符号，直接写明附件名称即可，C项表述正确，排除。\n公文正文中的附件名称位置位于发文机关署名之前，D项表述错误，当选。\n故正确答案为D。\n【文段出处】《国务院办公厅关于做好优化营商环境改革举措复制推广借鉴工作的通知》", "APP考点": "公文常识题", "APP来源": "2020年北京市公务员录用考试《行测》题（乡镇卷）（网友回忆版）第54题", "书籍配图": "yyimage\\book\\330.webp"}, {"编号": "YY101", "原编号": "YY105", "题号": "334-7", "书籍页码": 334, "书籍章节": "第四章篇章阅读-公文题材-高难进阶", "书籍部分": "高难进阶", "材料": "> **引言**：以下是略有删节的公文部分内容，阅读之后回答41-45题。（与题号335-9材料相同）\n\n## 第一段：强化重点领域集中整治\n坚持专项整治与日常监管相结合，以关系生命健康、财产安全和环境保护的商品以及知识产权领域的突出问题为重点，定期组织开展专项整治，严厉打击侵权假冒违法犯罪行为。完善以随机抽查为重点的日常监督检查制度，强化对互联网、农村市场和城乡结合部等侵权假冒高发多发领域和地区的监管，坚持线上线下治理相结合，深挖违法犯罪活动的组织者、策划者、实施者，清理生产源头，铲除销售网络，维护公平竞争的市场秩序。\n## 第二段：加强部门间执法协作\n执法监管部门、行业主管部门等要充分发挥各自优势，加强打击侵权假冒执法协作，促进执法监管和行业管理等信息共享，在执法检查、检验检测、鉴定认定等方面互相提供支持。执法监管部门发现违法行为涉及其他部门职责的，要及时通报相关部门采取措施，对于重大案件线索，必要时要共同研究案情，开展联合执法。加强对基层综合执法部门的指导，（甲）监管职责，（乙）权力清单，（丙）监管漏洞，确保综合执法机构权威高效、运转协调，提高执法效能。\n## 第三段：推进区域间执法协调联动\n针对侵权假冒行为______的特点，加强区域间执法协作，探索建立跨区域联席会议、线索通报、证据移转、案件协查、联合办案以及检验鉴定结果互认等制度，完善线索发现、源头追溯、属地查处机制，推动执法程序和标准统一化，加强交界区域基层执法协作，消除监管空白地带，对侵权假冒商品的生产、流通、销售形成全链条打击。结合实施国家区域发展战略，在京津冀、长江经济带、泛珠三角区域等深入开展打击侵权假冒区域合作，总结经验，适时向全国推广。\n## 第四段：健全行政执法与刑事司法衔接机制\n建立健全行政执法部门与司法机关信息共享、案情通报、案件移送制度，完善案件移送标准和程序，坚决克服有案不移、有案难移、以罚代刑现象。完善行政执法部门与司法机关间有关案件咨询、督查督办等工作机制，规范行政执法证据的固定和移送，实现行政执法与刑事司法无缝衔接。完善涉嫌犯罪案件移送中有关涉案物品处置制度，探索建立涉案物品保管“公物仓”和有毒有害物品统一销毁处理制度。建成中央、省、市、县四级联网的行政执法与刑事司法衔接信息共享系统，提高衔接工作效率和规范化水平。", "配图": null, "题干": "依次填入第2段中甲、乙、丙三处，最恰当的一组词语是", "选项": {"A": "厘清 明确 堵塞", "B": "细化 共享 填补", "C": "转变 完善 发现", "D": "承担 开列 弱化"}, "APP标准答案": "A", "作答记录": {"一刷": {"原始记录": ["D"], "作答次数": 1}, "二刷": {"原始记录": ["A"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "51%", "APP易错项": "B", "APP解析": "甲处，搭配\"监管职责\"。A项\"厘清\"指整理清楚，用于此处可说明使\"监管职责\"更加清楚；B项\"细化\"指使更具体、更细致，用于此处可形容使职责更具体，均保留。C项\"转变\"强调的是改变、变化，文段没有体现要改变，排除。D项\"承担\"指敢于担当的责任与义务，填入语义合适，保留。\n乙处，搭配\"权力清单\"，根据前文\"监管职责\"更加清楚可知，此处强调执法部门要根据自身职责明确权力，A项\"明确\"符合文意且搭配恰当，保留。B项\"共享\"强调了分享、共同拥有，无法和\"权力\"搭配，故与文意不符，排除。\n丙处，A项\"堵塞\"指阻塞，使不通，与\"漏洞\"为常见固定搭配，可选。D项\"弱化\"是变弱的意思，和\"漏洞\"不能搭配，排除。\n故正确答案为A。\n【文段出处】《国务院关于新形势下加强打击侵犯知识产权和制售假冒伪劣商品工作的意见》", "APP考点": "逻辑填空题", "APP来源": "2019年北京市公务员录用考试《行测》题（网友回忆版）第42题", "书籍配图": "yyimage\\book\\334.webp"}, {"编号": "YY102", "原编号": "YY107", "题号": "341-5", "书籍页码": 341, "书籍章节": "第四章篇章阅读-综合训练二", "书籍部分": "综合训练", "材料": "史前历史研究方法\n\n## ① 背景引入：历史学家的研究困境\n历史学家曾经纠结于是否将采集狩猎时代写进历史，因为他们大多缺乏相应的研究技术，无法了解一个没有文字证据的时代。通常来说，研究采集狩猎的不是历史学家，而是考古学家、人类学家和史前历史学家。\n\n## ② 证据类型一：远古物质遗迹与自然环境证据\n在缺乏文字证据的情况下，学者们常常采用三种截然不同的证据来了解这段时期的历史。第一种是远古社会留下的物质遗迹。考古学家解读人类骨骼、石器和其他历史遗迹，研究远古人类及其猎物的遗骸，或者某些物品的残留物，如石器、制作品或者食物残渣。此外，自然环境中的一些研究证据，也可以帮助学者们了解气候和环境变化。我们没有发现多少人类历史最早时期的骨骼遗迹，能够确认属于现代人类的骨骼遗迹，最早只能追溯至16万年前。尽管如此，考古学家仍能从支离破碎的骨骼遗迹中读取大量令人震惊的消息。比如，通过研究从海床和数万年前形成的冰盖中提取的花粉和果核样本，考古学家们已经成功地重构了当时的气候和环境变化模型，而且准确度越来越高。此外，半个世纪以来不断改进的年代测定技术，让我们能更加准确地推算年代，从而为整部人类历史编纂更加准确的大事年表。\n\n## ③ 证据类型二：现代采集狩猎部落研究\n第二种用来研究早期人类历史的主要证据，来自于对现代采集狩猎部落的研究。这种研究方法必须______，因为现代采集狩猎者毕竟来自现代，他们的生活方式或多或少受到现代社会的影响。尽管如此，通过研究现代采集狩猎的生活方式，我们能够更多地了解古代小型采集狩猎部落的基本生活方式。这种研究可以帮助史前历史学家更好地解读为数不多的史前考古证物。\n\n## ④ 证据类型三：现代基因差异对比研究\n近年来，基于现代基因差异进行对比研究的新方法，成为研究早期人类历史的第三种途径。基因研究可以测定现代族群之间的基因差异程度，帮助我们推测自己族群的历史，以及确定远古人口迁移时，不同族群分散的时间。\n\n## ⑤ 总结与挑战：跨学科证据的整合\n要将这些不同类型的证据整合进一部世界历史并不简单：首先，大多数历史学家缺乏必要的专业知识和训练；其次，考古遗迹、人类学成果和基因研究会产生不同类型的信息，这些信息和大多数专业历史学家视为首要研究基础的文字记载是截然不同的。来自于采集狩猎时代的考古证据，无法像书面材料一样记载个性化的细节，但它可以揭示许多关于人类生活方式的信息。整合这些不同学科领域的真知洞见，是世界历史面临的主要挑战之一，尤其在研究采集狩猎时代时，它是我们必须直面的挑战。", "配图": null, "题干": "这篇文章意在说明，在研究采集狩猎时代时：", "选项": {"A": "传统历史学家的研究存在一定局限", "B": "整合多学科的研究成果是一大挑战", "C": "对物质遗迹的研究相较其他方法更为可靠", "D": "应该加大对现代采集狩猎部落的研究力度"}, "APP标准答案": "B", "作答记录": {"一刷": {"原始记录": ["C"], "作答次数": 1}, "二刷": {"原始记录": ["B"], "作答次数": 1}, "三刷": {"原始记录": []}, "四刷": {"原始记录": []}, "五刷": {"原始记录": []}}, "APP全站正确率": "81%", "APP易错项": "A", "APP解析": "文章第①到④段详细介绍了研究采集狩猎时代的三种方法。最后一段对上文三种方法结果进行整合，为全文的重点，最后一段指出要将这些不同类型的证据整合起来并不容易，\"整合这些不同学科领域的真知洞见\"，尤其是研究采集狩猎时代，是必须直面的挑战。故文章意在说明，在研究采集狩猎时代时，要整合不同学科领域的研究成果是一项重大挑战，对应B项。\nA项，\"传统历史学家的研究\"对应最后一段的\"首先\"之后，是证据整合困难的一个方面，表述片面，排除；\nC项，\"对物质遗迹的研究\"只是文章所介绍的研究方法之一，不足以概括全文，排除；\nD项，文章没有指出要加大对现代采集狩猎部落的研究力度，无中生有，排除。\n故正确答案为B。\n【文段出处】《极简历史系列》", "APP考点": "中心理解题、普通篇章", "APP来源": "2021年北京市公务员录用考试《行测》题（区级及以上卷）（网友回忆版）第70题", "书籍配图": "yyimage\\book\\341.webp"}];
+
+        // ============ 全局状态 ============
+        let questionMap = Object.create(null);   // 题号 -> [题目对象...]
+        let jsonEntries = [];
+        let activeIndex = -1;
+        let currentData = [];                    // 当前题库原始数组，供搜索使用
+
+        const SUBJECT = '言语理解与表达';
+        const IMG_PREFIX = '';      // 图片相对路径前缀（如 pdimage/），空串则不补
+
+        const IMG_RE = /\.(png|jpe?g|webp|gif|bmp|svg)$/i;
+        const BRUSH_KEYS = ['一刷', '二刷', '三刷', '四刷', '五刷'];
+
+        // ============ 小工具 ============
+        function escapeHtml(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+                { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+            ));
+        }
+        function normalizePath(p) {
+            return String(p).replace(/\\/g, '/').replace(/^\.?\/+/, '').trim();
+        }
+        function pick(obj, keys) {
+            for (const k of keys) {
+                const v = obj[k];
+                if (v !== undefined && v !== null && v !== '') return v;
+            }
+            return '';
+        }
+        function looksLikeImage(s) {
+            return IMG_RE.test(String(s).trim());
+        }
+
+        // ============ 图片渲染：本地相对路径（与 HTML 同目录的图片文件夹） ============
+        function renderImage(path) {
+            if (!path) return '';
+            let p = normalizePath(path);
+            if (IMG_PREFIX && p.indexOf(IMG_PREFIX) !== 0) p = IMG_PREFIX + p;
+            const label = escapeHtml(path);
+            return `<img class="q-img" src="${escapeHtml(p)}" alt="${label}" loading="lazy" title="点击查看大图">`;
+        }
+
+        // ============ 行内 LaTeX 渲染 ============
+        // 题库解析里的公式是 $...$ 包裹的行内 LaTeX（目前仅资料分析用到）。
+        // 这里用轻量解析器渲染，不依赖外部 CDN，离线打开也能正常显示。
+        const MATH_SYMBOLS = {
+            times: '×', div: '÷', approx: '≈', pm: '±', mp: '∓',
+            le: '≤', leq: '≤', ge: '≥', geq: '≥', ne: '≠', neq: '≠',
+            equiv: '≡', sim: '∼', simeq: '≃', propto: '∝', cong: '≅',
+            cdot: '·', cdots: '⋯', ldots: '…', dots: '…',
+            circ: '°', angle: '∠', perp: '⊥', parallel: '∥',
+            to: '→', rightarrow: '→', Rightarrow: '⇒', leftrightarrow: '↔',
+            infty: '∞', sum: '∑', prod: '∏', therefore: '∴', because: '∵',
+            left: '', right: '', quad: ' ', qquad: '  ',
+            '%': '%', '$': '$', '#': '#', '&': '&', '_': '_', '{': '{', '}': '}',
+            ',': ' ', ';': ' ', ':': ' ', '!': '', ' ': ' '
+        };
+
+        // 读取 {..} 分组（支持嵌套）；没有花括号时取单个字符
+        function readGroup(src, start) {
+            let i = start;
+            while (src[i] === ' ') i++;
+            if (src[i] !== '{') {
+                return { text: src[i] === undefined ? '' : src[i], next: i + 1 };
+            }
+            let depth = 0, j = i;
+            for (; j < src.length; j++) {
+                if (src[j] === '{') depth++;
+                else if (src[j] === '}') { depth--; if (depth === 0) break; }
+            }
+            return { text: src.slice(i + 1, j), next: j + 1 };
+        }
+
+        function renderLatex(src) {
+            let out = '', i = 0;
+            while (i < src.length) {
+                const ch = src[i];
+
+                if (ch === '\\') {
+                    const m = /^\\([a-zA-Z]+)/.exec(src.slice(i));
+                    if (m) {
+                        const name = m[1];
+                        i += 1 + name.length;
+
+                        if (name === 'frac' || name === 'dfrac' || name === 'tfrac') {
+                            const a = readGroup(src, i);
+                            const b = readGroup(src, a.next);
+                            i = b.next;
+                            out += '<span class="frac"><span class="frac-num">' + renderLatex(a.text) +
+                                   '</span><span class="frac-den">' + renderLatex(b.text) + '</span></span>';
+                            continue;
+                        }
+                        if (name === 'text' || name === 'mathrm' || name === 'operatorname') {
+                            const a = readGroup(src, i);
+                            i = a.next;
+                            out += renderLatex(a.text);
+                            continue;
+                        }
+                        if (name === 'sqrt') {
+                            const a = readGroup(src, i);
+                            i = a.next;
+                            out += '√<span class="sqrt-arg">' + renderLatex(a.text) + '</span>';
+                            continue;
+                        }
+
+                        const sym = MATH_SYMBOLS[name];
+                        out += sym !== undefined ? sym : '\\' + escapeHtml(name);
+                        continue;
+                    }
+                    // 单字符命令：\% \{ \} \& 等
+                    const c = src[i + 1];
+                    if (c === undefined) { out += '\\'; i++; continue; }
+                    out += MATH_SYMBOLS[c] !== undefined ? MATH_SYMBOLS[c] : escapeHtml(c);
+                    i += 2;
+                    continue;
+                }
+
+                if (ch === '{') {                       // 裸分组，去掉花括号
+                    const a = readGroup(src, i);
+                    i = a.next;
+                    out += renderLatex(a.text);
+                    continue;
+                }
+
+                out += escapeHtml(ch);
+                i++;
+            }
+            return out;
+        }
+
+        // 行内文本：$...$ 渲染成公式，其余按普通文本（并支持 **加粗**）
+        function renderInline(text) {
+            let out = '', i = 0;
+            while (i < text.length) {
+                if (text[i] === '$') {
+                    const end = text.indexOf('$', i + 1);
+                    const body = end === -1 ? null : text.slice(i + 1, end);
+                    if (body && body.length && body.indexOf('\n') === -1) {
+                        out += '<span class="math">' + renderLatex(body) + '</span>';
+                        i = end + 1;
+                        continue;
+                    }
+                    out += '&#36;';                     // 落单的 $ 原样输出
+                    i++;
+                    continue;
+                }
+                let j = text.indexOf('$', i);
+                if (j === -1) j = text.length;
+                out += escapeHtml(text.slice(i, j)).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                i = j;
+            }
+            return out;
+        }
+
+        // 把题干/解析等富文本按行渲染：图片路径行 → <img>，" - " 行 → 列表，其余 → 段落
+        function renderRichText(value) {
+            if (value === undefined || value === null || value === '') return '';
+            const lines = Array.isArray(value) ? value : String(value).split(/\r?\n/);
+            let html = '', inList = false, listBuf = [];
+
+            const flushList = () => {
+                if (inList) {
+                    html += '<ul class="md-list">' + listBuf.join('') + '</ul>';
+                    inList = false;
+                    listBuf = [];
+                }
+            };
+
+            lines.forEach(line => {
+                const t = String(line == null ? '' : line).trim();
+                if (!t) { flushList(); return; }
+
+                const li = /^[-*•]\s+(.*)$/.exec(t);
+                if (li) {
+                    inList = true;
+                    listBuf.push('<li>' + renderInline(li[1]) + '</li>');
+                    return;
+                }
+
+                flushList();
+                if (looksLikeImage(t)) { html += renderImage(t); return; }
+                html += `<p class="qt-text">${renderInline(t)}</p>`;
+            });
+
+            flushList();
+            return html;
+        }
+
+        // ============ 判错逻辑 ============
+        function isWrong(recordStr, standardAnswer) {
+            if (!recordStr) return false; // 没做的记录不计入错误
+            const record = String(recordStr);
+            const std = String(standardAnswer == null ? '' : standardAnswer).trim();
+            // 如果 APP 的备注里写了“作答正确”，或者纯粹写了正确答案，算对
+            if (record.includes('正确') || (std && record.trim() === std)) {
+                return false;
+            }
+            // 否则（比如选了错误选项，或者备注了“作答2次”等），算错
+            return true;
+        }
+
+        // ============ 加载内置题库 ============
+        function loadEntry(index) {
+            const entry = jsonEntries[index];
+            if (!entry) return;
+            activeIndex = index;
+
+            document.getElementById('current-file-name').textContent = entry.name;
+            document.getElementById('current-file-meta').textContent = `共 ${entry.count} 题 · 图片为本地相对路径`;
+
+            analyzeData(entry.data);
+            searchQuestions();
+
+            document.getElementById('dashboard').style.display = 'block';
+        }
+
+        // ============ 数据分析与渲染 ============
+        function analyzeData(data) {
+            const pointsMap = {};
+            let totalBrush1 = 0;
+            let totalBrush2 = 0;
+            const deadlyQuestions = [];
+
+            questionMap = Object.create(null);
+            currentData = data;
+
+            data.forEach(item => {
+                const qNum = String(item['题号'] || item['编号'] || '未知题号');
+                const stdAnswer = pick(item, ['APP标准答案', 'APP标准答案：']);
+                const pointsStr = pick(item, ['APP考点：', 'APP考点']) || '未知考点';
+
+                // 供弹窗按题号回溯完整题目
+                if (!questionMap[qNum]) questionMap[qNum] = [];
+                questionMap[qNum].push(item);
+
+                // 拆分出多个考点
+                const points = String(pointsStr).split('、').map(p => p.trim()).filter(p => p);
+                const records = item['作答记录'] || {};
+
+                const r1 = records['一刷'] ? records['一刷']['原始记录'] : null;
+                const r2 = records['二刷'] ? records['二刷']['原始记录'] : null;
+                const r3 = records['三刷'] ? records['三刷']['原始记录'] : null;
+                const r4 = records['四刷'] ? records['四刷']['原始记录'] : null;
+                const r5 = records['五刷'] ? records['五刷']['原始记录'] : null;
+
+                // 判断对错
+                const wrong1 = r1 ? isWrong(r1, stdAnswer) : false;
+                const wrong2 = r2 ? isWrong(r2, stdAnswer) : false;
+
+                // 判断是否是“死磕点”（三刷及以上错过的题就算）
+                const wrong3 = r3 ? isWrong(r3, stdAnswer) : false;
+                const wrong4 = r4 ? isWrong(r4, stdAnswer) : false;
+                const wrong5 = r5 ? isWrong(r5, stdAnswer) : false;
+                const isDeadly = wrong3 || wrong4 || wrong5;
+
+                if (wrong1) totalBrush1++;
+                if (wrong1 && wrong2) totalBrush2++;
+
+                if (isDeadly) {
+                    deadlyQuestions.push({ num: qNum, points: points.join(' / ') });
+                }
+
+                // 聚合考点数据
+                points.forEach(p => {
+                    if (!pointsMap[p]) {
+                        pointsMap[p] = { name: p, w1: [], w2: [] };
+                    }
+                    if (wrong1) pointsMap[p].w1.push(qNum);
+                    if (wrong1 && wrong2) pointsMap[p].w2.push(qNum);
+                });
+            });
+
+            // 更新概览数字
+            document.getElementById('brush1-count').textContent = totalBrush1;
+            document.getElementById('brush2-count').textContent = totalBrush2;
+            document.getElementById('deadly-count').textContent = deadlyQuestions.length;
+
+            // 渲染死磕题单
+            const deadlyContainer = document.getElementById('deadly-list');
+            if (deadlyQuestions.length === 0) {
+                deadlyContainer.innerHTML = '<span style="color:#27ae60; font-weight:bold;">🎉 太棒了，你的题库中暂无三刷依然做错的题目！</span>';
+            } else {
+                deadlyContainer.innerHTML = deadlyQuestions.map(q =>
+                    `<span class="tag tag-deadly tag-click" data-num="${escapeHtml(q.num)}" title="点击查看题目原文">题号 ${escapeHtml(q.num)} (考点: ${escapeHtml(q.points)})</span>`
+                ).join('');
+            }
+
+            // 考点排序：核心薄弱点排在前面。先按二刷连错数降序，连错数一样按一刷错数降序
+            const pointsArray = Object.values(pointsMap).sort((a, b) => {
+                if (b.w2.length !== a.w2.length) return b.w2.length - a.w2.length;
+                return b.w1.length - a.w1.length;
+            });
+
+            // 渲染表格
+            const tbody = document.getElementById('knowledge-points-body');
+            tbody.innerHTML = pointsArray.map(p => {
+                // 如果这个考点全对，不展示
+                if (p.w1.length === 0 && p.w2.length === 0) return '';
+
+                // 为了视觉清晰，一二刷连错的题从一刷列表中剔除（避免重复展示题号）
+                const w1Only = p.w1.filter(num => !p.w2.includes(num));
+
+                const w1Count = [...new Set(p.w1)].length;
+                const w2Count = [...new Set(p.w2)].length;
+
+                const w2Tags = p.w2.map(num =>
+                    `<span class="tag tag-w2 tag-click" data-num="${escapeHtml(num)}" title="一二刷连错 · 点击查看题目">${escapeHtml(num)}</span>`
+                ).join('');
+                const w1Tags = w1Only.map(num =>
+                    `<span class="tag tag-w1 tag-click" data-num="${escapeHtml(num)}" title="一刷错 · 点击查看题目">${escapeHtml(num)}</span>`
+                ).join('');
+
+                return `
+                    <tr>
+                        <td><strong>${escapeHtml(p.name)}</strong></td>
+                        <td style="color:#e67e22; font-weight:bold;">${w1Count}</td>
+                        <td style="color:#c0392b; font-weight:bold;">${w2Count}</td>
+                        <td>
+                            <div class="question-list">
+                                ${w2Tags}
+                                ${w1Tags}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // ============ 题目详情弹窗 ============
+        const overlay = document.getElementById('modalOverlay');
+
+        function openQuestion(num) {
+            const items = questionMap[num];
+            if (!items || !items.length) {
+                alert('题库中未找到题号 ' + num + ' 的完整记录。');
+                return;
+            }
+            document.getElementById('modalTitle').textContent = '题号 ' + num;
+            document.getElementById('modalSub').textContent =
+                items.length > 1 ? `该题号下有 ${items.length} 条记录` : '点击图片可查看大图';
+            document.getElementById('modalBody').innerHTML =
+                items.map(renderQuestionDetail).join('<hr class="q-sep">');
+            overlay.classList.add('show');
+            document.getElementById('modalBody').scrollTop = 0;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function renderQuestionDetail(item) {
+            const std = String(pick(item, ['APP标准答案', 'APP标准答案：'])).trim();
+            const trap = String(pick(item, ['APP易错项：', 'APP易错项'])).trim();
+            const rate = pick(item, ['APP全站正确率：', 'APP全站正确率']);
+            const points = pick(item, ['APP考点：', 'APP考点']);
+            const source = pick(item, ['APP来源：', 'APP来源']);
+            const analysis = pick(item, ['APP解析：', 'APP解析']);
+            const code = item['编号'];
+            const page = item['书籍页码'];
+            const chapter = item['书籍章节'];
+            const part = item['书籍部分'];
+            const material = item['材料'];
+            const tigan = item['题干'];
+            const peitu = item['配图'];
+            const bookImg = item['书籍配图'];
+            const options = item['选项'] || {};
+            const records = item['作答记录'] || {};
+
+            let html = '';
+
+            // 头部元信息
+            const metaBits = [];
+            if (code) metaBits.push('编号 ' + escapeHtml(code));
+            if (page !== undefined && page !== null && page !== '') metaBits.push('第 ' + escapeHtml(page) + ' 页');
+            if (part) metaBits.push(escapeHtml(part));
+            if (metaBits.length) html += `<div class="q-meta">${metaBits.join(' · ')}</div>`;
+            if (chapter) html += `<div class="q-chapter">${escapeHtml(chapter)}</div>`;
+
+            // 材料 / 题干 / 配图
+            if (material) html += `<div class="q-block"><div class="q-label">材料</div>${renderRichText(material)}</div>`;
+            if (tigan) html += `<div class="q-block"><div class="q-label">题干</div>${renderRichText(tigan)}</div>`;
+            if (peitu) html += `<div class="q-block"><div class="q-label">配图</div>${renderRichText(peitu)}</div>`;
+
+            // 选项
+            const optKeys = Object.keys(options);
+            if (optKeys.length) {
+                const rows = optKeys.map(k => {
+                    const val = String(options[k] == null ? '' : options[k]).trim();
+                    const isStd = k === std;
+                    const isTrap = k === trap && !isStd;
+                    const cls = isStd ? ' option-correct' : (isTrap ? ' option-trap' : '');
+                    const mark = isStd ? '✅ 正确答案' : (isTrap ? '⚠️ 易错项' : '');
+                    const text = (val && val !== k)
+                        ? escapeHtml(val)
+                        : '<span class="opt-ph">选项内容见图</span>';
+                    return `<div class="option-row${cls}">
+                        <span class="opt-key">${escapeHtml(k)}.</span>
+                        <span class="opt-text">${text}</span>
+                        <span class="opt-mark">${mark}</span>
+                    </div>`;
+                }).join('');
+                html += `<div class="q-block"><div class="q-label">选项</div>${rows}</div>`;
+            }
+
+            // 答案 / 考点信息
+            const infoBits = [];
+            if (std) infoBits.push(`<span>标准答案：<b class="badge-right">${escapeHtml(std)}</b></span>`);
+            if (trap) infoBits.push(`<span>APP易错项：<b style="color:#c2410c;">${escapeHtml(trap)}</b></span>`);
+            if (rate) infoBits.push(`<span>全站正确率：<b>${escapeHtml(rate)}</b></span>`);
+            if (points) infoBits.push(`<span>考点：<b>${escapeHtml(points)}</b></span>`);
+            if (infoBits.length) html += `<div class="q-block"><div class="answer-box">${infoBits.join('')}</div></div>`;
+
+            // 作答记录
+            const attemptRows = BRUSH_KEYS.map(bt => {
+                const rec = records[bt] ? records[bt]['原始记录'] : null;
+                const recStr = rec === null || rec === undefined ? '' : String(rec).trim();
+                let state = '<span class="muted">未作答</span>';
+                if (recStr) {
+                    state = isWrong(recStr, std)
+                        ? '<span class="badge-wrong">❌ 错误</span>'
+                        : '<span class="badge-right">✅ 正确</span>';
+                }
+                return `<tr><td>${bt}</td><td>${recStr ? escapeHtml(recStr) : '—'}</td><td>${state}</td></tr>`;
+            }).join('');
+            html += `<div class="q-block"><div class="q-label">作答记录</div>
+                <table class="attempt-table">
+                    <thead><tr><th width="16%">刷次</th><th width="59%">APP 原始记录</th><th width="25%">判定</th></tr></thead>
+                    <tbody>${attemptRows}</tbody>
+                </table></div>`;
+
+            // 解析 / 来源 / 书籍配图
+            if (analysis) html += `<div class="q-block"><div class="q-label">APP 解析</div>${renderRichText(analysis)}</div>`;
+            if (source) html += `<div class="q-block"><div class="q-label">题目来源</div><p class="qt-text">${escapeHtml(source)}</p></div>`;
+            if (bookImg) html += `<div class="q-block"><div class="q-label">书籍配图</div>${renderRichText(bookImg)}</div>`;
+
+            return html;
+        }
+
+        // ============ 搜索功能 ============
+        function itemFieldText(item, field) {
+            switch (field) {
+                case '考点': return pick(item, ['APP考点：', 'APP考点']);
+                case '题干': return item['题干'];
+                case '编号': return item['编号'];
+                case '题号': return item['题号'];
+                case '材料': return item['材料'];
+                case '解析': return pick(item, ['APP解析：', 'APP解析']);
+                case '来源': return pick(item, ['APP来源：', 'APP来源']);
+                case '章节': return item['书籍章节'];
+                case '部分': return item['书籍部分'];
+                case '页码': return item['书籍页码'];
+                default: return '';
+            }
+        }
+
+        function makeSnippet(text, query) {
+            const s = String(text == null ? '' : text);
+            if (!s) return '';
+            const idx = s.toLowerCase().indexOf(String(query).toLowerCase());
+            if (idx === -1) return s.slice(0, 160);
+            const start = Math.max(0, idx - 30);
+            const end = Math.min(s.length, idx + query.length + 110);
+            let snip = s.slice(start, end);
+            if (start > 0) snip = '…' + snip;
+            if (end < s.length) snip = snip + '…';
+            return snip;
+        }
+
+        function highlightMatches(text, query) {
+            const esc = escapeHtml(text);
+            if (!query) return esc;
+            const q = String(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            return esc.replace(new RegExp('(' + q + ')', 'gi'), '<mark>$1</mark>');
+        }
+
+        function searchQuestions() {
+            const input = document.getElementById('searchInput');
+            const fieldSel = document.getElementById('searchField');
+            const resultsBox = document.getElementById('searchResults');
+            const countBox = document.getElementById('searchCount');
+            const query = input.value.trim();
+            const field = fieldSel.value;
+
+            if (!query) {
+                resultsBox.innerHTML = '';
+                countBox.textContent = '';
+                return;
+            }
+
+            const qLower = query.toLowerCase();
+            const results = [];
+
+            currentData.forEach(item => {
+                const qNum = String(item['题号'] || item['编号'] || '未知题号');
+                const points = pick(item, ['APP考点：', 'APP考点']);
+                let matched = false;
+                let matchText = '';
+
+                if (field === 'all') {
+                    const candidates = [
+                        { text: item['题干'] },
+                        { text: points },
+                        { text: item['编号'] },
+                        { text: qNum },
+                        { text: item['材料'] },
+                        { text: pick(item, ['APP解析：', 'APP解析']) },
+                        { text: pick(item, ['APP来源：', 'APP来源']) },
+                        { text: item['书籍章节'] },
+                        { text: item['书籍部分'] },
+                        { text: item['书籍页码'] }
+                    ];
+                    for (const c of candidates) {
+                        if (String(c.text == null ? '' : c.text).toLowerCase().includes(qLower)) {
+                            matched = true;
+                            matchText = String(c.text);
+                            break;
+                        }
+                    }
+                } else {
+                    const text = itemFieldText(item, field);
+                    if (String(text == null ? '' : text).toLowerCase().includes(qLower)) {
+                        matched = true;
+                        matchText = String(text);
+                    }
+                }
+
+                if (matched) results.push({ qNum, points, item, matchText });
+            });
+
+            if (!results.length) {
+                countBox.textContent = `未找到与「${query}」相关的题目`;
+                resultsBox.innerHTML = '<div class="search-no-result">没有匹配的题目，换个关键词或字段试试。</div>';
+                return;
+            }
+
+            countBox.textContent = `共找到 ${results.length} 道相关题目`;
+
+            resultsBox.innerHTML = results.map(r => {
+                const metaBits = [];
+                if (r.points) metaBits.push('考点：' + r.points);
+                if (r.item['编号']) metaBits.push('编号：' + r.item['编号']);
+                if (r.item['书籍页码'] !== undefined && r.item['书籍页码'] !== null && r.item['书籍页码'] !== '') metaBits.push('第 ' + r.item['书籍页码'] + ' 页');
+                if (r.item['书籍章节']) metaBits.push(r.item['书籍章节']);
+                const meta = metaBits.join(' · ');
+
+                const snippet = highlightMatches(makeSnippet(r.matchText, query), query);
+                return `<div class="search-result-card tag-click" data-num="${escapeHtml(r.qNum)}" title="点击查看题目原文">
+                    <div class="search-result-head">
+                        <span class="search-result-num">题号 ${escapeHtml(r.qNum)}</span>
+                        ${meta ? `<span class="search-result-meta">${escapeHtml(meta)}</span>` : ''}
+                    </div>
+                    <div class="search-result-snippet">${snippet}</div>
+                </div>`;
+            }).join('');
+        }
+
+        document.getElementById('searchInput').addEventListener('input', searchQuestions);
+        document.getElementById('searchField').addEventListener('change', searchQuestions);
+        document.getElementById('searchClear').addEventListener('click', function () {
+            document.getElementById('searchInput').value = '';
+            searchQuestions();
+            document.getElementById('searchInput').focus();
+        });
+
+        // ============ 事件委托 ============
+        document.addEventListener('click', function (e) {
+            const tag = e.target.closest('.tag-click');
+            if (tag) {
+                openQuestion(tag.dataset.num);
+                return;
+            }
+            const img = e.target.closest('.q-img');
+            if (img) {
+                window.open(img.dataset.full || img.src, '_blank');
+            }
+        });
+
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeModal();
+        });
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============ 启动：直接使用内置题库 ============
+        jsonEntries = [{ name: '内置' + SUBJECT + '题库', count: EMBEDDED_DATA.length, data: EMBEDDED_DATA }];
+        loadEntry(0);
+
+    </script>
+
+    <script>
+    (function () {
+        var hero = document.getElementById('titleHero');
+        var btn = document.getElementById('thFold');
+        if (!hero || !btn) { return; }
+        var COLLAPSED_KEY = 'qb-tool-hero-collapsed';
+        function setState(collapsed) {
+            hero.classList.toggle('collapsed', collapsed);
+            btn.textContent = collapsed ? '+' : '−';
+            btn.title = collapsed ? '展开标题区' : '隐藏标题区';
+            try { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); } catch (e) {}
+        }
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            setState(!hero.classList.contains('collapsed'));
+        });
+        hero.addEventListener('click', function (e) {
+            if (hero.classList.contains('collapsed')) { setState(false); }
+        });
+        try { if (localStorage.getItem(COLLAPSED_KEY) === '1') { setState(true); } } catch (e) {}
+    })();
+    </script>
+    </body>
+</html>

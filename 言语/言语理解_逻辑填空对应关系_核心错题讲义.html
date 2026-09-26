@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>言语理解：逻辑填空-语境对应关系 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《言语理解：逻辑填空-语境对应关系 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 言语理解模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 21 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">言语理解：逻辑填空-语境对应关系 核心错题 · 共 21 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY070 (249-6)</b><span class="q-page">书本第 249 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 词的辨析-搭配对象、对应关系-前后呼应、成语填空、对应关系-解释说明</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">从物质形态上看，广义的历史典籍版本包括甲骨文、金文、简帛、石刻、唐宋元明清及近代的手写本、印刷品等，可谓____。此外，还有大量的出土文物、地上地下遗址、文化遗存，以及祖祖辈辈____的历史传说、民风民俗、家风家训等，这些共同构成"广阔的文化空间"，也是一座巨大的____的文化宝藏，蕴藏着中华文明生生不息的密码。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">琳琅满目 一脉相承 独一无二</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">汗牛充栋 口耳相传 无与伦比</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">浩如烟海 倾囊相授 包罗万象</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">卷帙浩繁 言传身教 价值连城</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY071 (254-25)</b><span class="q-page">书本第 254 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">作为一项革新性的技术，自动驾驶技术的商用落地，除了技术的成熟度外，还需要考虑法规、基础设施、社会接受度等诸多方面的问题。因此它必定不是一蹴而就的事情，必然要经历一个复杂而漫长的过程。只有解决好上述诸多问题，自动驾驶的健康发展和广泛应用才不会是"____"。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">空中楼阁</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">海市蜃楼</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">明日黄花</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">无中生有</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY072 (258-45)</b><span class="q-page">书本第 258 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、混搭填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">癌症是细胞层面上的进化。总有那么一些基因突变，会让细胞突破身体的监管，开始肆意分裂，留下大量的后代，而这些后代又会在原来的基础上积累更多基因突变。人类有千千万万的基因，细胞就能有远多于千千万万的突变，这____的突变彼此再排列组合就会有恒河沙数的变化。无论是人体自身的抗癌机制，还是现代医学技术的____，对癌细胞来说都不过是某种"____"而已，杀死的都是弱者，而杀不死的必定会更强大。依次填入横线处最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">形形色色 疗愈 隔靴搔痒</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">旷日持久 介入 优胜劣汰</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">高深莫测 应用 弱肉强食</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">不计其数 干预 物竞天择</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY073 (262-62)</b><span class="q-page">书本第 262 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">关注受众、研究受众、服务受众，是互联网思维的一个鲜明特点。这与政治工作倡导以人为本的理念____。政治工作本质上是做人的工作，其实质就是一种受众至上的思维理念。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">一脉相承</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">相辅相成</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">不谋而合</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">并行不悖</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY074 (263-68)</b><span class="q-page">书本第 263 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人类文明史是一部不断克服灾难、危机和挑战，探寻人类生存和发展之路的历史。____是人类共同应对挑战、跨越逆境、取得突破和进步的出路。当前，人类面对着复杂交织的传统和非传统安全问题，各类问题呈现出联动性、跨国性等特征。同处一个地球村，没有一个国家能凭一己之力谋求自身的绝对安全，也没有一个国家可以从别国的动荡中收获稳定。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">海纳百川</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">和衷共济</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">惺惺相惜</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">安危与共</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY075 (264-70)</b><span class="q-page">书本第 264 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词填空、对应关系-前后呼应、关联关系-因果关系</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">水流与冰川的____，会碰撞出一个神奇的景观——冰川洞穴。冰岛的冰川洞穴更是一个独特存在，与世界其他地方的冰川洞穴相比，它们晶莹透明，极尽美妙。然而，在冰岛温和的海洋性气候和独特的地热环境下，它们几乎随时____，这使每个镜头都成为唯一的瞬间。依次填入划横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">接触 消失</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">会合 止息</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">聚积 融化</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">相遇 消融</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY076 (264-74)</b><span class="q-page">书本第 264 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一个超级工程，就是一件____的工业艺术品，凝结着工程师们非凡的想象力。超级工程纪录片将其中的科技术语转化为日常语言，以____的表达诠释复杂问题，打破专业隔阂，赋予硬核科技以浪漫诗意。依次填入画横线处的词语，最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">别出心裁 言简意赅</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">气势恢宏 有条不紊</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">独一无二 精益求精</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">精美绝伦 通俗易懂</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY077 (265-75)</b><span class="q-page">书本第 265 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">近400年来，人类在探索宇宙方面取得了长足的进步。我们知道了地球上再壮观的烟火表演与超新星爆发相比，都____；一颗方糖大小的中子星就有数亿吨重；宇宙中充满着____的物质，包括难以捉摸的黑洞、暗物质、引力波等。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">相形见绌 林林总总</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">不值一提 莫名其妙</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">大相径庭 千奇百怪</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">黯然失色 不可思议</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY078 (265-77)</b><span class="q-page">书本第 265 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词填空、对应关系-前后呼应、关联关系-因果关系、关联关系-并列关系</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">太阳能、风能是产生电力的主要可再生新能源，但都具有随机性、____、波动性等特点。太阳能光板在晴天、白天时能发电，阴天、夜晚时就"罢工"了，风能发电也跟风力和天气息息相关。因此，目前迫切需要大规模储能装置，将富余的电能储存起来，在发电不足的时间用，以保证电力的____供给。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">地域性 持续</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">阶段性 弹性</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">间歇性 平稳</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">周期性 高效</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY079 (266-80)</b><span class="q-page">书本第 266 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、混搭填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">革命文物见证光荣历史，传承红色基因。技术的进步，给革命文物传播带来了全新的____。通过网上博物馆，观众可以突破时间空间的限制，随时随地参观游览。通过多媒体情景展示，观众可以____，重温当年情境。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">契机 设身处地</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">载体 感同身受</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">形式 抚今追昔</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">机遇 身临其境</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY080 (267-7)</b><span class="q-page">书本第 267 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词填空、对应关系-前后呼应、关联关系-因果关系、对应关系-形象表达</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">快递业并非一般的行业，它就像一个"超级连接器"，可连接生产消费、打通千城百业、连通线上线下、畅通内外循环。正因此，它被称为反映经济活力的"____"。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">风向标</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">试金石</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">放大镜</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">显色剂</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY081 (268-9)</b><span class="q-page">书本第 268 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空、词的辨析-词义侧重</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在科技-产业-金融新循环长效机制下，天津金融机构广泛开展了产品创新。比如中国邮政储蓄银行天津分行配套了"技术流评价"体系，对技术实力强、发展前景好的企业，提供更有竞争力的优惠利率，以及无还本续贷等增值服务。目的就是真正让科技企业____，加速把科技成果转化为生产力，推动产业升级。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">破茧成蝶</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">游刃有余</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">脱颖而出</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">轻装上阵</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY082 (270-18)</b><span class="q-page">书本第 270 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词填空、词的辨析-搭配对象、对应关系-前后呼应、对应关系-形象表达</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人才振兴是乡村全面振兴的____，加强乡村人才队伍建设是推进乡村全面振兴的题中应有之义。要聚焦"引、留、育"关键环节，在"引贤、留才、育苗"上____发力，凝聚人才扎根美丽乡村，高效培育融入乡村全面振兴，激活动能赋能乡村全面振兴，让现代化人才在乡村全面振兴的____中建功立业。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">标杆 集中 温床</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">源头 精准 蓝图</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">核心 切实 画卷</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">基础 持续 沃土</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY083 (270-19)</b><span class="q-page">书本第 270 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 词的辨析-搭配对象、对应关系-前后呼应、混搭填空、对应关系-解释说明</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">____的布局模式早已被实践证明是行不通的。部分地区曾陷入"撒胡椒面"式的发展误区，同时布局未来产业多个领域，结果研发力量分散，投资巨大却未能取得一项核心突破。与新兴产业相比，未来产业发展____更低，产业成长的不确定性更大，只有精心选择赛道，方能集中资源攻克核心技术。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">齐头并进 支撑力</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">贪大求全 可行性</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">面面俱到 成熟度</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">沙里淘金 体系化</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY084 (270-20)</b><span class="q-page">书本第 270 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">未来特战力量可通过智能辅助，直接干扰或控制敌方指挥控制系统，造成敌方思想混乱、心理受挫甚至出现幻觉；或者通过伴随无人平台实施网络作战，篡改指控系统指令和数据实现"____"，致使敌方指挥失灵、协同失效、人员失能，____地失去战斗力，从而实现"不战而屈人之兵"。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">移花接木 彻头彻尾</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">釜底抽薪 无声无息</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">暗度陈仓 潜移默化</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">反客为主 浑然不觉</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY085 (271-23)</b><span class="q-page">书本第 271 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">通常深度大于6000米的深海被称为深渊，科学家认为其有着____的科考和科研价值。下潜到1万米深度，相当于在1个手指甲大小的面积上承受约1吨的重量。气压、光照、盐度的逐级变化，造就了地球这个最深处的特殊性。在此开展科学研究，能够获取地球物理、地质构造等____的科学资料。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">不可替代 独一无二</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">无与伦比 不胜枚举</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">难以估量 丰富多彩</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">前所未有 错综复杂</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY086 (272-25)</b><span class="q-page">书本第 272 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、混搭填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">中华法系形成于秦朝，至隋唐日趋成熟，宋元明清时期____形成了影响深远的成文法典，在历史发展中____而成的中华法系彰显了中华优秀传统法律文化自我发展、回应挑战的主体性与生命力，也反映了中华文明____的延续性。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">陆续 积淀 源远流长</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">相继 淬炼 一脉相承</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">渐次 聚集 薪火相传</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">稳步 嬗变 生生不息</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY087 (272-28)</b><span class="q-page">书本第 272 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-前后呼应、关联关系-因果关系、关联关系-并列关系、混搭填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">注册制改革越包容，市场主体越要____。随着注册制全面推进，新股上市数量势必增多，上市公司"____"的时代一去不返。将自身相关信息说完整、说清楚，既是上市公司的法定责任，也是逐浪资本市场的立身之本。因此，企业应提升____和竞争意识，高度负责、抱诚守真地"自我介绍"。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">自律 待价而沽 紧迫感</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">自重 滥竽充数 使命感</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">自觉 奇货可居 危机感</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">自强 一枝独秀 责任感</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY088 (274-35)</b><span class="q-page">书本第 274 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 实词填空、关联关系-因果关系、关联关系-并列关系</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">所谓环境影响评价，是指对规划和建设项目实施后可能造成的环境影响进行分析、预测和评估，提出预防或减轻不良环境影响的对策和措施，进行跟踪监测的方法与制度。可以说，环境影响评价是控制环境风险的"____"，也是在发展中守住绿水青山的第一道防线，对协同推进经济高质量发展和生态环境高水平保护发挥着重要作用。填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">预警机</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">安全阀</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">试金石</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">缓冲器</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY089 (275-38)</b><span class="q-page">书本第 275 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 词的辨析-搭配对象、对应关系-前后呼应、混搭填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">数字经济健康发展，有利于推动构建新发展格局。当前，世界百年未有之大变局持续____，新一轮科技变革____，全球产业链趋向本土化重构。作为以数据为核心要素、以数字技术为主要手段、以互联网为重要载体的新型经济形态，数字经济正全面融入人类社会各领域。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">深化 方兴未艾</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">加重 如火如荼</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">更迭 愈演愈烈</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">演变 风起云涌</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>YY090 (275-42)</b><span class="q-page">书本第 275 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 对应关系-主题词、对应关系-前后呼应、成语填空</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">五彩滩是一处著名的雅丹地貌景观，位于新疆维吾尔自治区，中国唯一一条注入北冰洋的河流额尔齐斯河穿其而过。南岸有绿洲、沙漠，北岸则是____的泥岩、砂岩及砂砾组成的奇石怪岩，这两种____的地貌遥相辉映，"一河隔两岸，胜似两重天"。依次填入画横线部分最恰当的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">鳞次栉比 大相径庭</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">千姿百态 别具一格</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">色彩斑斓 截然不同</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">绚丽多姿 各有千秋</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>
