@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：逻辑判断-加强题型 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：逻辑判断-加强题型 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 17 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：逻辑判断-加强题型 核心错题 · 共 17 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD213 (292-7)</b><span class="q-page">书本第 292 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人们感受气味通过嗅觉受体实现。研究发现：随着人类的演化，编码人类嗅觉受体的基因不断突变，许多在过去能强烈感觉气味的嗅觉受体已经突变为对气味不敏感的受体，与此同时，人类嗅觉受体的总体数目也随时间推移逐渐变少。由此可以认为，人类的嗅觉经历着不断削弱、逐渐退化的过程。以下哪项如果为真，最能支持上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">随着人类进化，嗅觉中枢在大脑皮层中所占面积逐渐减少</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">相对于视觉而言，嗅觉在人类感觉系统中的重要性较低</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">人类有大约1000个嗅觉受体相关基因，其中只有390个可以编码嗅觉受体</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">不同人群之间嗅觉存在很大差异，老年人的嗅觉敏感性明显低于年轻人</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD214 (293-9)</b><span class="q-page">书本第 293 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 必要条件</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">科学研究显示，一个人在一天早些或晚些时候吃最丰盛的一餐并不影响身体代谢热量的方式。但在早上吃最丰盛一餐的人在晚些时候会感觉不那么饿，这可能会让他们在现实世界中更容易实现减肥。以下哪项是上述论证的必要前提？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">大量摄入丰盛的早餐，可以通过更大程度的抑制食欲来帮助遵守减肥方案</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">某些代谢测量只能在早餐后进行，而不能在晚餐后进行</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">饮食时间能促进人类减肥的潜在机制还不清楚</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">昼夜节律被打乱者可能会有不同的代谢反应</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD215 (293-10)</b><span class="q-page">书本第 293 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 搭桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">目前，研究人员已可以利用基因组编辑技术，破坏致病基因或插入外源基因，来预防或治疗疾病。艾滋病（AIDS）是具有免疫功能的淋巴细胞感染了艾滋病病毒（HIV）造成的，在感染淋巴细胞时，HIV通过识别淋巴细胞表面一种名为CCR5的蛋白质，以此为记号并进行侵入。研究人员可以从患者身上采集淋巴细胞，对其进行基因组编辑，再把编辑后的淋巴细胞送回患者体内，达到治疗效果。要得到上述结论，需要补充的前提是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">CCR5基因是AIDS的相关基因</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">患者的淋巴细胞可以由直系亲属的淋巴细胞代替</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">HIV面对丧失功能的CCR5，会找到淋巴细胞上的另一种CXCR4细胞来侵入</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">基因组编辑技术可以使CCR5基因丧失功能，这样HIV就无法感染淋巴细胞了</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD216 (294-13)</b><span class="q-page">书本第 294 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 搭桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">杂草稻是稻田里不种自生、伴随栽培稻生长的一种"杂草型稻"。研究者在杂草稻基因组中发现了与干旱胁迫下叶片干枯程度显著相关的基因——PAPH1。消除该基因后的株系，其叶肉细胞膜内外钙离子和钾离子流速降低；而PAPH1基因过度表达的株系，其叶肉细胞膜内外钙离子和钾离子流速增加。因此研究者指出，PAPH1基因在杂草稻抗旱性中发挥关键作用。上述论证的成立须补充以下哪项作为前提？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">正常状态下的栽培稻长期生长在有水的环境中，不含PAPH1基因</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">叶肉细胞膜内外钙离子和钾离子的流速也促进PAPH1基因的表达</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">叶肉细胞膜内外钙离子和钾离子流速越高，杂草稻的抗旱性越强</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">杂草稻与栽培稻存在基因交流，其演化与栽培稻选育品种密切相关</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD217 (295-16)</b><span class="q-page">书本第 295 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某新闻媒体报道，某厂家生产的洗洁精含有甲醛，会危害人体健康。厂家对此回应：我厂生产的洗洁精确实含有甲醛，但不会对使用者的健康构成威胁。以下哪项如果为真，最能支持厂家的说法？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">甲醛常作为洗洁精的防腐抗菌剂使用</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">厂家已采用其他成分替代甲醛，这种新成分对人体无害</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">正常使用该洗洁精不会产生甲醛残留，不存在健康隐患</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">经有关部门多次检测，该洗洁精都未检出甲醛含量超标</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD218 (297-23)</b><span class="q-page">书本第 297 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一项研究重建了过去25年来鸟类在20多万个地点创造的声音景观，结果发现，现今鸟类的声音强度已经出现了普遍的下降，且不如过去那般高低起伏、动听悦耳。研究者认为，这种现象主要是气候变化导致的。但反对者认为，这与气候无关，主要是因为鸟类社群的组成发生了变化，致使物种减少导致。以下哪项如果为真，最能支持研究者的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">日益严重的变暖趋势导致鸟类社群物种缩窄</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">鸟类的声音变得越来越简单且异质性越来越小</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">一些歌声动听婉转的鸟类正在向高纬度迁移</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">一般来说，体型较小的物种灭绝风险较高</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD219 (298-26)</b><span class="q-page">书本第 298 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 搭桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">借助水文气象卫星20年采集的数据，科学家看到全球56%的海水变得越来越绿，这些海水都处在南纬40度和北纬40度之间的热带和亚热带水域，海水颜色由上层海水所含物质决定，深蓝色意味着海洋中没有太多生物，绿色则代表海里存在着以浮游植物为基础的生态系统，科学家据此认为，气候变暖让这片海域变得越来越绿。以下哪项如果为真，最能支持上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">变绿海域都处在热带和亚热带，特别是赤道附近</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">如果海洋持续变暖，海洋变绿现象会持续地加剧</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">气候变暖会大大加速热带和亚热带海洋浮游植物生长</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">模拟海洋生态系统证明气候变暖与海水变绿之间存在正相关关系</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD220 (299-30)</b><span class="q-page">书本第 299 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 搭桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">卫星在低地球轨道运行，随着时间的推移会逐渐失去高度，最终在与大气层剧烈摩擦中燃烧解体。数年来，在地球大气层中燃烧的卫星数量不断增长。卫星主要由铝构成，当卫星燃烧时，铝会转化成铝的氧化物。因此，研究人员认为，不断发射的卫星会给地球大气层带来危害。以下哪项如果为真，最能支持上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">据有关部门统计，每天都会有一个老化的卫星在地球大气层中解体</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">在足够浓度下，氧化铝能够催化臭氧与氯气的破坏性反应，导致臭氧分子分裂</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">目前发射的卫星多是大量卫星群构成的星链卫星，卫星之间产生的化学反应无法预测</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">卫星发射后的残骸会逐渐分解为粒子，这些粒子有的会长期停留在地球大气层</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD221 (299-31)</b><span class="q-page">书本第 299 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">进入秋季以来，国际化肥价格呈爆发式上涨，氮肥、磷肥、钾肥比上一年同期都有大幅上涨。对此，有关专家表示，近期受多种因素叠加影响，化肥价格上涨明显，但价格与市场需求量相关，国内肥料价格很快就会回到正常水平。专家最不可能基于以下哪项得出上述观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">肥价过高，粮价不稳，经销商和农户购肥积极性减弱</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">农业用肥即将度过高峰期进入淡季，需求量将会下降</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">原料价格上涨，生产成本过高，多家化肥企业暂停生产</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">我国延长收紧化肥出口时间，变相增加了国内化肥供应</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD222 (299-32)</b><span class="q-page">书本第 299 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">维生素D是人体必需的脂溶性维生素。人通过暴露于阳光下、膳食摄入和维生素D补充等途径补充维生素D。不断有研究提示，补充维生素D可降低癌症发生风险、保护血管、预防糖尿病、保护肝肾。但最近的一项包括2.6万人的随机对照实验显示，补充维生素D在降低心血管事件发生率、死亡率，以及预防癌症、降低癌症死亡率方面，与安慰剂无异。因此，有研究者认为，补充维生素D不会产生积极作用。以下各项如果为真，哪项最能支持该研究者的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">维生素D可直接影响人类229个基因的活性，缺乏维生素D会增加患上各种免疫性疾病的风险</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">针对大量研究的综述显示，身体中维生素D水平不佳的人群的死亡率会增加</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">补充维生素D的价值视情况而定，体重指数低的人补充维生素D，对自身免疫性疾病有预防作用</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">研究显示，口服维生素D和钙补充剂会使轻度和中度动脉粥样硬化患者的全因死亡风险增加38%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD223 (299-34)</b><span class="q-page">书本第 299 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在我国北方的春天，树木花粉是一种主要的过敏源，它们通过空气传播，不可避免地被吸入体内，使过敏体质人群产生或轻或重的炎症反应。与此同时，作为树木种子的杨柳飞絮同样使过敏人群感到不适。有研究人员认为，杨柳飞絮虽然会使呼吸道产生不适，但它不是过敏源，许多声称杨柳飞絮过敏的人实际上是花粉过敏。以下哪项如果为真，不能支持研究人员的论证？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">杨柳飞絮容易进入人的呼吸道，并粘附其上产生刺激作用，出现类似过敏的症状</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">杨柳飞絮漫天飞舞之时，正值很多种树开花之际，二者在时间上存在着重叠</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">杨柳飞絮含有油质和多糖类物质，作用在皮肤上可通过一系列反应变成一种过敏源</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">由于被杨柳飞絮包裹携带，风媒花粉更容易进入呼吸道引起过敏反应</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD224 (299-37)</b><span class="q-page">书本第 299 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强-实验类、补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一项研究发现牙龈炎和老年痴呆有关。研究人员招募了172名平均年龄67岁的老年人，一方面监测他们的牙龈损伤程度，另一方面通过脑部扫描来测量他们的海马体积。研究进行了4年，结果发现牙龈的损伤程度和海马体体积的降低有直接关系。研究人员认为，对于老年人而言，预防牙龈炎有助于预防老年痴呆。以下哪项如果为真，最能支持上述结论：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">牙龈炎会对心脏造成影响，还会影响肺部功能或引起胃部疾病</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">导致牙龈炎的牙龈卟啉单胞菌可以入侵脑组织，并对神经细胞造成损伤</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">患有老年痴呆的病人常常会忘记刷牙，从而容易引发牙龈炎</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">老年痴呆虽然是一种神经退行性疾病，但其可能是由于躯体疾病引起的</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD225 (304-46)</b><span class="q-page">书本第 304 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 必要条件</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">每吨电子垃圾中含有200-350g金。最近，国内团队研制出一种被命为JNM的新吸附材料。JNM可对CPU废弃物浸出液中的金离子进行5次循环吸附，并保持较高吸附率：在高浓度干扰离子作用下，JNM能对金离子保持高选择性吸附，从150个CPU废弃物中，JNM能回收0.61g金。所以，JNM是目前回收复杂废液中微量金的最高效新材料。上述结论若要增强说服力，还需要补充的前提是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">JNM对金的吸附量能伴随着金离子初始浓度增高而增大</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">JNM对金的最大吸附量超过了国内外已知的所有吸附材料</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">JNM能高效回收生活污水、工业废水和海水中的微量金</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">JNM在1000ppm时，对金的最大吸附量达到954mg/g</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD226 (306-2)</b><span class="q-page">书本第 306 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 补充论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究员让流行音乐爱好者听一组流行歌曲，同时用功能磁共振成像监测他们的大脑活动。在进行扫描前，研究员通过经颅磁刺激间接刺激或抑制大脑的奖赏回路。结果发现，在听音乐之前刺激奖赏回路会增加被试听音乐时的愉悦感，而抑制它则会降低愉悦感。因此，研究员认为，大脑的奖赏回路会影响人们对音乐的喜欢程度。以下哪项如果为真，最能支持上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">缺乏音乐快感的人听音乐时，其大脑奖赏回路的活动很微弱</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人们在享受美食时，也会出现大脑奖赏回路活动性升高</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">不喜欢流行音乐的人在听流行歌曲时，也会出现大脑奖赏回路的活动</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">音乐家喜欢的音乐，对"乐盲"而言可能是噪音，因为两者的大脑活动机制不同</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD227 (308-6)</b><span class="q-page">书本第 308 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">买电影票前，去电影网站查看待映影片的评分；看电视剧前，要等到有评分后才决定是否观看······各种文化产品似乎都有了属于自己的分数。一个高分能为相关文化产品带来较高的关注度和较大的影响力，这反过来又影响文化产品的创作。然而，有专家表示，这样的评分很有可能影响文化产品的创新发展。以下除哪项外，均能支持上述专家的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">那些试图突破常规、探索新风格或新形式的文化产品，往往会因为不符合评分者的偏好，而只得到较低的评分</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">新的文化产品往往需要一定的时间周期，才能培养出口碑和受众基础，而评分的即时性会抑制这种成长空间</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">在评分的过程中，粉丝群体会毫无理由地对自己喜爱的作品给出高分评价，从而影响评分的公正性和客观性</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">为获得更高的评分和更多的市场认可，许多文化产品的创作者会迎合评分标准和大众喜好，重复已成功的模式和题材</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD228 (310-11)</b><span class="q-page">书本第 310 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题、加强-实验类</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某团队开展了一项关于预防中风的研究。研究对象分为两组，一组食用低钠盐（约75%的氯化钠和25%的氯化钾），一组食用普通盐（约97%的氯化钠）。在5年的跟踪调查中发现，食用低钠盐的群体，其中风发病率显著低于食用普通盐的群体。因此，减少钠的摄入有助于预防中风。以下各项如果为真，最不能支持这一结论的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">食用低钠盐的中风患者的死亡率远低于食用普通盐的中风患者</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">两组研究对象在性别、年龄等方面不存在明显差异</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">研究期间，两组研究对象每日摄入的盐含量接近</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">摄入氯化钾不会影响中风发病率</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD229 (311-15)</b><span class="q-page">书本第 311 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">墨西哥丽脂鲤是一类洞穴鱼，生活在寒冷漆黑的洞穴中，它们的身体不产生色素，因此呈现白化状态。与其他鱼类相比，墨西哥丽脂鲤的某一基因发生突变，使其难以合成酪氨酸，因此抑制了黑色素的形成。研究人员认为这一基因改变并不是生物进化中的偶然事件，而是鱼类为了生存所做出的适应性策略。以下除哪项外，均能支持研究人员的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">酪氨酸是合成多巴胺等激素的前体，许多动物在应对生存压力时都会分泌多巴胺类物质</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">与墨西哥丽脂鲤类似，一些生存在阴暗寒冷环境中的海底生物也会出现身体白化现象</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">这一基因改变促使墨西哥丽脂鲤血液中的红细胞体积更大，血红蛋白容量更高，更能应对缺氧环境</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">形成黑色素需要耗费能量，而墨西哥丽脂鲤长期处在能量匮乏的环境中，减少酪氨酸的合成有助于自身能量的储备</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

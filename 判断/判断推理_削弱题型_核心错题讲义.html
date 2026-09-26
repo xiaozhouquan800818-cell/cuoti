@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：逻辑判断-削弱题型 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：逻辑判断-削弱题型 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 17 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：逻辑判断-削弱题型 核心错题 · 共 17 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD230 (322-20)</b><span class="q-page">书本第 322 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 因果倒置</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究发现，人们在社交媒体上花费的时间越长，越容易感到孤独。研究人员招募了1787名19岁至32岁的成年人，让他们完成一份问卷。调查发现，在社交媒体上每天花费时间超过120分钟的人感受到的孤独，大约是那些每天费时少于30分钟的人的两倍。研究人员解释说，这可能是因为人们在社交媒体上花的时间越多，现实世界中与人交流的时间就越少，因此越容易感到孤独。以下哪项如果为真，最能削弱上述研究结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">越容易感到孤独的人越喜欢用社交媒体</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">越喜欢用社交媒体的人，对生活的满意度越低</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">人们越来越喜欢通过社交媒体来了解其他人的生活</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">人们喜欢在社交媒体上发布积极经历，容易使接收此类信息的人心态失衡</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD231 (327-35)</b><span class="q-page">书本第 327 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">近年来减肥人士所追捧的低碳饮食，指的是在饮食中严格限制碳水化合物的摄入量，增加蛋白质和脂肪的摄入量。一些研究指出，通过降低饮食中的碳水化合物不但可以达到减重的目的，还能在一定程度上降低血液胆固醇水平，令心脏病风险有所降低。所以不少支持者认为，长期低碳饮食对身材和健康都有益。以下哪项如果为真，不能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">研究发现只有1%的人能够长期坚持低碳饮食，平均坚持19个月</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">低碳饮食者会更多进食蛋白质、脂肪，不适合冠心病、痛风等患者</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">碳水化合物是营养膳食的基础，长期低碳饮食会影响大脑功能，导致精神萎靡</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">少吃才是减肥的硬道理，通过改变碳水化合物、蛋白质和脂肪的比例并不能起到效果</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD232 (328-38)</b><span class="q-page">书本第 328 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 因果倒置</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">相比那些不练习瑜伽的人来说，经常练习瑜伽的人体型更好一些。可见，瑜伽能锻炼人的柔韧性，塑造完美体型。以下哪项如果为真，最能对上述结论提出质疑？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">大部分人喜欢瑜伽，就是因为瑜伽能够让人拥有更好的体型</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">塑造完美体型的方式不仅仅只有瑜伽</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">瑜伽不仅能够塑造人的完美体型，还能预防关节炎</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">真正体型不好的人一般不会选择练习瑜伽</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD233 (329-42)</b><span class="q-page">书本第 329 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">中小学生"抬头不看黑板，低头手机平板"的现象屡见不鲜，对学生的学习和成长造成严重影响。因此有专家建议，所有中小学都应当制定校规，禁止中小学生在校园使用智能手机、平板电脑，从而避免这些电子产品影响孩子们在校园中的学习与生活。以下选项最能质疑该专家建议的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">许多家长严格限制孩子使用电子产品的时间</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">中小学生在校外玩手机平板的现象比校内严重</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">学校将加强对中小学生带电子产品进入校园的检查</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">学生需要在校内通过平板电脑学习某些课程</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD234 (331-1)</b><span class="q-page">书本第 331 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">近日，某款磁性笔销量大增，买家主要是中小学生。磁性笔由多个磁力小部件组成，依靠强大的磁性可任意变换出不同的造型，颇具娱乐性。磁性笔商家称，磁性笔能开发智力，寓教于乐，让孩子爱上写字，学龄以上孩子都可以安全使用。以下哪项如果为真，最能质疑商家的说法？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">该磁性笔磁力小部件重金属超标，可能对使用者健康造成危害</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">某调查发现，初三的大部分学生认为磁性笔很无聊，是给小孩子玩的</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">家长普遍反映，孩子上课只顾着玩磁性笔，听课效率比以前下降了很多</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">一个四岁孩子在玩磁性笔时不慎吞咽了散落的磁力小部件，造成肠穿孔</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD235 (331-2)</b><span class="q-page">书本第 331 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 他因削弱</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">今年夏天，街边冷饮摊上的冰激凌普遍涨价，多款畅销产品的价格都有不同程度的上涨。有人认为，这是因为冰激凌中的中高端品种越来越多，使消费者对价格较高的冰激凌有更高的接受度，最终导致了冰激凌的市场价格普遍上涨。以下最能削弱上述论断的一项是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">中高端品种冰激凌刺激了其他品种冰激凌的市场价格上涨</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">低价冰激凌的品种同样越来越多，并且味道也很受欢迎</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">某家大型超市的冰激凌平均价格未出现明显上涨</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">厂家和经销商的经营成本、用工成本不断上涨</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD236 (331-3)</b><span class="q-page">书本第 331 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">小李对小张说："你少吃一点咸菜，平时吃得太咸，将来会得高血压。"小张反驳道："吃得咸不咸跟高血压没有关系，你看五十年代的人，天天都吃咸菜疙瘩，也没有现在这么多人得高血压。"以下哪项如果为真，不能帮助小李质疑小张的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">过去医疗条件落后，民众健康意识淡薄，即使得了高血压也不知道</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">吃太多盐会影响钙和锌的吸收，易患骨质疏松，还会加重肝肾代谢负担</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">五十年代的人作息更规律，运动量更大，有助于排出体内的钠，降低血压</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">吸烟、饮酒、高盐饮食、精神紧张都会导致高血压和心脑血管疾病风险增加</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD237 (331-4)</b><span class="q-page">书本第 331 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱-实验类、拆桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某消费导向杂志在读者中做了一项调查，以预测明年的消费趋势。在被调查者中，有57%的人在明年有奢侈品项目消费的计划。该杂志由此推测：明年消费者的消费能力会很强。以下哪项如果为真，最能削弱该杂志的推测？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">该刊物的读者要比一般消费者富有</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">并非所有该刊物的读者都对调查作了回答</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">大多没有奢侈品项目消费计划的人都打算存钱买房</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">计划购买的奢侈品大多是进口的，并不能刺激国内市场</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD238 (332-6)</b><span class="q-page">书本第 332 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱-实验类、削弱论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">为了解当下大学生对军事的关注程度，某教授列举了20种军事装备，请30位大学生识别。结果显示，多数人只识别出2到6种装备，极少数人识别出15种以上，甚至有人全部都不能识别。其中"海鹞战斗机"的辨识率最高，30人中有19人识别正确；"舰载式战斗机"所有人都未能识别。20种军事装备的整体识别错误率超过75%。该实验者由此得出，当代大学生对军事的关注程度并没有提高，甚至有所下降。以下哪项如果为真，最能对该教授的结论构成质疑？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">教授选取的20种军事装备不具有代表性</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">教授选取的30位大学生均不是军事院校的学生</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"舰载式战斗机"这种战斗装备有些军事迷也未能识别</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">教授选取的30位大学生中约有50%对军事不感兴趣</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD239 (332-7)</b><span class="q-page">书本第 332 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究人员基于生物库大样本队列，采用生物电阻抗测量脂肪含量，分析其与死亡风险的关系，结果显示脂肪含量过少与死亡风险增高存在关联。研究人员认为，脂肪含量过少的人，死亡风险会增高。以下哪项如果为真，最能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">在生活方式不健康的人群中，脂肪含量过多或过少均会增加死亡风险</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">脂肪含量过多给人带来的死亡风险，高于脂肪含量过少带来的死亡风险</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">脂肪含量过少和死亡风险高都是由疾病带来的，疾病是二者的共同原因</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">低脂肪的饮食可以改善血脂的代谢、降低胆固醇、降低低密度脂蛋白的水平</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD240 (333-9)</b><span class="q-page">书本第 333 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">当人体摄入过多的蛋白质时，肾脏必须更加努力工作以清除额外产生的含氮废物。长此以往可能会导致肾小球滤过率升高，从而增加肾脏的工作负担，加速肾脏损伤。因此有人认为，健身人群长期喝蛋白粉会伤肾。以下哪项如果为真，最能反驳上述观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">熬夜、劳累、高油高盐饮食等是导致肾病的主要原因</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">运动会使肌肉纤维发生损伤，需要更多蛋白质来修复</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">比起欧美国家，我国人均每日蛋白质摄入量要低不少</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">研究表明，喝蛋白粉与其他摄入蛋白质方式无明显区别</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD241 (333-11)</b><span class="q-page">书本第 333 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某段时间内，在经历了较长时间的持续下跌后，全球范围内的原油价格出现了明显的反弹，但是原油价格在突破了每桶70美元大关后，其反弹势头突然中止了。对于此次原油价格反弹中止的原因，有学者认为，这是由主要市场需求疲软造成的。但是，有反对人士指出，并非是主要市场需求疲软导致了此次原油价格反弹中止，而是由全球原油库存增加导致的。以下哪项如果为真，最能削弱反对人士的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">主要市场需求疲软是导致原油库存增加的原因</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">随着经济提振，原油库存增加不可能持续下去</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">部分国家实际上正面临着原油库存不足的局面</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">主要生产国的产能过剩导致全球原油库存增加</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD242 (334-14)</b><span class="q-page">书本第 334 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究表明，购物行为能够刺激大脑的多个区域，使人们感到幸福。进一步研究发现，在别人身上花的钱占购物支出的比例越大的人，其幸福感越强；但在自己身上花钱的多少和幸福感的关系则不那么明显。有人因此认为，为了提高个人幸福感，在购物时，应该给别人花更多的钱。<br/>下列选项如果为真，最能反驳这一结论的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">向他人推荐的商品如果受到了他人的认可，人们也会感到幸福</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">如果为他人购买的商品没有受到他人的喜爱，容易使人变得沮丧</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">购物带来的快乐很短暂，个人所面对的困难和压力不会因为购物而消失</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">与他人关系好的人往往更加幸福，且更愿意在购物时为他人花更多的钱</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD243 (335-16)</b><span class="q-page">书本第 335 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究人员观察一群霓虹脂鲤对捕捞行为的反应，它们在水箱里会通过狭窄开口撤离。霓虹脂鲤通过较大开口的速度快于较小开口，但倾向以恒定的速率撤出各种大小的开口——但每组最后几条鱼是例外，它们会通过得更慢。虽然它们在通过各种大小的开口前都会先聚集在周围，但并未观察到逃离的鱼之间发生物理接触。研究人员认为霓虹脂鲤在通过狭窄开口之前会等待或排队，以维系其偏好的社交距离。<br/>以下哪项如果为真，最能削弱研究人员的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">霓虹脂鲤会根据环境调整自己的游动速度</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">霓虹脂鲤的等待或排队行为只是生物本能</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">霓虹脂鲤的个体行为跟群体行为完全不同</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">霓虹脂鲤在避险时会表现出独特的行为</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD244 (336-18)</b><span class="q-page">书本第 336 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 因果倒置</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">近年来科技的迅猛发展为科幻小说创作提供了启发，也为科幻小说创作提供了丰富的素材。科幻小说的主题即是围绕着科技幻想、揭示科技发展带来的社会问题及其给人类带来的启示而展开的。因此科幻小说的蓬勃发展是科技发展的结果。<br/>以下哪项如果为真，最能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">伴随着西方工业革命产生的科幻小说经历了初创、成熟和鼎盛三个历史时期</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">科技发展拓展了科幻小说的想象空间，科幻小说为科技发展提供了人文视角</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">科技只是科幻小说中的背景元素，科幻小说本质上还是要讲述一个完整的故事</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">科幻小说展现了人类的愿望，最终推动科技发展将那些梦想变为现实</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD245 (336-19)</b><span class="q-page">书本第 336 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一直以来，患者在初诊后第二天拿着检查报告找医生复诊时需要再挂号，这大大增加患者的就医负担。针对这一情况，某医院开始实施"一次挂号管三天"的做法，让当天不能完成检查或不能领取检查报告的患者，在三天内可携带报告到同一科室复诊，无需再次挂号。对此，有初诊患者担心，医院此举会延长他们的等待时间，挤压他们的就诊机会。<br/>以下哪项如果为真，最能说明上述患者的担心是不必要的？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">该做法实施后，医院将根据医生的接诊情况，合理安排初诊患者与复诊患者的接诊次序，尽量避免出现长时间排队现象</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">无论是否需要再次挂号，患者都会去同一科室进行复诊，该做法的实施不会导致科室接诊的患者明显增多</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">该做法实施前，医生也会接待手持检查报告的复诊患者，但他们需要重新挂号，与初诊患者一起按挂号次序就诊</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">该做法实施后，患者可在挂号三天有效期内从容完成检查、治疗等就医环节，保障诊治的连续性和有效性</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD246 (337-22)</b><span class="q-page">书本第 337 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论点</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">近期，某国一品牌评级权威机构发布了该国品牌力指数（C-BPI）品牌排名和分析报告。报告指出，受近年来该国经济和消费环境的影响，该国品牌力整体发展处于下行周期。从数据看，年度C-BPI得分增长品牌的平均增长分数在急速下滑。但是，也有分析人士对此表示反对，他们认为近年来企业在整体上采用的收缩战略，对品牌力整体发展造成了冲击。<br/>以下哪项如果为真，最能削弱上述分析人士的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">一些品牌由于有固定的消费群体，并未采用品牌收缩战略</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">受经济和消费环境的影响，各企业在品牌端采用了收缩战略</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">尽管品牌力整体发展处于下行周期，但也有品牌保持了强劲的发展态势</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">对于品牌而言，无论何种情况下竞争从未停止，越是处于下行周期，竞争愈显激烈</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

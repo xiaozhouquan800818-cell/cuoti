@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：逻辑判断-专项集训 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：逻辑判断-专项集训 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 13 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：逻辑判断-专项集训 核心错题 · 共 13 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD260 (360-1)</b><span class="q-page">书本第 360 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 搭桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">市美术馆近期举办"小读者"系列活动，活动包含若干项目。报名情况如下：<br/>（1）小读者在艺术阅读和版画实践课中至少参加了一个；<br/>（2）小读者如果参加了艺术阅读，则没有参加书法小课堂；<br/>（3）小苏参加了书法小课堂；<br/>美术馆馆长知道上述情况后断定，小苏也参加了手工剪纸活动。以下哪项如果为真，可以成为美术馆馆长判断的前提？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">小苏没有参加艺术阅读</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">小苏没有参加版画实践课</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">参加了手工剪纸活动的也参加了版画实践课</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">不参加手工剪纸活动的都不参加版画实践课</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD262 (361-3)</b><span class="q-page">书本第 361 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 推理形式</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">不建立主体明确、要求清晰的责任体系，就不能压紧压实安全生产责任。当前主体明确、要求清晰的责任体系已经建立，因此安全生产责任已经压紧压实。<br/>下列选项与题干逻辑结构最为相似的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">只有实行多元共治，才能构建和谐社区。某社区建成了和谐社区，因此该社区实行了多元共治</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">不实现教育资源的公平分配，就无法提高全民素质。当前全民素质还有待提高，所以教育资源的公平分配还未实现</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">如果某地区深入推进生态文明建设，那么该地区已经实现了资源循环利用。这是因为不深入推进生态文明建设，就无法实现资源循环利用</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">如果合理开采资源，就能实现自然资源的可持续利用。多地政府已经出台法律法规禁止过度开采，因此许多地区已经实现了自然资源的可持续利用</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD264 (362-6)</b><span class="q-page">书本第 362 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 加强选非题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在过去，药物的研发主要来自于陆地生物，这与陆地生物更被熟知且容易获得有关。近几十年来，越来越多的药物开始从海洋生物中产生，海洋生态环境极具复杂性，因而海洋生物相比于陆地生物有着更为广泛的多样性。有人据此认为，海洋生物产业潜力巨大，海洋生物更有可能是未来新型抗生素、抗癌药物的来源。<br/>以下除哪项外，均能支持上述观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">目前抗生素都来源于陆地微生物，病菌耐药性不断上升，而海洋微生物药物已经对一些感染性疾病提供了替代性疗法</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">借助计算机工具，人们已经将庞大的生物基因组库和具有生物活性的化合物库进行关联，用以探索新药物</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">一些海洋生物如鲸、鲨等终身不得癌症，有近300种海洋生物含有抗肿瘤物质，它们是研究抗癌药物的重要资源</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">当前已经发现的3.5万个海洋天然产物中有一半以上都具有生物活性，还有更多数以万计的未知海洋天然产物亟待开发</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD265 (363-7)</b><span class="q-page">书本第 363 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 他因削弱</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一项针对25-32岁的10万年轻人生活状况的调查发现，61%的年轻人有休息日熬夜的习惯，并且这部分人在熬夜之后的第二天上午几乎都在睡懒觉。统计还发现，在休息日熬夜的这部分年轻人中，有32%的年轻人拥有自己的住房。研究人员为此建议，为早日拥有自己的安乐窝，年轻人应该尽早改变休息日熬夜的习惯。<br/>下列____如果为真，最能质疑研究人员的观点。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">休息日熬夜的年轻人大部分是在打游戏，沉溺游戏使他们工作缺乏热情</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">在休息日喜欢集体聚会的年轻人拥有自己住房的比例还不到20%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">25-32岁的年轻人薪酬普遍较低，他们中能够拥有自己住房的不足三分之一</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">有些年轻人虽然拥有住房，但是高额的还贷压力使得他们根本没有时间睡懒觉</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD266 (363-8)</b><span class="q-page">书本第 363 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱-实验类、削弱论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究人员分析了生物库中26000多名53岁至86岁成年人的数据，以调查睡眠时间、模式和质量等各方面对人们精神敏锐度和认知能力的影响。受试者完成了各种认知测试，包括记忆力、反应时间和流体智力测试。研究结果表明，与早起者相比，晚睡者在认知测试中表现更好。在一个小组中，晚睡者的得分比早起者的得分高出约13.5%；在另一个小组中则高出7.5%。研究人员据此得出结论，晚睡者一般比早起者的头脑更敏锐。<br/>以下哪项如果为真，最能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">研究中认知测试得分高的人，其睡眠质量高，他们不需要太早进入睡眠</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">既不能睡得太多，也不能睡得太少，这对保证大脑的敏锐思考至关重要</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">无论是晚睡还是早起，都是个人的生活习惯，受到多重因素影响而形成</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">晚睡者有夜间活动的习惯，他们也难以早起，且起床后会感到精力不济</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD267 (364-1)</b><span class="q-page">书本第 364 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 因果倒置</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一项对某企业基层工作人员的研究报告显示，使用社交软件的基层工作人员罹患糖尿病、精神疾病、缺血性心脏疾病的概率均显著低于不使用社交软件的。据此，该企业管理人员认为，社交软件的使用有利于基层工作人员的健康。<br/>以下哪项如果为真，最能削弱上述管理人员的结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">长时间使用电脑或者手机会引发包括精神疾病在内的多种健康问题</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">该企业基层工作人员没有足够多的时间和精力锻炼身体</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">该企业基层工作人员压力大，身心健康的人才在工作之余使用社交软件</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">该企业基层工作人员普遍在四十岁以上，相当一部分人不使用社交软件</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD268 (366-8)</b><span class="q-page">书本第 366 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 必要条件</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">二溴乙烷过去常被用来去除谷物储藏过程产生的害虫，由于这种化学物品可能导致处理谷物的工人神经损害，因而被禁止使用。然而，在二溴乙烷被禁止使用两年之后，处理谷物的工人还是出现了神经损害。有专家据此断言有新的化学物质导致人们神经损害。<br/>以下哪项如果为真，最有可能是上述专家推断的假设？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">杀灭谷物中害虫的药品总会存在对人体有害的化学物质</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">如果是二溴乙烷导致的神经损伤，这种损伤在两年之内就会出现</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">处理谷物的工人若仍使用二溴乙烷，那么他们神经受损是大概率事件</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">若有新的化学物质造成神经损伤，那么这种神经损伤与二溴乙烷所造成的损伤相似</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD269 (367-1)</b><span class="q-page">书本第 367 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 拆桥</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在经验交流会上，有多个省份的同类机构都提到了某公司新开发的安全管理系统。他们认为，这套系统运行稳定、操作便捷，对业务帮助很大。小李代表单位参加了本次经验交流会，会后他提出，为了提高本单位的安全管理水平，建议单位也引进这套系统。<br/>以下各项如果为真，最能反驳这一建议的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">本单位已经拥有一套运行多年的安全管理系统</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">并不是所有省份的同类机构都使用了这套系统</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">安全管理水平提升需要管理系统和管理机制双管齐下</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">本单位的业务运行机制和其他省份有较大差异</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD270 (368-5)</b><span class="q-page">书本第 368 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱论据</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人的跖趾关节将其脚趾与脚的其他部位相连，使得双脚在行走和跑步中更加平稳，动作更加迅速。有研究认为，当跖趾关节向上弯曲时，连接着脚趾骨和跟骨的足底腱膜会变得更加紧绷，产生一个向上的力，来抵消脚纵弓承受的一部分压力，从而让双脚在前进中更加稳定。因此，一些常见的运动鞋或者老年健步鞋会有一个特征——具有鞋尖翘度。当人们穿上一双鞋尖向上翘起的鞋时，跖趾关节会顺着鞋尖翘起的弧度向上翘起，产生相似的效果。<br/>以下哪项如果为真，最能削弱上述研究者的观点？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">这些具有足弓支持、缓冲等作用的鞋出现的时间并不长</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">脚发力过程中，鞋尖翘度会明显影响跖趾关节的弯曲范围，限制其活动</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">穿上鞋尖有翘度的鞋行走感觉更轻盈，这是由于脚纵弓承受的压力减少所导致的</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">跖趾关节向上弯曲产生的向上力虽可抵消脚纵弓承受的一部分压力，但十分微弱，对人类稳定行走的影响不大</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD271 (369-7)</b><span class="q-page">书本第 369 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 他因削弱</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">1990年，W市70岁以上老人骨折发生率很高，同时，70岁以上老人的死亡率也很高，因此可以得知，骨折高发导致了70岁以上老人死亡率的上升。<br/>以下哪项如果为真，最能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">1990年，W市正在经历战乱</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">W市很多70多岁以上的老人都是独居老人</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">此后十年，W市70岁以上老人的骨折率和死亡率一直很高</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">W市60岁到65岁老人骨折发生率是70岁以上老人的2倍</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD272 (370-2)</b><span class="q-page">书本第 370 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">中微子自由流动对之后宇宙中结构的形成有很重要的影响，在中微子自由流动的尺度内，由于其具有很大的速度，所以不能被限制在势阱中，导致小尺度上结构的形成的难度加大。中微子在小尺度上对结构形成的抑制效应随着中微子质量的增加而增加，并提供了中微子质量最清晰的观测特征之一。<br/>由此可以推出：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">宇宙中结构的形成取决于中微子的自由流动</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">中微子由于速度很快所以不能被限制在势阱中</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">在小尺度上中微子的质量越大对结构形成的抑制作用越强</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">中微子在小尺度上的质量提供了中微子质量的最清晰观测特征</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD273 (371-4)</b><span class="q-page">书本第 371 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 只有一真/一假</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某次体操比赛之前，有甲、乙、丙、丁四人预测红队、黄队、绿队、蓝队的出场顺序，四人的预测如下：<br/>甲说：只有黄队第二个出场，红队才第一个出场。<br/>乙说：如果红队第三个出场，那么蓝队第四个出场。<br/>丙说：蓝队不是第四个出场。<br/>丁说：黄队第二个出场。<br/>比赛结束后，发现四人中只有一人预测为真，那么绿队是第几个出场？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">第一个</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">第二个</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">第三个</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">第四个</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD274 (373-10)</b><span class="q-page">书本第 373 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 削弱-实验类、他因削弱</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某村庄南北两块小麦地里，南面的地施用了生物复合肥，北面的地则没有。收割完小麦测算后发现，南面的地亩产450公斤，北面的地亩产200公斤。由此可见，施用生物复合肥是南北两块小麦地亩产差异较大的原因。<br/>以下哪项如果为真，最能削弱上述结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">南北两块小麦地均由老杨管理</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">南北两块小麦地的土壤质量不同</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">村南小麦地里施用的生物复合肥已过保质期</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">村西的小麦地里也施用了该生物复合肥，亩产只有230公斤</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

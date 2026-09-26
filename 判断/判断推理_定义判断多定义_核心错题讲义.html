@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：定义判断-多定义 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：定义判断-多定义 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 15 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：定义判断-多定义 核心错题 · 共 15 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD105 (190-6)</b><span class="q-page">书本第 190 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">机会成本指经济资源的所有者由于将所有的经济资源投入到某种经济活动中，放弃把这些经济资源投入到其他经济活动中所可能获得的最大利益。机会成本可分为显成本和隐成本，显成本指厂商在生产要素市场上购买或租用他人所拥有的生产要素的总支出，隐成本指厂商本身自己所拥有的且被用于企业生产过程的那些生产要素的总价格。<br/>根据以上定义，下列说法正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">张厂长用于办公的自家楼房是张厂长的显成本</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">张厂长支付给王工程师的年薪是张厂长的隐成本</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">张厂长发给员工的年终奖是张厂长的隐成本</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">张厂长管理工厂的应得酬劳是张厂长的隐成本</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD106 (191-8)</b><span class="q-page">书本第 191 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">探索性学习是指突破现有规范、标准及惯例，不断搜寻、试验和创造全新知识的学习模式。挖掘性学习是指基于对现有技术、能力和范式的提炼和深化来进行学习的模式。<br/>根据上述定义，下列最适宜描述探索性学习的一组词是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">筛选、尝试</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">风险、延伸</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">发现、创新</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">变化、选择</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD107 (193-13)</b><span class="q-page">书本第 193 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">按照运输支出与运输量的关系，运输成本可分为运输可变成本和运输固定成本。运输可变成本是指随运输量的变化而变动的成本；运输固定成本是指短期内不随运输量变化而变动的成本。<br/>根据上述定义，下列属于运输固定成本的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">运输车辆燃油费用</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">运输车辆车库建设费用</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">运输车辆损耗费用</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">运输工具路桥通行费用</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD108 (196-24)</b><span class="q-page">书本第 196 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">专业化营销策略是在选择目标市场时，企业选择若干细分市场进行专业化经营的策略。一般分为产品专业化、市场专业化和有选择的专业化三种。产品专业化指公司提供同一类产品或服务，以满足各种不同的市场需求；市场专业化指为某个特定的顾客群提供多样化的产品、服务或解决方案；有选择的专业化则以细分市场的吸引力为标准选择多个细分市场，但各细分市场之间可能关联较小。<br/>根据上述定义，下列属于有选择的专业化营销策略的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">公司着力向全国医药市场推广某种冠心病药品</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">公司专注营销少年儿童学习、娱乐等系列产品</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">公司瞄准职业男装和学龄儿童童鞋市场开展营销</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">公司集中精力于边远农村家电市场的开拓与营销</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD109 (196-25)</b><span class="q-page">书本第 196 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">风险知觉，是指消费者在购买产品时，对他所意识到的风险（而非实际存在的风险）的知觉。知觉风险的程度因消费者的个性、商品的性质、购买的情境和方式的不同而变化。因此，广告宣传除传播商品信息外，还应当主动参与购买决策，帮助消费者克服风险感，即进行风险知觉干预。<br/>根据上述定义，以下广告语中未涉及风险知觉干预的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">"手中有房，心中不慌"</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">"两年内只退不换，五年内免费保修"</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"xx汽水，带给你儿时的味道"</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">"xx牛奶，好在天然，贵在品质"</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD110 (197-27)</b><span class="q-page">书本第 197 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">相关群体是指能够直接或间接影响消费者购买行为的群体。相关群体有三种形式：一是主要团体，即对消费者的购买行为发生直接和主要影响的亲近群体；二是次要团体，即消费者所参加的社会团体和业余组织；三是期望群体，虽然消费者一般不属于这一群体，但这一群体成员的态度或行为对消费者有着很大影响。<br/>根据上述定义，下列相关群体中属于期望群体的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">独立开展商品测评的网络博主</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">教育子女要节俭消费的父母</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">消费者自主加入的网上团购群</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">经常一起购物的同事和朋友</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD111 (198-29)</b><span class="q-page">书本第 198 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">《通用规范汉字表》将收录的汉字分为三个等级：一级字为常用字，主要满足基础教育和文化普及的基本用字需要；二级字的使用度仅次于一级字，主要满足出版印刷、辞书编纂和信息处理等方面的一般用字需要；三级字是姓氏人名、地名、科学技术术语和中小学语文教材文言文用字中未进入一、二级字表的较通用的字，主要满足信息化时代与大众生活密切相关的专门领域的用字需要。<br/>根据上述定义，下列汉字分级最有可能正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">一级字：秀；二级字：硅；三级字：闸</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">一级字：甩；二级字：偻；三级字：畈</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">一级字：坋；二级字：苓；三级字：蔻</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">一级字：焘；二级字：泻；三级字：兀</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD112 (199-2)</b><span class="q-page">书本第 199 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">中间指标通常表示患者在完成特定的治疗周期之后呈现的治疗效果，可揭示患者对于干预方案的反应。终点指标通常反映医疗卫生服务干预措施的长期效果，大多反映的是已经发生或者患者可以感知的疾病事件。<br/>根据上述定义，下列属于中间指标的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">肝癌手术后五年生存率大概可达30%~80%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">烧伤患者的伤情鉴定为头面部、躯干烧伤面积达50%以上</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">改良饮水工程后居民胃液内致癌性亚硝胺的暴露水平明显下降</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">高血压患者服用一抗高血压药物后发生心脑血管事件的概率为10%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD113 (201-9)</b><span class="q-page">书本第 201 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">法律证成是给一个具体法律决定提供充足理由的活动或过程，可分为内部证成和外部证成。内部证成是指法律决定必须按照一定的推理规则从相关前提中逻辑地推导出来的活动或过程。外部证成是指对法律决定所依赖的前提进行寻找、判断与论证的活动或过程。<br/>根据上述定义，下列说法正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">某基层人民法院法官就其裁判中所适用的公序良俗原则进行正当性论证属于外部证成</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">某市监狱管理局执法人员就存在冲突的法律条文进行优先适用论证属于内部证成</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">某设区的市人大常委会就新修订法规的实施情况组织专家评估属于法律证成</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">某市公安局依据法律条文对张某散布谣言的行为处以行政拘留不涉及法律证成</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD114 (201-10)</b><span class="q-page">书本第 201 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 常规问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">缩喻是比喻的一种，是指喻词不出现，本体与喻体以修饰或并列的形式出现的一种修辞方式。从语法结构来看，缩喻主要有两种形式：（1）偏正式：喻体修饰本体；（2）并列式：喻体与本体形成并列关系。<br/>根据上述定义，下列属于偏正式缩喻的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">黄金季节</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人高马大</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">祖国母亲</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">弯弯的月儿小小的船</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD115 (204-3)</b><span class="q-page">书本第 204 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">使动用法和意动用法都是文言文中常见的词类活用现象。使动用法是指谓语动词具有"使之怎么样"的意思，即此时谓语动词表示的动作不是主语发出的，而是由宾语发出的。意动用法是指谓语动词具有"以之为何"的意思，即认为宾语怎样或把宾语当作怎样。<br/>根据上述定义，下列画线的字与其他三项用法不同的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">直可惊天地，泣鬼神</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">且庸人尚羞之，况于将相乎</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">渔人甚异之</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">故人不独亲其亲，不独子其子</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD116 (204-4)</b><span class="q-page">书本第 204 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">选择或然率理论解释的是影响受众对大众传播内容选择的决定性因素。该理论的核心公式是：选择或然率=报偿的保证/费力的程度。其中，报偿的保证指的是传播内容满足选择者需要的程度，即内容对于受众的吸引力和实用性；费力的程度指的是获取传播内容和使用传播途径的难度。<br/>根据上述定义，下列属于提高选择或然率的传播行为的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">视频号平台借助数据分析和个性化算法，给用户推荐符合其偏好的视频</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">时下流行的某影视作品在播放之前被插入一段2分钟的广告</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">某商家优化了商品布局，将畅销商品放在出口处，顾客可直接扫码支付</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">电视内置视频播放软件，开机后须先注册登录，才可搜索相关内容观看</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD117 (205-8)</b><span class="q-page">书本第 205 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">"嗜睡"是一种睡眠失调现象，患者会持续感到极端疲倦，昏昏欲睡，往往会在毫无预警的情况下睡着，甚至是在活动中途突然入睡。"醉睡"则指酒醒后并没有完全清醒的状态，"醉睡"往往伴随混乱、迷惑、甚至暴力反应和失忆。<br/>根据上述定义，下列选项未体现"嗜睡"或"醉睡"的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">昨夜雨疏风骤，浓睡不消残酒</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">终日昏昏醉梦间，忽闻春尽强登山</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">老眠早觉常残夜，病力先衰不待年</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">临川税驾忽数月，嗜睡爱闲常闭门</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD118 (207-11)</b><span class="q-page">书本第 207 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">再造性想象是指根据言语的描述或图解的示意在头脑中形成相应的形象的过程，主体的知识经验越丰富、理解力越强，再造性想象的形成就越完善；创造性想象是指根据一定的目的，在头脑中独立地创造出某种新形象的过程。与再造性想象不同，创造性想象不是依据任何现成的描述形成的，而是以有关的记忆表象为基础按照自己的创见来创造新形象。<br/>据上述定义，下列对应关系错误的是：<br/>①苹果砸在牛顿头上，由此牛顿发现了万有引力<br/>②建筑师根据图纸，想象出建筑物的具体形象<br/>③鲁班因为受到茅草划破手背的启发，发明了锯子</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">①属于创造性想象</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">①②属于再造性想象</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">②属于再造性想象</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">①③属于创造性想象</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD119 (207-13)</b><span class="q-page">书本第 207 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 特殊问法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">词间相关关系是指语义上或概念上有一定程度关联的一对概念。包括以下几种相关关系：<br/>（1）行为或过程或活动与行为者或工具或产物或属性或对象；<br/>（2）物体或材料或事件或事物与其属性；<br/>（3）因果依赖关联；<br/>（4）物体或现象或行为与其反作用者；<br/>（5）原料与产品、理论与应用；<br/>（6）事件、机构与相关人。<br/>根据上述定义，下列词间相关关系与其所属类型对应正确的有几项？<br/>①"桑蚕丝"与"丝绸"--（5）<br/>②"磁铁"与"铁磁性"--（1）<br/>③"炎症"与"消炎药"--（4）<br/>④"戊戌变法"与"康有为"--（6）<br/>⑤"收割"与"谷类作物"--（2）<br/>⑥"侵权"与"名誉受损"--（3）</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">2</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">3</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">4</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">5</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

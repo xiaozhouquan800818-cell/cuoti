@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：逻辑判断-日常结论 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：逻辑判断-日常结论 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 7 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：逻辑判断-日常结论 核心错题 · 共 7 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD247 (341-2)</b><span class="q-page">书本第 341 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究人员发现荔枝的某段特定DNA序列在不同品种荔枝中的缺失情况不同。来源于云南的特早熟品种基因组有该DNA序列的缺失，但来源于海南的晚熟品种中没有缺失。而"妃子笑"作为特早熟和晚熟的杂交种，则是"杂合"的缺失，即"妃子笑"的两条同源染色体中一条（来源于特早熟的父本）有这个缺失，而另外一条（来源于晚熟的母本）没有。这也正好与"妃子笑"的开花期在特早熟和晚熟之间相对应。<br/>以下陈述如果为真，哪项最可能是研究人员的结论？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">特定DNA序列的缺失情况，可能是导致荔枝不同花期形成和成熟早晚的重要因素</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">解码荔枝基因组，研发相应的育种和栽培调控技术，造就不同品种荔枝的不同特色</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">"妃子笑"荔枝的花期和成熟期介于不同品种荔枝之间，有助于提高其对市场的占有度</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">荔枝的某段特定DNA序列是决定荔枝品种与口味的关键因子</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD248 (342-5)</b><span class="q-page">书本第 342 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">科学家们在给老鼠准备的"饮料"里分别加入了糖或甜味剂——安赛蜜。起初，小鼠们两种饮料都喝。可到了第二天，它们就几乎完全放弃了甜味剂，只爱喝真正的糖饮料。更"夸张"的是，被去除了味蕾上的甜味受体的小鼠，舌头尝不出任何甜味，也会偏爱选择真正的糖。后来科学家发现，小鼠和人的脑中都有一个区域只对葡萄糖而不是甜味剂有反应。这个区域在孤束核尾部（简称cNST），隐藏于大脑最原始的区域——脑干，并不在小鼠处理味觉的脑区。<br/>根据上述材料，以下判断正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">甜味剂的"甜"和糖的"甜"，作用在味蕾不同的受体上</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">无糖可乐受人欢迎，并不是因为它更好喝，而是因为它更健康</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">小鼠能区别出甜味剂和糖的不同是因为大脑的处理区域存在差异</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">小鼠大脑处理味觉的区域仅对安赛蜜敏感，而cNST则对葡萄糖敏感</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD249 (343-8)</b><span class="q-page">书本第 343 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">有研究结果表明，虽然适度休假可以缓解员工的心理压力，从而提高工作效率，但这种效果会随着假期延长而显著降低。当假期超过三天时，因为对回去上班感到焦虑，员工的心理压力水平便有可能出现部分回升，这在一定程度上会影响他们回归工作岗位后的工作表现。<br/>根据以上表述，下列判断一定正确的是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">员工的工作效率与心理压力密切相关</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">让员工休假三天以上对企业而言弊大于利</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">企业应该对休假结束后的员工进行适当的心理疏导</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">长时间休假后员工常因积压了大量工作而感到压力</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD250 (344-12)</b><span class="q-page">书本第 344 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">几年前，某市开始对使用一次性塑料餐盒的餐厅征收处理费，餐厅每使用一个一次性塑料餐盒就要缴纳2元的处理费。自从征收这项处理费后，该市餐厅使用一次性塑料餐盒的数量逐年下降。<br/>由此可以推出：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">该市餐厅的营业额不断下降</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">该市餐厅非一次性餐盒的使用量不断上升</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">该市一次性塑料餐盒处理费的收入不断减少</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">该市征收一次性塑料餐盒处理费导致餐厅利润下降</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD251 (344-13)</b><span class="q-page">书本第 344 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">一项心理学研究认为，出身经济层次最低家庭的人中年后出现代谢综合征的比例最高，无论他们获得多大成就都是如此。该研究同时发现代谢综合征虽与童年生活状况有关，但该群体中那些拥有慈母的人不容易出现该综合征。究其原因，慈母具有同情心，会告诉孩子如何应对压力并鼓励他们健康饮食，保持良好生活方式。因此，我们在现实中可以设计一套方案，指导母亲教育孩子如何应对压力、健康生活和掌控命运。<br/>由此可以推出：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">设计针对母亲的指导方案，有助于降低特定群体出现代谢综合征的比例</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">因为缺少母爱，出身经济层次最低家庭的人出现代谢综合征的比例最高</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">因为父亲不教导孩子保持良好生活方式，所以父亲对孩子的健康没影响</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">出身经济层次最低家庭的人，童年如受到慈母呵护，中年后身体很健康</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD252 (346-1)</b><span class="q-page">书本第 346 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">研究人员开展的一项研究发现，太空中飞行超过3个月的宇航员，即使回到地球一年后，还可能出现骨恢复不完全的迹象，但在宇宙飞行期间增加更多基于抗阻的锻炼，有助于减少骨量损失。<br/>基于上述研究，最有可能推出下列哪一论断成立？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">执行飞行任务时长越长的宇航员其整体胫骨密度恢复得越不完全</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">执行飞行任务时长越长的宇航员其骨恢复量在回到地球一年后会更少</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">飞行期间完成了更多硬拉训练的宇航员其中位胫骨失效载荷变化不大</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">跳跃抗阻锻炼对腿部提供了高冲击动态负荷，会促进空间飞行任务中的骨形成</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD253 (346-2)</b><span class="q-page">书本第 346 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 日常结论</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">人的平均智商每十年有一定幅度增长，这个现象被称为弗林效应，它可能是儿童时期营养、医疗和教育品质不断提升的结果。而且数据显示，平均智商最大幅的增长发生在发展中国家和地区。在这些地方，儿童时期营养、标准化教育和医疗条件的提升是影响智商的最重要因素。<br/>由此可以推出：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">人的平均智商并非一成不变，而是会受到社会发展变化的影响</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">人的平均智商水平反映了该国家和地区的经济发展水平</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">发展中国家人的平均智商要远低于发达国家人的平均智商</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">发达国家人的平均智商增幅缓慢是因为在营养、医疗和教育方面已无太多提升空间</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>

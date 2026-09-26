@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>判断推理：逻辑判断-组合排列 核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《判断推理：逻辑判断-组合排列 核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 判断推理模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 13 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">判断推理：逻辑判断-组合排列 核心错题 · 共 13 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD200 (277-4)</b><span class="q-page">书本第 277 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 从最大信息开始推</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">新一届中国科幻小说大赛"星座奖"结果发布，来自广东、上海、四川的甲、乙、丙三人位列三甲，已知：（1）乙不来自四川；（2）乙不是第三名；（3）丙不是第一名；（4）来自广东的作者不是第二名；（5）来自四川的作者夺得第一名。由此可推知（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">甲不是第一名</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">乙获得第一名</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">丙来自四川</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">乙来自上海</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD201 (277-5)</b><span class="q-page">书本第 277 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 代入法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">新学期某班级周一早上有四节课，课程名称是语文、数学、英语、体育，有甲、乙、丙、丁四名同学在讨论并猜测这四节课从第一节到第四节的排序：（1）甲：语文、英语不相邻；（2）乙：数学与体育相邻；（3）丙：语文不在第一；（4）丁：英语在最后。甲、乙、丙、丁四人中如果仅有一人的猜测不正确，由此不可能出现的排序是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">数学、体育、语文、英语</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">数学、语文、体育、英语</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">语文、英语、数学、体育</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">语文、数学、体育、英语</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD202 (278-7)</b><span class="q-page">书本第 278 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 从确定信息开始推</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">小张的所有同学（假定只有王，周，陈三人）都给小张的同一个朋友打过电话，小张的所有朋友（假定只有李、朱、余三人）都给小张的同一个同学打过电话，王和教师李从无联系，余和企业家周从无联系。接到小张所有同学电话的那个人不是教师就是工程师，接到小张所有朋友电话的那个人不是公务员就是企业家。小张的所有同学和朋友职业各不相同。由此可以推出：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">陈是公务员，朱是工程师</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">王是公务员，余是工程师</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">余是公务员，朱是工程师</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">陈是公务员，王是工程师</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD203 (278-8)</b><span class="q-page">书本第 278 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 从最大信息开始推</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">有7名到大美公司应聘的人员：甲、乙、丙、丁、戊、己和庚，他们被安排在同一天的不同时段进行面试。每个人进行面试的时段各不相同，而且每人只进行一次面试。所有应聘人员不是硕士，就是博士。还知道如下条件：（1）不存在面试顺序相邻两人都是硕士的情况；（2）己的面试先于乙和丁；在己之前进行面试的人中恰好有两名硕士；（3）甲是第6个进行面试的；（4）庚的面试在丙之前进行。据此可以得出，以下哪两人的面试不可能相邻？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">戊和己</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">戊和丙</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">己和乙</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">己和庚</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD204 (279-11)</b><span class="q-page">书本第 279 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 从最大信息开始推</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">小赵、小钱和小孙或是公务员，或是大学教师，或是医生。他们分别毕业于重庆大学、四川大学和西南政法大学。通过联谊活动，四川大学毕业者认识了小赵和小钱。公务员祝贺四川大学毕业者获评高级职称。教师邀请西南政法大学毕业者参加调研课题。四川大学毕业者找教师咨询招生事宜。小赵与重庆大学毕业者联名出版了一本专著。根据以上叙述，可以推出（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">小钱毕业于西南政法大学</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">小钱是大学教师，小孙是医生</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">小赵毕业于重庆大学，是公务员</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">小孙毕业于四川大学，是大学教师</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD205 (279-12)</b><span class="q-page">书本第 279 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 框架题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">甲、乙、丙三人对一块花田里种植的花朵品种做了两次猜测：甲：①"它是月季"；②"它不是玫瑰"。乙：①"它不是月季"；②"它是玫瑰"。丙：①"它不是月季"；②"它不是牡丹"。工作人员听到后表示："你们三人中，只有一个人两次都猜对了，一个人猜对了一次，还有一个人完全猜错了。"如果工作人员的说法是对的，则该花田里种植的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">玫瑰</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">月季</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">牡丹</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">玫瑰、月季和牡丹之外的花种</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD206 (281-16)</b><span class="q-page">书本第 281 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 代入法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">大学毕业后，小曾、小刘、小李、小张四人被甲、乙、丙和丁四家单位录取（顺序未必对应）。同班级其他4位同学就他们的录取情况作了如下猜测：同学A：小曾被丙单位录用；小李被丁单位录用。同学B：小刘被乙单位录用；小张被甲单位录用。同学C：小曾被丁单位录用；小李被乙单位录用。同学D：小刘被乙单位录用；小张被丙单位录用。如果其中3位同学的猜测都只对了一半，还有1位同学的猜测完全错了。则小曾、小刘、小李、小张4人被录取的单位可能分别是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">甲、乙、丁、丙</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">乙、甲、丙、丁</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">丙、乙、丁、甲</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">丙、丁、乙、甲</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD207 (281-17)</b><span class="q-page">书本第 281 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 从最大信息开始推</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在一次技能竞赛中，甲、乙、丙、丁4人排名前四且无人并列，已知甲和第三名是好友且名次比该好友高；丁和甲不是好友但和第一名是好友；乙的名次比丙高。根据上述信息，以下判断错误的是（ ）。</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">丙的名次不高于第三名</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">甲的名次一定高于丙</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">乙和丁是好友</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">乙不可能是第一名</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD208 (282-2)</b><span class="q-page">书本第 282 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 代入法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">来自同一个班级的六位小伙伴（赵、钱、孙、李、周、吴）从前到后排队依次领军训服装。其中，赵排在第一位或最后一位；孙和李顺序相邻；钱排在周的前面且二人不相邻；李和赵的距离比他与周的距离更近。则排在倒数第二位的可能是：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">孙</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">李</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">周</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">钱</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD209 (282-19)</b><span class="q-page">书本第 282 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 框架题</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">A县的大学生村官中，本科学历的人数多于研究生学历的人数，女性人数多于男性人数。如果上述论述为真，则下列判断一定正确的有（ ）。①A县研究生学历的女大学生村官人数多于本科学历的男大学生村官人数②A县本科学历的男大学生村官人数多于研究生学历的男大学生村官人数③A县本科学历的女大学生村官人数多于研究生学历的男大学生村官人数</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">①和②</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">②和③</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">只有②</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">只有③</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD210 (283-5)</b><span class="q-page">书本第 283 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 假设</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在某法学院的一次模拟竞赛中，冯明、范华、朱丽、赵刚、吴勇等5位同学参加模拟民事诉讼、刑事诉讼、行政诉讼和劳动争议仲裁4项比赛，每位同学参加1项比赛，每项比赛都有1-2位同学参加。已知：（1）如果冯明和朱丽之中至少有1位同学参加模拟劳动争议仲裁，那么范华参加模拟民事诉讼，而赵刚参加模拟劳动争议仲裁；（2）如果范华和赵刚之中至少有1位同学参加模拟劳动争议仲裁，那么朱丽和吴勇都参加模拟民事诉讼。若吴勇未参加模拟劳动争议仲裁，则可以推出以下哪项？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">范华参加模拟行政诉讼</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">赵刚参加模拟刑事诉讼</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">冯明参加模拟劳动争议仲裁</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">朱丽参加模拟民事诉讼</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD211 (284-9)</b><span class="q-page">书本第 284 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 假设</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某大学毕业班甲、乙、丙、丁、戊、己、庚7位同学对于未来的打算包括就业、考研、留学3种情况，每位同学只选择了其中一种，且每种情况都有上述7位同学中的2~3人选择。已知：（1）如果甲、丙两人中至少有一人选择就业或留学，则乙和戊选择考研；（2）如果乙、丁两人中至少有一人选择就业或考研，则己和庚选择留学；（3）如果戊、己两人中至少有一人选择考研或留学，则乙和丙选择就业。根据上述信息可以得出，选择留学的同学有：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">甲和乙</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">丙和戊</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">乙和丁</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">丁和庚</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>PD212 (285-13)</b><span class="q-page">书本第 285 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 代入法</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">某超市从前到后整齐排列着7排货架，放置着文具、零食、调料、日用品、酒、粮油和饮料7类商品，每类商品占据一排。已知：（1）酒类排在调料类之前；（2）文具类和调料类中间隔着3排；（3）粮油类在零食类之后，中间隔着2排；（4）日用品类紧挨在文具类前一排或者后一排。如果饮料类排在第1排，则以下哪项是可能的？</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">零食类排在文具类前一排</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">粮油类排在调料类前一排</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">日用品类排在文具类前一排</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">酒类排在文具类前一排</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>
