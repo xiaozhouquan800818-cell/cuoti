@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资料分析高阶学情诊断与提分规划报告</title>
+<style>
+  :root{
+    --ink:#1a1d24; --sub:#5a6473; --line:#e3e7ee; --bg:#f6f8fb;
+    --red:#c62828; --redbg:#fdecec; --orange:#e07b00; --orangebg:#fff5e6;
+    --blue:#1a5fb4; --bluebg:#eaf2fd; --green:#1f7a4d; --greenbg:#e9f7ef;
+    --purple:#6b3fa0; --purplebg:#f3ecfb;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:0; background:var(--bg);
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Source Han Sans SC",sans-serif;
+    color:var(--ink); line-height:1.85; font-size:15.5px;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+  header.hero{
+    background:linear-gradient(135deg,#12243d 0%,#1e3a5f 55%,#2b527f 100%);
+    color:#fff; padding:54px 44px 46px; border-radius:0 0 18px 18px;
+    box-shadow:0 10px 34px rgba(18,36,61,.28); margin-bottom:36px;
+  }
+  header.hero .tag{
+    display:inline-block; font-size:12.5px; letter-spacing:2.5px;
+    background:rgba(255,255,255,.16); padding:5px 14px; border-radius:20px; margin-bottom:18px;
+  }
+  header.hero h1{ margin:0 0 14px; font-size:31px; line-height:1.4; letter-spacing:.5px; font-weight:800;}
+  header.hero p.sub{ margin:0; font-size:14.5px; color:#c3d4e8; line-height:1.9;}
+  header.hero .stat-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px;}
+  header.hero .stat{
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
+    border-radius:10px; padding:12px 20px; min-width:150px;
+  }
+  header.hero .stat b{display:block; font-size:24px; color:#ffd166; line-height:1.3;}
+  header.hero .stat span{font-size:12.5px; color:#b9cde4;}
+
+  h2{
+    font-size:22px; margin:52px 0 20px; padding:0 0 12px 16px;
+    border-left:5px solid #1a5fb4; border-bottom:2px solid var(--line);
+    letter-spacing:.5px;
+  }
+  h3{font-size:17.5px; margin:32px 0 14px; color:#12243d; padding-left:11px; border-left:4px solid #9db8d8;}
+  h4{font-size:15.5px; margin:22px 0 10px; color:#2b3b52;}
+
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:24px 28px; margin:18px 0; box-shadow:0 2px 10px rgba(20,40,80,.045);
+  }
+  .card.alert{border-left:5px solid var(--red); background:linear-gradient(180deg,#fffafa,#fff);}
+  .card.tip{border-left:5px solid var(--green); background:linear-gradient(180deg,#f9fdfb,#fff);}
+  .card.warn{border-left:5px solid var(--orange); background:linear-gradient(180deg,#fffcf6,#fff);}
+  .card.strategy{border-left:5px solid var(--purple); background:linear-gradient(180deg,#fbf8fe,#fff);}
+
+  table{
+    width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;
+    background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 2px 10px rgba(20,40,80,.05);
+  }
+  th{
+    background:#1e3a5f; color:#fff; padding:11px 12px; text-align:left;
+    font-weight:600; font-size:13.5px; letter-spacing:.4px; white-space:nowrap;
+  }
+  td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  tr:last-child td{border-bottom:none;}
+  td.num{text-align:center; font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .pill{display:inline-block; padding:2px 9px; border-radius:11px; font-size:12.5px; font-weight:600; white-space:nowrap;}
+  .p-red{background:var(--redbg); color:var(--red);}
+  .p-org{background:var(--orangebg); color:var(--orange);}
+  .p-blu{background:var(--bluebg); color:var(--blue);}
+  .p-grn{background:var(--greenbg); color:var(--green);}
+  .p-pur{background:var(--purplebg); color:var(--purple);}
+  .pd{font-family:Consolas,"Courier New",monospace; font-size:13px; font-weight:700; color:#1a5fb4;
+      background:#eef4fc; padding:1px 7px; border-radius:5px; white-space:nowrap; display:inline-block; margin:1px 0;}
+
+  .bar{height:9px; border-radius:5px; background:#e8edf4; overflow:hidden; min-width:70px;}
+  .bar > i{display:block; height:100%; border-radius:5px;}
+
+  ul,ol{padding-left:24px; margin:12px 0;}
+  li{margin:7px 0;}
+  li b{color:#12243d;}
+  .hi{background:linear-gradient(transparent 62%, #ffe08a 62%); font-weight:700; padding:0 1px;}
+  .quote{
+    border-left:4px solid #b8c6d8; background:#f8fafc; padding:14px 20px;
+    margin:16px 0; color:#3c4a5e; font-size:14.5px; border-radius:0 8px 8px 0;
+  }
+  code{background:#eef2f7; padding:1px 6px; border-radius:4px; font-family:Consolas,monospace; font-size:13.5px;}
+  .kpi{display:flex; flex-wrap:wrap; gap:14px; margin:18px 0;}
+  .kpi > div{
+    flex:1 1 190px; background:#fff; border:1px solid var(--line);
+    border-top:4px solid #1a5fb4; border-radius:10px; padding:16px 18px;
+  }
+  .kpi b{display:block; font-size:22px; color:#1a5fb4; line-height:1.4;}
+  .kpi span{font-size:13px; color:var(--sub);}
+  .final{
+    background:linear-gradient(135deg,#12243d,#26456d); color:#e8f0fa;
+    border-radius:14px; padding:34px 38px; margin-top:30px; font-size:15.5px; line-height:2.05;
+  }
+  .final h2{color:#ffd166; border-left-color:#ffd166; border-bottom-color:rgba(255,255,255,.15);}
+  .final b{color:#ffd166;}
+  .final .sign{text-align:right; margin-top:22px; color:#9fb6d0; font-size:14px;}
+  footer{text-align:center; color:#93a0b2; font-size:13px; margin-top:46px; line-height:2;}
+  @media (max-width:720px){
+    body{font-size:14.5px;}
+    .wrap{max-width:100%; padding:0 10px 60px;}
+    header.hero{padding:34px 20px 30px;}
+    header.hero h1{font-size:23px;}
+    header.hero p.sub{font-size:13.5px;}
+    header.hero .stat{min-width:0; flex:1 1 42%; padding:10px 14px;}
+    header.hero .stat b{font-size:20px;}
+    h2{font-size:19px; margin:38px 0 16px;}
+    h3{font-size:16px;}
+    h4{font-size:14.5px;}
+    .card{padding:16px 14px;}
+    table{display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; font-size:12.5px; border-radius:8px;}
+    th{white-space:normal; font-size:12px; padding:8px 9px;}
+    td{padding:8px 9px;}
+    .pd{white-space:nowrap; font-size:12px;}
+    code{white-space:normal; word-break:break-word; overflow-wrap:anywhere;}
+    .kpi > div{flex:1 1 100%;}
+    .bar{min-width:0;}
+    .final{padding:22px 18px; font-size:14px;}
+    .quote{padding:12px 14px; font-size:13.5px;}
+  }
+  @media print{
+    body{background:#fff; font-size:12.5px;}
+    header.hero{box-shadow:none; border-radius:0;}
+    .card,table{box-shadow:none; page-break-inside:avoid;}
+    h2{page-break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="tag">行 测 · 资 料 分 析 · 学 情 诊 断</div>
+  <h1>资料分析高阶学情诊断与提分规划报告</h1>
+  <p class="sub">
+    数据源一：《资料分析书籍目录.txt》全书 1020 题（表格 160 / 图形 80 / 文字 280 / 综合 400 / 第五章综合训练 100）<br>
+    数据源二：《资料分析_题库.json》一刷错题 <b>183 题</b>（ZL001–ZL183，逐题比对「书籍章节 / 书籍部分 / 题干 / 标准答案 / 一刷记录 / 全站正确率 / 易错项 / APP考点」八个字段）<br>
+    已完成前四章 920 题 · 一刷总正确率 <b>80.1%</b> · 目标：限时 30 分钟 20 题稳保 90%（对 18 题以上）
+  </p>
+  <div class="stat-row">
+    <div class="stat"><b>19.9%</b><span>前四章一刷失误率（183/920）</span></div>
+    <div class="stat"><b>63%</b><span>183 道错题的全站平均正确率</span></div>
+    <div class="stat"><b>48.6%</b><span>死于大众易错项（89/183）</span></div>
+    <div class="stat"><b>84.2%</b><span>失分集中在文字+综合（154/183）</span></div>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<h2>一、数据透视与考场失速诊断（切中要害）</h2>
+
+<h3>1.1 错题雷达图：四大资料类型的失分重灾区</h3>
+
+<p>把 183 道错题按教材四大章拆开，再和全书题量做浓度对比，你的漏洞图谱一目了然——<b>不是你均匀地差，而是你只在两个地方系统性崩塌</b>。</p>
+
+<table>
+  <thead><tr>
+    <th>章节（教材页码）</th><th>全书题量</th><th>一刷错题</th><th>模块内错题率</th><th>失分浓度</th><th>诊断定性</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><b>第一章 表格资料</b>（P5–49）</td><td class="num">160</td><td class="num">20</td><td class="num">12.5%</td>
+      <td><div class="bar"><i style="width:27%;background:#1f7a4d"></i></div><span class="pill p-grn">低</span></td>
+      <td>表格找数快、结构清晰，是你的舒适区</td>
+    </tr>
+    <tr>
+      <td><b>第二章 图形资料</b>（P50–77）</td><td class="num">80</td><td class="num">9</td><td class="num">11.3%</td>
+      <td><div class="bar"><i style="width:24%;background:#1f7a4d"></i></div><span class="pill p-grn">最低</span></td>
+      <td>唯一真正掌握的模块，<b>但仍死在"精度"上</b></td>
+    </tr>
+    <tr>
+      <td><b>第三章 文字资料</b>（P78–150）</td><td class="num">280</td><td class="num">63</td><td class="num">22.5%</td>
+      <td><div class="bar"><i style="width:78%;background:#c62828"></i></div><span class="pill p-red">重灾区</span></td>
+      <td>长篇文字检索崩盘，<b>找数成本极高</b></td>
+    </tr>
+    <tr>
+      <td><b>第四章 综合资料</b>（P151–278）</td><td class="num">400</td><td class="num">91</td><td class="num">22.8%</td>
+      <td><div class="bar"><i style="width:80%;background:#c62828"></i></div><span class="pill p-red">最大失血点</span></td>
+      <td>数量最大、错得最多，<b>文字+图表混合检索失效</b></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card alert">
+  <p style="margin-top:0"><b>一句话结论：</b>文字资料 + 综合资料合计 <span class="hi">154 题，占 183 道错题的 84.2%</span>；而表格 + 图形只占 15.8%。<br>
+  这两章的题目总量占前四章的 73.9%（680/920），却贡献了 84.2% 的错题——<b>浓度显著超标</b>。更关键的是这两章的共同特征：<b>材料长、信息散、口径多、需要跨段落/跨图表取数</b>。<br>
+  这直接指向你的第一死因：<b>不是算不出来，是"找不到、找错、找漏"。</b></p>
+</div>
+
+<h4>基础 vs 进阶：你的两档正确率完全被数据印证</h4>
+
+<table>
+  <thead><tr><th>教材部分</th><th>题量</th><th>错题</th><th>错题率</th><th>等效正确率</th><th>你的自述</th></tr></thead>
+  <tbody>
+    <tr><td><b>夯实基础</b></td><td class="num">600</td><td class="num">89</td><td class="num">14.8%</td><td class="num"><span class="pill p-grn">85.2%</span></td><td>「基础题八成多」✔ 吻合</td></tr>
+    <tr><td><b>提升进阶</b></td><td class="num">320</td><td class="num">94</td><td class="num">29.4%</td><td class="num"><span class="pill p-org">70.6%</span></td><td>「难题七成」✔ 吻合</td></tr>
+    <tr><td><b>前四章合计</b></td><td class="num">920</td><td class="num">183</td><td class="num">19.9%</td><td class="num">80.1%</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<p>注意这个比例：<b>进阶部分的错题率（29.4%）是基础部分（14.8%）的 1.99 倍</b>。而你的考场真实水平是 60–70%，恰好落在"进阶档"甚至更低。这说明一个残酷事实：<span class="hi">你的考场状态 = 把 320 道进阶题的错误率，复制到了全部 20 道题上。</span></p>
+
+<h4>核心考点失分梯队（含点名题号）</h4>
+
+<table>
+  <thead><tr><th>梯队</th><th>核心考点（对应教材章节）</th><th>错题数</th><th>点名题号</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pill p-red">S 级</span></td>
+      <td><b>综合分析（选是/选非题）</b><br><span style="color:#5a6473;font-size:13px">第三、四章长材料为主，42 题中 38 题出自这两章</span></td>
+      <td class="num">42</td>
+      <td>
+        <span class="pd">ZL005</span><span class="pd">ZL007</span><span class="pd">ZL023</span><span class="pd">ZL026</span>
+        <span class="pd">ZL032</span><span class="pd">ZL035</span><span class="pd">ZL036</span><span class="pd">ZL040</span>
+        <span class="pd">ZL042</span><span class="pd">ZL046</span><span class="pd">ZL048</span><span class="pd">ZL052</span>
+        <span class="pd">ZL060</span><span class="pd">ZL062</span><span class="pd">ZL066</span><span class="pd">ZL069</span>
+        <span class="pd">ZL072</span><span class="pd">ZL077</span><span class="pd">ZL079</span><span class="pd">ZL081</span>
+        <span class="pd">ZL090</span><span class="pd">ZL096</span><span class="pd">ZL109</span><span class="pd">ZL112</span>
+        <span class="pd">ZL116</span><span class="pd">ZL118</span><span class="pd">ZL120</span><span class="pd">ZL124</span>
+        <span class="pd">ZL129</span><span class="pd">ZL132</span><span class="pd">ZL137</span><span class="pd">ZL153</span>
+        <span class="pd">ZL159</span><span class="pd">ZL162</span><span class="pd">ZL165</span><span class="pd">ZL167</span>
+        <span class="pd">ZL168</span><span class="pd">ZL170</span><span class="pd">ZL174</span><span class="pd">ZL176</span>
+        <span class="pd">ZL177</span><span class="pd">ZL183</span>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="pill p-red">S 级</span></td>
+      <td><b>现期比重</b>（第三章 P78 起 · 重量级考点）</td>
+      <td class="num">22</td>
+      <td>
+        <span class="pd">ZL004</span><span class="pd">ZL009</span><span class="pd">ZL033</span><span class="pd">ZL038</span>
+        <span class="pd">ZL053</span><span class="pd">ZL054</span><span class="pd">ZL055</span><span class="pd">ZL058</span>
+        <span class="pd">ZL074</span><span class="pd">ZL091</span><span class="pd">ZL094</span><span class="pd">ZL101</span>
+        <span class="pd">ZL103</span><span class="pd">ZL105</span><span class="pd">ZL114</span><span class="pd">ZL121</span>
+        <span class="pd">ZL127</span><span class="pd">ZL130</span><span class="pd">ZL135</span><span class="pd">ZL148</span>
+        <span class="pd">ZL157</span><span class="pd">ZL158</span><span class="pd">ZL172</span>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">A 级</span></td>
+      <td><b>现期平均数</b> / <b>一般增长率</b>（各 13 题，并列第二）</td>
+      <td class="num">26</td>
+      <td>
+        <b>平均数：</b><span class="pd">ZL001</span><span class="pd">ZL025</span><span class="pd">ZL045</span><span class="pd">ZL061</span>
+        <span class="pd">ZL064</span><span class="pd">ZL071</span><span class="pd">ZL083</span><span class="pd">ZL086</span>
+        <span class="pd">ZL089</span><span class="pd">ZL095</span><span class="pd">ZL136</span><span class="pd">ZL146</span><span class="pd">ZL166</span><span class="pd">ZL178</span><br>
+        <b>增长率：</b><span class="pd">ZL002</span><span class="pd">ZL003</span><span class="pd">ZL018</span><span class="pd">ZL027</span>
+        <span class="pd">ZL041</span><span class="pd">ZL106</span><span class="pd">ZL113</span><span class="pd">ZL126</span>
+        <span class="pd">ZL131</span><span class="pd">ZL145</span><span class="pd">ZL154</span><span class="pd">ZL160</span><span class="pd">ZL169</span>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">A 级</span></td>
+      <td><b>现期倍数</b>（9 题）</td>
+      <td class="num">9</td>
+      <td>
+        <span class="pd">ZL022</span><span class="pd">ZL065</span><span class="pd">ZL076</span><span class="pd">ZL139</span>
+        <span class="pd">ZL141</span><span class="pd">ZL142</span><span class="pd">ZL144</span><span class="pd">ZL149</span><span class="pd">ZL171</span>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="pill p-pur">B 级</span></td>
+      <td><b>基期比重（7）</b>·<b>两期比重（7）</b>·<b>增长量比较（5）</b>·<b>一般增长率比较（5）</b>·<b>增长量计算（4）</b>·<b>比值计算（4）</b>·<b>基期和差（4）</b>·<b>混合增长率（4）</b>·<b>简单计算类（12）</b></td>
+      <td class="num">48</td>
+      <td>
+        <b>基期比重：</b><span class="pd">ZL014</span><span class="pd">ZL037</span><span class="pd">ZL039</span><span class="pd">ZL068</span><span class="pd">ZL075</span><span class="pd">ZL082</span><span class="pd">ZL100</span><br>
+        <b>两期比重：</b><span class="pd">ZL013</span><span class="pd">ZL015</span><span class="pd">ZL043</span><span class="pd">ZL049</span><span class="pd">ZL088</span><span class="pd">ZL143</span><span class="pd">ZL179</span><br>
+        <b>混合增长率：</b><span class="pd">ZL012</span><span class="pd">ZL016</span><span class="pd">ZL019</span><span class="pd">ZL030</span><br>
+        <b>基期和差：</b><span class="pd">ZL017</span><span class="pd">ZL063</span><span class="pd">ZL099</span><span class="pd">ZL163</span><br>
+        <b>简单计算类：</b><span class="pd">ZL010</span><span class="pd">ZL080</span><span class="pd">ZL107</span><span class="pd">ZL117</span><span class="pd">ZL119</span><span class="pd">ZL125</span><span class="pd">ZL133</span><span class="pd">ZL164</span><span class="pd">ZL173</span><span class="pd">ZL175</span><span class="pd">ZL181</span>
+      </td>
+    </tr>
+    <tr>
+      <td><span class="pill p-blu">C 级</span></td>
+      <td><b>年均增长率（3）</b>·<b>平均数的增长率（3）</b>·<b>基期平均数（3）</b>·<b>两集合容斥（3）</b>·<b>间隔增长率（2）</b>·<b>混合平均数（1）</b>·<b>平均数增长量（1）</b>·<b>基期倍数（1）</b>·<b>基期比较（1）</b>等</td>
+      <td class="num">18</td>
+      <td>
+        <b>年均增长率：</b><span class="pd">ZL011</span><span class="pd">ZL110</span><span class="pd">ZL138</span><br>
+        <b>平均数增长率：</b><span class="pd">ZL020</span><span class="pd">ZL057</span><span class="pd">ZL085</span><br>
+        <b>基期平均数：</b><span class="pd">ZL084</span><span class="pd">ZL087</span><span class="pd">ZL123</span><br>
+        <b>两集合容斥：</b><span class="pd">ZL104</span><span class="pd">ZL134</span><span class="pd">ZL150</span><br>
+        <b>间隔增长率：</b><span class="pd">ZL034</span><span class="pd">ZL073</span>　<b>混合平均数：</b><span class="pd">ZL044</span>　<b>平均数增长量：</b><span class="pd">ZL161</span><br>
+        <b>其他单题：</b><span class="pd">ZL047</span><span class="pd">ZL050</span><span class="pd">ZL067</span><span class="pd">ZL070</span><span class="pd">ZL078</span><span class="pd">ZL092</span><span class="pd">ZL098</span><span class="pd">ZL108</span><span class="pd">ZL115</span><span class="pd">ZL122</span><span class="pd">ZL152</span><span class="pd">ZL156</span><span class="pd">ZL180</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card warn">
+  <p style="margin-top:0"><b>比重家族合计 38 题（20.8%），是绝对第一大家族。</b>现期比重 22 + 基期比重 7 + 两期比重 7 + 现期比重计算 1 + 现期比值 1。命题人对"比重"的偏爱是结构性的——它同时能考<b>找数、公式、估算、方向判断</b>四件事。你把比重练到 100%，等于直接锁死 20% 的失分。</p>
+</div>
+
+<h3>1.2 「平时八成、考场六成」的病理分析：三大嫌疑犯逐一裁决</h3>
+
+<p>你怀疑自己死于"检索溃乏 / 列式犹疑 / 暴力死算"。我把 183 题的客观数据摆出来，<b>三个嫌疑犯里，有两个有罪，第三个证据不足——而你恰恰冤枉了它</b>。</p>
+
+<table>
+  <thead><tr><th>嫌疑犯</th><th>证据</th><th>判决</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>① 检索溃乏</b><br><span style="font-size:13px;color:#5a6473">长篇材料找数慢 / 找错主体</span></td>
+      <td>
+        · 文字+综合 = <b>154/183 = 84.2%</b>，浓度超标<br>
+        · 点名的"找数型"错题：<span class="pd">ZL082</span>（跨第一段比重 + 第二段现期量 + 单位换算，全站仅 39%）<br>
+        · <span class="pd">ZL118</span>（文字 + 表1 + 表2 三段跳转，全站仅 <b>16%</b>，183 题中最难）<br>
+        · <span class="pd">ZL175</span>（表格只列 8 省，题干问的是全部 11 省，全站仅 <b>22%</b>）<br>
+        · 全站 ≥81% 却仍做错的 24 题里，有 4 题是纯粹的"找数/读数"类：<span class="pd">ZL117</span>(90%，简单查找)、<span class="pd">ZL056</span>(84%，直接找数)、<span class="pd">ZL133</span>(82%，简单查找)、<span class="pd">ZL164</span>(83%，简单计算)
+      </td>
+      <td><span class="pill p-red">主犯 · 约占失分 50%</span><br>你的失败从"读材料"那一刻就开始了，不是从"列式"开始的。</td>
+    </tr>
+    <tr>
+      <td><b>② 列式犹疑</b><br><span style="font-size:13px;color:#5a6473">特殊概念公式不熟</span></td>
+      <td>
+        · <b>高阶公式类错题 35 题（19.1%）</b>，且这批题的全站正确率普遍偏低：<br>
+        &nbsp;&nbsp;基期比重 7 题（平均 50.6%）· 两期比重 7 题（平均 63%）· 混合增长率 4 题（平均 56%）<br>
+        &nbsp;&nbsp;平均数的增长率 3 题（平均 54%）· 基期平均数 3 题（平均 58%）· 年均增长率 3 题（平均 52%）<br>
+        · <span class="pd">ZL044</span>（全站 39%）：题干问"受访的男性居民约有多少人"，材料只给了男女平均用时——<b>必须用"混合居中但不中，距离与量成反比"反推人数比</b>，你选了 D(3.0万)。<br>
+        · <span class="pd">ZL020</span>（45%）、<span class="pd">ZL011</span>（39%）、<span class="pd">ZL014</span>（41%）：全部是"公式记不牢/认不出考点"型
+      </td>
+      <td><span class="pill p-org">从犯 · 但最"值钱"</span><br>这类题<b>不需要算力，只需要 3 秒内调出公式</b>。这是你最容易拿满的一分。</td>
+    </tr>
+    <tr>
+      <td><b>③ 暴力死算</b><br><span style="font-size:13px;color:#5a6473">不会估算 / 硬算到底</span></td>
+      <td>
+        <b>反证三连：</b><br>
+        · <span class="pd">ZL010</span>（27%）：2021 年 9 月需把 <b>5 个明细项加总</b>得 123900 万元；2022 年 10 月只有 <b>1 个明细项</b> 113039.27 万元。你选了后者——<b>你是"该老实加总的时候偷懒了"</b>。<br>
+        · <span class="pd">ZL175</span>（22%）：表内 8 省之外还有 3 个省，需要用"总量 169.5 亿 − 8 省之和"补回来。你没补。<br>
+        · <span class="pd">ZL024</span>（26%）：四个季度的平均运输距离分别是 174 / 177 / 175 / 175 公里，<b>差距不足 2%</b>，必须精算；你选了 C，说明你用了粗估。
+      </td>
+      <td><span class="pill p-grn">无罪 · 你冤枉了自己</span><br>你不是"算得太细"，而是<b>精度的开关装反了</b>：该算时偷懒，该精算时估算。</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card alert">
+  <p style="margin-top:0"><b>病理定性（请把这句话读三遍）：</b></p>
+  <p style="font-size:16.5px;line-height:2"><span class="hi">你的病灶不是"会计思维"，而是"检索失能与决策失序"。</span><br>
+  会计思维的人会老老实实把 7 个明细项加起来（那他会做对 ZL010）；会计思维的人会看到"差距 2%"就乖乖精算（那他会做对 ZL024）。<b>你两题都错了，说明你不是算得太细，而是根本没建立起"什么时候该细、什么时候该粗"的判断标准。</b></p>
+  <p style="margin-bottom:0">这也解释了"平时八成、考场六成"：<b>平时你有 3 分钟做一题，检索慢一点、公式想 10 秒都能救回来；考场上每题只有 90 秒，检索和决策的每一秒迟疑都会直接转化为错误。</b>你的知识没丢，是<b>交付能力</b>在限时下崩了。</p>
+</div>
+
+<h3>1.3 陷阱抗性分析：你有近一半的失分，是"标准姿势踩坑"</h3>
+
+<div class="kpi">
+  <div><b>48.6%</b><span>183 题中有 <b>89 题</b>你选中的正是 APP 全站最高频错误项（易错项命中）</span></div>
+  <div><b>51.4%</b><span>另 <b>94 题</b>你选了一个"冷门错误项"——连大众的坑都没踩上</span></div>
+  <div><b>35.0%</b><span>你 183 次错误里有 <b>64 次选了 C</b>，而正确答案中 C 项只占 21.3%</span></div>
+</div>
+
+<h4>陷阱一：大众易错项命中率 48.6%——你的错法"标准"到令人不安</h4>
+
+<p>APP 易错项是命题人精心设计的"高级诱饵"（它往往是用错误公式、错误时间口径、错误单位算出来的那个数字）。你 183 次错误里有 89 次精准命中它，意味着：</p>
+
+<ul>
+  <li><b>这不是偶然计算事故，而是可预测的思维路径依赖。</b>你用的错误公式和全国大多数考生一模一样——说明你的公式体系里存在"系统性错误版本"，而不是"偶尔忘"。</li>
+  <li>典型代表：<span class="pd">ZL016</span>（混合增长率，全站 54%，你选 B = 易错项）、<span class="pd">ZL044</span>（混合平均数，39%）、<span class="pd">ZL063</span>（基期和差，52%，你选 C = 易错项）、<span class="pd">ZL140</span>、<span class="pd">ZL151</span>、<span class="pd">ZL174</span>、<span class="pd">ZL182</span>（增长量计算，<b>全站 93%</b>，你选 B = 易错项）。</li>
+</ul>
+
+<h4>陷阱二：C 项偏好（64/183 = 35%）——这是你的"手滑指纹"</h4>
+
+<table>
+  <thead><tr><th>项目</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+  <tbody>
+    <tr><td><b>183 题标准答案分布</b></td><td class="num">40（21.9%）</td><td class="num">54（29.5%）</td><td class="num">39（21.3%）</td><td class="num">50（27.3%）</td></tr>
+    <tr><td><b>你的 183 次错误选择分布</b></td><td class="num">32（17.5%）</td><td class="num">52（28.4%）</td><td class="num" style="background:#fdecec;color:#c62828;font-weight:700">64（35.0%）</td><td class="num">35（19.1%）</td></tr>
+  </tbody>
+</table>
+
+<p>标准答案里 C 项只占 21.3%，你的错误选择里 C 项却占 35.0%——<b>你选 C 的频率比"随机的真实答案"高出 64%</b>。这说明在"算出一个数字但算不准、或者两个选项之间摇摆"的时候，<b>你的潜意识会倒向 C 项（中间值、看起来最稳妥的那个）</b>。</p>
+
+<div class="quote">
+  <b>对你的直接价值：</b>在"完全没把握"的题上，你的 C 项偏好是<b>负资产</b>。而下面的数据是<b>正资产</b>——
+</div>
+
+<table>
+  <thead><tr><th>42 道综合分析题（选是/选非）的标准答案分布</th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>题量</td>
+      <td class="num">4（9.5%）</td><td class="num">9（21.4%）</td>
+      <td class="num">9（21.4%）</td>
+      <td class="num" style="background:#e9f7ef;color:#1f7a4d;font-weight:700">20（47.6%）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>在你做错的这 42 道综合分析题中，<b>答案落在 D 项的接近一半（20 题），落在 A 项的只有 4 题</b>。对应题号：<br>
+D 项：<span class="pd">ZL007</span><span class="pd">ZL023</span><span class="pd">ZL036</span><span class="pd">ZL042</span><span class="pd">ZL046</span><span class="pd">ZL052</span><span class="pd">ZL060</span><span class="pd">ZL066</span><span class="pd">ZL072</span><span class="pd">ZL079</span><span class="pd">ZL081</span><span class="pd">ZL090</span><span class="pd">ZL096</span><span class="pd">ZL109</span><span class="pd">ZL112</span><span class="pd">ZL124</span><span class="pd">ZL153</span><span class="pd">ZL159</span><span class="pd">ZL168</span><span class="pd">ZL170</span><br>
+C 项：<span class="pd">ZL005</span><span class="pd">ZL035</span><span class="pd">ZL048</span><span class="pd">ZL077</span><span class="pd">ZL162</span><span class="pd">ZL165</span><span class="pd">ZL167</span><span class="pd">ZL176</span><span class="pd">ZL177</span><br>
+A 项：<span class="pd">ZL026</span><span class="pd">ZL032</span><span class="pd">ZL040</span><span class="pd">ZL116</span></p>
+
+<p><b>战术结论：</b>综合分析题的作答顺序应当是 <b>D → C → B → A</b>。把 A 项放到最后看，因为它大约每 10 题才正确 1 次（注意：这是你这 183 道错题的样本分布，不是绝对规律，但它足以让"先扫 D/C"成为占优策略）。</p>
+
+<h4>陷阱三：典型陷阱类型点名</h4>
+
+<table>
+  <thead><tr><th>陷阱类型</th><th>命中的典型错题</th><th>你怎么中招的</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>范围完整性陷阱</b><br><span style="font-size:13px;color:#5a6473">部分 vs 全体</span></td>
+      <td><span class="pd">ZL175</span>(22%)<span class="pd">ZL118</span>(16%)<span class="pd">ZL010</span>(27%)</td>
+      <td>表格只给你"部分"，题干问的是"全体"。ZL175 漏掉表外 3 省；ZL118 的 B 项要先把五省之和算出来再和上海比；ZL010 要把 7 个明细项加总。</td>
+    </tr>
+    <tr>
+      <td><b>时间口径陷阱</b><br><span style="font-size:13px;color:#5a6473">累计/当月 · 同比/环比 · 基期/现期</span></td>
+      <td><span class="pd">ZL082</span>(39%)<span class="pd">ZL044</span>(39%)<span class="pd">ZL024</span>(26%)</td>
+      <td>题干"2018 年"要用第一段"比 2018 年全年高出 0.5 个百分点"反推（15.1%−0.5%=14.6%）；ZL024 问"2020 年各季度"但材料是月度数据，必须先合并成季度。</td>
+    </tr>
+    <tr>
+      <td><b>单位陷阱</b><br><span style="font-size:13px;color:#5a6473">亿元/万亿元 · 万元/亿元</span></td>
+      <td><span class="pd">ZL082</span><span class="pd">ZL118</span><span class="pd">ZL010</span></td>
+      <td>ZL082 材料是"亿元"、选项是"万亿元"；ZL010 在"万元"层级横跨三个数量级，估算时必须先统一量级。</td>
+    </tr>
+    <tr>
+      <td><b>主体错位陷阱</b><br><span style="font-size:13px;color:#5a6473">相似名词 · 限定词</span></td>
+      <td><span class="pd">ZL117</span>(90%)<span class="pd">ZL056</span>(84%)<span class="pd">ZL133</span>(82%)<span class="pd">ZL055</span>(86%)</td>
+      <td>这 4 道"全站都会、只有你错"的题，几乎全是"主体被限定词偷换"（如"前 20 家"vs"全行业"、"规上"vs"全部"）。<b>这是最不该丢的分。</b></td>
+    </tr>
+    <tr>
+      <td><b>精度陷阱</b><br><span style="font-size:13px;color:#5a6473">选项差距极小</span></td>
+      <td><span class="pd">ZL024</span>(26%)<span class="pd">ZL010</span>(27%)<span class="pd">ZL175</span>(22%)</td>
+      <td>这三题的计算量都很小，但选项之间只差 1–2%。<b>你的估算法在这里是"自杀式武器"。</b></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>二、题库区分度与含金量评估</h2>
+
+<h3>2.1 漏斗：920 → 183 之后，剩下的到底是什么题</h3>
+
+<table>
+  <thead><tr><th>含金量分层</th><th>全站正确率</th><th>题量</th><th>占比</th><th>性质判定</th><th>处理策略</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pill p-red">A 类 · 黄金错题</span></td>
+      <td class="num">≤50%</td><td class="num">37</td><td class="num">20.2%</td>
+      <td>真正的<b>能力边界</b>。全站也有一半以上的人做错，属于"高区分度题"。<br>代表：<span class="pd">ZL118</span>(16%)<span class="pd">ZL175</span>(22%)<span class="pd">ZL024</span>(26%)<span class="pd">ZL010</span>(27%)<span class="pd">ZL018</span>(30%)<span class="pd">ZL042</span>(33%)<span class="pd">ZL128</span>(33%)<span class="pd">ZL062</span>(35%)<span class="pd">ZL052</span>(36%)<span class="pd">ZL083</span>(36%)<span class="pd">ZL092</span>(36%)<span class="pd">ZL125</span>(36%)<span class="pd">ZL081</span>(37%)<span class="pd">ZL011</span>(39%)<span class="pd">ZL044</span>(39%)<span class="pd">ZL082</span>(39%)<span class="pd">ZL120</span>(39%)<span class="pd">ZL172</span>(40%)</td>
+      <td>重建思路，不求快，<b>每题必须写满公式骨架和速算路径</b>。<b>0 容错</b>（这批题练不透，90% 无从谈起）</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">B 类 · 白银错题</span></td>
+      <td class="num">51–80%</td><td class="num">122</td><td class="num">66.7%</td>
+      <td><b>拉分主战场</b>。这些题全站大多数人能做对，你也能做对——只是慢、或者踩了陷阱。<br>典型：<span class="pd">ZL004</span>(82%)<span class="pd">ZL005</span>(70%)<span class="pd">ZL009</span>(76%)<span class="pd">ZL013</span>(58%)<span class="pd">ZL016</span>(54%)<span class="pd">ZL101</span>(68%)<span class="pd">ZL148</span>(90%)</td>
+      <td>提速 + 抗陷阱。这是<b>从 80% 冲到 90% 的唯一战场</b>，占错题 2/3</td>
+    </tr>
+    <tr>
+      <td><span class="pill p-blu">C 类 · 青铜错题</span></td>
+      <td class="num">≥81%</td><td class="num">24</td><td class="num">13.1%</td>
+      <td><b>非受迫性失误（送分丢分）</b>。全站 8 成以上的人做对，只有你错了。<br>清单：<span class="pd">ZL001</span>(91%)<span class="pd">ZL004</span>(82%)<span class="pd">ZL040</span>(93%)<span class="pd">ZL041</span>(85%)<span class="pd">ZL046</span>(83%)<span class="pd">ZL054</span>(82%)<span class="pd">ZL055</span>(86%)<span class="pd">ZL056</span>(84%)<span class="pd">ZL059</span>(89%)<span class="pd">ZL086</span>(82%)<span class="pd">ZL095</span>(87%)<span class="pd">ZL108</span>(82%)<span class="pd">ZL113</span>(82%)<span class="pd">ZL117</span>(90%)<span class="pd">ZL133</span>(82%)<span class="pd">ZL134</span>(86%)<span class="pd">ZL142</span>(84%)<span class="pd">ZL147</span>(84%)<span class="pd">ZL148</span>(90%)<span class="pd">ZL164</span>(83%)<span class="pd">ZL168</span>(86%)<span class="pd">ZL170</span>(83%)<span class="pd">ZL171</span>(87%)<span class="pd">ZL182</span>(93%)</td>
+      <td><b>考场纪律问题，不是知识问题</b>。二刷这批题<b>必须 100% 全对</b>，错一题记一次"纪律处分"</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>2.2 你的真实段位：知识 65–70 分档，交付只有 60 分档</h3>
+
+<div class="card strategy">
+  <p style="margin-top:0"><b>关键推理：</b>这 183 道错题的<b>全站平均正确率是 63%</b>——也就是说，你踩中的大多不是"送分题"，而是"全站也要错一片"的中高区分度题。而你在这些题上依然拿到了 80.1% 的整体正确率。</p>
+  <p><b>结论一：你的知识段位不低。</b>在一个平均正确率 63% 的优质题池里稳定拿下 80%，换算到国考资料分析 20 题，你的"纯能力"水平约在 <span class="hi">对 14–15 题（70–75%）</span>。</p>
+  <p><b>结论二：你有 10–15 个百分点的"执行损耗"。</b>考场真实 60–70% vs 能力 70–75%，中间的落差不在知识里，而在三件事上：</p>
+  <ul style="margin-bottom:0">
+    <li><b>检索速度</b>——ZL082、ZL118 这类题，你平时能对，考场时间不够就崩；</li>
+    <li><b>公式调取速度</b>——ZL044、ZL020、ZL011 这类题，认不出考点就直接瞎算；</li>
+    <li><b>选项决策顺序</b>——综合分析题 42 道的平均全站正确率仅 60%，你在选项上"先啃硬骨头"，把时间烧光。</li>
+  </ul>
+</div>
+
+<h3>2.3 拉开分差的核心：是"计算量大"还是"逻辑绕弯"？</h3>
+
+<p>答案是<b>后者，且在你这儿是压倒性的后者</b>。用四道最难题做对照实验，结论非常清晰：</p>
+
+<table>
+  <thead><tr><th>题号</th><th>全站正确率</th><th>计算量</th><th>逻辑绕弯度</th><th>你的失分机制</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pd">ZL118</span></td><td class="num">16%</td><td>中</td>
+      <td><span class="pill p-red">极高</span>（4 个选项 = 4 条独立推理链：整体=部分÷比重 / 基期量 / 五省加总 / 差额判断；还要在文字+表1+表2 之间反复跳转）</td>
+      <td>不是算不动，是<b>每条链都要重新定位材料</b>，切换成本压垮了时间</td>
+    </tr>
+    <tr>
+      <td><span class="pd">ZL175</span></td><td class="num">22%</td><td><b>极小</b>（只做一次减法）</td>
+      <td><span class="pill p-red">极高</span>（表内 8 省 vs 题干"沿海省市"= 11 省，必须意识到"表外还有 3 个"并用总量补全）</td>
+      <td>你选了 A(5 个)——<b>完全没意识到材料边界之外还有主体</b></td>
+    </tr>
+    <tr>
+      <td><span class="pd">ZL010</span></td><td class="num">27%</td><td><b>大</b>（7 项加总，但只需小学加法）</td>
+      <td><span class="pill p-grn">零</span>（问"哪个月最严重"，方向毫无歧义）</td>
+      <td>你选了单行最大的 D——<b>该算的时候不算，这就是你"死算"罪名的真相：你不是算太多，是算太少</b></td>
+    </tr>
+    <tr>
+      <td><span class="pd">ZL024</span></td><td class="num">26%</td><td>中（12 个月数据合并成 4 个季度再相除）</td>
+      <td><span class="pill p-org">中</span>（考"平均运输距离=周转量÷货运量"这个非标准平均数定义）</td>
+      <td>你选了 C——<b>精度不足</b>。四个季度 174/177/175/175，任何粗略估算都会翻车</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card alert">
+  <p style="margin-top:0"><b>含金量结论：</b>你这 183 道错题的含金量<b>非常高，且含金量最高的一批恰恰不是"算术题"</b>。<br>
+  它们考的是三种能力：<b>①材料全局视野（知道表外还有东西）②多概念快速切换（一条题干里连用 3 个公式）③精度自适配（看见 2% 的选项差距就自动切精算模式）</b>。<br>
+  <span class="hi">刷题量不是你的解药，"题目读法 + 决策顺序"才是。</span>你已经刷了 920 题，如果解题的"操作系统"不换，再刷 920 题也只是把错误路径练得更熟练。</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>三、突破 90% 瓶颈的核心行动路径（二刷重启计划）</h2>
+
+<div class="card tip">
+  <p style="margin-top:0"><b>总周期建议：3 周二刷 + 1 周第五章冲刺 = 4 周。</b>二刷<b>不要按题号顺序刷</b>——那是把 183 种毛病随机乱炖。正确做法是<b>按考点重排、按病灶分组、按难度分档</b>。</p>
+</div>
+
+<h3>Step 1（第 1 周）· 找数与列式闭环：把"读材料"变成流水线</h3>
+
+<h4>① 结构化阅读三勾画（每篇材料 40 秒内完成）</h4>
+<ul>
+  <li><b>红笔勾时间</b>：每一个时间词（2018 年 / 2021 上半年 / 累计 / 当月 / 同比 / 环比）都必须落到纸面。<span class="pd">ZL082</span> 的"比 2018 年全年高出 0.5 个百分点"、<span class="pd">ZL024</span> 的"各季度"（材料是月度），都是靠这一步救回来的。</li>
+  <li><b>蓝笔勾主体</b>：圈出每一个限定词——"规上""前 20 家""沿海省市""限额以上"。<span class="pd">ZL117</span>(90%)、<span class="pd">ZL056</span>(84%)、<span class="pd">ZL133</span>(82%) 这三道送分题全死在限定词上。</li>
+  <li><b>绿笔勾单位</b>：亿元 / 万亿元、万元 / 亿元、吨 / 亿吨、% / 百分点。<span class="pd">ZL082</span> 就是"亿元→万亿元"的经典单位陷阱。</li>
+</ul>
+
+<h4>② 段落主旨速写（每段左侧写 3–5 个字）</h4>
+<p>在材料旁写下每段的"标签"，例如："总量+增速""分行业""分地区""占比结构""进出口"。这样当题干问"某省占比"时，你的眼睛会直接跳向"占比结构"那一段，而不是从头读第二遍。<br>
+<b>这一步专治 ZL082、ZL118 这类跨段取数的题</b>——它们的答案永远躺在"第 2 段第 1 句"或"表格最后一列"。</p>
+
+<h4>③ 题干 3 秒定式四步法（必须练到自动化）</h4>
+<ol>
+  <li><b>圈时间</b>（决定是现期还是基期）</li>
+  <li><b>圈主体</b>（决定去材料哪个位置找数）</li>
+  <li><b>定问法</b>（比重 / 平均数 / 增长率 / 倍数 / 增长量 / 和差）</li>
+  <li><b>写公式骨架</b>（只写字母符号，<b>不写数字</b>，例：<code>基期比重 = A/B × (1+b)/(1+a)</code>）</li>
+</ol>
+<p><b>硬性要求：从读完题干到写出公式骨架，不得超过 3 秒。</b>超过 3 秒就说明这个考点你还没形成条件反射，立刻回炉该考点的专项课（见第五部分）。</p>
+
+<h4>④ 二刷分组顺序（按病灶，不按题号）</h4>
+<table>
+  <thead><tr><th>批次</th><th>题组</th><th>题量</th><th>训练目标</th></tr></thead>
+  <tbody>
+    <tr><td>第 1 批</td><td><b>比重家族</b>（现期比重 + 基期比重 + 两期比重）</td><td class="num">38</td><td>把比重练成"看一眼就出公式"的本能</td></tr>
+    <tr><td>第 2 批</td><td><b>公式攻坚组</b>（混合增长率、平均数的增长率、基期平均数、间隔增长率、年均增长率、混合平均数、两集合容斥）</td><td class="num">35</td><td>消灭"认不出考点"的失分</td></tr>
+    <tr><td>第 3 批</td><td><b>平均数/倍数/增长率常规组</b></td><td class="num">48</td><td>提速 + 精度自适配</td></tr>
+    <tr><td>第 4 批</td><td><b>综合分析攻坚组</b>（42 题）</td><td class="num">42</td><td>选项决策顺序训练</td></tr>
+    <tr><td>第 5 批</td><td><b>送分题清零组</b>（全站 ≥81% 的 24 题）</td><td class="num">24</td><td>主体/时间/单位陷阱抗体</td></tr>
+  </tbody>
+</table>
+
+<h4>⑤ 必须背到"闭眼默写"的 9 组公式（对准你的 35 道公式类错题）</h4>
+<table>
+  <thead><tr><th>考点</th><th>公式 / 口诀</th><th>你的靶向错题</th></tr></thead>
+  <tbody>
+    <tr><td><b>基期比重</b></td><td><code>基期比重 = A/B × (1+b)/(1+a)</code>（a 为整体增速，b 为部分增速）</td><td><span class="pd">ZL014</span><span class="pd">ZL037</span><span class="pd">ZL039</span><span class="pd">ZL068</span><span class="pd">ZL075</span><span class="pd">ZL082</span><span class="pd">ZL100</span></td></tr>
+    <tr><td><b>两期比重差</b></td><td><b>先判方向</b>（a&gt;b 则比重上升），<b>再定大小</b>（现期比重 × |a−b|/(1+a)，结果必小于 |a−b|）</td><td><span class="pd">ZL013</span><span class="pd">ZL015</span><span class="pd">ZL043</span><span class="pd">ZL049</span><span class="pd">ZL088</span><span class="pd">ZL143</span><span class="pd">ZL179</span></td></tr>
+    <tr><td><b>混合增长率</b></td><td>线段法 / 十字交叉：<b>混合值居中但不居中，距离与量成反比</b>；先画数轴定区间，再用"偏向基期量大的一方"排除</td><td><span class="pd">ZL012</span><span class="pd">ZL016</span><span class="pd">ZL019</span><span class="pd">ZL030</span><span class="pd">ZL044</span></td></tr>
+    <tr><td><b>平均数的增长率</b></td><td><code>r = (a − b) / (1 + b)</code>（a=总量增速，b=份数增速）</td><td><span class="pd">ZL020</span><span class="pd">ZL057</span><span class="pd">ZL085</span></td></tr>
+    <tr><td><b>基期平均数</b></td><td><code>基期平均 = (A/B) × (1+b)/(1+a)</code>（与基期比重同构，直接套）</td><td><span class="pd">ZL084</span><span class="pd">ZL087</span><span class="pd">ZL123</span></td></tr>
+    <tr><td><b>间隔增长率</b></td><td><code>R = r1 + r2 + r1×r2</code>（r1、r2 为相邻两期增速）</td><td><span class="pd">ZL034</span><span class="pd">ZL073</span></td></tr>
+    <tr><td><b>年均增长率</b></td><td><code>(1+r)^n = 现期/基期</code>；用<b>代入法 + 二项式展开</b>（如 (1+r)²≈1+2r+r²）试选项，<b>不倒着开根号</b></td><td><span class="pd">ZL011</span><span class="pd">ZL110</span><span class="pd">ZL138</span></td></tr>
+    <tr><td><b>基期和差</b></td><td>先算现期差，再用两个增速分别"微调"；口诀：<b>增速都为正时，基期差必大于现期差</b>（先用来排错方向）</td><td><span class="pd">ZL017</span><span class="pd">ZL063</span><span class="pd">ZL099</span><span class="pd">ZL163</span></td></tr>
+    <tr><td><b>两集合容斥</b></td><td><code>都满足 = A + B − 总数</code>；"A 和非 A 思想"（高照专项）</td><td><span class="pd">ZL104</span><span class="pd">ZL134</span><span class="pd">ZL150</span></td></tr>
+  </tbody>
+</table>
+
+<h3>Step 2（第 2 周）· 估算与选项驱动：把"精度的开关"装回去</h3>
+
+<p>先把话说透：<b>你不是"精算强迫症"患者</b>（ZL010、ZL175 证明你该算时根本没算）。你的问题是<b>没有精度分级标准</b>。所以这一周你要建立的不是"更敢估"，而是一套<b>看选项决定精度的三步分流机制</b>。</p>
+
+<table>
+  <thead><tr><th>选项特征</th><th>精度策略</th><th>具体动作</th><th>你的对照案例</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>选项首位互不相同</b><br>（如 83 / 87 / 91 / 95）</td>
+      <td><span class="pill p-grn">粗算即可</span></td>
+      <td>分母<b>截 2 位</b>直除，算到首位就能锁定答案</td>
+      <td><span class="pd">ZL001</span>(91%)：这题本该 15 秒解决，你却错了</td>
+    </tr>
+    <tr>
+      <td><b>选项首位相同、次位不同</b><br>（如 2.4 / 2.6 / 2.9 / 3.0）</td>
+      <td><span class="pill p-org">中等精度</span></td>
+      <td>分母<b>截 3 位</b>直除，算到第二位</td>
+      <td><span class="pd">ZL044</span>(39%)：用比例法（51:49）比硬算更快</td>
+    </tr>
+    <tr>
+      <td><b>选项差距 &lt; 5%</b><br>或问"几个 / 排序 / 谁最大 / 是否超过"</td>
+      <td><span class="pill p-red">禁止估算</span></td>
+      <td><b>老实精算</b>。<b>这是你的红线，越线即错。</b></td>
+      <td><span class="pd">ZL024</span>(26%，四季度 174/177/175/175)、<span class="pd">ZL010</span>(27%，必须加总 7 项)、<span class="pd">ZL175</span>(22%，必须补全表外)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>必须练成肌肉记忆的四件兵器</h4>
+<ol>
+  <li><b>截位直除</b>：除法只算到"能区分选项的那一位"就停手。<b>核心纪律：绝不把除法算完。</b></li>
+  <li><b>百化分（特殊分数法）</b>——每天 15 分钟默写，要求 5 秒内反应：<br>
+    <code>1/7≈14.3%</code>（<span class="pd">ZL082</span> 的 14.6% 正好用得上）<code>1/6≈16.7%</code><code>1/8=12.5%</code><code>1/9≈11.1%</code><code>1/11≈9.1%</code><code>1/12≈8.3%</code><code>1/13≈7.7%</code><code>1/14≈7.1%</code><code>1/15≈6.7%</code><code>1/16=6.25%</code><code>1/17≈5.9%</code><code>1/18≈5.6%</code><code>1/19≈5.3%</code><code>1/20=5%</code>
+  </li>
+  <li><b>增长量速算</b>：当增长率 <code>r ≈ 1/n</code> 时，<b>增长量 = 现期量 ÷ (n+1)</b>；下降时用 <code>现期量 ÷ (n−1)</code>。专治 <span class="pd">ZL128</span>(33%)、<span class="pd">ZL155</span>、<span class="pd">ZL182</span>(93%，你居然错了)。</li>
+  <li><b>分数比较</b>：先看倍数关系（分子分母同增，看谁涨得快）；只有选项逼近时才用差分法/化同法。<b>比较类题目禁止通分。</b></li>
+</ol>
+
+<div class="card warn">
+  <p style="margin-top:0"><b>针对 ZL010 的专项反省（这题值得你抄十遍）：</b></p>
+  <p style="margin-bottom:0">遇到"哪个月 / 哪个类别 / 哪个地区 最严重（最大/最小/最高/最低）"的题，正确动作是：<br>
+  <b>第一步，对每个候选做量级估算（看数量级、看位数）；第二步，只对"量级最接近的前两名"精算；第三步，绝不允许"因为某个单元格的数字看起来最大就选它"。</b><br>
+  ZL010 里 2022 年 10 月的 113039.27 万元是<b>单行最大值</b>，而正确答案 2021 年 9 月需要把 5 行加起来才是 123900 万元。<span class="hi">你被"表格的视觉冲击"骗了——这正是命题人希望你犯的错。</span></p>
+</div>
+
+<h3>Step 3（第 3 周）· 综合分析题攻坚：把 42 道失分池变成得分池</h3>
+
+<p>综合分析题（每篇资料最后一道"下列说法正确/不正确的是"）占你错题的 <b>23.0%（42 题）</b>，平均全站正确率 60%，且 <b>38/42 出自第三、四章长材料</b>。这是你唯一"成规模、可批量提分"的板块。</p>
+
+<h4>① 选项决策顺序（先用数据，再用常识）</h4>
+<table>
+  <thead><tr><th>优先级</th><th>选项类型</th><th>动作</th><th>时间</th></tr></thead>
+  <tbody>
+    <tr><td><span class="pill p-grn">第 1 优先</span></td><td><b>不用算的</b>：直接读数、时间/主体/单位是否与材料一致</td><td>扫一眼就能判对错，先秒掉</td><td class="num">≤15 秒</td></tr>
+    <tr><td><span class="pill p-blu">第 2 优先</span></td><td><b>判方向/定大小的</b>：增长率升降、比重升降、平均数升降</td><td>两期比重差只需判 a 与 b 的大小关系，<b>不用算出具体数值</b></td><td class="num">≤25 秒</td></tr>
+    <tr><td><span class="pill p-org">第 3 优先</span></td><td><b>要算绝对值/加总多个分项/多步乘除的</b></td><td>放到最后；一旦已排除两项，直接"二选一 + 蒙"</td><td class="num">≤60 秒</td></tr>
+  </tbody>
+</table>
+
+<h4>② 综合分析的铁律</h4>
+<ul>
+  <li><b>先扫 C 项和 D 项，把 A 项留到最后。</b>你这 42 道的答案分布是 <b>D=20 / C=9 / B=9 / A=4</b>——D 项接近一半，A 项只有 9.5%。<span class="pd">ZL168</span>(86%)、<span class="pd">ZL170</span>(83%)、<span class="pd">ZL159</span> 这类"全站都会你却错"的综合分析题，多半就死在"从 A 项开始啃，啃到时间没了"。</li>
+  <li><b>选非题（"不正确的是"）的杀招：先找最容易被证伪的项</b>——通常是"绝对量比较/差值判断"类（如 <span class="pd">ZL118</span> 的 B 项"五省之和比上海低"）。</li>
+  <li><b>一轮定生死：</b>只要已经排除 2 项，就立刻停手，不要再"验证"剩下的项。<b>你不是考官，你只需要分数。</b></li>
+  <li><b>超时即蒙：</b>单题超过 120 秒，标记 + 蒙一个（优先 D/C，因为你的 C 偏好是负资产，D 在综合分析里明显占优）。</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>四、铁血考核标准（数据量化）</h2>
+
+<h3>4.1 二刷 KPI（183 题）</h3>
+
+<table>
+  <thead><tr><th>类别</th><th>题量</th><th>容错率</th><th>正确率要求</th><th>达标线</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>公式类错题</b>（基期比重 / 两期比重 / 混合增长率 / 平均数的增长率 / 基期平均数 / 间隔增长率 / 年均增长率 / 混合平均数 / 两集合容斥）</td>
+      <td class="num">35</td>
+      <td><span class="pill p-red">0 容错</span></td>
+      <td class="num">100%</td>
+      <td>套公式的题不存在"算错"的理由。<b>错 1 题 = 公式没背熟，当天重默</b></td>
+    </tr>
+    <tr>
+      <td><b>计算类错题</b>（现期比重 / 现期平均数 / 现期倍数 / 增长量 / 简单加减）</td>
+      <td class="num">60</td>
+      <td><span class="pill p-org">≤2 题</span></td>
+      <td class="num">≥96.7%</td>
+      <td>每题必须在旁标注速算路径（截位 / 百化分 / 直除到第几位）</td>
+    </tr>
+    <tr>
+      <td><b>综合分析类错题</b></td>
+      <td class="num">42</td>
+      <td><span class="pill p-org">≤5 题</span></td>
+      <td class="num">≥88.1%</td>
+      <td>必须标注"每个选项的取舍顺序"（哪项秒判、哪项跳过）</td>
+    </tr>
+    <tr>
+      <td><b>送分题清零组</b>（全站 ≥81% 的 24 题）</td>
+      <td class="num">24</td>
+      <td><span class="pill p-red">0 容错</span></td>
+      <td class="num">100%</td>
+      <td>错 1 题 = 记一次"考场纪律处分"，并把该题抄写进错题本首页</td>
+    </tr>
+    <tr>
+      <td><b>全量合计</b></td>
+      <td class="num">183</td>
+      <td><span class="pill p-red">≤7 题</span></td>
+      <td class="num" style="font-weight:700">≥96.2%</td>
+      <td><b>一次通过率 ≥96.2%</b> 才算二刷合格</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>4.2 错题本硬性格式（每题必须写满三行，缺一行视为未完成）</h3>
+
+<div class="card strategy">
+  <p style="margin-top:0"><b>格式模板（手写在题目旁的空白处）：</b></p>
+  <div class="quote" style="margin-bottom:0">
+    <b>① 错因标签（四选一，必须唯一）：</b>找错数 / 列错式 / 掉陷阱 / 算错<br>
+    <b>② 陷阱类型（可多选）：</b>时间陷阱（累计vs当月 / 同比vs环比 / 基期vs现期）· 主体陷阱（限定词偷换）· 单位陷阱（亿元vs万亿元）· 范围陷阱（表内vs全体 / 部分vs整体）· 精度陷阱（选项差距过小）<br>
+    <b>③ 速算路径（必须是可复用的动作）：</b>如"分母截两位直除""14.6%≈1/7 百化分""两期比重只判方向不计算""线段法定混合区间""先加总再比较"
+  </div>
+  <p style="margin:16px 0 0"><b>示例（以 ZL010 为例）：</b><br>
+  ① 错因：<b>找错数</b>（选了单行最大值，没做加总）　② 陷阱：<b>范围陷阱 + 精度陷阱</b>（比较类必须全量加总，禁止靠单元格视觉大小判断）<br>
+  ③ 速算路径：<b>先对 4 个候选做量级估算 → 对量级接近的 2021年9月(123900)与2022年10月(113039) 精算 → 结论：9月最大</b></p>
+</div>
+
+<h4>三刷清单准入规则（把 183 题的复习量压到 60 题以内）</h4>
+<ul>
+  <li><b>只有错因 = "掉陷阱" 或 "列错式" 的题，才允许进入三刷清单。</b>这两类 = 你的系统性漏洞，会反复出现。</li>
+  <li><b>错因 = "算错" 的题，直接划掉</b>，不再三刷——考场上不会再犯同一个加法错误，反复刷它只是自我安慰。</li>
+  <li>预期结果：183 题 → 二刷后顽固错题约 40–60 题 → 三刷 → 20 题以内（这就是你的"终极弱点清单"）。</li>
+</ul>
+
+<h3>4.3 第五章综合训练（100 题 / 5 套）限时与达标线</h3>
+
+<table>
+  <thead><tr><th>层级</th><th>限时要求</th><th>正确率要求</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td><b>单篇资料</b>（1 篇材料 + 5 题）</td><td class="num"><b>6 分钟</b></td><td class="num">—</td><td>阅读材料 ≤40 秒，平均每题 ≤65 秒</td></tr>
+    <tr><td><b>单套</b>（综合训练 1–5，各 20 题 / 4 篇）</td><td class="num"><b>25 分钟</b>（留 5 分钟缓冲）</td><td class="num">—</td><td>对应考场 20 题 / 30 分钟的真实节奏</td></tr>
+    <tr><td><b>第 1 周验收</b></td><td class="num">25 分钟</td><td class="num">≥80%（16/20）</td><td>综合训练 1</td></tr>
+    <tr><td><b>第 2 周验收</b></td><td class="num">25 分钟</td><td class="num">≥85%（17/20）</td><td>综合训练 2–3</td></tr>
+    <tr><td><b>第 3 周起验收</b></td><td class="num">25 分钟</td><td class="num"><b>≥90%（18/20）</b></td><td>综合训练 4–5，<b>连续 3 套 ≥18 题</b> 才判定"突破完成"</td></tr>
+  </tbody>
+</table>
+
+<h4>单题时间预算（贴在书桌前）</h4>
+<table>
+  <thead><tr><th>题型</th><th>时间上限</th><th>超时动作</th></tr></thead>
+  <tbody>
+    <tr><td>读材料（整篇）</td><td class="num">40 秒</td><td>—</td></tr>
+    <tr><td>简单题（直接读数 / 现期比重 / 现期倍数）</td><td class="num">50 秒</td><td>无（这类题超时即失败）</td></tr>
+    <tr><td>计算题（平均数 / 增长率 / 增长量）</td><td class="num">90 秒</td><td>标记后跳</td></tr>
+    <tr><td>综合分析题</td><td class="num">120 秒</td><td><b>强制执行"标记 + 蒙"</b>（优先 D/C）</td></tr>
+    <tr><td>单题绝对红线</td><td class="num">180 秒</td><td>无论做到哪一步，<b>弃题</b></td></tr>
+  </tbody>
+</table>
+
+<h4>最终模考验收（毕业标准）</h4>
+<div class="kpi">
+  <div><b>30 分钟</b><span>资料分析 20 题限时（含涂卡节奏）</span></div>
+  <div><b>≥18 题</b><span>正确率 ≥90%（对 18 题以上）</span></div>
+  <div><b>连续 2 次</b><span>必须连续两次达标才算真正突破</span></div>
+  <div><b>≤7 题</b><span>二刷 183 题容错上限（≥96.2%）</span></div>
+</div>
+
+<!-- ============================================================ -->
+<h2>五、B站名师靶向推荐与听课顺序</h2>
+
+<p>你的定位很清楚：<b>"不缺做基础除法的能力，缺考场的秒杀技巧与统筹策略"</b>。所以不要从头听课——那是最浪费生命的学习方式。<b>按下面这个顺序，只取所需，总投入控制在 4 周。</b></p>
+
+<div class="card tip">
+  <p style="margin-top:0"><b>路线图：</b>齐麟（2 周 · 重塑速算与公式总表）→ 高照拔高专项（1 周 · 公式补漏手术）→ 花生十三（1 周起 · 限时实战与决策，长期复看）</p>
+</div>
+
+<h3>5.1 第一步 · 速算体系重塑 —— 齐麟（B站「公考齐麟」）</h3>
+
+<div class="card">
+  <p style="margin-top:0"><b>为什么是他：</b>齐麟的资料分析体系是"<b>理论 → 刷题 → 冲刺</b>"的三段式（《数资满分计划》），并且他有一节极其契合你现状的课——<b>《资料分析考前梳理（所有知识点、题型、公式口诀、易错点）》</b>。你现在的病是"公式认不出、口径记不牢"，这节"公式口诀总表"性质的课就是给你打的补丁。</p>
+  <p><b>他的速算训练强在哪：</b></p>
+  <ul>
+    <li><b>直除法体系化</b>——不是"教你除法"，而是告诉你"<b>算到第几位就该停</b>"，这正好治你"精度开关装反"的病；</li>
+    <li><b>特殊分数法</b>（百化分的另一种叫法）——把 <code>1/7≈14.3%</code> 这类互化从"我要查表"变成"肌肉记忆"；</li>
+    <li><b>"默写表"文化</b>——齐麟体系里非常强调把公式和速算结果<b>默写</b>出来（市面上流传的"资料分析默写表"就是这个传统的产物）。<b>这一点对你至关重要：你的问题不是"没听过"，是"没默写过"。</b></li>
+  </ul>
+  <p><b>怎么练（严格执行，不要"看课式学习"）：</b></p>
+  <ol>
+    <li><b>第 1–2 天：</b>只看《资料分析基础理论 1 / 2》，<b>只看不写笔记</b>，用你的 183 道错题当"目录"——在错题旁标注"这题属于哪个理论点"。</li>
+    <li><b>第 3–7 天：每天 15 分钟"百化分默写"</b>。要求：1/2 到 1/20 的小数互化，<b>5 秒内反应</b>。写不出来就重来。这是纯体力活，但它是你提速的地基。</li>
+    <li><b>第 8–14 天：</b>用齐麟的刷题班做限时训练。<b>纪律：做对的题不看解析，只看错题的解析</b>——你的时间不够用来看你已经会的东西。</li>
+    <li><b>对齐靶点：</b>年均增长率（<span class="pd">ZL011</span><span class="pd">ZL110</span><span class="pd">ZL138</span>）、基期比重（<span class="pd">ZL014</span><span class="pd">ZL037</span><span class="pd">ZL039</span><span class="pd">ZL068</span><span class="pd">ZL075</span><span class="pd">ZL082</span><span class="pd">ZL100</span>）、基期和差（<span class="pd">ZL017</span><span class="pd">ZL063</span><span class="pd">ZL099</span><span class="pd">ZL163</span>）。</li>
+  </ol>
+</div>
+
+<h3>5.2 第二步 · 底层逻辑与公式补漏 —— 高照（B站「公考高照讲数资」）</h3>
+
+<div class="card warn">
+  <p style="margin-top:0"><b>先纠正一个可能的认知偏差：</b>你提到的<b>李梦娇老师不适合补资料分析</b>。她是华图在线常识学科负责人、"口诀速记法"创始人，主讲科目是<b>常识判断、公共基础知识、结构化面试</b>——<b>她不教资料分析</b>。拿她补公式，等于请语文老师补物理。<br>
+  （如果你确实需要口诀化记忆的帮手，李梦娇的正确用法是她的<b>常识</b>模块，那是另一个战场。）</p>
+</div>
+
+<div class="card">
+  <p style="margin-top:0"><b>为什么选高照来打公式补丁：</b>他的课是"<b>按考点切片</b>"的——《资料分析理论实战班》（含速算技巧一：加减乘；速算技巧二：除法与分数比较）、《3+2 学习法》、《题型夸夸刷》、《超大杯》，以及最关键的一套<b>「拔高专项」系列</b>：</p>
+  <ul>
+    <li>增长率拔高专项 · 间隔增长率拔高专项 · 乘积增长率拔高专项</li>
+    <li><b>混合增长率拔高专项（上/下）</b></li>
+    <li>增长量拔高专项 · <b>基期量拔高专项（上/下）</b> · 现期量拔高专项</li>
+    <li><b>比重拔高专项</b> · <b>平均数拔高专项</b> · 倍数拔高专项 · <b>A 和非 A 思想拔高专项</b></li>
+  </ul>
+  <p><b>这套东西的价值在于"专治认不出考点"。</b>你错 <span class="pd">ZL044</span>（混合平均数 39%）是因为你想不到"问人数要用时间距离反比"；错 <span class="pd">ZL082</span>（基期比重 39%）是因为你没意识到要先反推"2018 年比重 = 15.1% − 0.5%"。这类"想不到"，只能靠<b>同考点连做 10 题</b>的条件反射来治。</p>
+  <p><b>怎么用（只挑 6 个专项，不要全听）：</b></p>
+  <table>
+    <thead><tr><th>专项</th><th>对准你的错题</th></tr></thead>
+    <tbody>
+      <tr><td><b>混合增长率（上/下）</b></td><td><span class="pd">ZL012</span><span class="pd">ZL016</span><span class="pd">ZL019</span><span class="pd">ZL030</span><span class="pd">ZL044</span></td></tr>
+      <tr><td><b>基期量（上/下）</b></td><td><span class="pd">ZL098</span><span class="pd">ZL100</span><span class="pd">ZL123</span><span class="pd">ZL082</span></td></tr>
+      <tr><td><b>比重拔高</b></td><td><span class="pd">ZL014</span><span class="pd">ZL037</span><span class="pd">ZL039</span><span class="pd">ZL068</span><span class="pd">ZL075</span><span class="pd">ZL157</span><span class="pd">ZL172</span></td></tr>
+      <tr><td><b>平均数拔高</b></td><td><span class="pd">ZL020</span><span class="pd">ZL057</span><span class="pd">ZL084</span><span class="pd">ZL085</span><span class="pd">ZL087</span><span class="pd">ZL123</span></td></tr>
+      <tr><td><b>增长率拔高 + 间隔增长率</b></td><td><span class="pd">ZL011</span><span class="pd">ZL034</span><span class="pd">ZL073</span><span class="pd">ZL110</span><span class="pd">ZL138</span></td></tr>
+      <tr><td><b>A 和非 A 思想</b></td><td><span class="pd">ZL104</span><span class="pd">ZL134</span><span class="pd">ZL150</span>（两集合容斥）</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-bottom:0"><b>附加价值：</b>他的《默写百化分》讲义可以直接当作你每天 15 分钟默写训练的素材。</p>
+</div>
+
+<h3>5.3 第三步 · 考场实战与决策拆解 —— 花生十三</h3>
+
+<div class="card">
+  <p style="margin-top:0"><b>为什么必须看他：</b>你缺的不是知识，是<b>"考场上的真实决策过程"</b>——什么时候放弃、什么时候只算一半、什么时候直接看选项蒙。<b>花生十三的资料分析最突出的特点就是"看选项做题"与"不全算思维"</b>，而这恰恰是你的致命短板（<span class="pd">ZL010</span> 你该算不算、<span class="pd">ZL024</span> 你该精算不精算）。</p>
+  <p><b>他手上最有价值的两类素材：</b></p>
+  <ul>
+    <li><b>《四套资料分析"一镜到底"》</b>——真实限时、不剪辑的完整解题实录。这是最接近"考场现场"的教学形式，你能看到他<b>读材料用了几秒、在哪一题上犹豫、什么时候果断跳题</b>。</li>
+    <li><b>《资料分析 1200 题》+ 彩色笔记 + 速算技巧（上/下）</b>——用于题感和速算的日常维持。</li>
+  </ul>
+  <p><b>正确的观看流程（极其关键，别搞反）：</b></p>
+  <ol>
+    <li><b>先自己做</b>：找同一套题（20 题），限时 25 分钟，<b>记录每题用时</b>。</li>
+    <li><b>再看视频</b>：逐题对照三个问题——<b>① 他算了几步？我算了几步？② 他在哪一秒决定"不算了、看选项"？③ 他放弃的题，是在第几秒放弃的？</b></li>
+    <li><b>写"决策日志"</b>（不是错题本，是决策本）：一页纸，左边写"我的动作"，右边写"他的动作"，下面写"下一套我要改的 1 个动作"。<b>每套只改 1 个动作，不要贪多。</b></li>
+  </ol>
+  <p style="margin-bottom:0"><b>对齐靶点：</b><span class="pd">ZL024</span>（该精算时他在算、你在估）、<span class="pd">ZL010</span>（他在老老实实加总、你在凭视觉挑最大）、以及 <b>42 道综合分析题的取舍顺序</b>（他绝对不会从 A 项开始啃）。</p>
+</div>
+
+<h3>5.4 听课顺序总表</h3>
+<table>
+  <thead><tr><th>阶段</th><th>时间</th><th>老师</th><th>内容</th><th>产出物</th></tr></thead>
+  <tbody>
+    <tr><td><b>第 1 步</b></td><td class="num">2 周</td><td><b>齐麟</b></td><td>基础理论 1/2 + 考前梳理 + 刷题班限时训练</td><td>百化分默写过关 + 公式骨架 3 秒定式</td></tr>
+    <tr><td><b>第 2 步</b></td><td class="num">1 周</td><td><b>高照</b></td><td>6 大拔高专项（混合增长率 / 基期量 / 比重 / 平均数 / 增长率 / A 和非 A）</td><td>35 道公式类错题全部清零</td></tr>
+    <tr><td><b>第 3 步</b></td><td class="num">1 周+</td><td><b>花生十三</b></td><td>"一镜到底"限时实录 + 1200 题维持</td><td>决策日志 + 单题时间预算落地</td></tr>
+    <tr><td><b>穿插</b></td><td class="num">全程</td><td>—</td><td>第五章综合训练 1–5（每套 25 分钟）</td><td>连续 3 套 ≥18/20</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>六、导师寄语与考场纪律</h2>
+
+<h3>6.1 考场纪律：七条硬性改变（贴在书桌上，违反即自罚）</h3>
+
+<table>
+  <thead><tr><th>#</th><th>纪律</th><th>为什么（基于你的数据）</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td><b>坚决不当会计去死算。</b>除法只算到"能区分选项的那一位"，立刻停手。</td><td>你的错题里没有一道是"因为算得太粗"而丢分在简单题上的；相反，<span class="pd">ZL001</span>(91%)、<span class="pd">ZL148</span>(90%) 这类题全站都会，只有你在纠结。</td></tr>
+    <tr><td class="num">2</td><td><b>"哪个月/哪个最大/共有几个"这类题，禁止靠视觉直觉选答案，必须量级估算 + 前两名精算。</b></td><td><span class="pd">ZL010</span>(27%)、<span class="pd">ZL175</span>(22%)、<span class="pd">ZL024</span>(26%) 三题全是这么错的。</td></tr>
+    <tr><td class="num">3</td><td><b>选项差距小于 5% 或题干含"排序/共有几个/是否超过"，自动切换精算模式。</b></td><td>精度陷阱三题（ZL010 / ZL024 / ZL175）平均全站正确率仅 25%。</td></tr>
+    <tr><td class="num">4</td><td><b>综合分析题先扫 D 项和 C 项，A 项放最后。</b></td><td>你的 42 道综合分析错题里，答案 D 占 20 题（47.6%），A 只占 4 题（9.5%）。</td></tr>
+    <tr><td class="num">5</td><td><b>综合分析题排除 2 项后立刻停手，不再"验证"。</b>单题 120 秒上限，超时标记 + 蒙。</td><td>综合分析占你错题的 23.0%，平均正确率 60%——这是最耗时的板块，也是最容易"竹篮打水"的板块。</td></tr>
+    <tr><td class="num">6</td><td><b>每个时间词、每个限定词、每个单位，用笔圈出来。</b>不许"心里知道"。</td><td><span class="pd">ZL117</span>(90%)、<span class="pd">ZL056</span>(84%)、<span class="pd">ZL133</span>(82%)——三道全站都会的"找数题"，你全错在主体和限定词上。</td></tr>
+    <tr><td class="num">7</td><td><b>遇到"算出一个数但选项对不上"时，立刻回头查三件事：时间口径、主体范围、单位。</b>而不是重算一遍。</td><td>你 48.6% 的失误是"标准姿势踩坑"，重算只会得到同一个错误答案。</td></tr>
+  </tbody>
+</table>
+
+<div class="final">
+  <h2>6.2 名师箴言</h2>
+  <p>孩子，我先把你的幻想砸掉，再把你扶起来。</p>
+
+  <p><b>第一锤：你从来不是"算得太细"的人。</b><br>
+  你以为自己死于"会计思维"？数据不答应。ZL010 那道题，2021 年 9 月需要你把 5 个明细项加起来才是 123900 万，而 2022 年 10 月只有孤零零一行 113039.27 万——你连加都懒得加，直接挑了那个看起来最大的数字。ZL175 那道题，表格里只有 8 个省，题干问的是全部 11 个沿海省市，你连"表外面还有东西"都没想到。ZL024 那道题，四个季度的答案是 174、177、175、175，差距不到 2%，你却敢用粗估去挑。<br>
+  <span class="hi">你不是算得太精细，你是"该细的时候在偷懒，该狠的时候在犹豫"。</span>你的问题从来不是手上的笔太快，而是脑子里的开关装反了。</p>
+
+  <p><b>第二锤：你的错法"标准"得令人心碎。</b><br>
+  183 次错误里，有 89 次你精准命中了 APP 全站最高频错误项——也就是说，<b>你和全国几十万考生，犯了同一个错，用的是同一个错误公式。</b>另一次统计里，你 64 次把答案押在 C 项上，而正确答案里 C 项只占 21.3%。这说明你的错不是"事故"，是"路径依赖"——你的脑子里装着一套<b>错误但熟练</b>的解题程序，它平时转速慢时还能被你纠回来，一上考场限时，它就自动接管你了。</p>
+
+  <p><b>第三锤：你不是不会，你是"交不出来"。</b><br>
+  你在一个平均正确率 63% 的题池里拿下了 80.1%，你的知识段位在 70–75 分档。可你的考场产出只有 60–70%。<b>中间那 10 到 15 个百分点，不在你的书里，在你读材料的 40 秒里、在你调公式的 3 秒里、在你决定先看哪个选项的那一念里。</b>你要补的不是知识，是交付。</p>
+
+  <p><b>现在，把你扶起来。</b><br>
+  你要成为一名<b>贪婪且残忍的考场商人</b>。商人不问"这道题我懂不懂"，他问"这道题值不值得我投时间"。<br>
+  看到选项首位不同？<b>截两位直除，拿到分数就走，多算一步都是亏本。</b><br>
+  看到四个选项只差 2%？<b>立刻停下粗估的手，老老实实精算，这时候偷懒就是自杀。</b><br>
+  看到综合分析题？<b>先扫 D 项，再扫 C 项，排除两项就收手，绝不从 A 项开始啃——那是给命题人送时间的慈善行为。</b><br>
+  看到一道题啃了 120 秒还没结果？<b>标记、蒙一个、走人。你要的是 18 道题，不是这一道题的尊严。</b></p>
+
+  <p><b>最后的账，我替你算清楚：</b><br>
+  二刷 183 题，容错 7 道，一次通过率 96.2%；第五章 5 套，每套 25 分钟，连续 3 套 18 题以上；模考 20 题 / 30 分钟，连续 2 次 ≥18 题。<br>
+  <b>这三条线，就是你从"平时八成、考场六成"走到"考场九成"的全部路径。</b>它不难，它只是需要你在接下来 4 周里，<b>把每一次"我想再算精确一点"的冲动摁下去，把每一次"这个好像差不多"的侥幸掐死</b>。</p>
+
+  <p style="font-size:17px"><b>你已经刷了 920 题、错了 183 题，把所有的坑都替你踩完了。</b><br>
+  剩下的 4 周，不是"再来一遍"，而是<b>一次清算</b>——清算掉那 89 次人云亦云的错误，清算掉那 24 道连全站都会、只有你不会的送分题，清算掉那个"看到大数就选它"的自己。<br>
+  <b>去吧。带着商人的贪婪和残忍，把这 183 道题，一道一道，变成你的分数。</b></p>
+
+  <div class="sign">—— 你的资料分析金牌导师</div>
+</div>
+
+<footer>
+  报告生成依据：《资料分析书籍目录.txt》（全书 1020 题）· 《资料分析_题库.json》（一刷错题 183 题，ZL001–ZL183）<br>
+  全部统计口径：逐题比对「书籍章节 / 书籍部分 / 标准答案 / 一刷原始记录 / APP全站正确率 / APP易错项 / APP考点 / 题干关键词」八项字段
+</footer>
+
+</div>
+</body>
+</html>

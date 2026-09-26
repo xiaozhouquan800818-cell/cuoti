@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>三科易错板块与看课重点 · 2026-09-26</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2A4A'/%3E%3Cpath d='M20 42 L32 18 L44 42 M24 34 L40 34' stroke='%23E9B45A' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"/>
+<style>
+  :root{
+    --navy:#12243d; --navy2:#1e3a5f; --navy3:#2b527f;
+    --gold:#e8b64c; --gold2:#ffd166; --goldbg:#fff6e3;
+    --ink:#1a1d24; --muted:#5a6473; --faint:#8fa3bd;
+    --accent:#12243d; --accent-soft:#eaf2fd;
+    --bg:#f6f8fb; --card:#ffffff; --line:#e3e7ee;
+    --green:#1f7a4d; --green-soft:#e9f7ef;
+    --red:#c62828; --redbg:#fdecec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ===== 顶部导航 ===== */
+  .topnav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,36,61,.96);backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .topnav-inner{
+    max-width:1120px;margin:0 auto;padding:11px 20px;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .topnav-brand{
+    display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;color:#fff;
+    white-space:nowrap;
+  }
+  .topnav-brand svg{flex:none;}
+  .topnav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .topnav-links a{
+    text-decoration:none;color:#b9cde4;font-size:13.5px;font-weight:600;
+    padding:6px 12px;border-radius:999px;transition:.15s;
+  }
+  .topnav-links a:hover{background:rgba(255,255,255,.1);color:#fff;}
+  .topnav-links a.active{background:var(--gold);color:var(--navy);}
+  /* ===== 通用容器 ===== */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+  /* ===== Hero ===== */
+  .hero{
+    padding:62px 0 46px;text-align:center;
+    background:linear-gradient(135deg,#0f1e33 0%,#1e3a5f 55%,#2b527f 100%);
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(700px 300px at 82% 12%, rgba(232,182,76,.14), transparent 60%),
+               radial-gradient(600px 260px at 10% 90%, rgba(96,165,250,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .hero .kicker{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(232,182,76,.14);color:var(--gold2);font-size:13px;font-weight:700;
+    padding:6px 16px;border-radius:999px;letter-spacing:1px;margin-bottom:22px;
+    border:1px solid rgba(232,182,76,.4);
+  }
+  .hero h1{font-size:40px;font-weight:900;color:#fff;line-height:1.25;letter-spacing:1px;}
+  .hero .sub{color:#c3d4e8;font-size:15.5px;margin-top:14px;line-height:1.9;}
+  .hero .src{color:#9fb6d0;font-size:13px;margin-top:12px;}
+  .hero .src a{color:var(--gold2);text-decoration:none;border-bottom:1px dashed var(--gold2);}
+  /* ===== 统计卡片 ===== */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0 12px;}
+  .stat-card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+    box-shadow:0 1px 3px rgba(18,36,61,.05);position:relative;overflow:hidden;
+  }
+  .stat-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--navy2);}
+  .stat-card.pd::before{background:var(--green);}
+  .stat-card.yy::before{background:var(--gold);}
+  .stat-card.zl::before{background:var(--navy3);}
+  .chart-title .c-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:0 0 auto;}
+  .stat-name{font-size:14px;font-weight:700;color:var(--muted);display:flex;align-items:center;gap:8px;}
+  .stat-num{font-size:34px;font-weight:900;color:var(--navy);margin:10px 0 4px;}
+  .stat-num small{font-size:16px;font-weight:700;color:var(--faint);}
+  .stat-desc{font-size:13px;color:var(--muted);}
+  .stat-desc b{color:var(--ink);}
+  .note-bar{
+    background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold);
+    border-radius:10px;padding:14px 20px;margin:18px 0 8px;font-size:13.5px;color:var(--muted);
+  }
+  .note-bar b{color:var(--ink);}
+  /* ===== 章节区块 ===== */
+  section.block{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:30px 0;padding:34px 36px;box-shadow:0 2px 8px rgba(18,36,61,.05);}
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+  .sec-no{
+    width:44px;height:44px;border-radius:12px;background:var(--navy2);color:var(--gold2);
+    display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex:none;
+  }
+  .sec-title{font-size:25px;font-weight:900;color:var(--navy);}
+  .sec-badge{
+    font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:999px;
+    background:var(--goldbg);color:#8a6408;margin-left:auto;white-space:nowrap;
+  }
+  .sec-badge.gray{background:#EEF0F3;color:var(--muted);}
+  .sec-badge.green{background:var(--green-soft);color:var(--green);}
+  .sec-intro{color:var(--muted);font-size:14px;margin:2px 0 22px;}
+  .sec-intro b{color:var(--ink);}
+  /* 重点卡片 */
+  .focus-list{display:grid;gap:14px;margin-bottom:28px;}
+  .focus-item{
+    border:1px solid var(--line);border-radius:14px;padding:16px 20px;
+    background:#fbfcfe;transition:.15s;
+  }
+  .focus-item:hover{border-color:var(--navy3);box-shadow:0 2px 10px rgba(18,36,61,.08);}
+  .focus-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+  .focus-idx{
+    font-weight:900;color:#8a6408;font-size:15px;flex:none;width:26px;text-align:center;
+    height:26px;line-height:26px;border-radius:8px;background:var(--goldbg);
+  }
+  .focus-title{font-size:16.5px;font-weight:800;color:var(--navy);}
+  .focus-metric{font-size:13px;font-weight:700;color:#8a6408;background:var(--goldbg);padding:2px 10px;border-radius:999px;margin-left:auto;white-space:nowrap;}
+  .focus-body{font-size:14.5px;color:#3A4048;}
+  .focus-body .hl{
+    background:var(--goldbg);color:#8a6408;font-weight:800;padding:0 6px;border-radius:6px;
+    font-style:normal;white-space:nowrap;
+  }
+  .focus-body .qno{color:var(--navy2);font-weight:800;}
+  /* 图表区 */
+  .chart-title{font-size:15px;font-weight:800;color:var(--ink);margin:24px 0 4px;display:flex;align-items:center;gap:8px;}
+
+  @media (max-width:720px){
+    .wrap{padding:0 10px;}
+    .hero{padding:42px 14px 34px;}
+    .hero h1{font-size:27px;}
+    .stats{grid-template-columns:1fr;gap:12px;}
+    section.block{padding:20px 16px;border-radius:14px;}
+    .sec-title{font-size:20px;}
+  }
+
+  /* ===== 图表说明与容器 ===== */
+  .chart-sub{color:var(--muted);font-size:13px;margin:2px 0 14px;line-height:1.8;}
+  .chart-sub b{color:var(--ink);}
+  .chart-box{width:100%;height:340px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(18,36,61,.05);}
+  .chart-box.tall{height:540px;}
+  /* ===== 入库密度条形图 ===== */
+  .overview{display:grid;gap:14px;margin:12px 0 22px;}
+  .ov-item{
+    display:grid;grid-template-columns:118px 1fr;gap:6px 18px;align-items:center;
+    padding:13px 18px;border:1px solid var(--line);border-radius:12px;background:#fbfcfe;
+  }
+  .ov-name{grid-row:1/3;font-weight:800;color:var(--navy);font-size:15px;}
+  .ov-num{font-size:13.5px;color:var(--muted);line-height:1.7;}
+  .ov-num b{color:var(--ink);}
+  .ov-bar{height:11px;background:#eef1f6;border-radius:99px;overflow:hidden;}
+  .ov-fill{height:100%;background:linear-gradient(90deg,var(--navy2),var(--navy3));border-radius:99px;}
+  .ov-fill.gold{background:linear-gradient(90deg,#c8931f,var(--gold2));}
+  .ov-fill.green{background:linear-gradient(90deg,#17603b,var(--teal));}
+  .ov-cap{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--sub);}
+  /* ===== 章节明细表 ===== */
+  .tbl-wrap{width:100%;overflow-x:auto;border-radius:12px;box-shadow:0 1px 3px rgba(18,36,61,.05);}
+  .tbl-wrap table{min-width:640px;}
+  .tbl-wrap th,.tbl-wrap td{padding:12px 14px;white-space:nowrap;}
+  .rank{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:7px;background:#eef1f6;color:var(--muted);
+    font-weight:800;font-size:12.5px;
+  }
+  .rank.top{background:var(--gold);color:#7a5a12;}
+  .tag-adv,.tag-basic{
+    display:inline-block;padding:3px 11px;border-radius:999px;font-size:12.5px;font-weight:600;
+  }
+  .tag-adv{background:var(--bluebg);color:var(--blue);}
+  .tag-basic{background:#eef1f6;color:var(--muted);}
+  .tbl-wrap td.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .tbl-wrap td.density{font-weight:800;color:var(--navy2);}
+  .tbl-wrap td.density.hot{color:var(--red);}
+  /* ===== 执行顺序 ===== */
+  .order-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:14px 0 16px;}
+  .order-card{
+    position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);
+    border-radius:16px;padding:20px 20px 16px;box-shadow:0 1px 3px rgba(18,36,61,.05);
+  }
+  .order-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;}
+  .order-card.o1::before{background:var(--navy2);}
+  .order-card.o2::before{background:var(--gold);}
+  .order-card.o3::before{background:var(--green);}
+  .o-step{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:1px;
+    color:#8a6408;background:var(--goldbg);border:1px solid #ecdcb0;
+    padding:3px 11px;border-radius:999px;margin-bottom:10px;
+  }
+  .order-name{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:8px;}
+  .order-goal{font-size:13.5px;color:var(--muted);line-height:1.8;margin-bottom:10px;}
+  .order-goal b{color:var(--ink);}
+  .order-steps{margin:0;padding-left:20px;list-style:disc;display:grid;gap:7px;}
+  .order-steps li{font-size:13.5px;color:#3A4048;line-height:1.7;}
+  .o-k{
+    background:var(--bluebg);color:var(--blue);font-weight:800;font-size:13px;
+    padding:1px 9px;border-radius:7px;white-space:nowrap;
+  }
+  .order-note{
+    background:var(--goldbg);border:1px solid #ecdcb0;border-left:4px solid var(--gold);
+    border-radius:10px;padding:14px 18px;font-size:13.5px;color:#6d5b34;line-height:1.9;margin-top:6px;
+  }
+  .order-note b{color:#7a5a12;}
+  /* ===== 双栏卡（机器 / 人工） ===== */
+  .duo-card{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+    box-shadow:0 1px 3px rgba(18,36,61,.05);position:relative;overflow:hidden;
+  }
+  .duo-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;}
+  .duo-card.machine::before{background:var(--navy2);}
+  .duo-card.human::before{background:var(--gold);}
+  .duo-title{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:10px;}
+  /* ===== 页脚 ===== */
+  .footer{
+    background:linear-gradient(135deg,#0f1e33,#1e3a5f);color:#8fa3bd;
+    margin-top:40px;padding:26px 20px;font-size:13px;
+  }
+  .footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;}
+  .footer a{color:#b9cde4;text-decoration:none;}
+  .backtop{
+    display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#7a5a12;
+    font-weight:800;font-size:13px;padding:9px 18px;border-radius:999px;transition:background .15s;
+  }
+  .backtop:hover{background:var(--gold2);}
+  @media (max-width:900px){
+    .order-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .chart-box{height:300px;}
+    .chart-box.tall{height:420px;}
+    .ov-item{grid-template-columns:96px 1fr;padding:11px 13px;}
+    .tbl-wrap{overflow-x:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">
+      <svg width="22" height="22" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1B2A4A"/><path d="M20 42 L32 18 L44 42 M24 34 L40 34" stroke="#E9B45A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      看课重点 · 三科
+    </div>
+    <div class="topnav-links">
+      <a href="#overview" class="active">总览</a>
+      <a href="#zl">资料分析</a>
+      <a href="#pd">判断推理</a>
+      <a href="#yy">言语理解</a>
+      <a href="#order">执行顺序</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="overview">
+  <!-- ===== Hero ===== -->
+  <header class="hero">
+    <div class="kicker">2026-09-26 更新 · 听课规划</div>
+    <h1>三科易错板块与看课重点</h1>
+    <p class="sub">依据三份题库 JSON 与书籍目录章节题量编制：先看密度最高的易错板块，再按优先级补课。</p>
+    <p class="src">数据来源：<a href="https://drive.google.com/drive/folders/1UNLY6WA_KJ9O2KZT96r9xDUD3d17RsY1">言语题库</a> ·
+      <a href="https://drive.google.com/drive/folders/1s05I91bZZvsPkeF8qXNQo7wfF5Rpg7k8">判断题库</a> ·
+      <a href="https://drive.google.com/drive/folders/1l4zqB4AwxXHZJwMG4MvxI5W1UVoc9mc1">资料题库</a> ·
+      <a href="https://drive.google.com/drive/folders/14sGoyDPS6I0rbF3sSdTFnWskGM4H4R8I">书籍目录</a></p>
+  </header>
+
+  <!-- ===== 统计口径卡片 ===== -->
+  <div class="stats">
+    <div class="stat-card zl">
+      <div class="stat-name">资料分析</div>
+      <div class="stat-num">183 <small>/ 前四章 920 题</small></div>
+      <div class="stat-desc">一刷答错 <b>183</b> 条，二刷 <b>尚未记录</b>；当前正在看课。</div>
+    </div>
+    <div class="stat-card pd">
+      <div class="stat-name">判断推理</div>
+      <div class="stat-num">271 <small>/ 1002 题</small></div>
+      <div class="stat-desc">一刷答错 <b>270</b> 条，二刷仍错 <b>97 / 271</b>。</div>
+    </div>
+    <div class="stat-card yy">
+      <div class="stat-name">言语理解与表达</div>
+      <div class="stat-num">102 <small>/ 1005 题</small></div>
+      <div class="stat-desc">一刷答错 <b>102</b> 条，二刷仍错 <b>52 / 102</b>。</div>
+    </div>
+  </div>
+
+  <div class="note-bar">
+    <b>统计口径：</b>APP 考点为一题多标签，下文不同考点的题数可能重叠；判断 PD006 标“学过选 D”、标准答案也是 D，统计一刷答错时已剔除；“看课注意”是需核对的解题环节，不是对个人错因的断言。言语有 21 题二刷栏记录 2—5 次尝试仍答错（逻辑填空 16、片段阅读 5）。资料第五章综合训练 100 题按进度不参与“前四章 920 题”统计。
+  </div>
+
+  <!-- ===== 01 资料分析 ===== -->
+  <section class="block" id="zl">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <div class="sec-title">资料分析</div>
+      <div class="sec-badge green">当前正在看课 · 先补这几块</div>
+    </div>
+    <p class="sec-intro">按<b>入库密度</b>降序补课：先按时间、主体、单位定位，再决定现期还是基期；遇“以下正确/错误”先排明显项再算难项。</p>
+
+    <div class="focus-list">
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">1</span><span class="focus-title">文字资料 · 提升进阶</span><span class="focus-metric">30/80 · 37.5%</span></div>
+        <div class="focus-body">本次入库密度最高。听课时练“先按时间、主体、单位定位，再决定现期还是基期”，把<b>跨段找数与列式分开</b>。文字资料基础（第 78 页起）为 33/200。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">2</span><span class="focus-title">综合资料 · 提升进阶</span><span class="focus-metric">47/160 · 29.4%</span></div>
+        <div class="focus-body">重点看表、图、文字<b>跨材料定位</b>，先判断计算量；遇“以下正确/错误”<b>先排明显项再算难项</b>。基础（第 152 页起）亦有 44/240。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">3</span><span class="focus-title">综合分析题</span><span class="focus-metric">42 条入库</span></div>
+        <div class="focus-body">APP 考点标签，分散各章，<span class="hl">不要与“第四章综合资料”混为一类</span>。专盯选项真假核验：<b>时间、单位、比较对象、增长率与增长量有没有换</b>，先用量级和方向排除。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">4</span><span class="focus-title">比重系列</span><span class="focus-metric">现期25 / 基期7 / 两期6</span></div>
+        <div class="focus-body">学会从“谁占谁”确定分子分母；基期比重例题 <span class="qno">ZL100</span>（第 165 页）要把部分、总体的增长率分别还原，<b>两期比重先看分子增速和分母增速的大小</b>。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">5</span><span class="focus-title">平均数、增长与倍数</span><span class="focus-metric">现期平均13 / 增长率13 / 倍数10</span></div>
+        <div class="focus-body">另有增长量比较、增长率比较各 5 条。特别核对“<b>几个月月均</b>”的月份数、增长率分母是基期、倍数是谁除以谁。<span class="qno">ZL001</span>（第 8 页）月均销量题全站正确率 91% 仍被收录，可作基本读题与定位的自检题。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">6</span><span class="focus-title">低频特殊模型</span><span class="focus-metric">混合4 / 年均3 / 容斥3 / 间隔2</span></div>
+        <div class="focus-body">先听<b>思路和适用条件</b>，再做对应错题；容斥可对照 <span class="qno">ZL150</span>（第 243—244 页）画出“只属于 A、只属于 B、同时属于、两者都不属于”。</div>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>各板块入库密度（按降序）</div>
+    <div class="chart-sub">条形长度 = 入库一刷错题 / 书中题量；资料暂无二刷记录。</div>
+    <div class="chart-box" id="chart-zl"></div>
+
+    <div class="chart-title"><span class="c-dot"></span>章节总览</div>
+    <div class="overview">
+      <div class="ov-item">
+        <div class="ov-name">综合资料</div>
+        <div class="ov-num">91 / 400 题入库 · 密度 <b>22.8%</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:22.8%"></div></div>
+        <div class="ov-cap"><span>二刷：未记录</span><span>重点：跨材料定位</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">文字资料</div>
+        <div class="ov-num">63 / 280 题入库 · 密度 <b>22.5%</b></div>
+        <div class="ov-bar"><div class="ov-fill gold" style="width:22.5%"></div></div>
+        <div class="ov-cap"><span>二刷：未记录</span><span>重点：跨段找数</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">表格资料</div>
+        <div class="ov-num">20 / 160 题入库 · 密度 <b>12.5%</b></div>
+        <div class="ov-bar"><div class="ov-fill green" style="width:12.5%"></div></div>
+        <div class="ov-cap"><span>二刷：未记录</span><span>重点：行列对应</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">图形资料</div>
+        <div class="ov-num">9 / 80 题入库 · 密度 <b>11.2%</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:11.2%"></div></div>
+        <div class="ov-cap"><span>二刷：未记录</span><span>重点：读图定位</span></div>
+      </div>
+    </div>
+    <p class="chart-sub" style="margin-top:10px;">资料尚无二刷，现阶段不能说哪部分“听完课还不会”；看完后用<b>未见过的材料</b>检验。第五章综合训练 100 题暂不参与排序。</p>
+
+    <div class="chart-title"><span class="c-dot"></span>章节明细表（按入库密度降序）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:56px">排名</th><th style="width:38%">板块</th><th class="num" style="width:24%">入库一刷错题 / 书中题量</th><th class="num" style="width:18%">入库密度</th><th class="num" style="width:20%">二刷仍错 / 该板块</th></tr></thead>
+        <tbody>
+          <tr><td><span class="rank top">1</span></td><td><span class="tag-adv">文字资料 / 提升进阶</span></td><td class="num">30 / 80</td><td class="num density hot">37.5%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank top">2</span></td><td><span class="tag-adv">综合资料 / 提升进阶</span></td><td class="num">47 / 160</td><td class="num density">29.4%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank top">3</span></td><td><span class="tag-adv">表格资料 / 提升进阶</span></td><td class="num">11 / 40</td><td class="num density">27.5%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank">4</span></td><td><span class="tag-basic">综合资料 / 夯实基础</span></td><td class="num">44 / 240</td><td class="num density">18.3%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank">5</span></td><td><span class="tag-basic">文字资料 / 夯实基础</span></td><td class="num">33 / 200</td><td class="num density">16.5%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank">6</span></td><td><span class="tag-adv">图形资料 / 提升进阶</span></td><td class="num">6 / 40</td><td class="num density">15.0%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank">7</span></td><td><span class="tag-basic">表格资料 / 夯实基础</span></td><td class="num">9 / 120</td><td class="num density">7.5%</td><td class="num">未记录</td></tr>
+          <tr><td><span class="rank">8</span></td><td><span class="tag-basic">图形资料 / 夯实基础</span></td><td class="num">3 / 40</td><td class="num density">7.5%</td><td class="num">未记录</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 02 判断推理 ===== -->
+  <section class="block" id="pd">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div class="sec-title">判断推理</div>
+      <div class="sec-badge">复错最多的知识点先听</div>
+    </div>
+    <p class="sec-intro">二刷仍错 <b>97 / 271</b>；先听复错集中的<b>对应关系、组合排列、定义判断</b>，削弱与加强次之，图形只做针对性补课。</p>
+
+    <div class="focus-list">
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">1</span><span class="focus-title">类比推理 · 对应关系</span><span class="focus-metric">23/52 · 二刷仍错11</span></div>
+        <div class="focus-body">一刷入库密度 44.2%。把“<b>方式—目的、先后顺序、同一主体、功能用途、材料成品</b>”逐类区分；<span class="qno">PD157</span>（第 241 页）“装订→成册”的方式目的与时间先后混在备选项，<span class="qno">PD185</span>（第 253 页）还要核对各步主体是否相同。APP 标签全书共 31 条、二刷仍错 15（含专项集训）。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">2</span><span class="focus-title">组合排列</span><span class="focus-metric">13/35 · 二刷仍错6</span></div>
+        <div class="focus-body">重点听<b>确定条件先入表、排除法、代入法和假设分支</b>；<span class="qno">PD202</span>（第 278 页）同时涉及“所有”“同一个”“职业不同”，适合练人、职业、通话对象三列对应。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">3</span><span class="focus-title">定义判断 · 单定义 / 多定义</span><span class="focus-metric">38/114 · 二刷13错；15/58 · 二刷6错</span></div>
+        <div class="focus-body">先圈<b>主体、行为、方式、目的、必要条件</b>，再看题目要求选“符合/不符合”“正确/错误”。APP 标签“特殊问法”10 条、二刷仍错 6；多定义 <span class="qno">PD113</span>（第 201 页）要先判断选项说的是前提的论证还是由前提推出结论。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">4</span><span class="focus-title">逻辑判断 · 削弱与加强</span><span class="focus-metric">各17条 · 二刷8错 / 6错</span></div>
+        <div class="focus-body">先写<b>论点与论据之间的关系</b>；削弱看因果倒置、他因、样本与论点范围，加强看搭桥与必要条件，尤其别漏<span class="hl">“不能加强/不能削弱”选非题</span>。<span class="qno">PD215</span>（第 293 页）是搭桥，<span class="qno">PD235</span>（第 331 页）是他因与无关项辨别。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">5</span><span class="focus-title">日常结论 / 逻辑专项集训</span><span class="focus-metric">7/20 · 二刷4错；13/50 · 二刷7错</span></div>
+        <div class="focus-body">课上专练“<b>可能、一定、部分、全部</b>”的强弱，材料只支持什么就选什么；综合卷考的是<b>识别题型后切换方法</b>。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">6</span><span class="focus-title">图形推理 · 针对性补课</span><span class="focus-metric">数量规律21/81 · 二刷6错</span></div>
+        <div class="focus-body">属性规律 10/28 但二刷 0/10、空间重构二刷 1/7 已有改善；数量规律需继续练“<b>先找特征图→判断数面、线、点还是元素</b>”，不是每个都从头乱数。新题速度和命中率再决定是否回看完整图形课。</div>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>各节入库密度（24 节 · 按降序）</div>
+    <div class="chart-sub">条形长度 = 入库一刷错题 / 书中题量；数值为二刷仍错 / 该板块入库题。</div>
+    <div class="chart-box tall" id="chart-pd"></div>
+
+    <div class="chart-title"><span class="c-dot"></span>章节总览</div>
+    <div class="overview">
+      <div class="ov-item">
+        <div class="ov-name">定义判断</div>
+        <div class="ov-num">62 / 202 题入库 · 密度 <b>30.7%</b> · 二刷仍错 <b>24</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:30.7%"></div></div>
+        <div class="ov-cap"><span>入库密度最高</span><span>单定义 + 多定义</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">类比推理</div>
+        <div class="ov-num">60 / 213 题入库 · 密度 <b>28.2%</b> · 二刷仍错 <b>23</b></div>
+        <div class="ov-bar"><div class="ov-fill gold" style="width:28.2%"></div></div>
+        <div class="ov-cap"><span>对应关系为主</span><span>逻辑关系 40 条</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">逻辑判断</div>
+        <div class="ov-num">83 / 311 题入库 · 密度 <b>26.7%</b> · 二刷仍错 <b>38</b></div>
+        <div class="ov-bar"><div class="ov-fill green" style="width:26.7%"></div></div>
+        <div class="ov-cap"><span>二刷错题总数最多</span><span>削弱加强 + 组合排列</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">图形推理</div>
+        <div class="ov-num">65 / 276 题入库 · 密度 <b>23.6%</b> · 二刷仍错 <b>12</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:23.6%"></div></div>
+        <div class="ov-cap"><span>二刷改善最明显</span><span>只做针对性补课</span></div>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>章节明细表（24 节 · 按入库密度降序）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:52px">排名</th><th style="width:40%">板块</th><th class="num" style="width:22%">入库一刷错题 / 书中题量</th><th class="num" style="width:16%">入库密度</th><th class="num" style="width:20%">二刷仍错 / 该板块</th></tr></thead>
+        <tbody>
+          <tr><td><span class="rank top">1</span></td><td><span class="tag-adv">逻辑判断 / 组合排列</span></td><td class="num">13 / 35</td><td class="num density hot">37.1%</td><td class="num">6 / 13</td></tr>
+          <tr><td><span class="rank top">2</span></td><td><span class="tag-adv">图形推理 / 属性规律</span></td><td class="num">10 / 28</td><td class="num density hot">35.7%</td><td class="num">0 / 10</td></tr>
+          <tr><td><span class="rank top">3</span></td><td><span class="tag-adv">逻辑判断 / 日常结论</span></td><td class="num">7 / 20</td><td class="num density hot">35.0%</td><td class="num">4 / 7</td></tr>
+          <tr><td><span class="rank top">4</span></td><td><span class="tag-adv">定义判断 / 单定义</span></td><td class="num">38 / 114</td><td class="num density">33.3%</td><td class="num">13 / 38</td></tr>
+          <tr><td><span class="rank top">5</span></td><td><span class="tag-adv">逻辑判断 / 原因解释</span></td><td class="num">4 / 12</td><td class="num density">33.3%</td><td class="num">2 / 4</td></tr>
+          <tr><td><span class="rank">6</span></td><td><span class="tag-adv">类比推理 / 逻辑关系</span></td><td class="num">40 / 126</td><td class="num density">31.7%</td><td class="num">14 / 40</td></tr>
+          <tr><td><span class="rank">7</span></td><td><span class="tag-adv">图形推理 / 空间重构</span></td><td class="num">7 / 23</td><td class="num density">30.4%</td><td class="num">1 / 7</td></tr>
+          <tr><td><span class="rank">8</span></td><td><span class="tag-adv">定义判断 / 综合训练或专项集训</span></td><td class="num">9 / 30</td><td class="num density">30.0%</td><td class="num">5 / 9</td></tr>
+          <tr><td><span class="rank">9</span></td><td><span class="tag-adv">类比推理 / 拆分思维</span></td><td class="num">5 / 17</td><td class="num density">29.4%</td><td class="num">1 / 5</td></tr>
+          <tr><td><span class="rank">10</span></td><td><span class="tag-adv">逻辑判断 / 综合训练或专项集训</span></td><td class="num">13 / 50</td><td class="num density">26.0%</td><td class="num">7 / 13</td></tr>
+          <tr><td><span class="rank">11</span></td><td><span class="tag-adv">图形推理 / 数量规律</span></td><td class="num">21 / 81</td><td class="num density">25.9%</td><td class="num">6 / 21</td></tr>
+          <tr><td><span class="rank">12</span></td><td><span class="tag-adv">定义判断 / 多定义</span></td><td class="num">15 / 58</td><td class="num density">25.9%</td><td class="num">6 / 15</td></tr>
+          <tr><td><span class="rank">13</span></td><td><span class="tag-adv">逻辑判断 / 加强题型</span></td><td class="num">17 / 68</td><td class="num density">25.0%</td><td class="num">6 / 17</td></tr>
+          <tr><td><span class="rank">14</span></td><td><span class="tag-adv">图形推理 / 样式规律</span></td><td class="num">5 / 20</td><td class="num density">25.0%</td><td class="num">1 / 5</td></tr>
+          <tr><td><span class="rank">15</span></td><td><span class="tag-adv">逻辑判断 / 真假推理</span></td><td class="num">3 / 12</td><td class="num density">25.0%</td><td class="num">1 / 3</td></tr>
+          <tr><td><span class="rank">16</span></td><td><span class="tag-adv">逻辑判断 / 削弱题型</span></td><td class="num">17 / 69</td><td class="num density">24.6%</td><td class="num">8 / 17</td></tr>
+          <tr><td><span class="rank">17</span></td><td><span class="tag-adv">图形推理 / 综合训练或专项集训</span></td><td class="num">12 / 50</td><td class="num density">24.0%</td><td class="num">2 / 12</td></tr>
+          <tr><td><span class="rank">18</span></td><td><span class="tag-adv">类比推理 / 综合训练或专项集训</span></td><td class="num">7 / 30</td><td class="num density">23.3%</td><td class="num">5 / 7</td></tr>
+          <tr><td><span class="rank">19</span></td><td><span class="tag-adv">类比推理 / 语义关系</span></td><td class="num">7 / 32</td><td class="num density">21.9%</td><td class="num">3 / 7</td></tr>
+          <tr><td><span class="rank">20</span></td><td><span class="tag-adv">逻辑判断 / 翻译推理</span></td><td class="num">9 / 45</td><td class="num density">20.0%</td><td class="num">4 / 9</td></tr>
+          <tr><td><span class="rank">21</span></td><td><span class="tag-basic">图形推理 / 位置规律</span></td><td class="num">5 / 30</td><td class="num density">16.7%</td><td class="num">0 / 6</td></tr>
+          <tr><td><span class="rank">22</span></td><td><span class="tag-basic">类比推理 / 语法关系</span></td><td class="num">1 / 8</td><td class="num density">12.5%</td><td class="num">0 / 1</td></tr>
+          <tr><td><span class="rank">23</span></td><td><span class="tag-basic">图形推理 / 立体拼合、截面图、三视图与多面体折叠</span></td><td class="num">3 / 26</td><td class="num density">11.5%</td><td class="num">1 / 3</td></tr>
+          <tr><td><span class="rank">24</span></td><td><span class="tag-basic">图形推理 / 特殊规律</span></td><td class="num">2 / 18</td><td class="num density">11.1%</td><td class="num">1 / 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 03 言语理解 ===== -->
+  <section class="block" id="yy">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div class="sec-title">言语理解与表达</div>
+      <div class="sec-badge">重看结构与语境</div>
+    </div>
+    <p class="sec-intro">二刷仍错 <b>52 / 102</b>；其中 <b>21 题二刷多次尝试仍答错</b>（逻辑填空 16、片段阅读 5），不适合继续原题盲刷，优先消化错因。</p>
+
+    <div class="focus-list">
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">1</span><span class="focus-title">片段阅读 · 综合训练</span><span class="focus-metric">24/100 · 二刷仍错13</span></div>
+        <div class="focus-body">全科一刷入库最多的单个训练板块。错题 APP 标签以“主题词”9 条、“细节判断”7 条为主；学会<b>区分引入、例证、结论和对策句</b>，选项要同时覆盖主旨与核心话题。<span class="qno">YY001</span>（第 10 页）与 <span class="qno">YY002</span>（第 27 页）一刷、二刷都错在同一选项，可对照“现象/背景”与“末尾对策”在全文中的分量。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">2</span><span class="focus-title">逻辑填空 · 语境对应关系</span><span class="focus-metric">21/125 · 二刷仍错11</span></div>
+        <div class="focus-body">高难进阶（第 266 页起）12/45、二刷仍错 7；APP 标签“前后呼应”34 条、二刷仍错 18。听课专练<b>空格与前后哪一句相照应</b>，再核搭配对象、语气程度与成语侧重点。<span class="qno">YY074</span>（第 263 页）“安危与共”描述关系、“和衷共济”强调共同克服困难，这类状态与动作的区别要说得出来。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">3</span><span class="focus-title">中心理解 · 分述句特征</span><span class="focus-metric">7/30 · 二刷仍错4</span></div>
+        <div class="focus-body">识别<b>并列细节、铺垫、例证是不是只为支撑后面的观点</b>；<span class="qno">YY015—YY017</span> 可连续回看。关联词一节（第 2 页起）6/85、二刷仍错 4，重点是转折、因果、对策的先后和主题词的一致性。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">4</span><span class="focus-title">接语选择</span><span class="focus-metric">3/40 · 二刷3题全部仍错</span></div>
+        <div class="focus-body">样本只有三题，但复错明显。重点看<b>尾句留下的待解决问题与下文话题</b>，剔除前文已讲、只覆盖尾句一小部分或忽然换话题的选项；<span class="qno">YY054</span>（第 186 页）与 <span class="qno">YY055</span>（第 192 页）可直接练。</div>
+      </div>
+      <div class="focus-item">
+        <div class="focus-head"><span class="focus-idx">5</span><span class="focus-title">语句排序、填空与篇章阅读 · 短练习维持</span><span class="focus-metric">排序填空各2 · 篇章4</span></div>
+        <div class="focus-body">排序、填空各 2/50、二刷各仍错 1；篇章阅读共 4/105、二刷全部改对。<b>新卷表现若变差再扩大学习时间</b>，不要只凭入库少就假定已完全掌握。</div>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>各节入库密度（21 节 · 按降序）</div>
+    <div class="chart-sub">条形长度 = 入库一刷错题 / 书中题量；数值为二刷仍错 / 该板块入库题。</div>
+    <div class="chart-box tall" id="chart-yy"></div>
+
+    <div class="chart-title"><span class="c-dot"></span>章节总览</div>
+    <div class="overview">
+      <div class="ov-item">
+        <div class="ov-name">片段阅读</div>
+        <div class="ov-num">49 / 365 题入库 · 密度 <b>13.4%</b> · 二刷仍错 <b>25</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:13.4%"></div></div>
+        <div class="ov-cap"><span>入库密度最高</span><span>综合训练 24 条为主</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">逻辑填空</div>
+        <div class="ov-num">37 / 355 题入库 · 密度 <b>10.4%</b> · 二刷仍错 <b>20</b></div>
+        <div class="ov-bar"><div class="ov-fill gold" style="width:10.4%"></div></div>
+        <div class="ov-cap"><span>16 道多次尝试仍错</span><span>优先消化</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">语句表达</div>
+        <div class="ov-num">12 / 180 题入库 · 密度 <b>6.7%</b> · 二刷仍错 <b>7</b></div>
+        <div class="ov-bar"><div class="ov-fill green" style="width:6.7%"></div></div>
+        <div class="ov-cap"><span>接语 3 题全错</span><span>排序填空维持</span></div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-name">篇章阅读</div>
+        <div class="ov-num">4 / 105 题入库 · 密度 <b>3.8%</b> · 二刷仍错 <b>0</b></div>
+        <div class="ov-bar"><div class="ov-fill" style="width:3.8%"></div></div>
+        <div class="ov-cap"><span>二刷全部改对</span><span>短练习维持</span></div>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>章节明细表（21 节 · 按入库密度降序）</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:52px">排名</th><th style="width:40%">板块</th><th class="num" style="width:22%">入库一刷错题 / 书中题量</th><th class="num" style="width:16%">入库密度</th><th class="num" style="width:20%">二刷仍错 / 该板块</th></tr></thead>
+        <tbody>
+          <tr><td><span class="rank top">1</span></td><td><span class="tag-adv">片段阅读 / 综合训练或专项集训</span></td><td class="num">24 / 100</td><td class="num density hot">24.0%</td><td class="num">13 / 24</td></tr>
+          <tr><td><span class="rank top">2</span></td><td><span class="tag-adv">片段阅读 / 分述句特征</span></td><td class="num">7 / 30</td><td class="num density hot">23.3%</td><td class="num">4 / 7</td></tr>
+          <tr><td><span class="rank top">3</span></td><td><span class="tag-adv">逻辑填空 / 对应关系</span></td><td class="num">21 / 125</td><td class="num density">16.8%</td><td class="num">11 / 21</td></tr>
+          <tr><td><span class="rank">4</span></td><td><span class="tag-adv">片段阅读 / 主题词</span></td><td class="num">5 / 35</td><td class="num density">14.3%</td><td class="num">2 / 5</td></tr>
+          <tr><td><span class="rank">5</span></td><td><span class="tag-adv">语句表达 / 综合训练或专项集训</span></td><td class="num">5 / 40</td><td class="num density">12.5%</td><td class="num">2 / 5</td></tr>
+          <tr><td><span class="rank">6</span></td><td><span class="tag-adv">片段阅读 / 标题填入题</span></td><td class="num">3 / 30</td><td class="num density">10.0%</td><td class="num">0 / 3</td></tr>
+          <tr><td><span class="rank">7</span></td><td><span class="tag-adv">逻辑填空 / 创新考法</span></td><td class="num">1 / 10</td><td class="num density">10.0%</td><td class="num">0 / 1</td></tr>
+          <tr><td><span class="rank">8</span></td><td><span class="tag-adv">逻辑填空 / 搭配对象</span></td><td class="num">4 / 50</td><td class="num density">8.0%</td><td class="num">1 / 4</td></tr>
+          <tr><td><span class="rank">9</span></td><td><span class="tag-adv">片段阅读 / 词句理解题</span></td><td class="num">2 / 25</td><td class="num density">8.0%</td><td class="num">1 / 2</td></tr>
+          <tr><td><span class="rank">10</span></td><td><span class="tag-adv">语句表达 / 接语选择题</span></td><td class="num">3 / 40</td><td class="num density">7.5%</td><td class="num">3 / 3</td></tr>
+          <tr><td><span class="rank">11</span></td><td><span class="tag-adv">逻辑填空 / 关联关系</span></td><td class="num">3 / 40</td><td class="num density">7.5%</td><td class="num">2 / 3</td></tr>
+          <tr><td><span class="rank">12</span></td><td><span class="tag-adv">片段阅读 / 关联词</span></td><td class="num">6 / 85</td><td class="num density">7.1%</td><td class="num">4 / 6</td></tr>
+          <tr><td><span class="rank">13</span></td><td><span class="tag-adv">逻辑填空 / 综合训练或专项集训</span></td><td class="num">7 / 100</td><td class="num density">7.0%</td><td class="num">5 / 7</td></tr>
+          <tr><td><span class="rank">14</span></td><td><span class="tag-adv">篇章阅读 / 公文题材</span></td><td class="num">2 / 30</td><td class="num density">6.7%</td><td class="num">0 / 2</td></tr>
+          <tr><td><span class="rank">15</span></td><td><span class="tag-basic">片段阅读 / 细节判断题</span></td><td class="num">2 / 45</td><td class="num density">4.4%</td><td class="num">1 / 2</td></tr>
+          <tr><td><span class="rank">16</span></td><td><span class="tag-basic">语句表达 / 语句填空题</span></td><td class="num">2 / 50</td><td class="num density">4.0%</td><td class="num">1 / 2</td></tr>
+          <tr><td><span class="rank">17</span></td><td><span class="tag-basic">语句表达 / 语句排序题</span></td><td class="num">2 / 50</td><td class="num density">4.0%</td><td class="num">1 / 2</td></tr>
+          <tr><td><span class="rank">18</span></td><td><span class="tag-basic">逻辑填空 / 词义侧重感情色彩程度轻重</span></td><td class="num">1 / 30</td><td class="num density">3.3%</td><td class="num">1 / 1</td></tr>
+          <tr><td><span class="rank">19</span></td><td><span class="tag-basic">篇章阅读 / 综合训练或专项集训</span></td><td class="num">1 / 30</td><td class="num density">3.3%</td><td class="num">0 / 1</td></tr>
+          <tr><td><span class="rank">20</span></td><td><span class="tag-basic">篇章阅读 / 普通题材</span></td><td class="num">1 / 45</td><td class="num density">2.2%</td><td class="num">0 / 1</td></tr>
+          <tr><td><span class="rank">21</span></td><td><span class="tag-basic">片段阅读 / 中心创新</span></td><td class="num">0 / 15</td><td class="num density">0.0%</td><td class="num">0 / 0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 04 听课执行顺序 ===== -->
+  <section class="block" id="order">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <div class="sec-title">听课执行顺序与复查</div>
+      <div class="sec-badge gray">先资料 → 再判断 → 后言语</div>
+    </div>
+    <div class="order-grid">
+      <div class="order-card o1">
+        <div class="o-step">第 1 阶段</div>
+        <div class="order-name">资料分析 · 接着看</div>
+        <div class="order-goal">目标：错题率 &lt; 10%，单组用时 ≤ <b>6 分 30 秒</b>；准确率先稳住，再压速度。</div>
+        <ul class="order-steps">
+          <li><span class="o-k">文字资料提升进阶</span> → 综合提升进阶</li>
+          <li><span class="o-k">综合分析 &amp; 比重</span> → 平均数、增长率、倍数</li>
+          <li>低频特殊模型：混合 / 年均 / 间隔 / 容斥</li>
+        </ul>
+      </div>
+      <div class="order-card o2">
+        <div class="o-step">第 2 阶段</div>
+        <div class="order-name">判断推理</div>
+        <div class="order-goal">先复错最集中的知识点，图形只做针对性补课。</div>
+        <ul class="order-steps">
+          <li><span class="o-k">类比对应</span> → 组合排列</li>
+          <li><span class="o-k">定义单 / 多 与特殊问法</span></li>
+          <li><span class="o-k">加强 / 削弱</span> → 日常结论与综合题</li>
+          <li>图形补 <span class="o-k">数量规律</span>（先找特征图）</li>
+        </ul>
+      </div>
+      <div class="order-card o3">
+        <div class="o-step">第 3 阶段</div>
+        <div class="order-name">言语理解</div>
+        <div class="order-goal">重看结构与语境，21 道“多次仍错”优先消化。</div>
+        <ul class="order-steps">
+          <li><span class="o-k">片段主旨 / 分述</span> → 区分引入、例证、结论、对策</li>
+          <li><span class="o-k">逻辑填空前后呼应与搭配</span></li>
+          <li><span class="o-k">接语选择</span>：尾句待解决问题与下文话题</li>
+        </ul>
+      </div>
+    </div>
+    <div class="order-note">对讲课老师每讲完一个方法，用自己的话说“<b>题干出现什么信号才适用</b>”，并用一题新题验证；每节课结束用新材料检验，不用刚看过解析的原题作为唯一证据。</div>
+
+    <div class="chart-title"><span class="c-dot"></span>记录错因：机器栏 + 人工栏</div>
+    <div class="duo">
+      <div class="duo-card machine">
+        <div class="duo-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M9 20h6M12 16v4"/></svg>
+          机器栏
+        </div>
+        <p>只写题目客观的<b>考点、错项机制与条件</b>：这题考什么、错误选项为什么错、正确选项需要什么前提。</p>
+      </div>
+      <div class="duo-card human">
+        <div class="duo-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B7791F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          人工栏
+        </div>
+        <p>留给你记录当时具体的<b>犹豫、读错的词、定位路径与更快的做法</b>。没有本人补记的题，不要把推测写成既成事实。</p>
+      </div>
+    </div>
+
+    <div class="chart-title"><span class="c-dot"></span>数据边界</div>
+    <div class="note-bar">
+      本报告未逐张复核图形题配图，也未获得未入库的所有正确题作答记录或资料的二刷记录。排行榜是对当前三份题库和目录的排序；<b>二刷口径只表示“已入库一刷错题再次答错”，不等于整本书二刷错误率</b>。
+    </div>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <span>《三科易错板块与看课重点》网页版 · 数据截至 2026-09-26 · 依据题库 JSON 与书籍目录编制</span>
+      <a class="backtop" href="#overview">↑ 回到顶部</a>
+    </div>
+  </footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>
+(function(){
+  if (typeof echarts === 'undefined') { return; }
+  var INK = '#20242B', MUTED = '#68707C', FAINT = '#9AA2AE', ACCENT = '#1B2A4A', GOLD = '#B7791F', LINE = '#E8E4DA';
+  function mkBar(id, data, opts){
+    var el = document.getElementById(id);
+    if (!el) return;
+    var chart = echarts.init(el);
+    var names = data.map(function(d){ return d[0]; });
+    var vals  = data.map(function(d){ return d[1]; });
+    var meta  = data.map(function(d){ return d[2] || ''; });
+    var colors = data.map(function(d){ return d[3] === 'hot' ? '#C0392B' : ACCENT; });
+    chart.setOption({
+      grid: { left: 12, right: 78, top: 6, bottom: 6, containLabel: true },
+      tooltip: {
+        trigger: 'axis', axisPointer: { type: 'shadow' },
+        backgroundColor: '#fff', borderColor: LINE, textStyle: { color: INK, fontSize: 12.5 },
+        formatter: function(ps){
+          var p = ps[0];
+          return '<b>' + p.name + '</b><br/>入库密度：<b>' + p.value + '%</b>' + (meta[p.dataIndex] ? '<br/>' + meta[p.dataIndex] : '');
+        }
+      },
+      xAxis: {
+        type: 'value', max: opts.maxX || 50,
+        axisLabel: { color: MUTED, fontSize: 11, formatter: '{value}%' },
+        splitLine: { lineStyle: { color: '#EFECE4' } }
+      },
+      yAxis: {
+        type: 'category', data: names, inverse: true,
+        axisLine: { show: false }, axisTick: { show: false },
+        axisLabel: { color: INK, fontSize: 12, fontWeight: 600, width: opts.nameW || 180, overflow: 'truncate' }
+      },
+      series: [{
+        type: 'bar', data: vals, barWidth: '58%', barCategoryGap: '30%',
+        itemStyle: { color: function(p){ return colors[p.dataIndex]; }, borderRadius: [0, 4, 4, 0] },
+        label: {
+          show: true, position: 'right', color: INK, fontSize: 11.5, fontWeight: 700,
+          formatter: function(p){ return p.value + '%'; }
+        }
+      }]
+    });
+    window.addEventListener('resize', function(){ chart.resize(); });
+  }
+
+  var zl = [
+    ['文字资料 / 提升进阶', 37.5, '30 / 80 题 · 二刷未记录', 'hot'],
+    ['综合资料 / 提升进阶', 29.4, '47 / 160 题 · 二刷未记录'],
+    ['表格资料 / 提升进阶', 27.5, '11 / 40 题 · 二刷未记录'],
+    ['综合资料 / 夯实基础', 18.3, '44 / 240 题 · 二刷未记录'],
+    ['文字资料 / 夯实基础', 16.5, '33 / 200 题 · 二刷未记录'],
+    ['图形资料 / 提升进阶', 15.0, '6 / 40 题 · 二刷未记录'],
+    ['表格资料 / 夯实基础', 7.5, '9 / 120 题 · 二刷未记录'],
+    ['图形资料 / 夯实基础', 7.5, '3 / 40 题 · 二刷未记录']
+  ];
+  mkBar('chart-zl', zl, { maxX: 45 });
+
+  var pd = [
+    ['逻辑判断 / 组合排列', 37.1, '13/35 · 二刷 6/13', 'hot'],
+    ['图形推理 / 属性规律', 35.7, '10/28 · 二刷 0/10', 'hot'],
+    ['逻辑判断 / 日常结论', 35.0, '7/20 · 二刷 4/7', 'hot'],
+    ['定义判断 / 单定义', 33.3, '38/114 · 二刷 13/38'],
+    ['逻辑判断 / 原因解释', 33.3, '4/12 · 二刷 2/4'],
+    ['类比推理 / 逻辑关系', 31.7, '40/126 · 二刷 14/40'],
+    ['图形推理 / 空间重构', 30.4, '7/23 · 二刷 1/7'],
+    ['定义判断 / 综合或专项集训', 30.0, '9/30 · 二刷 5/9'],
+    ['类比推理 / 拆分思维', 29.4, '5/17 · 二刷 1/5'],
+    ['逻辑判断 / 综合或专项集训', 26.0, '13/50 · 二刷 7/13'],
+    ['图形推理 / 数量规律', 25.9, '21/81 · 二刷 6/21'],
+    ['定义判断 / 多定义', 25.9, '15/58 · 二刷 6/15'],
+    ['逻辑判断 / 加强题型', 25.0, '17/68 · 二刷 6/17'],
+    ['图形推理 / 样式规律', 25.0, '5/20 · 二刷 1/5'],
+    ['逻辑判断 / 真假推理', 25.0, '3/12 · 二刷 1/3'],
+    ['逻辑判断 / 削弱题型', 24.6, '17/69 · 二刷 8/17'],
+    ['图形推理 / 综合或专项集训', 24.0, '12/50 · 二刷 2/12'],
+    ['类比推理 / 综合或专项集训', 23.3, '7/30 · 二刷 5/7'],
+    ['类比推理 / 语义关系', 21.9, '7/32 · 二刷 3/7'],
+    ['逻辑判断 / 翻译推理', 20.0, '9/45 · 二刷 4/9'],
+    ['图形推理 / 位置规律', 16.7, '5/30 · 二刷 0/6'],
+    ['类比推理 / 语法关系', 12.5, '1/8 · 二刷 0/1'],
+    ['图形推理 / 立体拼合、截面图等', 11.5, '3/26 · 二刷 1/3'],
+    ['图形推理 / 特殊规律', 11.1, '2/18 · 二刷 1/2']
+  ];
+  mkBar('chart-pd', pd, { maxX: 45 });
+
+  var yy = [
+    ['片段阅读 / 综合训练或专项集训', 24.0, '24/100 · 二刷 13/24', 'hot'],
+    ['片段阅读 / 分述句特征', 23.3, '7/30 · 二刷 4/7', 'hot'],
+    ['逻辑填空 / 对应关系', 16.8, '21/125 · 二刷 11/21'],
+    ['片段阅读 / 主题词', 14.3, '5/35 · 二刷 2/5'],
+    ['语句表达 / 综合训练或专项集训', 12.5, '5/40 · 二刷 2/5'],
+    ['片段阅读 / 标题填入题', 10.0, '3/30 · 二刷 0/3'],
+    ['逻辑填空 / 创新考法', 10.0, '1/10 · 二刷 0/1'],
+    ['逻辑填空 / 搭配对象', 8.0, '4/50 · 二刷 1/4'],
+    ['片段阅读 / 词句理解题', 8.0, '2/25 · 二刷 1/2'],
+    ['语句表达 / 接语选择题', 7.5, '3/40 · 二刷 3/3'],
+    ['逻辑填空 / 关联关系', 7.5, '3/40 · 二刷 2/3'],
+    ['片段阅读 / 关联词', 7.1, '6/85 · 二刷 4/6'],
+    ['逻辑填空 / 综合训练或专项集训', 7.0, '7/100 · 二刷 5/7'],
+    ['篇章阅读 / 公文题材', 6.7, '2/30 · 二刷 0/2'],
+    ['片段阅读 / 细节判断题', 4.4, '2/45 · 二刷 1/2'],
+    ['语句表达 / 语句填空题', 4.0, '2/50 · 二刷 1/2'],
+    ['语句表达 / 语句排序题', 4.0, '2/50 · 二刷 1/2'],
+    ['逻辑填空 / 词义侧重感情色彩程度轻重', 3.3, '1/30 · 二刷 1/1'],
+    ['篇章阅读 / 综合训练或专项集训', 3.3, '1/30 · 二刷 0/1'],
+    ['篇章阅读 / 普通题材', 2.2, '1/45 · 二刷 0/1'],
+    ['片段阅读 / 中心创新', 0.0, '0/15 · 二刷 0/0']
+  ];
+  mkBar('chart-yy', yy, { maxX: 30 });
+
+  // 导航高亮
+  var links = document.querySelectorAll('.topnav-links a');
+  var secs = ['overview','zl','pd','yy','order'];
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY + 90;
+    var cur = 'overview';
+    for (var i = 0; i < secs.length; i++) {
+      var el = document.getElementById(secs[i]);
+      if (el && el.offsetTop <= y) cur = secs[i];
+    }
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

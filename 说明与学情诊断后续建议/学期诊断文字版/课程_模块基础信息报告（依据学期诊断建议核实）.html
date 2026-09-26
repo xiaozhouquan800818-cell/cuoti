@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>课程/模块基础信息报告 · 依据学期诊断建议核实</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2A4A'/%3E%3Cpath d='M20 46 L20 20 L44 20 M44 20 L44 34 M20 34 L40 34' stroke='%23E9B45A' stroke-width='5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"/>
+<style>
+  :root{
+    --navy:#12243d; --navy2:#1e3a5f; --navy3:#2b527f;
+    --gold:#e8b64c; --gold2:#ffd166; --goldbg:#fff6e3;
+    --ink:#1a1d24; --muted:#5a6473; --faint:#8fa3bd;
+    --accent:#12243d; --accent-soft:#eaf2fd;
+    --bg:#f6f8fb; --card:#ffffff; --line:#e3e7ee;
+    --green:#1f7a4d; --green-soft:#e9f7ef; --red:#c62828;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC",sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;}
+  /* ===== 顶部导航 ===== */
+  .topnav{position:sticky;top:0;z-index:50;background:rgba(18,36,61,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08);}
+  .topnav-inner{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .topnav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;color:#fff;white-space:nowrap;}
+  .topnav-brand svg{flex:none;}
+  .topnav-links{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+  .topnav-links a{text-decoration:none;color:#b9cde4;font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;transition:.15s;}
+  .topnav-links a:hover{background:rgba(255,255,255,.1);color:#fff;}
+  .topnav-links a.active{background:var(--gold);color:var(--navy);}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px;}
+  /* ===== Hero ===== */
+  .hero{padding:62px 0 44px;text-align:center;background:linear-gradient(135deg,#0f1e33 0%,#1e3a5f 55%,#2b527f 100%);color:#fff;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(700px 300px at 82% 12%, rgba(232,182,76,.14), transparent 60%),radial-gradient(600px 260px at 10% 90%, rgba(96,165,250,.10), transparent 60%);pointer-events:none;}
+  .hero .kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(232,182,76,.14);color:var(--gold2);font-size:13px;font-weight:700;padding:6px 16px;border-radius:999px;letter-spacing:1px;margin-bottom:20px;border:1px solid rgba(232,182,76,.4);}
+  .hero h1{font-size:36px;font-weight:900;color:#fff;line-height:1.3;letter-spacing:1px;}
+  .hero .sub{color:#c3d4e8;font-size:15.5px;margin-top:12px;line-height:1.9;}
+  .hero .meta{color:#9fb6d0;font-size:13px;margin-top:8px;}
+  /* ===== 核心回答 ===== */
+  .core-answer{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:14px;padding:22px 26px;margin:26px 0 10px;box-shadow:0 2px 10px rgba(18,36,61,.05);}
+  .core-answer .ca-title{font-size:15px;font-weight:900;color:var(--navy);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .ca-route{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+  .ca-item{border:1px solid var(--line);border-radius:12px;padding:14px 18px;background:#fbfcfe;transition:.15s;}
+  .ca-item:hover{border-color:var(--navy3);box-shadow:0 4px 14px rgba(18,36,61,.08);}
+  .ca-item .cai-name{font-size:14px;font-weight:800;color:#8a6408;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+  .ca-item p{font-size:13.5px;color:#3A4048;}
+  .ca-boundary{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:12px;}
+  .ca-boundary b{color:var(--ink);}
+  /* ===== 区块 ===== */
+  section.block{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:28px 0;padding:32px 36px;box-shadow:0 2px 8px rgba(18,36,61,.05);}
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:8px;flex-wrap:wrap;}
+  .sec-no{width:44px;height:44px;border-radius:12px;background:var(--navy2);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex:none;}
+  .sec-title{font-size:25px;font-weight:900;color:var(--navy);}
+  .sec-badge{font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--goldbg);color:#8a6408;margin-left:auto;white-space:nowrap;}
+  .sec-badge.gray{background:#EEF0F3;color:var(--muted);}
+  .sec-badge.green{background:var(--green-soft);color:var(--green);}
+  .sec-intro{color:var(--muted);font-size:14px;margin:2px 0 20px;}
+  .sec-intro b{color:var(--ink);}
+  h3.sub{font-size:17px;font-weight:900;color:var(--navy);margin:26px 0 6px;display:flex;align-items:center;gap:10px;}
+  h3.sub .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:none;}
+  h3.sub .tag{font-size:11.5px;font-weight:700;color:var(--muted);background:#EEF0F3;padding:2px 10px;border-radius:999px;margin-left:4px;}
+  p.sub-note{font-size:13.5px;color:var(--muted);margin-bottom:14px;}
+  p.sub-note b{color:var(--ink);}
+  /* ===== 信息卡（教材） ===== */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 16px;}
+  .info-card{border:1px solid var(--line);border-radius:14px;padding:16px 20px;background:#fbfcfe;transition:.15s;}
+  .info-card:hover{border-color:var(--navy3);}
+  .info-card .ic-k{font-size:12.5px;font-weight:800;color:#8a6408;margin-bottom:4px;display:flex;align-items:center;gap:6px;}
+  .info-card .ic-v{font-size:14px;color:#3A4048;}
+  .info-card .ic-v b{color:var(--navy);}
+  .concl{background:var(--accent-soft);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--navy);}
+  .concl b{font-weight:800;}
+  /* ===== 讲师图卡 ===== */
+  .teacher-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin:10px 0 18px;}
+  .teacher-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;transition:.18s;box-shadow:0 1px 3px rgba(18,36,61,.05);}
+  .teacher-card:hover{box-shadow:0 10px 26px rgba(18,36,61,.14);transform:translateY(-3px);border-color:#c9d6e6;}
+  .t-img{aspect-ratio:4/3.4;overflow:hidden;background:#eef1f6;position:relative;}
+  .t-img img{width:100%;height:100%;object-fit:cover;display:block;}
+  .t-img.portrait{aspect-ratio:4/4.4;}
+  .t-body{padding:13px 16px 15px;}
+  .t-name{font-size:16px;font-weight:900;color:var(--navy);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .t-org{font-size:11px;font-weight:700;color:#8a6408;background:var(--goldbg);padding:1px 9px;border-radius:999px;white-space:nowrap;}
+  .t-role{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.55;}
+  .t-src{font-size:10.5px;color:var(--faint);margin-top:6px;}
+  .t-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:var(--navy);background:linear-gradient(135deg,var(--accent-soft),#F2F4F8);gap:8px;font-weight:800;font-size:15px;}
+  /* ===== 表格 ===== */
+  .tbl-wrap{overflow-x:auto;margin:6px 0 12px;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 3px rgba(18,36,61,.05);}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;}
+  thead th{background:var(--navy2);text-align:left;font-weight:800;color:#fff;padding:11px 14px;border-bottom:2px solid var(--navy);white-space:nowrap;letter-spacing:.3px;}
+  tbody td{padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--accent-soft);}
+  tbody tr:nth-child(even){background:#fcfdff;}
+  td.course{font-weight:700;color:var(--ink);}
+  td .sub-li{display:block;font-size:12.5px;color:var(--muted);}
+  td .who{color:#3A4048;}
+  td .who b{color:var(--navy);}
+  td .date{color:var(--muted);font-size:12.5px;}
+  /* ===== 顺序时间轴 ===== */
+  .order-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px;}
+  .order-card{border:1px solid var(--line);border-radius:16px;padding:20px 20px 8px;background:#fbfcfe;position:relative;overflow:hidden;}
+  .order-card::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;}
+  .order-card.o1::before{background:var(--navy2);}
+  .order-card.o2::before{background:var(--gold);}
+  .order-card.o3::before{background:var(--green);}
+  .order-card .o-step{position:absolute;top:12px;right:16px;background:var(--navy2);color:#fff;font-size:12px;font-weight:800;padding:3px 14px;border-radius:999px;letter-spacing:1px;}
+  .order-card.o2 .o-step{background:var(--green);}
+  .order-card.o3 .o-step{background:var(--gold);color:#7a5a12;}
+  .order-name{font-size:16px;font-weight:900;color:var(--navy);margin:6px 0 10px;padding-right:74px;}
+  .order-steps{list-style:none;padding:0;margin-bottom:12px;}
+  .order-steps li{position:relative;padding:0 0 10px 20px;font-size:13.5px;color:#3A4048;}
+  .order-steps li::before{content:"";position:absolute;left:3px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--gold);border:2px solid #fff;box-shadow:0 0 0 1px var(--gold);}
+  .order-steps li:not(:last-child)::after{content:"";position:absolute;left:6px;top:18px;bottom:0;width:1.5px;background:var(--line);}
+  .order-steps li .o-k{font-weight:800;color:var(--ink);}
+  .fix-callout{background:var(--goldbg);border-left:4px solid var(--gold);border-radius:10px;padding:14px 18px;font-size:13.5px;color:#6d5b34;margin:14px 0;}
+  .fix-callout b{color:#8a6408;}
+  .fix-callout .fx{display:block;margin-top:4px;}
+  /* ===== 参考来源 ===== */
+  .ref-list{list-style:none;padding:0;margin-top:10px;}
+  .ref-list li{display:flex;gap:12px;padding:9px 4px;border-bottom:1px dashed var(--line);font-size:13px;color:#3A4048;align-items:baseline;}
+  .ref-list li:last-child{border-bottom:none;}
+  .ref-no{flex:none;font-weight:900;color:#8a6408;width:34px;text-align:right;}
+  .ref-list a{color:var(--navy2);text-decoration:none;border-bottom:1px dashed #b8c2d6;word-break:break-all;}
+  .ref-list a:hover{color:var(--gold);}
+  .ref-list .ref-src{display:block;color:var(--faint);font-size:11.5px;margin-top:2px;}
+  /* ===== 页脚 ===== */
+  .footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 46px;color:var(--faint);font-size:12.5px;background:#fff;}
+  .footer .wrap{display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between;}
+  .backtop{display:inline-flex;align-items:center;gap:6px;color:var(--navy2);font-weight:700;text-decoration:none;}
+  .backtop:hover{color:var(--gold);}
+  .ai-note{font-size:11.5px;color:var(--faint);margin-top:8px;font-style:italic;}
+  @media (max-width:860px){
+    .ca-route{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .order-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:27px;}
+    .hero{padding:44px 14px 34px;}
+    .topnav-links{display:none;}
+    section.block{padding:24px 18px;border-radius:14px;}
+    .teacher-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:520px){ .teacher-grid{grid-template-columns:1fr;} }
+  @media print{ .topnav{display:none;} body{background:#fff;} section.block{box-shadow:none;break-inside:avoid;} }
+</style>
+</head>
+<body>
+
+<!-- ===== 顶部导航 ===== -->
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="topnav-brand">
+      <svg width="22" height="22" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1B2A4A"/><path d="M20 46 L20 20 L44 20 M44 20 L44 34 M20 34 L40 34" stroke="#E9B45A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      课程/模块基础信息
+    </div>
+    <div class="topnav-links">
+      <a href="#answer" class="active">核心回答</a>
+      <a href="#book">教材对应</a>
+      <a href="#pd">判断推理</a>
+      <a href="#yy">言语理解</a>
+      <a href="#zl">资料分析</a>
+      <a href="#suggest">使用建议</a>
+      <a href="#ref">参考来源</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <!-- ===== Hero ===== -->
+  <header class="hero">
+    <div class="kicker">依据《学期诊断建议》核实 · 2026-09-27 检索</div>
+    <h1>课程/模块基础信息报告</h1>
+    <p class="sub">学期诊断建议指向的课程均可对应到真实产品：教材为粉笔《决战行测5000题》系列，看课对象为 B 站、粉笔、CCtalk 等平台的公考名师课程。</p>
+    <p class="meta">课程名称、主讲人、生成/上线日期以各平台课程页为准。</p>
+  </header>
+
+  <!-- ===== 核心回答 ===== -->
+  <section class="core-answer" id="answer">
+    <div class="ca-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.5 11 13.5 15 9"/><circle cx="12" cy="12" r="9"/></svg>
+      核心回答：三科看课对象一览
+    </div>
+    <div class="ca-route">
+      <div class="ca-item">
+        <div class="cai-name">判断推理</div>
+        <p>基础体系与公式听 <b>聂佳</b>；图推专项选 <b>程永乐 800 题</b> 或 <b>龙飞百大图推</b>；削弱加强维持 <b>花生十三</b>。</p>
+      </div>
+      <div class="ca-item">
+        <div class="cai-name">言语理解</div>
+        <p>基础与逻辑填空听 <b>郭熙、欧阳</b>；冲刺套题精讲跟 <b>欣说言语</b>。</p>
+      </div>
+      <div class="ca-item">
+        <div class="cai-name">资料分析</div>
+        <p>对应 <b>齐麟数资课程</b>（用户当前正在看）。</p>
+      </div>
+    </div>
+    <div class="ca-boundary">
+      <b>信息边界：</b>“龙艳”未核实到公考名师身份，已替换；“齐麟图推”说法存疑，齐麟仅保留数资口径。课程上线日期为 2026 年 9 月 27 日检索所得，以各平台页面为准。
+    </div>
+  </section>
+
+  <!-- ===== 01 教材与题库对应课程 ===== -->
+  <section class="block" id="book">
+    <div class="sec-head">
+      <div class="sec-no">01</div>
+      <div class="sec-title">教材与题库对应课程</div>
+      <div class="sec-badge gray">粉笔《决战行测5000题》系列</div>
+    </div>
+    <p class="sec-intro">你的题库 JSON、书籍目录与章节页码，全部对应粉笔《决战行测5000题》系列：目录中“夯实基础／高难进阶”两级结构、四大题型章节划分与题库“书籍部分”字段逐项吻合。</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="ic-k">课程/书名</div>
+        <div class="ic-v"><b>粉笔《决战行测5000题》</b>（判断推理、言语理解与表达、资料分析、政治理论与常识、数量关系 5 大模块，每模块上下两册，全套 10 本）</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-k">结构与识别依据</div>
+        <div class="ic-v">按考点下设“夯实基础”“高难进阶”两级梯度，章节含图形推理／定义判断／类比推理／逻辑判断等，与你《判断推理书籍目录.txt》一致；判断推理册约 985—1002 题</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-k">出版社与版本</div>
+        <div class="ic-v"><b>知识出版社</b>；2026 版首印 2024 年 6 月，2027 版印刷时间 2026 年 3—5 月，新增 2026 年国考真题</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-k">配套课程</div>
+        <div class="ic-v">随书附赠粉笔 APP 会员与“一题一码”扫码看视频解析（约 60 个月权益），在粉笔 APP 中刷的题即本书对应题目</div>
+      </div>
+    </div>
+    <div class="concl"><b>结论：</b>你刷的题库即粉笔官方教材配套题库，APP 内的考点标签、全站正确率与解析均来自粉笔题库体系，后续听课可直接在粉笔 APP 内以“5000题”模块衔接。</div>
+  </section>
+
+  <!-- ===== 02 判断推理模块课程 ===== -->
+  <section class="block" id="pd">
+    <div class="sec-head">
+      <div class="sec-no">02</div>
+      <div class="sec-title">判断推理模块课程</div>
+      <div class="sec-badge green">基础重塑 · 图形进阶 · 逻辑论证</div>
+    </div>
+    <p class="sec-intro">按更新后的报告方案 5.1—5.3 组织：基础重塑、图形进阶、逻辑论证三段分别对应不同的老师与课程。</p>
+
+    <!-- （一） -->
+    <h3 class="sub"><span class="dot"></span>（一）基础重塑与系统搭建<span class="tag">聂佳（体系/公式）＋程永乐（图推专项）</span></h3>
+    <p class="sub-note">原方案“粉笔聂佳或龙艳”中，<b>龙艳未能在粉笔师资页及公开渠道核实到公考名师身份</b>，故替换为“聂佳＋程永乐”组合：聂佳负责判断推理整体体系与公式，程永乐专门补图推。</p>
+    <div class="teacher-grid">
+      <div class="teacher-card">
+        <div class="t-img portrait"><img src="assets/niejia.jpg" alt="聂佳 · 粉笔教育集团副总裁"/></div>
+        <div class="t-body">
+          <div class="t-name">聂佳 <span class="t-org">粉笔</span></div>
+          <div class="t-role">粉笔教育集团副总裁 · 17 年授课经验 · 学员评分 4.9，搭建粉笔判断推理教研教学体系</div>
+          <div class="t-src">图源：粉笔官方课程宣传物料（网络检索）</div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="t-img"><img src="assets/chengyongle.jpg" alt="程永乐 · 图形推理800题"/></div>
+        <div class="t-body">
+          <div class="t-name">程永乐 <span class="t-org">粉笔</span></div>
+          <div class="t-role">粉笔判断学科教研负责人 · 985 工科硕士 · 12 年教学 · 学员 500 万，独创“图形推理的前世今生”</div>
+          <div class="t-src">图源：粉笔官方课程宣传物料（网络检索）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:76px">项目</th><th style="width:40%">课程名称</th><th style="width:32%">主讲人</th><th style="width:22%">生成/上线日期</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>聂佳</b></td>
+            <td class="course">2027判断专项带刷班<span class="sub-li">加强削弱100题＋定义判断100题＋逻辑一拖五60题，36课时录播，全套电子讲义</span><span class="sub-li">判断推理系统精讲（B站免费）；方法精讲-判断1~5（粉笔980）</span></td>
+            <td class="who">粉笔教育集团副总裁，17 年授课经验，学员评分 4.9，搭建粉笔判断推理教研教学体系</td>
+            <td class="date">带刷班 2026 年 8 月官宣、9 月 30 日起更新课时；系统精讲为历年免费课</td>
+          </tr>
+          <tr>
+            <td><b>程永乐</b></td>
+            <td class="course">图形推理800题专项课<span class="sub-li">2027考季，40 次课每次 20 题，600 金题＋200 甄选题，直播＋回放＋纸质讲义</span><span class="sub-li">判断必刷200母题</span></td>
+            <td class="who">粉笔判断学科教研负责人，985 工科硕士，12 年教学，学员 500 万，独创“图形推理的前世今生”</td>
+            <td class="date">800题课 2026 年 7 月 6 日起售、9 月中下旬开播（讲义 9.25／10.16 分批发货）；200 母题 2026 年 8 月上线</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concl"><b>结论：</b>基础薄弱期以聂佳系统精讲打底判断四大题型；图推短板（对应你图谱中位置、数量、立体拼合等错题）由程永乐800题专项以“特征图秒定考点”的方式密集补练。</div>
+
+    <!-- （二） -->
+    <h3 class="sub"><span class="dot"></span>（二）图形进阶与类比辨析<span class="tag">程永乐800题／龙飞百大图推；齐麟仅保留数资口径</span></h3>
+    <p class="sub-note">原方案“齐麟图推特征识别＋类比二级辨析”中，<b>齐麟公开身份为数资名师</b>（前腰果公职数量专家），图推部分改由程永乐800题或龙飞承担，齐麟一节若保留只谈数资。</p>
+    <div class="teacher-grid">
+      <div class="teacher-card">
+        <div class="t-img">
+          <div class="t-fallback">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+            龙飞 · 四海
+          </div>
+        </div>
+        <div class="t-body">
+          <div class="t-name">龙飞 <span class="t-org">四海公考</span></div>
+          <div class="t-role">四海公考判断推理名师，图推口碑公认（“百大图推”为经典课），独创“吹捏大法”秒杀一笔画</div>
+          <div class="t-src">未检索到可核验的公开人像，以图标示意</div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="t-img portrait"><img src="assets/qilin.jpg" alt="齐麟 · 前腰果公职数量专家"/></div>
+        <div class="t-body">
+          <div class="t-name">齐麟 <span class="t-org">数资口径</span></div>
+          <div class="t-role">前腰果公职数量专家，公众号“公考齐麟”；本报告仅保留其数资课程口径，不承担图推/类比教学</div>
+          <div class="t-src">图源：公开网络检索（商务肖像照）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:76px">项目</th><th style="width:40%">课程名称</th><th style="width:32%">主讲人</th><th style="width:22%">生成/上线日期</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>龙飞</b></td>
+            <td class="course">百大图形推理<span class="sub-li">12 讲直播，100 母图＋200 变式题，平面＋立体全覆盖，配思维导图</span><span class="sub-li">平面图推先行班／筑基班；平面图推500题；判断试题精讲（定义＋图推，51 课时）</span></td>
+            <td class="who">四海公考判断推理名师，图推口碑公认（“百大图推”为经典课），独创“吹捏大法”秒杀一笔画</td>
+            <td class="date">百大图推 2026 年 8 月 13—26 日直播；先行班为 2026 年更新的 10 节课融合版</td>
+          </tr>
+          <tr>
+            <td><b>齐麟</b><br/><span class="sub-li" style="font-size:11px">（数资口径）</span></td>
+            <td class="course">行测高分计划班（数资）<span class="sub-li">资料分析理论方法精讲；2026国省考晚自习系列（免费刷题）</span></td>
+            <td class="who">前腰果公职数量专家，公众号“公考齐麟”</td>
+            <td class="date">2025 年 5 月起晚自习系列持续更新</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concl"><b>结论：</b>图推进阶在程永乐800题与龙飞百大图推之间二选一即可（前者粉笔体系、后者四海体系）；齐麟不再承担图推／类比教学，判断部分的合作讲师实际为胡小胡、欣说言语等。</div>
+
+    <!-- （三） -->
+    <h3 class="sub"><span class="dot"></span>（三）逻辑论证攻坚与实战<span class="tag">花生十三（维持原推荐）</span></h3>
+    <p class="sub-note">削弱加强一节维持原方案：花生十三在逻辑判断的削弱／加强题型上口碑一致，以<b>理科思维拆解论据与论点关系</b>，与你“先写论点论据关系”的训练方向吻合。</p>
+    <div class="teacher-grid">
+      <div class="teacher-card" style="max-width:340px;">
+        <div class="t-img portrait"><img src="assets/huasheng.jpg" alt="花生十三 · 四海公考"/></div>
+        <div class="t-body">
+          <div class="t-name">花生十三 <span class="t-org">四海公考</span></div>
+          <div class="t-role">四海公考行测全科讲师，十余年教学经验，曾国考 87.3／省考 93 分，原创解题体系</div>
+          <div class="t-src">图源：快懂百科人物页（网络检索）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:76px">项目</th><th style="width:40%">课程名称</th><th style="width:32%">主讲人</th><th style="width:22%">生成/上线日期</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>花生十三</b></td>
+            <td class="course">行测3大模块基础入门课<span class="sub-li">105 课时，含判断推理</span><span class="sub-li">国省考行测系统班；27版海海刷2000题（判断推理模块）；逻辑判断600题</span></td>
+            <td class="who">四海公考行测全科讲师，十余年教学经验，曾国考 87.3／省考 93 分，原创解题体系</td>
+            <td class="date">入门课已完结长期有效；27版海海刷2000题 2026 年 9 月上线</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concl"><b>结论：</b>削弱加强攻坚期以花生十三系统课建立论点论据分析框架，再用海海刷2000题中的判断模块做高密度实战。</div>
+  </section>
+
+  <!-- ===== 03 言语理解模块课程 ===== -->
+  <section class="block" id="yy">
+    <div class="sec-head">
+      <div class="sec-no">03</div>
+      <div class="sec-title">言语理解模块课程</div>
+      <div class="sec-badge gray">郭熙 / 欧阳 · 欣说言语</div>
+    </div>
+    <p class="sec-intro">言语部分按诊断报告建议保留三位老师：<b>郭熙、欧阳</b>负责基础与逻辑填空，<b>欣说言语</b>负责冲刺套题精讲。</p>
+    <div class="teacher-grid">
+      <div class="teacher-card">
+        <div class="t-img portrait"><img src="assets/guoxi.jpg" alt="郭熙 · 粉笔言语金牌讲师"/></div>
+        <div class="t-body">
+          <div class="t-name">郭熙 <span class="t-org">粉笔</span></div>
+          <div class="t-role">粉笔言语优质教师、老牌名师，逻辑填空专项口碑强；10 年公考培训经验，超 150 万人次评分 4.9</div>
+          <div class="t-src">图源：粉笔官方讲师宣传物料（网络检索）</div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="t-img">
+          <div class="t-fallback">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1B2A4A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15Z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/></svg>
+            欧阳 · 粉笔
+          </div>
+        </div>
+        <div class="t-body">
+          <div class="t-name">欧阳 <span class="t-org">粉笔</span></div>
+          <div class="t-role">粉笔言语优质教师，12 年授课经验；主讲方法精讲-言语（粉笔980系统班）</div>
+          <div class="t-src">未检索到可核验的公开人像，以图标示意</div>
+        </div>
+      </div>
+      <div class="teacher-card">
+        <div class="t-img"><img src="assets/xinshuo.jpg" alt="欣说言语课程海报"/></div>
+        <div class="t-body">
+          <div class="t-name">欣说言语 <span class="t-org">葛欣</span></div>
+          <div class="t-role">公众号“欣说言语”（葛欣，另有张赛男）；冲刺套题逐题精讲，含 2015—2024 国考地市／副省／执法差异题、联考套题</div>
+          <div class="t-src">图源：欣说言语课程宣传物料（网络检索）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:76px">项目</th><th style="width:40%">课程名称</th><th style="width:32%">主讲人</th><th style="width:22%">生成/上线日期</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>郭熙</b></td>
+            <td class="course">言语方法精讲（9 节，B站免费配套）<span class="sub-li">言语必做100题（10 节）；上分总动员（专项提升约 23 节）</span><span class="sub-li">言语高分十二计（27考季最新）</span></td>
+            <td class="who">粉笔言语优质教师、老牌名师，逻辑填空专项口碑强</td>
+            <td class="date">高分十二计 2026 年 6 月 18 日 B站上线；方法精讲为历年课</td>
+          </tr>
+          <tr>
+            <td><b>欧阳</b></td>
+            <td class="course">方法精讲-言语（粉笔980系统班）</td>
+            <td class="who">粉笔言语优质教师，12 年授课经验</td>
+            <td class="date">2019 年起主讲，2024 年 4 月仍在授课</td>
+          </tr>
+          <tr>
+            <td><b>欣说言语</b></td>
+            <td class="course">欣说言语专项班（录播）<span class="sub-li">真题套题精讲（2015—2024 国考地市／副省／执法差异题、联考套题）</span><span class="sub-li">易错提升与基础理论</span></td>
+            <td class="who">葛欣（公众号“欣说言语”，另有张赛男）</td>
+            <td class="date">2024 考季起各季更新</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concl"><b>结论：</b>基础与逻辑填空语境用郭熙／欧阳的方法精讲；冲刺阶段用欣说言语的套题逐题精讲做错项拆解与复盘，与诊断报告“片段主旨／分述、前后呼应、接语选择”的补课顺序衔接。</div>
+  </section>
+
+  <!-- ===== 04 资料分析模块课程 ===== -->
+  <section class="block" id="zl">
+    <div class="sec-head">
+      <div class="sec-no">04</div>
+      <div class="sec-title">资料分析模块课程</div>
+      <div class="sec-badge green">齐麟数资课程（当前进行中）</div>
+    </div>
+    <p class="sec-intro">资料分析对应<b>齐麟数资课程</b>，与你截至 2026 年 9 月 26 日“正在看资料分析网课”的状态一致。</p>
+    <div class="teacher-grid">
+      <div class="teacher-card" style="max-width:340px;">
+        <div class="t-img portrait"><img src="assets/qilin.jpg" alt="齐麟 · 数资名师"/></div>
+        <div class="t-body">
+          <div class="t-name">齐麟 <span class="t-org">公考齐麟</span></div>
+          <div class="t-role">前腰果公职数量专家，公众号“公考齐麟”；数资模块口碑课程持续更新</div>
+          <div class="t-src">图源：公开网络检索（商务肖像照）</div>
+        </div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:76px">项目</th><th style="width:40%">课程名称</th><th style="width:32%">主讲人</th><th style="width:22%">生成/上线日期</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>齐麟</b></td>
+            <td class="course">资料分析理论方法精讲<span class="sub-li">行测高分计划班（数资模块，含课后督学与配套教材）</span><span class="sub-li">2026 国省考行测真题班（数资部分）</span></td>
+            <td class="who">齐麟，前腰果公职数量专家，公众号“公考齐麟”</td>
+            <td class="date">2025 年（高分计划3班）；真题班 2026 年更新</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concl"><b>结论：</b>资料分析维持齐麟路径，按诊断报告顺序推进：文字提升进阶 → 综合提升进阶 → 综合分析与比重 → 平均数、增长率、倍数。</div>
+  </section>
+
+  <!-- ===== 05 使用建议与信息边界 ===== -->
+  <section class="block" id="suggest">
+    <div class="sec-head">
+      <div class="sec-no">05</div>
+      <div class="sec-title">使用建议与信息边界</div>
+      <div class="sec-badge gray">听课顺序沿用诊断报告</div>
+    </div>
+
+    <div class="order-grid">
+      <div class="order-card o1">
+        <div class="o-step">第 1 阶段</div>
+        <div class="order-name">资料分析 · 当前进行中</div>
+        <ul class="order-steps">
+          <li><span class="o-k">文字资料提升进阶</span> → 综合提升进阶</li>
+          <li><span class="o-k">综合分析与比重</span> → 平均数、增长率、倍数</li>
+          <li>听齐麟数资课程，先稳准确率再压速度</li>
+        </ul>
+      </div>
+      <div class="order-card o2">
+        <div class="o-step">第 2 阶段</div>
+        <div class="order-name">判断推理</div>
+        <ul class="order-steps">
+          <li><span class="o-k">对应关系</span> → 组合排列</li>
+          <li><span class="o-k">定义单/多与特殊问法</span></li>
+          <li><span class="o-k">加强/削弱</span> → 日常结论与综合题</li>
+          <li>图形补 <span class="o-k">数量规律</span></li>
+        </ul>
+      </div>
+      <div class="order-card o3">
+        <div class="o-step">第 3 阶段</div>
+        <div class="order-name">言语理解</div>
+        <ul class="order-steps">
+          <li><span class="o-k">片段主旨/分述</span></li>
+          <li><span class="o-k">逻辑填空前后呼应与搭配</span></li>
+          <li><span class="o-k">接语选择</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fix-callout">
+      <b>已修正的两处：</b>
+      <span class="fx">① “龙艳”未核实到公考名师身份（粉笔师资页无此人），5.1 改为“聂佳＋程永乐”；</span>
+      <span class="fx">② “齐麟图推”存疑，图推改由程永乐800题／龙飞承担，齐麟仅谈数资。</span>
+    </div>
+
+    <div class="concl"><b>信息边界：</b>以上课程名称、主讲人、上线日期为 2026 年 9 月 27 日检索所得，涉及价格、发货与课时更新的信息以各平台课程页为准；“夯实基础／高难进阶”题量与题库口径以粉笔 APP 实际数据为准。</div>
+  </section>
+
+  <!-- ===== 参考来源 ===== -->
+  <section class="block" id="ref">
+    <div class="sec-head">
+      <div class="sec-no" style="background:var(--gold)">24</div>
+      <div class="sec-title">参考来源</div>
+      <div class="sec-badge gray">全部获取于 2026-09-27</div>
+    </div>
+    <ol class="ref-list">
+      <li><span class="ref-no">[1]</span><div>热书发现：《公务员考试决战行测5000题（判断推理）》内容简介<a href="https://hotbook.nbt.edu.cn/nbt/?id=82896&what=detail">查看来源</a></div></li>
+      <li><span class="ref-no">[2]</span><div>MarginNote：《决战行测5000题 上册》目录<a href="https://bbs.marginnote.com.cn/uploads/short-url/641ibZzRWPKAXi1GeTIqiiDRKAV.pdf">查看来源</a></div></li>
+      <li><span class="ref-no">[3]</span><div>粉笔官网：《粉笔-师资介绍》<a href="https://spa.fenbi.com/page/teacher">查看来源</a></div></li>
+      <li><span class="ref-no">[4]</span><div>抖音-粉笔图书旗舰店：《2026决战行测5000题 最新版（出版信息）》<a href="https://www.iesdouyin.com/share/video/7484937914246253882">查看来源</a></div></li>
+      <li><span class="ref-no">[5]</span><div>抖音：《2027新版·行测5000题（10册）印刷时间》<a href="https://www.iesdouyin.com/share/video/7640382398782811057">查看来源</a></div></li>
+      <li><span class="ref-no">[6]</span><div>抖音：《聂佳新课上线——2027判断专项带刷班》<a href="https://www.iesdouyin.com/share/video/7677025108662543699">查看来源</a></div></li>
+      <li><span class="ref-no">[7]</span><div>B站：《聂佳判断-削弱题型系统精讲》<a href="https://m.bilibili.com/video/BV1cN411t7CB">查看来源</a></div></li>
+      <li><span class="ref-no">[8]</span><div>粉笔课堂：《粉笔网课-聂佳方法精讲判断》<a href="https://pc.fenbi.com/pcwebsw/lecture/39060">查看来源</a></div></li>
+      <li><span class="ref-no">[9]</span><div>新浪微博：《公考齐麟认证信息》<a href="https://www.sina.cn/news/detail/5220924237807643.html">查看来源</a></div></li>
+      <li><span class="ref-no">[10]</span><div>B站：《2026国省考晚自习157：判断-2023-2024国考真题》<a href="https://www.bilibili.com/video/BV1DBCABKEoo/">查看来源</a></div></li>
+      <li><span class="ref-no">[11]</span><div>CCtalk：《2026最新国省考行测真题班》<a href="https://m.cctalk.com/m/group/91621709">查看来源</a></div></li>
+      <li><span class="ref-no">[12]</span><div>B站课堂：《花生十三：行测3大模块基础入门课》<a href="https://www.bilibili.com/cheese/play/ep45174">查看来源</a></div></li>
+      <li><span class="ref-no">[13]</span><div>B站课堂：《花生十三：2025省考行测系统班》<a href="https://www.bilibili.com/cheese/play/ep1536778">查看来源</a></div></li>
+      <li><span class="ref-no">[14]</span><div>抖音：《花生老师27版海海刷2000题上线》<a href="https://www.iesdouyin.com/share/video/7687602502624660901">查看来源</a></div></li>
+      <li><span class="ref-no">[15]</span><div>抖音：《图形推理800题上线（程永乐）》<a href="https://www.iesdouyin.com/share/video/7686096007913835776">查看来源</a></div></li>
+      <li><span class="ref-no">[16]</span><div>淘宝-粉笔图书旗舰店：《2027考季程永乐图形推理800题课程》<a href="https://mobile-phone.taobao.com/chanpin/6e8371fd5c9ef047a4feea96e60b99a5149cf89893f7ae9f2e9bf7b4b325f433.html">查看来源</a></div></li>
+      <li><span class="ref-no">[17]</span><div>抖音：《龙飞百大图形推理开课》<a href="https://www.iesdouyin.com/share/video/7672742959125410041">查看来源</a></div></li>
+      <li><span class="ref-no">[18]</span><div>四海公考：《四海公考课程主页》<a href="https://sihaigongkao.mddclass.com/?tab=allcourse">查看来源</a></div></li>
+      <li><span class="ref-no">[19]</span><div>B站课堂：《【龙飞判断】判断试题精讲 定义+图推》<a href="https://www.bilibili.com/cheese/play/ss806622302">查看来源</a></div></li>
+      <li><span class="ref-no">[20]</span><div>抖音：《言语正确率低 想快速提高就跟着郭熙老师》<a href="https://www.iesdouyin.com/share/video/7566908820887743451">查看来源</a></div></li>
+      <li><span class="ref-no">[21]</span><div>B站：《【27考季最新课程】郭熙言语高分十二计6》<a href="https://www.bilibili.com/video/BV1aPjw6KEzT/">查看来源</a></div></li>
+      <li><span class="ref-no">[22]</span><div>豆丁网：《2024.04.18 方法精讲-言语4 欧阳（笔记）》<a href="https://www.docin.com/touch_new/preview_new.do?id=4678701448">查看来源</a></div></li>
+      <li><span class="ref-no">[23]</span><div>CCtalk：《2024欣说言语专项班（录播）》<a href="https://m.cctalk.com/m/group/91060846">查看来源</a></div></li>
+      <li><span class="ref-no">[24]</span><div>CCtalk：《2024-2025最新国联考行测套题刷题班》<a href="https://m.xcommon.com/m/group/91508041">查看来源</a></div></li>
+    </ol>
+    <p class="ai-note">（注：报告正文基于上述公开来源核实整理，部分内容可能由 AI 辅助生成；网页配图来自公开网络检索，仅作信息示意。）</p>
+  </section>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="wrap">
+      <span>《课程/模块基础信息报告（依据学期诊断建议核实）》网页版 · 检索日期 2026-09-27</span>
+      <a class="backtop" href="#answer">↑ 回到顶部</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var links = document.querySelectorAll('.topnav-links a');
+  var secs = ['answer','book','pd','yy','zl','suggest','ref'];
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY + 90;
+    var cur = 'answer';
+    for (var i = 0; i < secs.length; i++) {
+      var el = document.getElementById(secs[i]);
+      if (el && el.offsetTop <= y) cur = secs[i];
+    }
+    links.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

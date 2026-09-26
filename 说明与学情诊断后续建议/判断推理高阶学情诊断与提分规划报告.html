@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>判断推理高阶学情诊断与提分规划报告</title>
+<style>
+  :root{
+    --ink:#1a1d24; --sub:#5a6473; --line:#e3e7ee; --bg:#f6f8fb;
+    --red:#c62828; --redbg:#fdecec; --orange:#e07b00; --orangebg:#fff5e6;
+    --blue:#1a5fb4; --bluebg:#eaf2fd; --green:#1f7a4d; --greenbg:#e9f7ef;
+    --purple:#6b3fa0; --purplebg:#f3ecfb;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:0; background:var(--bg);
+    font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB","Source Han Sans SC",sans-serif;
+    color:var(--ink); line-height:1.85; font-size:15.5px;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px 80px;}
+  header.hero{
+    background:linear-gradient(135deg,#12243d 0%,#1e3a5f 55%,#2b527f 100%);
+    color:#fff; padding:54px 44px 46px; border-radius:0 0 18px 18px;
+    box-shadow:0 10px 34px rgba(18,36,61,.28); margin-bottom:36px;
+  }
+  header.hero .tag{
+    display:inline-block; font-size:12.5px; letter-spacing:2.5px;
+    background:rgba(255,255,255,.16); padding:5px 14px; border-radius:20px; margin-bottom:18px;
+  }
+  header.hero h1{ margin:0 0 14px; font-size:31px; line-height:1.4; letter-spacing:.5px; font-weight:800;}
+  header.hero p.sub{ margin:0; font-size:14.5px; color:#c3d4e8; line-height:1.9;}
+  header.hero .stat-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px;}
+  header.hero .stat{
+    background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.2);
+    border-radius:10px; padding:12px 20px; min-width:150px;
+  }
+  header.hero .stat b{display:block; font-size:24px; color:#ffd166; line-height:1.3;}
+  header.hero .stat span{font-size:12.5px; color:#b9cde4;}
+
+  h2{
+    font-size:22px; margin:52px 0 20px; padding:0 0 12px 16px;
+    border-left:5px solid #1a5fb4; border-bottom:2px solid var(--line);
+    letter-spacing:.5px;
+  }
+  h3{font-size:17.5px; margin:32px 0 14px; color:#12243d; padding-left:11px; border-left:4px solid #9db8d8;}
+  h4{font-size:15.5px; margin:22px 0 10px; color:#2b3b52;}
+
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:24px 28px; margin:18px 0; box-shadow:0 2px 10px rgba(20,40,80,.045);
+  }
+  .card.alert{border-left:5px solid var(--red); background:linear-gradient(180deg,#fffafa,#fff);}
+  .card.tip{border-left:5px solid var(--green); background:linear-gradient(180deg,#f9fdfb,#fff);}
+  .card.warn{border-left:5px solid var(--orange); background:linear-gradient(180deg,#fffcf6,#fff);}
+  .card.strategy{border-left:5px solid var(--purple); background:linear-gradient(180deg,#fbf8fe,#fff);}
+
+  table{
+    width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;
+    background:#fff; border-radius:10px; overflow:hidden;
+    box-shadow:0 2px 10px rgba(20,40,80,.05);
+  }
+  th{
+    background:#1e3a5f; color:#fff; padding:11px 12px; text-align:left;
+    font-weight:600; font-size:13.5px; letter-spacing:.4px; white-space:nowrap;
+  }
+  td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tr:nth-child(even) td{background:#fafbfd;}
+  tr:last-child td{border-bottom:none;}
+  td.num{text-align:center; font-variant-numeric:tabular-nums; white-space:nowrap;}
+
+  .pill{display:inline-block; padding:2px 9px; border-radius:11px; font-size:12.5px; font-weight:600; white-space:nowrap;}
+  .p-red{background:var(--redbg); color:var(--red);}
+  .p-org{background:var(--orangebg); color:var(--orange);}
+  .p-blu{background:var(--bluebg); color:var(--blue);}
+  .p-grn{background:var(--greenbg); color:var(--green);}
+  .p-pur{background:var(--purplebg); color:var(--purple);}
+  .pd{font-family:Consolas,"Courier New",monospace; font-size:13px; font-weight:700; color:#1a5fb4;
+      background:#eef4fc; padding:1px 7px; border-radius:5px; white-space:nowrap;}
+
+  .bar{height:9px; border-radius:5px; background:#e8edf4; overflow:hidden; min-width:70px;}
+  .bar > i{display:block; height:100%; border-radius:5px;}
+
+  ul,ol{padding-left:24px; margin:12px 0;}
+  li{margin:7px 0;}
+  li b{color:#12243d;}
+  .hi{background:linear-gradient(transparent 62%, #ffe08a 62%); font-weight:700; padding:0 1px;}
+  .quote{
+    border-left:4px solid #b8c6d8; background:#f8fafc; padding:14px 20px;
+    margin:16px 0; color:#3c4a5e; font-size:14.5px; border-radius:0 8px 8px 0;
+  }
+  code{background:#eef2f7; padding:1px 6px; border-radius:4px; font-family:Consolas,monospace; font-size:13.5px;}
+  .kpi{display:flex; flex-wrap:wrap; gap:14px; margin:18px 0;}
+  .kpi > div{
+    flex:1 1 190px; background:#fff; border:1px solid var(--line);
+    border-top:4px solid #1a5fb4; border-radius:10px; padding:16px 18px;
+  }
+  .kpi b{display:block; font-size:22px; color:#1a5fb4; line-height:1.4;}
+  .kpi span{font-size:13px; color:var(--sub);}
+  .final{
+    background:linear-gradient(135deg,#12243d,#26456d); color:#e8f0fa;
+    border-radius:14px; padding:34px 38px; margin-top:30px; font-size:15.5px; line-height:2.05;
+  }
+  .final h2{color:#ffd166; border-left-color:#ffd166; border-bottom-color:rgba(255,255,255,.15);}
+  .final b{color:#ffd166;}
+  .final .sign{text-align:right; margin-top:22px; color:#9fb6d0; font-size:14px;}
+  footer{text-align:center; color:#93a0b2; font-size:13px; margin-top:46px; line-height:2;}
+  @media (max-width:720px){
+    body{font-size:14.5px;}
+    .wrap{max-width:100%; padding:0 10px 60px;}
+    header.hero{padding:34px 20px 30px;}
+    header.hero h1{font-size:23px;}
+    header.hero p.sub{font-size:13.5px;}
+    header.hero .stat{min-width:0; flex:1 1 42%; padding:10px 14px;}
+    header.hero .stat b{font-size:20px;}
+    h2{font-size:19px; margin:38px 0 16px;}
+    h3{font-size:16px;}
+    h4{font-size:14.5px;}
+    .card{padding:16px 14px;}
+    table{display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; font-size:12.5px; border-radius:8px;}
+    th{white-space:normal; font-size:12px; padding:8px 9px;}
+    td{padding:8px 9px;}
+    .pd{white-space:nowrap; font-size:12px;}
+    .kpi > div{flex:1 1 100%;}
+    .bar{min-width:0;}
+    .final{padding:22px 18px; font-size:14px;}
+    .quote{padding:12px 14px; font-size:13.5px;}
+  }
+  @media print{
+    body{background:#fff; font-size:12.5px;}
+    header.hero{box-shadow:none; border-radius:0;}
+    .card,table{box-shadow:none; page-break-inside:avoid;}
+    h2{page-break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="tag">行 测 · 判 断 推 理 · 学 情 诊 断</div>
+  <h1>判断推理高阶学情诊断与提分规划报告</h1>
+  <p class="sub">
+    数据源：《判断推理书籍目录.txt》全书 1002 题（图推 276 / 定义 202 / 类比 213 / 逻辑 311）<br>
+    样本源：《判断推理题库.json》一刷错题 271 题 → 二刷顽固错题 <b>97 题</b>（逐题比对「一刷 / 二刷 / 标准答案 / 全站正确率 / 易错项 / APP考点」六个字段）
+  </p>
+  <div class="stat-row">
+    <div class="stat"><b>27.0%</b><span>一刷失误率（271/1002）</span></div>
+    <div class="stat"><b>35.8%</b><span>二刷复错率（97/271）</span></div>
+    <div class="stat"><b>58.8%</b><span>同坑跌倒两次（57/97）</span></div>
+    <div class="stat"><b>59.8%</b><span>死于大众易错项（58/97）</span></div>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<h2>一、数据透视与高分盲区诊断（切中要害）</h2>
+
+<h3>1.1 错题雷达图：四大模块失分重灾区</h3>
+
+<p>97 道二刷顽固错题并非均匀分布。把它们的分布和全书题量做对比，你的知识漏洞图谱非常清晰：</p>
+
+<table>
+  <thead><tr>
+    <th>模块</th><th>全书题量</th><th>顽固错题</th><th>占 97 题</th><th>该模块内复错浓度</th><th>诊断定性</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><b>第一章 图形推理</b></td><td class="num">276</td><td class="num">12</td><td class="num">12.4%</td>
+      <td><div class="bar"><i style="width:34%;background:#1f7a4d"></i></div><span class="pill p-grn">相对较低</span></td>
+      <td>规律识别框架已建立，<b>数量规律细节</b>仍有漏网</td>
+    </tr>
+    <tr>
+      <td><b>第二章 定义判断</b></td><td class="num">202</td><td class="num">24</td><td class="num">24.7%</td>
+      <td><div class="bar"><i style="width:62%;background:#c62828"></i></div><span class="pill p-red">高浓度</span></td>
+      <td>书本最薄、你错最多——<b>「抠字眼」能力缺失</b></td>
+    </tr>
+    <tr>
+      <td><b>第三章 类比推理</b></td><td class="num">213</td><td class="num">23</td><td class="num">23.7%</td>
+      <td><div class="bar"><i style="width:60%;background:#e07b00"></i></div><span class="pill p-org">高浓度</span></td>
+      <td>凭语感作答，<b>二级辨析完全没建立</b></td>
+    </tr>
+    <tr>
+      <td><b>第四章 逻辑判断</b></td><td class="num">311</td><td class="num">38</td><td class="num">39.2%</td>
+      <td><div class="bar"><i style="width:78%;background:#c62828"></i></div><span class="pill p-red">重灾区</span></td>
+      <td>绝对失分主战场，<b>削弱加强 + 组合排列</b>双崩</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card alert">
+  <p style="margin-top:0"><b>一句话结论：</b>你的问题不在图形推理，而在<span class="hi">「文字类判断推理」</span>。定义 + 类比 + 逻辑合计 85 题，占 97 题的 <b>87.6%</b>。这说明你不缺智商，缺的是<strong>把文字语言转译为逻辑公式的纪律性</strong>。图形推理你只错 12 题，恰恰证明——<b>当规则是显性的（线条、面、点），你能做对；当规则藏在文字里，你就开始「凭常识做题」。</b></p>
+</div>
+
+<h4>细分考点重灾区（含点名题号）</h4>
+
+<table>
+  <thead><tr>
+    <th>梯队</th><th>细分考点（对照教材章节）</th><th>题数</th><th>点名题号</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pill p-red">S 级</span></td>
+      <td><b>逻辑·削弱题型</b>（教材 P313 第四节：削弱论点 / 他因削弱 / 因果倒置 / 削弱论据 / 拆桥）</td>
+      <td class="num">8</td>
+      <td><span class="pd">PD228</span> <span class="pd">PD229</span> <span class="pd">PD230</span> <span class="pd">PD233</span> <span class="pd">PD235</span> <span class="pd">PD239</span> <span class="pd">PD241</span> <span class="pd">PD242</span> <span class="pd">PD244</span> <span class="pd">PD246</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-red">S 级</span></td>
+      <td><b>类比·对应关系</b>（教材 P239 考点5，全书最大考点 52 题）</td>
+      <td class="num">11</td>
+      <td><span class="pd">PD157</span> <span class="pd">PD158</span> <span class="pd">PD161</span> <span class="pd">PD162</span> <span class="pd">PD164</span> <span class="pd">PD165</span> <span class="pd">PD166</span> <span class="pd">PD167</span> <span class="pd">PD172</span> <span class="pd">PD174</span> <span class="pd">PD176</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">A 级</span></td>
+      <td><b>定义·单定义「其他句式」+「方式目的」</b>（教材 P149 第一节）</td>
+      <td class="num">12</td>
+      <td><span class="pd">PD071</span> <span class="pd">PD079</span> <span class="pd">PD080</span> <span class="pd">PD085</span> <span class="pd">PD089</span> <span class="pd">PD094</span> <span class="pd">PD099</span> <span class="pd">PD100</span> <span class="pd">PD102</span> <span class="pd">PD120</span> <span class="pd">PD123</span> <span class="pd">PD128</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">A 级</span></td>
+      <td><b>逻辑·加强题型</b>（教材 P287 第三节：搭桥 / 加强选非题 / 补充论据）</td>
+      <td class="num">6</td>
+      <td><span class="pd">PD215</span> <span class="pd">PD216</span> <span class="pd">PD219</span> <span class="pd">PD227</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-org">A 级</span></td>
+      <td><b>逻辑·组合排列</b>（教材 P275 第二节：假设法 / 代入法 / 最大信息）</td>
+      <td class="num">6</td>
+      <td><span class="pd">PD201</span> <span class="pd">PD202</span> <span class="pd">PD203</span> <span class="pd">PD208</span> <span class="pd">PD210</span> <span class="pd">PD211</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-blu">B 级</span></td>
+      <td><b>定义·多定义「特殊问法」</b>（教材 P187 第二节；含新考法 6 题）</td>
+      <td class="num">6</td>
+      <td><span class="pd">PD105</span> <span class="pd">PD113</span> <span class="pd">PD116</span> <span class="pd">PD118</span> <span class="pd">PD119</span> <span class="pd">PD124</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-blu">B 级</span></td>
+      <td><b>图推·数量规律「复合考点」</b>（教材 P50 第四节；面/线/点/素交叉）</td>
+      <td class="num">6</td>
+      <td><span class="pd">PD022</span> <span class="pd">PD023</span> <span class="pd">PD026</span> <span class="pd">PD027</span> <span class="pd">PD035</span> <span class="pd">PD042</span> <span class="pd">PD059</span> <span class="pd">PD060</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-pur">C 级</span></td>
+      <td><b>逻辑·翻译推理 + 日常结论 + 原因解释 + 真假推理</b></td>
+      <td class="num">11</td>
+      <td><span class="pd">PD193</span> <span class="pd">PD195</span> <span class="pd">PD197</span> <span class="pd">PD198</span> <span class="pd">PD249</span> <span class="pd">PD250</span> <span class="pd">PD251</span> <span class="pd">PD252</span> <span class="pd">PD255</span> <span class="pd">PD256</span> <span class="pd">PD261</span></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-pur">C 级</span></td>
+      <td><b>图推·空间类</b>（教材 P103 空间重构 / P114 截面图）</td>
+      <td class="num">2</td>
+      <td><span class="pd">PD045</span> <span class="pd">PD053</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card warn">
+  <p style="margin:0"><b>特别点名——逻辑判断「第八节专项集训」（教材 P360-P376，共 50 题）</b>：你在这一节的 5 套卷子里折了 <b>7 题</b>：<span class="pd">PD262</span>（推理形式）、<span class="pd">PD264</span>（加强选非题）、<span class="pd">PD265</span>（他因削弱）、<span class="pd">PD269</span>（拆桥）、<span class="pd">PD270</span>（削弱论据）、<span class="pd">PD272</span>（日常结论）、<span class="pd">PD274</span>（削弱-实验类、他因削弱）。<br>
+  专项集训是<b>综合卷</b>，不告诉你考哪个考点——这恰恰暴露了你的致命伤：<span class="hi">脱离章节标题你就无法自主定位考点</span>。考场上没有人给你「考点提示」，这才是真实考场。</p>
+</div>
+
+<h3>1.2 刷题行为侧写（思维固化分析）</h3>
+
+<p>我把你 97 道题的一刷答案、二刷答案与标准答案做了三向比对，得到两个关键行为指标：</p>
+
+<div class="kpi">
+  <div><b>57 题</b><span>同坑跌倒两次<br>（一刷 = 二刷，选了同一个错误选项）</span></div>
+  <div><b>40 题</b><span>盲目避坑<br>（一刷 ≠ 二刷，两次错在不同选项）</span></div>
+  <div><b>174 题</b><span>二刷已修正<br>（271 − 97，真实提分空间）</span></div>
+  <div><b>35.8%</b><span>复错率<br>（对标：该数据应压到 10% 以内）</span></div>
+</div>
+
+<h4>「同坑跌倒两次」57 题 —— 这不是粗心，是顽固的神经回路</h4>
+
+<p>一刷错了 B，二刷还是错 B，说明<b>你的错误选项在你大脑里形成了一个「自洽的、能说服你的逻辑」</b>。你不是不知道正确答案，你是<b>真诚地认为错误答案才对</b>。这类错误最危险，因为它会稳定地出现在考场上。</p>
+
+<p>按模块拆解同坑率：</p>
+
+<table>
+  <thead><tr><th>模块</th><th>顽固错题</th><th>同坑（一刷=二刷）</th><th>同坑率</th><th>思维定势解读</th></tr></thead>
+  <tbody>
+    <tr><td>图形推理</td><td class="num">12</td><td class="num">6</td><td class="num">50.0%</td>
+      <td>一半是「当场拍脑袋」，随机性大；另一半是<b>数错数</b>（如 <span class="pd">PD027</span> 线、<span class="pd">PD035</span> 点连错两次）</td></tr>
+    <tr><td><b>定义判断</b></td><td class="num">24</td><td class="num">15</td><td class="num">62.5%</td>
+      <td><b>最高同坑率</b>——说明定义题你有一套<b>稳定但错误</b>的自觉：抓「意思」而不抓「要件关键词」，同一处坑反复掉</td></tr>
+    <tr><td>类比推理</td><td class="num">23</td><td class="num">14</td><td class="num">60.9%</td>
+      <td>「造了句，但造句方向固定」——你习惯性造同一类关系句，所以两次掉进同一个二级辨析陷阱</td></tr>
+    <tr><td>逻辑判断</td><td class="num">38</td><td class="num">22</td><td class="num">57.9%</td>
+      <td><b>绝对数量最大</b>。典型如 <span class="pd">PD228</span>（因果倒置）、<span class="pd">PD233</span>（削弱论点）连错两次——论证模型没建立，两次都用同一套「常识推理」硬解</td></tr>
+  </tbody>
+</table>
+
+<div class="card alert">
+  <p style="margin:0">看 <span class="pd">PD161</span>（<b>全站正确率仅 36%</b>，考点：包容关系+对应关系，一刷 A 二刷 A 标准 D）和 <span class="pd">PD167</span>（<b>仅 33%</b>，考点：包容关系+对应关系，一刷 B 二刷 B 标准 C）——<b>两道地狱难度的类比题，你两次都选了同一个错项</b>。这不是随机蒙错，这是你的类比思维在「包容 vs 对应」这个岔路口上，<span class="hi">有一条根深蒂固的错误默认路径</span>。</p>
+</div>
+
+<h4>「盲目避坑」40 题 —— 更隐蔽的第二种病</h4>
+
+<p>一刷错 B，二刷改成 C，结果答案是 D。这类错题揭示了一个残酷事实：<b>你二刷时并没有真正搞懂题目，只是在「躲」一刷的那个答案</b>。</p>
+
+<p>典型样本：</p>
+<ul>
+  <li><span class="pd">PD102</span>（定义·单定义-其他句式，58%）：一刷 B → 二刷 D，标准 A。<b>两次都没抓住定义要件</b>，纯靠语感在两个「看起来像」的选项间漂移。</li>
+  <li><span class="pd">PD195</span>（逻辑·翻译推理-推理形式，61%）：一刷 D → 二刷 A，标准 B。<b>三段论结构没做形式化转写</b>，所以两次都被不同的干扰项骗。</li>
+  <li><span class="pd">PD230</span>（逻辑·削弱论点，85%）：一刷 C → 二刷 D，标准 A。<b>一道 85% 的送分题，你换了个姿势又错一次</b>。</li>
+  <li><span class="pd">PD272</span>（逻辑·日常结论，66%）：一刷 D → 二刷 B，标准 C。<b>「最不能推出」题型的排除逻辑没建立</b>。</li>
+</ul>
+
+<div class="quote">
+  <b>行为侧写结论：</b>「同坑 57 题」= 你的<b>错误逻辑自洽</b>，需要「拆掉重建」；「换坑 40 题」= 你的<b>正确逻辑从未建立</b>，需要「从零搭建」。这两类错题的解法完全不同——前者要写「错因诊断」，后者要写「正确推演链」。你现在的复习方式如果只是「重做一遍看答案」，这两类题<b>一道都治不好</b>。
+</div>
+
+<h3>1.3 陷阱抗性分析：你是死于大众陷阱，还是死于个性化盲区？</h3>
+
+<p>我把你二刷的答案，与粉笔 APP 给出的「全站易错项」做了交叉比对——这能精确区分两种失败模式：</p>
+
+<table>
+  <thead><tr>
+    <th>失败模式</th><th>判定标准</th><th>题数</th><th>占比</th><th>真实病因</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pill p-org">死于大众陷阱</span></td>
+      <td>二刷答案 <b>=</b> APP 易错项</td>
+      <td class="num"><b>58</b></td><td class="num">59.8%</td>
+      <td>审题漏条件、二级辨析没做、把「加强」看成「削弱」——<b>能力够，纪律不够</b></td>
+    </tr>
+    <tr>
+      <td><span class="pill p-red">死于个性化盲区</span></td>
+      <td>二刷答案 <b>≠</b> APP 易错项</td>
+      <td class="num"><b>39</b></td><td class="num">40.2%</td>
+      <td>连大众都觉得不靠谱的选项你却选了——<b>底层逻辑完全缺失，属于知识盲区</b></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>分模块看，你的「个性化盲区」分布极不均匀，这非常有价值：</p>
+
+<table>
+  <thead><tr><th>模块</th><th>命中大众易错项</th><th>个性化盲区</th><th>大众命中率</th><th>结论</th></tr></thead>
+  <tbody>
+    <tr><td>图形推理</td><td class="num">7</td><td class="num">5</td><td class="num">58.3%</td>
+      <td>尚可，但 <span class="pd">PD026</span>（82%题，你选A、大众选D、标准C）、<span class="pd">PD045</span>（82%题，你选D、大众选C、标准B）属于<b>独自跑偏</b>，是空间感和复合规律的硬伤</td></tr>
+    <tr><td>定义判断</td><td class="num">14</td><td class="num">10</td><td class="num">58.3%</td>
+      <td><span class="pd">PD093</span>（大前提）、<span class="pd">PD100</span>（方式目的）、<span class="pd">PD105</span>（特殊问法）— 你选的选项连大众都不考虑，说明<b>根本没读全定义要件</b></td></tr>
+    <tr><td>类比推理</td><td class="num">16</td><td class="num">7</td><td class="num"><b>69.6%</b></td>
+      <td><b>全部模块中最高</b>——好消息！说明你类比的基础关系判断是对的，<span class="hi">只差临门一脚的二级辨析</span></td></tr>
+    <tr><td>逻辑判断</td><td class="num">21</td><td class="num">17</td><td class="num"><b>55.3%</b></td>
+      <td><b>最危险</b>。近一半是连大众都不选的角度，证明你在削弱加强题型上<b>没有「论点-论据-论证方式」的模型意识</b>，纯凭阅读理解做题</td></tr>
+  </tbody>
+</table>
+
+<h4>三档失守诊断：你的错题可以精确分成三类</h4>
+
+<div class="card alert">
+  <h4 style="margin-top:0">第一档｜送分题失守（全站正确率 ≥ 80%，共 10 题）—— 这一档最该被骂</h4>
+  <p>10 道题，全站 80% 以上的人能做对，你做了两遍还是错：</p>
+  <table style="margin-top:10px">
+    <thead><tr><th>题号</th><th>考点</th><th>正确率</th><th>一刷</th><th>二刷</th><th>标准</th><th>易错项</th><th>行为定性</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pd">PD035</span></td><td>图推-数量规律-点</td><td class="num">94%</td><td class="num">D</td><td class="num">D</td><td class="num">C</td><td class="num">D</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD131</span></td><td>类比-语义关系-近义关系</td><td class="num">88%</td><td class="num">A</td><td class="num">A</td><td class="num">D</td><td class="num">A</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD228</span></td><td>逻辑-削弱-因果倒置</td><td class="num">87%</td><td class="num">B</td><td class="num">B</td><td class="num">A</td><td class="num">C</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD233</span></td><td>逻辑-削弱论点</td><td class="num">87%</td><td class="num">B</td><td class="num">B</td><td class="num">D</td><td class="num">B</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD215</span></td><td>逻辑-加强-搭桥</td><td class="num">85%</td><td class="num">A</td><td class="num">A</td><td class="num">D</td><td class="num">A</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD230</span></td><td>逻辑-削弱论点</td><td class="num">85%</td><td class="num">C</td><td class="num">D</td><td class="num">A</td><td class="num">B</td><td><span class="pill p-org">换坑·漂移</span></td></tr>
+      <tr><td><span class="pd">PD026</span></td><td>图推-数量规律-复合</td><td class="num">82%</td><td class="num">D</td><td class="num">A</td><td class="num">C</td><td class="num">D</td><td><span class="pill p-org">换坑·漂移</span></td></tr>
+      <tr><td><span class="pd">PD045</span></td><td>图推-空间重构-六面体</td><td class="num">82%</td><td class="num">C</td><td class="num">D</td><td class="num">B</td><td class="num">C</td><td><span class="pill p-org">换坑·漂移</span></td></tr>
+      <tr><td><span class="pd">PD251</span></td><td>逻辑-日常结论</td><td class="num">82%</td><td class="num">B</td><td class="num">B</td><td class="num">A</td><td class="num">B</td><td><span class="pill p-red">同坑·连错两次</span></td></tr>
+      <tr><td><span class="pd">PD255</span></td><td>逻辑-原因解释</td><td class="num">82%</td><td class="num">C</td><td class="num">B</td><td class="num">A</td><td class="num">C</td><td><span class="pill p-org">换坑·漂移</span></td></tr>
+    </tbody>
+  </table>
+  <p style="margin-bottom:0"><b>病因判定：</b>这一档 <b>7 题属于「同坑」</b>。<span class="hi">不是不会，而是你的错误答案在你脑子里有极强的说服力</span>。比如 <span class="pd">PD035</span>——94% 正确率的数点题，你两次都选 D，大众易错项也是 D。这是典型的<b>「少数几个点，数错一次就记住错的那个数，第二次直接调用」</b>。必须用「重数 + 写下计数过程」强制打断。</p>
+</div>
+
+<div class="card warn">
+  <h4 style="margin-top:0">第二档｜中档题二级辨析缺失（51%–70%，共 49 题）—— 提分主力区</h4>
+  <p style="margin-bottom:0">这一档占 97 题的 <b>50.5%</b>，是你的<b>最大提分矿区</b>。它们不难到做不出，也不易到能白给。<span class="hi">从 5 分提到 8 分，全看这一档</span>。典型如 <span class="pd">PD157</span> <span class="pd">PD162</span> <span class="pd">PD187</span>（类比对应关系）、<span class="pd">PD183</span> <span class="pd">PD186</span>（类比专项卷）、<span class="pd">PD197</span>（常规翻译）、<span class="pd">PD227</span>（加强选非题）、<span class="pd">PD239</span>（削弱论点）、<span class="pd">PD262</span> <span class="pd">PD265</span> <span class="pd">PD270</span>（逻辑专项卷）。</p>
+</div>
+
+<div class="card tip">
+  <h4 style="margin-top:0">第三档｜高难题完全盲区（≤ 40%，共 4 题）—— 战略性放弃候选</h4>
+  <p style="margin-bottom:0"><span class="pd">PD042</span>（40%，数量规律-复合）、<span class="pd">PD161</span>（36%，类比·包容+对应）、<span class="pd">PD167</span>（33%，类比·包容+对应）、<span class="pd">PD172</span>（<b>29%</b>，类比·对应关系，全卷最低）。<br>
+  <b>注意：</b><span class="pd">PD161</span> 与 <span class="pd">PD167</span> 考点完全相同（都是「包容关系+对应关系」双重辨析），且你两次都选同一个错项——这不是运气问题，这是<b>同一个知识盲点被考了两次</b>。<span class="hi">这两题必须死磕，是类比推理的「任督二脉」</span>。</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>二、题库区分度与含金量评估</h2>
+
+<h3>2.1 漏斗模型：你的 97 题含金量到底有多高？</h3>
+
+<table>
+  <thead><tr><th>层级</th><th>题量</th><th>转化率</th><th>含义</th></tr></thead>
+  <tbody>
+    <tr><td>全书判断推理总量</td><td class="num">1002</td><td class="num">—</td><td>教材上册全样本，含全部 夯实基础 / 高难进阶 / 新考法 / 5 套专项卷</td></tr>
+    <tr><td>一刷错题</td><td class="num">271</td><td class="num">27.0%</td><td>首轮失误率，正常偏高水平（优秀考生首轮失误率 20–25%）</td></tr>
+    <tr><td>二刷顽固错题</td><td class="num">97</td><td class="num"><b>35.8%</b></td><td><b>关键指标</b>。二刷订正率仅 64.2%，远低于 85% 的健康线</td></tr>
+    <tr><td>占全书比重</td><td class="num">97/1002</td><td class="num">9.7%</td><td>若原样带入考场，40 题判断推理将稳定丢 <b>3.9 题</b>，正确率天花板被锁死在 <b>≈90%</b> 以下</td></tr>
+  </tbody>
+</table>
+
+<h3>2.2 含金量分层：这 97 题在考什么层次的拉分能力？</h3>
+
+<p>把这 97 题按教材难度标签归类，结论非常反常识：</p>
+
+<table>
+  <thead><tr><th>难度标签</th><th>题数</th><th>占比</th><th>说明与代表题号</th></tr></thead>
+  <tbody>
+    <tr><td><b>夯实基础</b></td><td class="num">28</td><td class="num">28.9%</td>
+      <td><span class="pill p-red">警报</span> <b>近三成顽固错题是基础题</b>！<span class="pd">PD035</span>(94%)、<span class="pd">PD131</span>(88%)、<span class="pd">PD228</span>(87%)、<span class="pd">PD233</span>(87%)、<span class="pd">PD215</span>(85%)、<span class="pd">PD045</span>(82%)、<span class="pd">PD026</span>(82%)、<span class="pd">PD255</span>(82%)、<span class="pd">PD251</span>(82%)、<span class="pd">PD193</span>(73%)、<span class="pd">PD201</span>(77%)、<span class="pd">PD202</span>(72%)、<span class="pd">PD203</span>(68%) 等</td></tr>
+    <tr><td><b>高难进阶</b></td><td class="num">43</td><td class="num">44.3%</td>
+      <td>主力战场，占近一半。含 <span class="pd">PD161</span>(36%)、<span class="pd">PD167</span>(33%)、<span class="pd">PD172</span>(29%)、<span class="pd">PD113</span>(43%)、<span class="pd">PD261</span>(43%)、<span class="pd">PD242</span>(44%)、<span class="pd">PD246</span>(44%)、<span class="pd">PD053</span>(45%)、<span class="pd">PD099</span>(45%)、<span class="pd">PD009</span>(46%)、<span class="pd">PD211</span>(47%)、<span class="pd">PD128</span>(48%) 等</td></tr>
+    <tr><td><b>新考法</b></td><td class="num">7</td><td class="num">7.2%</td>
+      <td>命题创新方向，<span class="pd">PD116</span> <span class="pd">PD118</span> <span class="pd">PD119</span>（定义·多定义特殊问法）、<span class="pd">PD170</span>→<span class="pd">PD172</span>、<span class="pd">PD174</span>→<span class="pd">PD176</span>（类比对应关系新考法）、<span class="pd">PD181</span>→<span class="pd">PD183</span>（拆分思维新考法）</td></tr>
+    <tr><td><b>专项集训卷</b></td><td class="num">19</td><td class="num">19.6%</td>
+      <td>图推卷三（<span class="pd">PD059</span> <span class="pd">PD060</span>）、定义卷一/二/三（<span class="pd">PD120</span> <span class="pd">PD123</span> <span class="pd">PD124</span> <span class="pd">PD126</span> <span class="pd">PD128</span>）、类比卷一/二/三（<span class="pd">PD184</span> <span class="pd">PD185</span> <span class="pd">PD186</span> <span class="pd">PD187</span> <span class="pd">PD190</span>）、逻辑卷一/三/四（<span class="pd">PD262</span> <span class="pd">PD264</span> <span class="pd">PD265</span> <span class="pd">PD269</span> <span class="pd">PD270</span> <span class="pd">PD272</span> <span class="pd">PD274</span>）</td></tr>
+  </tbody>
+</table>
+
+<h3>2.3 全站正确率分层与你的真实段位</h3>
+
+<table>
+  <thead><tr><th>正确率区间</th><th>题数</th><th>占比</th><th>难度定性</th><th>你应有的表现</th></tr></thead>
+  <tbody>
+    <tr><td><b>≥ 81%</b></td><td class="num">10</td><td class="num">10.3%</td><td>送分题</td><td><span class="pill p-red">必须 100% 做对</span> 现在做两次都错 —— 纯纪律问题</td></tr>
+    <tr><td>71% – 80%</td><td class="num">24</td><td class="num">24.7%</td><td>基础题</td><td>容错 ≤ 1 题</td></tr>
+    <tr><td>61% – 70%</td><td class="num">24</td><td class="num">24.7%</td><td>中档题</td><td>容错 ≤ 2 题</td></tr>
+    <tr><td>51% – 60%</td><td class="num">25</td><td class="num">25.8%</td><td>中高难</td><td>容错 ≤ 4 题</td></tr>
+    <tr><td>41% – 50%</td><td class="num">10</td><td class="num">10.3%</td><td>高难</td><td>对 6 题以上即为优秀</td></tr>
+    <tr><td><b>≤ 40%</b></td><td class="num">4</td><td class="num">4.1%</td><td>地狱级</td><td>拿下其中 2 题（<span class="pd">PD161</span> <span class="pd">PD167</span>）即可</td></tr>
+  </tbody>
+</table>
+
+<div class="card strategy">
+  <h4 style="margin-top:0">段位判定：你现在处于「70 分档位」，距离「80 分档位」缺的不是知识，是稳定性</h4>
+  <p><b>证据一：</b>你的错题里 <b>58 题（59.8%）</b>的答案 = 全站易错项。这说明你能看出「哪些选项是坑」，但<span class="hi">你分辨不出「两个坑里哪个更像答案」</span>——这是典型的 70 分段特征，不是 50 分段。</p>
+  <p><b>证据二：</b>你在 276 题图形推理里只顽固错 12 题（4.3%），在 202 题定义判断里顽固错 24 题（11.9%），在 311 题逻辑判断里顽固错 38 题（12.2%）。<b>图推的准确率是「会看」的证明，文字题的准确率是「不会推」的证据</b>——你的理科图形直觉正常，文字逻辑链条断裂。</p>
+  <p style="margin-bottom:0"><b>证据三（最关键）：</b>28 道「夯实基础」题二刷还错，其中 <b>10 道是全站 80%+ 的送分题</b>。这些题考察的不是「拉分能力」，而是「不出错的能力」。<span class="hi">你现在的丢分结构 = 送分题漏 10 题 + 中档题丢 49 题 + 高难题丢 38 题</span>。只要把前两档守住，判断推理 80% 是保底，85% 是可达。</p>
+</div>
+
+<p><b>这 97 题真正在考什么？</b>它们在考三层能力，而你断在了第二层：</p>
+<ol>
+  <li><b>第一层｜规则识别</b>（你已具备）：看出图推的规律类型、认出类比的表层关系。</li>
+  <li><b>第二层｜要件锁定与二级辨析</b>（<span class="hi">你的致命断点</span>）：定义题「必须同时满足 A 且 B 且 C」；类比题「感情色彩、词性、程度、必然/或然、主体是否一致」；削弱题「这是削弱论点还是削弱论据，能不能拆桥」。</li>
+  <li><b>第三层｜抗干扰</b>（你尚未触及）：在 40 题 35 分钟的压迫下，仍能把前两层跑完。</li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>三、突破 85% 瓶颈的核心行动路径（打怪升级三步走）</h2>
+
+<h3>Step 1｜洗髓：把「绝对规则题」做成 100% 正确率闭环</h3>
+
+<p><b>打击目标：</b>翻译推理（教材 P258）、真假推理（P352）、图推位置/数量规律基础（P2-P93）、组合排列代入法。<br>
+<b>硬指标：</b>这四类题在模考中<b>容错率 = 0</b>。</p>
+
+<h4>① 翻译推理：把「理解」换成「翻译」</h4>
+<p>你在这块错了 <span class="pd">PD193</span>（常规翻译，73%，一刷C二刷D标准A）、<span class="pd">PD195</span>（推理形式，61%，一刷D二刷A标准B）、<span class="pd">PD197</span>（常规翻译，55%，一刷A二刷B标准C）、<span class="pd">PD198</span>（集合推理，60%，一刷B二刷A标准D）。四道题全部是「换坑」——<b>说明你根本没翻译，全靠语感</b>。</p>
+<p>建立「三步机械流程」，写不出就不许选答案：</p>
+<ol>
+  <li><b>划关联词</b>：只圈这 8 个词——<code>如果…就</code>、<code>只有…才</code>、<code>除非…否则</code>、<code>…必须…</code>、<code>且</code>、<code>或</code>、<code>所有</code>、<code>有的</code>。</li>
+  <li><b>写箭头</b>：在题本空白处把题干逐句转写成 <code>A→B</code> 的形式。<b>「只有 A 才 B」必须写成 B→A</b>（这是最高频陷阱）。</li>
+  <li><b>逆否检验</b>：拿到选项后，把选项反向写成 <code>¬B→¬A</code>，看是否能由题干链推出。<b>只能使用「肯前必肯后」「否后必否前」，其余一律判错</b>。</li>
+</ol>
+<div class="quote"><b>针对 <span class="pd">PD198</span>（集合推理）的专属处方：</b>「所有/有的」必须画<b>欧拉图（文氏图）</b>，不许心算。「有的 A 是 B」绝不等于「有的 A 不是 B」——把这条写在便利贴上贴桌面。</div>
+
+<h4>② 真假推理：矛盾关系的秒杀口诀</h4>
+<p><span class="pd">PD261</span>（只有一真/一假，43%，一刷B二刷C标准A）暴露了你对矛盾关系不熟。必背四组矛盾：<br>
+<code>A 与 ¬A</code> / <code>「所有都是」与「有的不是」</code> / <code>「所有都不是」与「有的是」</code> / <code>「A且B」与「¬A或¬B」</code>。<br>
+<b>操作口诀：找到矛盾组 → 一真一假 → 看剩余命题真假 → 反推答案。</b>此类题目标：<b>30 秒内出答案，全对</b>。</p>
+
+<h4>③ 图推基础（位置/数量）：从「看」升级为「数」</h4>
+<p>你的 <span class="pd">PD035</span>（94%题，数量规律-点，连错两次）、<span class="pd">PD027</span>（67%，数量规律-线，连错两次）、<span class="pd">PD042</span>（40%，复合规律）、<span class="pd">PD059</span>（57%，复合规律）、<span class="pd">PD060</span>（51%，数量规律-素）——<b>全部是「数错」而非「看不出」</b>。</p>
+<p>建立「<b>数前先定标准</b>」纪律：</p>
+<ul>
+  <li><b>数面</b>：只数封闭区域，注意「大面套小面算几个」先定死，一以贯之。</li>
+  <li><b>数线</b>：先数直线，再数曲线，最后数笔画（奇点÷2）。<b>把计数结果写在图上</b>——不写不选。</li>
+  <li><b>数点</b>：只数交点、切点、端点。数完先做「递增/递减/常数」三查。</li>
+  <li><b>复合规律</b>（你的最大盲区）：当单一数量不成规律时，<b>立刻两两联动</b>——「面+线」「点+线」「素+位置」。<span class="pd">PD026</span>（82%题，一刷D二刷A标准C）、<span class="pd">PD042</span>、<span class="pd">PD059</span> 都是复合规律。</li>
+</ul>
+
+<h3>Step 2｜攻坚：定义 + 类比，改掉「凭感觉选」的毛病</h3>
+
+<p><b>打击目标：</b>定义判断 24 题 + 类比推理 23 题 = <b>47 题</b>（占 97 题的 48.5%）。<b>这是你投入产出比最高的一块</b>。</p>
+
+<h4>① 定义判断：圈画关键词 + 造句比对（「要件清单法」）</h4>
+<p>你的定义错题高度集中在两个考点：<b>「方式目的」（5 题）</b>与<b>「单定义-其他句式」（7 题）</b>，加上<b>「特殊问法」（6 题）</b>。这三个考点的共同点是——<span class="hi">要求你逐字比对，而你只做了「大意匹配」</span>。</p>
+<p><b>强制四步法（每道定义题必须留痕）：</b></p>
+<ol>
+  <li><b>划主语</b>：谁做的？（主体）。<span class="pd">PD098</span>（主客体，58%，连错两次）、<span class="pd">PD090</span>（大前提+主客体，71%，连错两次）就死在这里。</li>
+  <li><b>划方式</b>：怎么做的？（手段/途径）。「方式目的」考点必抓<span class="pd">「通过…」「以…方式」「为了…」</span>这类标志词——<span class="pd">PD071</span> <span class="pd">PD079</span> <span class="pd">PD085</span> <span class="pd">PD089</span> <span class="pd">PD100</span> 全部是这个词的漏网之鱼。</li>
+  <li><b>划结果/目的</b>：为了什么？</li>
+  <li><b>划否定词与限定词</b>：「不属于」「除外」「未经」「非」「尚未」——<b>用红笔圈出来</b>。<span class="pd">PD097</span>（拆词，57%，连错两次，一刷D二刷D标准A）就是因为没锁定「自行恢复」这个要件。</li>
+</ol>
+<p><b>「特殊问法」专项</b>（<span class="pd">PD105</span> <span class="pd">PD113</span> <span class="pd">PD116</span> <span class="pd">PD118</span> <span class="pd">PD119</span> <span class="pd">PD124</span>，共 6 题）：做题时<b>先在题号旁写下「选是」或「选非」两个字</b>，写完再读选项。这 6 题里有 5 题是「同坑」，说明你<b>每次都在同一种问法上翻车</b>——这是纯粹的流程缺失，改起来最快。</p>
+
+<h4>② 类比推理：造句 + 词性 + 二级辨析三级跳</h4>
+<p>好消息：你的类比「大众易错项命中率」是四大模块最高的 <b>69.6%</b>，说明<b>表层关系你判断得对</b>。你只错在「最后一步」。你的类比错题 57% 集中在<b>「对应关系」</b>（11 题），尤其 <span class="pd">PD161</span>(36%)、<span class="pd">PD167</span>(33%)、<span class="pd">PD172</span>(29%) 三道地狱题<b>考点完全同源</b>（包容关系+对应关系的双重辨析）。</p>
+<p><b>强制三级跳流程：</b></p>
+<table>
+  <thead><tr><th>层级</th><th>动作</th><th>检验标准</th></tr></thead>
+  <tbody>
+    <tr><td><b>第一跳：造句</b></td><td>把题干两词造成一句通顺的话：「A 是 B 的原材料」「A 是 B 的载体」</td>
+      <td>造不出一句明确的话 → 用<b>拆分思维</b>（教材 P249）逐字拆</td></tr>
+    <tr><td><b>第二跳：词性/结构</b></td><td>标出名词/动词/形容词，看构词结构（并列/偏正/动宾）</td>
+      <td><span class="pd">PD181</span>→<span class="pd">PD183</span>（反义关系+拆分思维，57%，连错两次）就死在这一跳</td></tr>
+    <tr><td><b>第三跳：二级辨析</b></td><td>依次比对 6 个维度：<b>① 必然 vs 或然 ② 主体是否一致 ③ 感情色彩（褒/贬/中） ④ 程度轻重 ⑤ 时间先后 ⑥ 人工 vs 自然</b></td>
+      <td>只需一个维度不同即可排除。<span class="pd">PD139</span>(52%)、<span class="pd">PD165</span>(42%)、<span class="pd">PD167</span>(33%) 都靠这一跳才分得开</td></tr>
+  </tbody>
+</table>
+<div class="quote"><b>死磕清单：</b>把 <span class="pd">PD158</span>、<span class="pd">PD161</span>、<span class="pd">PD165</span>、<span class="pd">PD166</span>、<span class="pd">PD167</span> 五道题排在一起做专题对比——它们的考点都是「<b>包容关系 + 对应关系</b>」的组合，做完你就能看穿命题人的套路。</div>
+
+<h3>Step 3｜冲刺：死磕削弱/加强 + 空间重构</h3>
+
+<p><b>打击目标：</b>逻辑判断 38 题，其中<b>加强题型 6 题 + 削弱题型 10 题 = 16 题</b>，加上专项卷里的 7 题，合计 <b>23 题</b>，占 97 题的 <b>23.7%</b>。</p>
+
+<h4>① 削弱/加强：先找论点，再判「削的是哪一层」</h4>
+<p>你在这一块的个性化盲区最多（逻辑模块大众命中率仅 55.3%），<span class="hi">根源是：你从来不单独把「论点」拎出来</span>。你在「读懂整段话」然后凭印象选。</p>
+<p><b>强制三行笔记法：</b></p>
+<ol>
+  <li><b>第一行写论点</b>：用一句话概括「作者想让我信什么」。<b>看转折词后、结论词（因此/可见/认为/表明）后</b>。</li>
+  <li><b>第二行写论据</b>：作者用什么支撑。若<b>只有论点无论据</b>（如 <span class="pd">PD218</span> 的题型），加强只能靠<b>补充论据</b>。</li>
+  <li><b>第三行判关系</b>：论点论据<b>话题一致</b> → 优先削弱论点；<b>话题不一致</b> → 优先<b>拆桥</b>。<br>
+  <span style="color:#c62828">例：<span class="pd">PD269</span>（拆桥，71%，一刷C二刷A标准D）——论据说「其他省份觉得这系统好」，论点说「我们单位该引进」，话题不一致，正确答案就是拆桥。</span></li>
+</ol>
+<p><b>削弱力度排序必背（从强到弱）：</b>因果倒置 &gt; 直接否定论点 &gt; 拆桥 &gt; 他因削弱 &gt; 削弱论据 &gt; 不明确项。</p>
+<ul>
+  <li><span class="pd">PD228</span>（87%题，因果倒置，连错两次）、<span class="pd">PD244</span>（62%，因果倒置，连错两次）→ 见到「A 导致 B」立刻反问：<b>会不会是 B 导致 A？</b></li>
+  <li><span class="pd">PD233</span>（87%）、<span class="pd">PD235</span>（64%，他因削弱）、<span class="pd">PD239</span>（58%）、<span class="pd">PD242</span>（44%）、<span class="pd">PD246</span>（44%）、<span class="pd">PD270</span>（56%，削弱论据）、<span class="pd">PD274</span>（68%，实验类+他因削弱）—— <b>这 7 题全部要吃透「削弱的是论点还是论据」的区别</b>。</li>
+  <li><span class="pd">PD215</span>（85%，搭桥，连错两次）、<span class="pd">PD216</span>（80%，搭桥）、<span class="pd">PD219</span>（77%，搭桥）、<span class="pd">PD227</span>（55%，加强选非题）→ <b>「加强选非题」是送命题，必须先写「选非」，再逐项判断</b>。</li>
+</ul>
+
+<h4>② 空间重构：把空间想象换成「机械规则」</h4>
+<p>你只错 2 题（<span class="pd">PD045</span> 六面体 82%、<span class="pd">PD053</span> 截面图 45%），但这两题都<b>换坑了</b>，说明规则不稳。空间类不需要天赋，只需要规则：</p>
+<ul>
+  <li><b>六面体</b>：一律用「<b>相对面排除法 + 相邻面箭头法</b>」。先在展开图上标出 3 组相对面（同行隔一个、Z 字两端），选项里出现相对面相邻 → <b>秒排</b>。剩下用箭头法比对图案朝向。</li>
+  <li><b>截面图</b>：只背一句话——<span class="hi">截面图的边数 ≤ 原多面体的面数；刀切过几个面，截面就有几条边</span>。数边比想象快 10 倍。</li>
+  <li><b>立体拼合</b>：先数立方体总数（体积），再排除体积不符的选项，最后看凹凸互补。</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>四、铁血考核标准（数据量化）</h2>
+
+<h3>4.1 三刷 97 题错题的 KPI</h3>
+
+<div class="kpi">
+  <div><b>≥ 93/97</b><span>三刷总正确率 ≥ 96%<br>（至多错 4 题）</span></div>
+  <div><b>100%</b><span>28 道「夯实基础」题<br>必须全对，一题不许错</span></div>
+  <div><b>100%</b><span>10 道「送分题」<br>（正确率≥81%）必须全对</span></div>
+  <div><b>≤ 2 题</b><span>4 道地狱题（≤40%）<br>至少拿下 PD161、PD167</span></div>
+</div>
+
+<table>
+  <thead><tr><th>题型 / 考点</th><th>三刷容错率</th><th>模考容错率（以 40 题卷为基准）</th><th>附加要求</th></tr></thead>
+  <tbody>
+    <tr><td><b>翻译推理</b>（P258）</td><td class="num" style="color:#c62828"><b>0 题</b></td><td class="num">≤ 0 题（全对）</td><td>每题必须在题本上写出箭头翻译式，无痕迹视为未完成</td></tr>
+    <tr><td><b>真假推理</b>（P352）</td><td class="num" style="color:#c62828"><b>0 题</b></td><td class="num">≤ 0 题（全对）</td><td>必须写出矛盾关系组（如「A 与 ¬A」）</td></tr>
+    <tr><td><b>组合排列</b>（P275）</td><td class="num">≤ 1 题</td><td class="num">≤ 1 题</td><td>代入法/假设法二选一，须写选用理由</td></tr>
+    <tr><td><b>削弱 / 加强</b>（P287、P313）</td><td class="num">≤ 2 题</td><td class="num">≤ 2 题</td><td>每题必写「论点」一行；选非题先标「选非」</td></tr>
+    <tr><td><b>类比推理</b>（P219）</td><td class="num">≤ 2 题</td><td class="num">≤ 1 题</td><td>必须造句 + 标注二级辨析维度</td></tr>
+    <tr><td><b>定义判断</b>（P148）</td><td class="num">≤ 1 题</td><td class="num">≤ 1 题</td><td>必须圈出主体 / 方式 / 目的 / 否定词</td></tr>
+    <tr><td><b>图形推理·位置与数量</b>（P2-P93）</td><td class="num" style="color:#c62828"><b>0 题</b></td><td class="num">≤ 1 题</td><td>必须写「图形特征 + 考点路线」</td></tr>
+    <tr><td><b>图形推理·空间类</b>（P103、P114）</td><td class="num">≤ 1 题</td><td class="num">≤ 1 题</td><td>六面体须标相对面；截面图须写边数推断</td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 三刷图推错题的「痕迹标准」</h3>
+
+<div class="card alert">
+  <p style="margin-top:0"><b>规则：三刷图推错题时，仅仅「选对答案」判为不合格。</b>每道题必须在题本上留下以下三行文字，缺一行即视为该题未完成，需要重做：</p>
+  <ol>
+    <li><b>【图形特征】</b>用 8 个字以内描述这组图长什么样。<br>
+      <span style="color:#5a6473">示范（对应 <span class="pd">PD035</span>）：「图形被分割、有明显线与线交点 → 优先数点」</span></li>
+    <li><b>【考点路线】</b>写出你走完的排查顺序，必须是完整链条。<br>
+      <span style="color:#5a6473">示范（对应 <span class="pd">PD042</span>/<span class="pd">PD059</span>）：「元素组成不同 → 属性（对称/曲直/开闭）排除 → 数量：数面不成规律 → 面+线复合 → 命中」</span></li>
+    <li><b>【错误归因】</b>用一句话写清一刷、二刷为什么错，二选一：<br>
+      <b>类型 A（同坑：<span class="pd">PD027</span> <span class="pd">PD035</span> <span class="pd">PD042</span> <span class="pd">PD059</span> <span class="pd">PD060</span>）</b>写「我数错了什么，错在哪个环节」；<br>
+      <b>类型 B（换坑：<span class="pd">PD009</span> <span class="pd">PD022</span> <span class="pd">PD023</span> <span class="pd">PD026</span> <span class="pd">PD045</span> <span class="pd">PD053</span>）</b>写「我漏掉了哪个规律，正确的排查起点应该是什么」。</li>
+  </ol>
+</div>
+
+<h3>4.3 模考时间分配与综合正确率评估</h3>
+
+<table>
+  <thead><tr><th>模块</th><th>参考题量</th><th>建议用时</th><th>单题配速</th><th>强制跳题线</th></tr></thead>
+  <tbody>
+    <tr><td>图形推理</td><td class="num">10</td><td class="num"><b>8 分钟</b></td><td class="num">≤ 48 秒/题</td><td><span class="pill p-red">超过 60 秒无思路，立即标记跳过</span></td></tr>
+    <tr><td>定义判断</td><td class="num">10</td><td class="num"><b>9 分钟</b></td><td class="num">≤ 54 秒/题</td><td>超过 70 秒，蒙一个并标记</td></tr>
+    <tr><td>类比推理</td><td class="num">10</td><td class="num"><b>5 分钟</b></td><td class="num">≤ 30 秒/题</td><td>超过 45 秒，立即跳过（性价比极低）</td></tr>
+    <tr><td>逻辑判断</td><td class="num">10</td><td class="num"><b>13 分钟</b></td><td class="num">≤ 78 秒/题</td><td>组合排列超过 2 分钟，放弃</td></tr>
+    <tr><td colspan="2"><b>判断推理合计</b></td><td class="num"><b>35 分钟</b></td><td class="num">—</td><td>超时 2 分钟以上，必须压缩类比时间补回</td></tr>
+  </tbody>
+</table>
+
+<p><b>综合正确率评估标准（以 40 题判断推理卷为基准）：</b></p>
+<table>
+  <thead><tr><th>正确率</th><th>错题数</th><th>段位判定</th><th>后续动作</th></tr></thead>
+  <tbody>
+    <tr><td>≥ 90%</td><td class="num">≤ 4</td><td><span class="pill p-grn">顶尖</span> 判断推理已成为你的得分项</td><td>维持，精力转向其他模块</td></tr>
+    <tr><td><b>85% – 89%</b></td><td class="num">5 – 6</td><td><span class="pill p-blu">目标档</span> <b>本阶段冲刺目标</b></td><td>分析错题的模块归属，定向补漏</td></tr>
+    <tr><td>80% – 84%</td><td class="num">7 – 8</td><td><span class="pill p-org">及格线</span> 达到你的承诺底线</td><td>检查是否在送分题上丢分</td></tr>
+    <tr><td>&lt; 80%</td><td class="num">≥ 9</td><td><span class="pill p-red">不合格</span></td><td><b>停止刷新题</b>，回到本报告 Step 1 重做基础闭环</td></tr>
+  </tbody>
+</table>
+
+<p><b>附加考核项（每周自检）：</b></p>
+<ul>
+  <li><b>送分题零失误率：</b>模考中全站正确率 ≥ 80% 的题，你的正确率必须 ≥ 95%。一旦在送分题失手 2 题以上，当周加练 30 道基础题。</li>
+  <li><b>「选非题」零失误率：</b>所有「不属于 / 不能 / 除…外」的题，错误数必须为 0。这是纪律题，不是能力题。</li>
+  <li><b>二刷复错率：</b>每周随机抽 30 道做过的错题重做，复错率必须 <b>≤ 10%</b>（当前 35.8%，需下降至 1/3）。</li>
+</ul>
+
+<!-- ============================================================ -->
+<h2>五、B 站名师靶向推荐与听课顺序</h2>
+
+<div class="card">
+  <p style="margin:0"><b>听课总原则：不要从头听到尾。</b>你的图推基础是好的（276 题只顽固错 12 题），不需要重修全科。请<span class="hi">严格按下面「只补断点」的顺序听课</span>——每一段听课都必须挂靠到你具体的错题号上，听完立刻做对应题，否则听课就是娱乐。</p>
+</div>
+
+<h3>5.1 第一阶段｜基础重塑与系统搭建：粉笔 聂佳 / 龙艳</h3>
+
+<p><b>为什么是她们：</b>粉笔系老师在<b>知识体系的严密性</b>上无可替代。聂佳、龙艳的判断推理系统课，最大的价值不是「讲得有趣」，而是<span class="hi">把每个考点拆成有限、可枚举、可复用的清单</span>。比如「对称性」会拆成「对称轴方向 / 数量 / 与图形关系」三层；「逻辑判断」会把翻译推理的 8 组关联词做成公式表。<b>这正好治你「凭常识做题」的病</b>——你的错题里 28 道是基础题，说明你需要的是「规则清单」而不是「技巧点拨」。</p>
+
+<p><b>怎么补（只补这四块，按优先级）：</b></p>
+<table>
+  <thead><tr><th>顺序</th><th>补什么</th><th>对应教材章节</th><th>挂靠错题</th><th>听课要求</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>翻译推理公式表</b></td><td>第四章第一节 P258</td><td><span class="pd">PD193</span> <span class="pd">PD195</span> <span class="pd">PD197</span> <span class="pd">PD198</span></td>
+      <td>把 8 组关联词的翻译规则手抄成一张卡片，贴墙。<b>听到能默写为止</b></td></tr>
+    <tr><td>2</td><td><b>削弱 / 加强题型方法论</b></td><td>第四章第三、四节 P287 / P313</td><td><span class="pd">PD215</span> <span class="pd">PD216</span> <span class="pd">PD219</span> <span class="pd">PD227</span> <span class="pd">PD228</span> <span class="pd">PD233</span> <span class="pd">PD239</span> <span class="pd">PD244</span></td>
+      <td>重点听「论点论据话题一致 / 不一致」的分流判定，做成流程图</td></tr>
+    <tr><td>3</td><td><b>定义判断关键词法</b></td><td>第二章 P148-P218</td><td><span class="pd">PD071</span> <span class="pd">PD079</span> <span class="pd">PD085</span> <span class="pd">PD089</span> <span class="pd">PD090</span> <span class="pd">PD093</span> <span class="pd">PD097</span> <span class="pd">PD098</span> <span class="pd">PD099</span> <span class="pd">PD100</span></td>
+      <td>听完立刻用「主体 / 方式 / 目的 / 否定词」四栏重做这 10 题</td></tr>
+    <tr><td>4</td><td><b>图推特征总结课</b></td><td>第一章 P1-P147</td><td><span class="pd">PD026</span> <span class="pd">PD027</span> <span class="pd">PD035</span> <span class="pd">PD042</span> <span class="pd">PD045</span> <span class="pd">PD053</span> <span class="pd">PD059</span> <span class="pd">PD060</span></td>
+      <td>只听「数量规律」与「空间重构」两节，位置/样式/属性你已掌握，<b>跳过</b></td></tr>
+  </tbody>
+</table>
+<p><b>避坑提醒：</b>系统课动辄 60+ 小时，<b>不要通刷</b>。按上表挑章节，每节课后立刻配套做 10 道同类题，正确率不到 90% 不许听下一节。</p>
+
+<h3>5.2 第二阶段｜图形进阶与类比辨析：齐麟</h3>
+
+<p><b>为什么是他：</b>齐麟的 <b>「图推特征识别法」</b>解决的是「<b>拿到一个陌生图形，0.5 秒内判断该往哪个规律走</b>」的问题。传统讲法是「逐条试规律」，齐麟讲法是「<b>看特征直接锁定路线</b>」——元素组成相同看位置、相似看样式、不同看属性/数量、有黑白块看运算。<span class="hi">这正是补你「复合规律找不到入口」的钥匙</span>（<span class="pd">PD026</span> 82%题、<span class="pd">PD042</span> 40%题、<span class="pd">PD059</span> 57%题全是复合规律）。</p>
+<p>他的<b>类比推理二级辨析</b>讲解同样值得听：他会把「造句」之后那些不讲道理的差别（必然/或然、主体一致、程度轻重、感情色彩）做成可对照的清单——你类比错题的「大众命中率 69.6%」证明你只差这最后一步。<b>重点攻克 <span class="pd">PD161</span> <span class="pd">PD167</span> <span class="pd">PD172</span> 三道地狱题对应的知识点（包容关系 + 对应关系的双重辨析）</b>。</p>
+
+<p><b>刷题视频的正确打开方式（关键）：</b></p>
+<ol>
+  <li><b>先暂停，后播放。</b>视频里出题的一刻立即暂停，自己限时 50 秒做完，写下「图形特征 + 考点路线」，再继续播放。</li>
+  <li><b>重点看「入口判断」的讲解。</b>不要只对答案，要听他「为什么先看这个特征而不是那个」——这一步才是拉分点。</li>
+  <li><b>建「特征—规律」对照表。</b>每看 20 题总结一行，例如：「出现多个封闭区域且形状规整 → 优先数面」。最终你手上应有 15–20 行这样的速查表。</li>
+  <li><b>错题本联动。</b>每遇到与你 97 题同类型的题目，立刻把题号记在旁边，形成「知识点—我的错题」双向索引。</li>
+  <li><b>倍速别超 1.5 倍。</b>图推是视觉识别训练，倍速过高会导致特征识别来不及成型，得不偿失。</li>
+</ol>
+
+<h3>5.3 第三阶段｜逻辑论证攻坚与实战：花生十三</h3>
+
+<p><b>为什么是他：</b>花生十三在<b>削弱 / 加强题型</b>上的核心贡献是「<b>理科思维拆解 + 排除法</b>」——他不教你去「理解文段」，而是教你把论证拆成「论据 → 论点」的机械结构，然后拿选项逐个去套「<b>这个选项动的是哪一环</b>」。<span class="hi">这正是你逻辑判断模块最缺的模型意识</span>：你的逻辑错题里 <b>17 题（44.7%）是「连大众都不选」的个性化盲区</b>，说明你在纯靠阅读理解做题。</p>
+
+<p><b>他的方法为什么能提速：</b>排除法一旦成型，你不需要「找到正确答案」，只需要「排除掉三个动了无关项的」——<b>从「选对」变成「排错」，认知负荷直接减半</b>，这正是你在 35 分钟内做 40 题的关键。</p>
+
+<p><b>考前使用方案（配合你的 10 道削弱/加强错题）：</b></p>
+<table>
+  <thead><tr><th>错题</th><th>考点</th><th>正确率</th><th>用花生十三方法必须问自己的问题</th></tr></thead>
+  <tbody>
+    <tr><td><span class="pd">PD228</span></td><td>因果倒置</td><td class="num">87%</td><td>题干是不是在说「A 导致 B」？有没有可能是 B 导致 A？</td></tr>
+    <tr><td><span class="pd">PD233</span></td><td>削弱论点</td><td class="num">87%</td><td>这个选项是直接否定结论，还是在旁边绕？</td></tr>
+    <tr><td><span class="pd">PD235</span></td><td>他因削弱</td><td class="num">64%</td><td>有没有第三个变量能同时解释两件事？</td></tr>
+    <tr><td><span class="pd">PD239</span></td><td>削弱论点</td><td class="num">58%</td><td>我选的选项动的是论点，还是只是重复了论据？</td></tr>
+    <tr><td><span class="pd">PD242</span></td><td>削弱论点</td><td class="num">44%</td><td>「短期快乐」能不能否定「提升幸福感」的结论？——别把程度不同当成否定</td></tr>
+    <tr><td><span class="pd">PD244</span></td><td>因果倒置</td><td class="num">62%</td><td>关系好 → 更愿意为他人花钱？顺序是不是反了？</td></tr>
+    <tr><td><span class="pd">PD246</span></td><td>削弱论点</td><td class="num">44%</td><td>选项和论点话题是否一致？不一致的能不能算削弱？</td></tr>
+    <tr><td><span class="pd">PD270</span></td><td>削弱论据</td><td class="num">56%</td><td>我削的是论据链条，还是只是质疑了细节？</td></tr>
+    <tr><td><span class="pd">PD274</span></td><td>实验类 + 他因削弱</td><td class="num">68%</td><td>对比实验里，两组之间还有没有其他差异？</td></tr>
+    <tr><td><span class="pd">PD227</span></td><td>加强选非题</td><td class="num">55%</td><td>我有没有先写下「选非」两个字？</td></tr>
+  </tbody>
+</table>
+
+<h3>5.4 听课总时间表（建议 3 周）</h3>
+<table>
+  <thead><tr><th>周次</th><th>主线任务</th><th>配套动作</th><th>验收标准</th></tr></thead>
+  <tbody>
+    <tr><td><b>第 1 周</b></td><td>聂佳/龙艳：翻译推理公式 + 削弱加强方法论</td>
+      <td>重做 <span class="pd">PD193</span> <span class="pd">PD195</span> <span class="pd">PD197</span> <span class="pd">PD198</span> <span class="pd">PD228</span> <span class="pd">PD233</span> <span class="pd">PD239</span> <span class="pd">PD244</span>；默写关联词表</td>
+      <td>翻译推理+真假推理重做正确率 <b>100%</b></td></tr>
+    <tr><td><b>第 2 周</b></td><td>齐麟：图推特征识别 + 类比二级辨析</td>
+      <td>重做全部 12 道图推错题 + 23 道类比错题；建「特征—规律」速查表</td>
+      <td>类比重做正确率 <b>≥ 95%</b>；图推 <b>100%</b></td></tr>
+    <tr><td><b>第 3 周</b></td><td>花生十三：削弱加强排除法 + 限时套题</td>
+      <td>重做全部 38 道逻辑错题；做 3 套限时判断推理卷</td>
+      <td>97 题三刷总正确率 <b>≥ 96%</b>；模考判断推理 <b>≥ 85%</b></td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>六、导师寄语与考场纪律</h2>
+
+<h3>6.1 考场纪律：五条必须做出的硬性改变</h3>
+
+<div class="card alert">
+  <ol>
+    <li><b>图推超过 60 秒没思路，立刻标记跳过，绝不恋战。</b><br>
+      <span style="color:#5a6473">依据：你图推只顽固错 12 题，说明实力够；考试时的时间黑洞才是真杀手。图推单题配速必须 ≤ 48 秒。</span></li>
+
+    <li><b>类比推理必须造句，并标注词性与二级辨析维度。</b><br>
+      <span style="color:#5a6473">依据：你类比错题的「大众易错项命中率」高达 69.6%——表层关系都判对了，就差最后一步。解题时间 ≤ 30 秒，超时即跳。</span></li>
+
+    <li><b>削弱/加强必须先独立写出「论点」一行，再读选项。</b><br>
+      <span style="color:#5a6473">依据：逻辑模块你的个性化盲区高达 44.7%，全部源于没有「论点-论据」的拆解意识。</span></li>
+
+    <li><b>定义判断必须先圈「选是/选非」，再圈主体、方式、目的、否定词。</b><br>
+      <span style="color:#5a6473">依据：6 道「特殊问法」错题里有 5 道是同坑连错——这是纯粹的流程性失分，本不该发生。</span></li>
+
+    <li><b>任何情况下不得在送分题上失手。</b>全站正确率 ≥ 80% 的题，模考正确率必须 ≥ 95%。<br>
+      <span style="color:#5a6473">依据：你有 10 道送分题二刷还错，其中 <span class="pd">PD035</span> 全站 94% 正确率你连错两次。这不是能力问题，是态度问题。</span></li>
+  </ol>
+</div>
+
+<div class="final">
+  <h2 style="margin-top:0;padding-left:16px">导师寄语：别再用「常识」开脱你的懒惰</h2>
+
+  <p>我先把最扎心的一组数字摆在桌上：<b>你在一刷错的 271 道题里，有 174 道二刷就改对了。</b>这意味着什么？意味着那 174 道题你<b>本来就会</b>——一刷错的唯一原因是你不认真。</p>
+
+  <p>而这 97 道，才是你真实的天花板。它们不是「运气不好」，不是「看错题」，不是「考官出得变态」——它们是<b>你脑子里 97 个自洽的错误逻辑</b>。你在 <span class="pd">PD161</span> 和 <span class="pd">PD167</span> 上，面对同一个「包容关系+对应关系」的辨析点，两次都选了同一个错项；你在 <span class="pd">PD035</span> 这道全站 94% 正确率的数点题上，两次都数出了同一个错数。<b>这不叫失误，这叫思想上的固执。</b></p>
+
+  <p>你最大的幻觉，是认为「判断推理靠读懂意思就能做」。所以你读定义读个大概就选，读类比读个感觉就选，读削弱加强读个顺眼就选。但请你记住：<b>命题人造这道题，就是为了让「靠读意思」的人掉进去的</b>。你 59.8% 的错题落在了全站易错项上——你不是选了错答案，你是<b>被命题人精准地钓上了钩</b>。</p>
+
+  <p>真正的判断推理，是一门<b>理科</b>。定义判断是「要件取交集」，类比推理是「关系映射 + 多维度校验」，削弱加强是「论证结构拆解」，翻译推理是「符号运算」。它有公式，有流程，有清单，有唯一解。<b>它不需要你的语感，它需要你的纪律。</b></p>
+
+  <p>所以从今天起，请给自己立下三条铁律：</p>
+  <p style="padding-left:20px">
+    <b>第一，不许「读完就选」。</b>定义题不圈关键词不许选，类比题不造句不许选，削弱加强不写论点不许选。<br>
+    <b>第二，不许「重做不复盘」。</b>97 道题三刷，每道题必须写下「图形特征 / 考点路线 / 错误归因」——只选对答案不给分。<br>
+    <b>第三，不许「恋战」。</b>图推 60 秒、类比 30 秒、定义 70 秒、逻辑 78 秒，到点就跳。你在死磕一道题时，正在失去 3 道送分题。
+  </p>
+
+  <p>我知道你看到这 97 道题的时候是有点绝望的。但我要告诉你：<b>这 97 道题是你目前最宝贵的资产。</b>它们不是你的耻辱，是你的体检报告——1002 道题里，只有这 97 道精准地指出了你的病灶。绝大多数考生刷完一本 1002 题的书，只知道「我错了 271 道」，然后糊里糊涂地重复刷题，重复犯同样的错。<b>而你，已经把病灶全部定位到了具体题号上。</b></p>
+
+  <p>剩下的就只有一件事：<b>一道一道拆掉它们。</b>把 57 道「同坑」题的错误逻辑逐条写下来撕碎，把 40 道「换坑」题的正确推演链逐条重建，把 28 道基础题的规则清单背到能默写，把 10 道送分题的失分原因钉在墙上每天看一眼。</p>
+
+  <p>三周之后，当你再把这 97 道题摆在面前，能一眼看出每道题的考点、一眼写清每条推演链的时候——<b>你会发现，你获得的不是 97 道题的分数，而是一整套在 35 分钟内稳定输出 85% 正确率的判断推理操作系统。</b></p>
+
+  <p style="font-size:17px;margin-top:26px"><b>判断推理从不奖励聪明人，它只奖励把规则执行到毫厘的人。去吧，把这 97 道题当成 97 场小规模战役，一场一场打下来。我在 85% 的地方等你。</b></p>
+
+  <div class="sign">—— 你的判断推理金牌导师</div>
+</div>
+
+<footer>
+  《判断推理高阶学情诊断与提分规划报告》<br>
+  数据来源：判断推理书籍目录.txt（全书 1002 题）· 判断推理题库.json（一刷错题 271 题 / 二刷顽固错题 97 题）<br>
+  分析维度：模块分布 · 考点归因 · 一刷二刷三向比对 · 全站正确率分层 · 易错项抗性 · 教材难度标签
+</footer>
+
+</div>
+</body>
+</html>

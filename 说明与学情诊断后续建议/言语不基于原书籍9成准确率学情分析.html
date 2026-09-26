@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>言语理解与表达 · 学情分析与提分规划报告</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --ink-2: #4b5563;
+    --ink-3: #6b7280;
+    --line: #e5e7eb;
+    --accent: #c0392b;
+    --accent-2: #1f4e79;
+    --gold: #b8860b;
+    --green: #1e7d43;
+    --red-bg: #fdecea;
+    --blue-bg: #eaf1f8;
+    --gold-bg: #fdf6e3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    font-size: 15px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+
+  /* 头部 */
+  .hero {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 60%, #4b5563 100%);
+    color: #fff; border-radius: 14px; padding: 40px 36px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  }
+  .hero h1 { font-size: 26px; letter-spacing: 1px; margin-bottom: 10px; }
+  .hero .sub { color: #d1d5db; font-size: 14px; }
+  .hero .sub b { color: #fbbf24; }
+
+  /* 总览卡片 */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 18px 0; }
+  .kpi {
+    background: var(--card); border-radius: 12px; padding: 18px 16px;
+    border: 1px solid var(--line); text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  }
+  .kpi .num { font-size: 30px; font-weight: 700; line-height: 1.2; }
+  .kpi .lab { font-size: 12.5px; color: var(--ink-3); margin-top: 4px; }
+  .kpi.red .num { color: var(--accent); }
+  .kpi.blue .num { color: var(--accent-2); }
+  .kpi.gold .num { color: var(--gold); }
+  .kpi.green .num { color: var(--green); }
+
+  /* 章节 */
+  section { margin-top: 34px; }
+  h2 {
+    font-size: 20px; padding-left: 12px; border-left: 5px solid var(--accent);
+    margin-bottom: 16px; letter-spacing: .5px;
+  }
+  h3 { font-size: 16.5px; margin: 20px 0 10px; color: var(--accent-2); }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 24px; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  }
+  .card p { margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+  .alert {
+    background: var(--red-bg); border-left: 4px solid var(--accent);
+    padding: 14px 18px; border-radius: 8px; margin: 14px 0;
+  }
+  .info {
+    background: var(--blue-bg); border-left: 4px solid var(--accent-2);
+    padding: 14px 18px; border-radius: 8px; margin: 14px 0;
+  }
+  .tip {
+    background: var(--gold-bg); border-left: 4px solid var(--gold);
+    padding: 14px 18px; border-radius: 8px; margin: 14px 0;
+  }
+  b.hl { color: var(--accent); }
+  b.hl-b { color: var(--accent-2); }
+  b.hl-g { color: var(--gold); }
+
+  /* 表格 */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+  th {
+    background: #f0f2f5; color: var(--ink-2); font-weight: 600;
+    padding: 9px 10px; text-align: left; border-bottom: 2px solid #d8dce2;
+    white-space: nowrap;
+  }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:hover td { background: #fafbfc; }
+  .t-red { color: var(--accent); font-weight: 700; }
+  .t-green { color: var(--green); font-weight: 700; }
+
+  /* 条形图 */
+  .bars { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+  .bar-row { display: grid; grid-template-columns: 210px 1fr 56px; align-items: center; gap: 10px; }
+  .bar-label { font-size: 13px; color: var(--ink-2); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-track { background: #eef0f3; border-radius: 6px; height: 20px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, #c0392b, #e0655a); color: #fff; font-size: 11px; line-height: 20px; padding: 0 8px; white-space: nowrap; }
+  .bar-fill.blue { background: linear-gradient(90deg, #1f4e79, #3a78b5); }
+  .bar-fill.green { background: linear-gradient(90deg, #1e7d43, #3aa76a); }
+  .bar-val { font-size: 12.5px; font-weight: 700; color: var(--ink-2); }
+
+  /* 步骤块 */
+  .steps { counter-reset: step; }
+  .step {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 24px 20px 64px; margin-bottom: 16px; position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  }
+  .step::before {
+    counter-increment: step; content: "Step " counter(step);
+    position: absolute; left: 16px; top: 20px;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 13px;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .step h3 { margin-top: 0; }
+  .step ol, .step ul { padding-left: 22px; margin: 8px 0; }
+  .step li { margin-bottom: 6px; }
+
+  /* 老师卡片 */
+  .teacher {
+    display: grid; grid-template-columns: 88px 1fr; gap: 16px; align-items: start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  }
+  .teacher .phase {
+    background: var(--accent-2); color: #fff; border-radius: 10px;
+    text-align: center; padding: 14px 8px; font-size: 13px; font-weight: 700; line-height: 1.5;
+  }
+  .teacher h3 { margin: 0 0 4px; }
+  .teacher .who { color: var(--accent); font-weight: 700; }
+
+  .quote {
+    background: linear-gradient(135deg, #1f2937, #374151);
+    color: #e5e7eb; border-radius: 12px; padding: 28px 30px; margin-top: 18px;
+    font-size: 14.5px; line-height: 2;
+  }
+  .quote b { color: #fbbf24; }
+
+  .foot { text-align: center; color: var(--ink-3); font-size: 12.5px; margin-top: 40px; }
+  @media (max-width: 720px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .bar-row { grid-template-columns: 120px 1fr 48px; }
+    .teacher { grid-template-columns: 1fr; }
+    .hero { padding: 28px 20px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .card, .step, .teacher, .kpi { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 头部 -->
+  <div class="hero">
+    <h1>言语理解与表达 · 学情分析与提分规划报告</h1>
+    <div class="sub">数据基础：错题记录 <b>102题</b>（YY001–YY102），覆盖书籍四大章。一刷102题全部答错（判定为错题本导出），二刷已全部重做，<b>三刷至五刷全部空白</b>。</div>
+    <div class="sub">核心结论：二刷正确率 <b>49%（50/102）</b>，全站平均正确率 63%。当前距"整体85%"的目标不是差一步，而是差两个台阶。</div>
+  </div>
+
+  <!-- 关键数据 -->
+  <div class="kpis">
+    <div class="kpi red"><div class="num">49%</div><div class="lab">二刷正确率（50/102）</div></div>
+    <div class="kpi blue"><div class="num">63%</div><div class="lab">题库全站平均正确率</div></div>
+    <div class="kpi gold"><div class="num">31题</div><div class="lab">二刷重蹈覆辙（同样的坑）</div></div>
+    <div class="kpi red"><div class="num">21题</div><div class="lab">钉子题（多次作答仍错）</div></div>
+  </div>
+
+  <!-- 一、学情分析 -->
+  <section>
+    <h2>一、细致的学情分析</h2>
+
+    <h3>1.1 总体战报与错题雷达图</h3>
+    <div class="card">
+      <table>
+        <tr><th>模块</th><th>题量</th><th>二刷对/错</th><th>二刷正确率</th><th>评级</th></tr>
+        <tr><td>篇章阅读</td><td>4</td><td>4 / 0</td><td class="t-green">100%</td><td>样本太小，不作数</td></tr>
+        <tr><td>片段阅读</td><td>49</td><td>24 / 25</td><td class="t-red">49%</td><td>重灾区</td></tr>
+        <tr><td>语句表达</td><td>12</td><td>5 / 7</td><td class="t-red">42%</td><td>最惨模块</td></tr>
+        <tr><td>逻辑填空</td><td>37</td><td>17 / 20</td><td class="t-red">46%</td><td>重灾区</td></tr>
+      </table>
+
+      <p><b>考点失分排行（知识盲区地图）</b></p>
+      <div class="bars">
+        <div class="bar-row"><div class="bar-label">词句理解（5错4）</div><div class="bar-track"><div class="bar-fill" style="width:80%">80%</div></div><div class="bar-val">YY025/031/043/046</div></div>
+        <div class="bar-row"><div class="bar-label">接语选择（4错3）</div><div class="bar-track"><div class="bar-fill" style="width:75%">75%</div></div><div class="bar-val">YY054/055/056 三连错</div></div>
+        <div class="bar-row"><div class="bar-label">关联词·对策类（6错4）</div><div class="bar-track"><div class="bar-fill" style="width:67%">67%</div></div><div class="bar-val">YY001/002/003/005</div></div>
+        <div class="bar-row"><div class="bar-label">语句排序（3错2）</div><div class="bar-track"><div class="bar-fill" style="width:67%">67%</div></div><div class="bar-val">YY050(送分题)/059</div></div>
+        <div class="bar-row"><div class="bar-label">分述句特征（7错4）</div><div class="bar-track"><div class="bar-fill" style="width:57%">57%</div></div><div class="bar-val">YY016/017/018</div></div>
+        <div class="bar-row"><div class="bar-label">逻辑填空·对应关系高难（12错6）</div><div class="bar-track"><div class="bar-fill" style="width:50%">50%</div></div><div class="bar-val">YY079–090段6道</div></div>
+        <div class="bar-row"><div class="bar-label">细节判断（9错4）</div><div class="bar-track"><div class="bar-fill" style="width:44%">44%</div></div><div class="bar-val">YY023/026/038/047</div></div>
+      </div>
+
+      <div class="alert">
+        <b>最要命的信号：你的正确率曲线是"平坦型"。</b>全站正确率≥80%的17道题你二刷只对11道（65%）；全站≤50%的26道难题你对12道（46%）。简单题和难题的正确率差距不到20个百分点——正常考生应是85%+ vs 50%的剪刀差。<b>说明你做题不是靠方法，是靠感觉蒙。</b>难题蒙对是运气，简单题蒙错就是硬伤。
+      </div>
+    </div>
+
+    <h3>1.2 刷题行为诊断：你在什么坑里反复跌倒</h3>
+    <div class="card">
+      <p><b class="hl">① "同样的坑"31题（占错题60%）——二刷重复一刷的同一个错误选项</b></p>
+      <p>片段阅读区顽固分子：YY001（B→B）、YY002（C→C）、YY009（A→A）、YY018（D→D）、YY031（B→B）、YY033（B→B）、YY034（D→D）、YY038（C→C）、YY040（B→B）、YY043（D→D）、YY047（A→A）、YY049（C→C）。</p>
+      <p>最刺眼的是<b class="hl">接语选择三连C魔咒</b>：YY054、YY055、YY056，一刷选C，二刷还选C。你不是"忘了"，是<b>错误的解题路径原封不动走了第二遍</b>——二刷对你只是"把题再看一遍"，不是"用方法重新做一遍"。</p>
+      <p>逻辑填空区钉子：YY067（D→D）、YY077（A→A）、YY094（B→B），以及反复点同一个错误选项的 YY082（C×4）、YY088（A×3）、YY089（D×3）、YY068（B、C×4）、YY066（D×4）、YY080（D×4）。<b class="hl">YY068是全站78%的题，你五次作答全错——这不是遗忘，是错误认知已经固化。</b></p>
+
+      <p><b class="hl">② "换坑"21题（占错题40%）——一刷错A，二刷错B</b></p>
+      <p>YY003、YY005、YY011、YY015、YY016、YY023、YY025、YY026、YY035、YY041、YY046、YY059、YY066、YY070、YY076、YY079、YY080、YY087、YY092、YY093、YY095。这说明二刷时你<b>不是在应用方法，而是在"排除掉上次选过的那个选项"后随机赌下一个</b>。换坑不是进步，是蒙题换了姿势。</p>
+
+      <p><b class="hl">③ 钉子题21道（二刷作答≥2次仍全错）</b></p>
+      <p>YY011、YY015、YY016、YY017、YY029、YY063、YY066、YY068、YY070、YY074、YY079、YY080、YY082、YY087、YY088、YY089、YY090、YY092、YY093、YY095、YY096。其中 YY068 五次全错、YY066 / YY080 / YY082 各四次全错——<b>这21道题是你的"思维暗礁"，不专门爆破，三刷还是错。</b></p>
+
+      <p><b>关于"一刷对、二刷错"的知识退化</b>：本数据集不存在该现象（一刷本就全错），但存在更严重的变体——<b class="hl">三刷至五刷全部空白，你没有建立"错题闭环"，二刷错完就扔了。</b>这是行为层面的第一大问题。</p>
+    </div>
+
+    <h3>1.3 易错项陷阱分析：你一半随大流，一半自己乱</h3>
+    <div class="card">
+      <table>
+        <tr><th>维度</th><th>数据</th><th>判定</th></tr>
+        <tr><td>一刷踩中APP易错项</td><td>55/102 = <b>54%</b></td><td>大众化陷阱为主</td></tr>
+        <tr><td>二刷踩中APP易错项</td><td>32/52 = <b class="t-red">61.5%</b></td><td><b>比例不降反升</b></td></tr>
+        <tr><td>二刷错且未踩中易错项</td><td>20题</td><td>个性化盲区</td></tr>
+      </table>
+      <p><b>结论一</b>：二刷后你掉进"大众陷阱"的比例反而从54%升到61.5%——因为换坑时你排除了自己一刷的个性化错误，落进了剩下的那个易错项。<b>大众陷阱你没免疫，只是绕了一圈又跳进去。</b></p>
+      <p><b>结论二</b>：20道个性化盲区里有6道是"钉子型个性化盲区"（连大众都很少犯的低级错误）：</p>
+      <ul style="padding-left:22px;">
+        <li>YY067（全站84%）两刷选D"无米之炊"——"燃眉之急/当务之急/不时之需"基础词义辨析不过关；</li>
+        <li>YY082（61%）四次选C——"沃土"这种形象表达你完全接不住；</li>
+        <li>YY029、YY040、YY055、YY093——纯逻辑错误：尾句新话题抓错、对策方向判断错。</li>
+      </ul>
+      <div class="alert"><b>一句话总结：你一半错在大众都会错的地方（技巧没学透），一半错在大众都不会错的地方（基本功有窟窿）。</b></div>
+    </div>
+  </section>
+
+  <!-- 二、题库难度核查 -->
+  <section>
+    <h2>二、题库难度核查（客观评估）</h2>
+    <div class="card">
+      <table>
+        <tr><th>全站正确率区间</th><th>题量</th><th>占比</th><th>图示</th></tr>
+        <tr><td>≥90%</td><td>2题</td><td>2%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill green" style="width:5%">2</div></div></td></tr>
+        <tr><td>80–89%</td><td>15题</td><td>15%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill green" style="width:37%">15</div></div></td></tr>
+        <tr><td>70–79%</td><td>19题</td><td>19%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill green" style="width:47%">19</div></div></td></tr>
+        <tr><td>60–69%</td><td>17题</td><td>17%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill" style="width:42%">17</div></div></td></tr>
+        <tr><td>50–59%</td><td>25题</td><td>24%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill" style="width:62%">25</div></div></td></tr>
+        <tr><td>40–49%</td><td>22题</td><td>21%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill" style="width:55%">22</div></div></td></tr>
+        <tr><td>&lt;40%</td><td>2题（YY066:37%、YY092:39%）</td><td>2%</td><td><div class="bar-track" style="max-width:300px"><div class="bar-fill" style="width:5%">2</div></div></td></tr>
+      </table>
+      <p><b>全站加权平均正确率：约 63%。</b></p>
+      <div class="info">
+        <p><b>结论：这份题库难度中等偏难，区分度良好，对你当前水平绝不偏简单，完全够支撑冲刺85%。</b></p>
+        <p>① 近半题目（47%）全站正确率低于60%，其中24题低于50%——这些正是拉差距的题；</p>
+        <p>② 高难进阶35题 + 综合训练37题 = 72题的中高难度训练池，足以支撑你从50%磨到85%；</p>
+        <p>③ 它"偏"的地方只有一个：<b>创新考法题几乎缺位</b>（仅YY091一道）。书籍目录里片段阅读创新考法15题、语句排序/填空创新考法各5题、逻辑填空创新考法10题，你的错题本几乎没覆盖——冲刺阶段要专门补；</p>
+        <p>④ 另一个警示：<b>题库里全站≥80%的送分题共17道，你二刷丢了6道</b>（YY001、YY015、YY041、YY050、YY067、YY076、YY094中）。任何一套85%策略的第一步都是"送分题一分不丢"。你离85%差的36个百分点里，有6个点纯属白送。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三、行动路径 -->
+  <section>
+    <h2>三、接下来怎么办：打怪升级闯关路径</h2>
+    <div class="steps">
+
+      <div class="step">
+        <h3>破冰：干掉"对策识别 + 主题词"两大底层漏洞，清零送分题</h3>
+        <p><b>这是你一切失分的底层逻辑根源。</b>你的对策类题（YY001、YY002、YY003、YY005、YY016、YY030、YY035、YY039）错法高度一致：<b>把"对策前的背景/问题/举例"当主旨</b>。YY001你两次选B"数据密集型"（结论前的内容），YY002两次选C"重视文化传承"（对策的铺垫句）。你缺的不是语感，是一套机械化的主干提取动作。</p>
+        <p><b>任务清单：</b></p>
+        <ol>
+          <li>重学书籍"考点1 关联词"夯实基础50题，重点标注：<b>"因此/所以/这就要求/应当/必须/唯有……才/通过……实现"</b> 七类对策标志词；</li>
+          <li>把 YY001、002、003、005、016、030、035、039 这8道对策类错题做"手术式复盘"：标出每道题的对策句、背景句、例子，写清"为什么我选的项是铺垫"；</li>
+          <li>主题词训练：YY009、011、017、018、033、034、040 七道题，每题练习"两个主题词圈定法"——主旨题正确答案必须同时包含文段核心话题（如YY011必须含"莲子心+叶绿素"）；</li>
+          <li><b>优先歼灭9道"送分题"</b>：YY001(80%)、YY015(84%)、YY050(86%)、YY054(75%)、YY067(84%)、YY068(78%)、YY074(73%)、YY076(87%)、YY077(75%)——这些全站70%+的题你二刷还错，先把它们清零。</li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <h3>攻坚：清剿语句表达三兄弟 + 逻辑填空语境分析</h3>
+        <ul>
+          <li><b>接语选择题</b>（当前75%错误率，你的最短板）：YY054/055/056 三连错的病根是<b>只看尾句字面，不抓"问题→对策"的走向</b>。方法：先问"文段最后提出了什么问题/新话题？下文必须承接它"。YY054尾句说"兼职调解员满足不了新要求"→下文必然讲"专职队伍"（D），你两次选C"专业素养"就是只抓了尾句里一个词。</li>
+          <li><b>语句排序</b>：重练"首句特征（引出话题 &gt; 结论/指代/转折开头）→ 捆绑验证"。YY050是全站86%的题，③引出话题定首句直接锁定D，你两次选C——首句判断都没过关。</li>
+          <li><b>词句理解</b>（80%错误率，全场最惨）：代词题练"就近指代+语义完整性"（YY046："它"指代"漂絮的副产物"而非"残絮"，因为要满足"数量不多"的搭配）；词语题练"后文解释说明定位法"（YY025"解耦表征"的答案就在"简单来说就是"后面）。</li>
+          <li><b>逻辑填空语境分析</b>：高难段对应关系题50%错误率集中在<b>"形象表达+程度轻重"</b>：YY080（风向标vs试金石）、YY088（安全阀vs预警机）、YY082（沃土vs蓝图）、YY066（洞悉vs明确）、YY089（方兴未艾vs风起云涌）。病根是<b>不读横线前后的呼应词，凭语感选"念着顺"的</b>。YY080"反映经济活力"→必须选"风向标"（反映=显示方向），你四次选D"显色剂"就是纯凭新颖感瞎选。</li>
+        </ul>
+      </div>
+
+      <div class="step">
+        <h3>冲刺：高难进阶清零 + 篇章阅读扩量 + 创新考法补课</h3>
+        <ol>
+          <li><b>高难进阶35题二刷正确率只有40%</b>（14/35），三刷必须做到≥85%。重点盯21道钉子题，逐题写"错误选项解剖笔记"；</li>
+          <li><b>篇章阅读目前4题全对是假象</b>——样本仅4题，书籍第四章有105题你基本没碰。按"先题后文、题文对应"练满至少30题，公文题材（YY100、YY101）重点补公文格式常识；</li>
+          <li><b>创新考法缺口</b>：书籍目录中片段阅读15题、排序5题、填空5题、逻辑填空10题共35道创新考法，错题本只覆盖1道，冲刺期必须专项过一遍；</li>
+          <li>每周至少2套言语套题（40题/35分钟），用套题验证真实水平。</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 四、考核标准 -->
+  <section>
+    <h2>四、阶段性考核标准（严守85%底线）</h2>
+    <div class="card">
+      <table>
+        <tr><th>阶段</th><th>考核项</th><th>严苛标准</th><th>说明</th></tr>
+        <tr><td rowspan="3"><b>Step 1</b></td><td>全站≥70%的36题（含9道送分题）三刷</td><td class="t-red">≥97%（至多错1题）</td><td>送分题没有讨价还价的余地</td></tr>
+        <tr><td>对策类错题（8道）专项重做</td><td class="t-red">100%</td><td>写不出"对策句定位"就不算过</td></tr>
+        <tr><td>主题词类错题（7道）专项重做</td><td>≥85%</td><td>—</td></tr>
+        <tr><td rowspan="3"><b>Step 2</b></td><td>接语选择/词句理解/语句排序三科专项</td><td>每科 ≥80%</td><td>用书籍第二章未做的新题考核，防背答案</td></tr>
+        <tr><td>21道钉子题三刷</td><td class="t-red">错误率 ≤10%（至多错2道）</td><td>钉子题是底线中的底线</td></tr>
+        <tr><td>二刷52道错题整体三刷</td><td>≥85%</td><td>—</td></tr>
+        <tr><td rowspan="4"><b>Step 3</b></td><td>高难进阶35题三刷</td><td>≥85%</td><td>—</td></tr>
+        <tr><td>逻辑填空新题（未做过的书题）</td><td>≥80%</td><td>语境分析法要在陌生题上验证</td></tr>
+        <tr><td>言语模块套题（40题/35分钟）</td><td class="t-red">连续3套 ≥34/40（85%）</td><td>单套达标不算数，连3套才叫"稳定"</td></tr>
+        <tr><td>全站正确率≤50%的难题专项</td><td>≥50%（26题对13+）</td><td>难题不指望85%，但至少要过半</td></tr>
+      </table>
+      <div class="alert"><b>一票否决项</b>：任何一套套题中，全站≥80%的送分题错题数≥2，即判定该阶段不通过。85%的正确率是靠"送分题不丢"撑起来的，不是靠难题赌出来的。</div>
+    </div>
+  </section>
+
+  <!-- 五、B站名师 -->
+  <section>
+    <h2>五、B站名师推荐与听课顺序规划</h2>
+
+    <div class="teacher">
+      <div class="phase">基础重塑<br>阶段</div>
+      <div>
+        <h3><span class="who">粉笔 · 郭熙</span>（+ 备选：粉笔·欧阳、文超教育·刘文超）</h3>
+        <p><b>为什么是他</b>：你的两大底层漏洞（对策识别、逻辑填空词汇）正是郭熙的看家本领。他的言语系统课讲"关联词定重点"清晰到可以当模板抄，还有广受好评的<b>成语高频积累课</b>——你 YY068（万人空巷/趋之若鹜）五次错、YY067（燃眉之急）两刷错，属于成语基本盘塌方，这课就是给你开的。</p>
+        <p><b>听课顺序</b>：先听片段阅读的"结构分析法"（对齐书籍考点1、2、3），再跟成语课每天背50词。备选：欧阳（逐句带读、细腻，适合语感差的你）；刘文超免费行测系统课可作0元兜底。</p>
+      </div>
+    </div>
+
+    <div class="teacher">
+      <div class="phase">技巧拔高<br>与逻辑攻坚</div>
+      <div>
+        <h3><span class="who">花生十三</span>（片段阅读）+ <span class="who">欣说言语</span>（逻辑填空）</h3>
+        <p><b>花生十三 · 片段阅读</b>：你的片段阅读是"凭感觉选"的重灾区，而花生十三的片段阅读讲<b>逻辑推演式解题</b>——先把文段拆成论点/论据/对策的骨架再选答案，专治你 YY001/YY002 这种"被铺垫句拐跑"的病。风格硬核、节奏快，适合你现在的"方法缺失期"下猛药。听他的片段阅读专项课，边听边拿你的31道"同样的坑"错题做陪练。</p>
+        <p><b>欣说言语 · 逻辑填空</b>：B站言语区口碑最硬的真题逐题精讲UP主。你的逻辑填空高难段50%错误率集中在"对应关系/形象表达"（YY080、YY082、YY088、YY089、YY090），欣说的特色恰恰是<b>"语境前后呼应法"</b>——每道题先找横线前后的呼应词再定选项，逐题拆给你看。把她的逻辑填空真题集刷一遍，你的"凭语感"会变成"凭对应"。</p>
+      </div>
+    </div>
+
+    <div class="teacher">
+      <div class="phase">冲刺刷题<br>阶段</div>
+      <div>
+        <h3><span class="who">花生十三刷题班</span> / <span class="who">欣说言语套题解析</span></h3>
+        <p>① 欣说言语的历年真题套题逐题解析：考前两个月每周两套，跟她的解析对答案、校准思路；</p>
+        <p>② 花生十三的言语刷题班/考前串讲：用他的"快解技巧"做限时训练，练40题35分钟时间压力下的正确率；</p>
+        <p>③ 考前两周：只看你自己的<b>21道钉子题笔记 + 三刷错题本</b>，不再摄入新题新方法，防止临场切换思维模式。</p>
+        <div class="tip"><b>提醒</b>：你的正确率曲线是"平坦型"，说明基础方法都没内化。<b>听课顺序必须是"郭熙打底 → 花生十三拔高"</b>，顺序反了你会听不懂、跟不住。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 六、学习方向与导师寄语 -->
+  <section>
+    <h2>六、学习方向调整与导师建议</h2>
+    <div class="card">
+      <h3>6.1 学习方向调整（三条硬性改变）</h3>
+      <p><b>① 解题步骤固化</b>：中心理解题强制走"标关联词 → 圈主题词 → 划对策/结论 → 排除无主题词项"四步，落笔前必须能说出"我排除的项错在哪一步"。你现在二刷靠"排除上次的答案"蒙题，这一步不改，三刷还是50%。</p>
+      <p><b>② 阅读习惯改造</b>：你的失分题80%死在"分不清重点句和分述句"。从现在起每道错题用两种颜色标注：红色=文段核心句，黑色=背景/例子/解释，做满50题你的眼睛会自动抓重点。</p>
+      <p><b>③ 时间分配</b>：片段阅读单题≤60秒，逻辑填空≤45秒，语句排序≤75秒，篇章阅读先题后文。你 YY050（86%的排序题）会错，多半是排序题耗时长导致心态崩——限时是保命线。同时，<b>三刷机制必须建立</b>：现在你的三刷、四刷、五刷全是空的，从今天起每道错题按"第3天、第10天、第30天"三次重做。</p>
+    </div>
+
+    <div class="quote">
+      <h3 style="color:#fff;border:none;padding:0;margin:0 0 10px;">6.2 导师寄语</h3>
+      <p>你把102道错题做成了102道"熟悉的老朋友"——二刷时31道题义无反顾地跳进同一个坑，YY068做了五次还是错。<b>这暴露的早已不是知识问题，而是你复盘时的自我欺骗：把"看了一遍解析"当成"学会了这道题"。</b></p>
+      <p>但我也要告诉你一个好消息：你的数据里没有"高难全会、基础全崩"的虚浮，也没有"难题恐惧症"——全站≤50%的难题你二刷能对46%，这证明你的阅读底子不差，差的只是方法、词汇和闭环。你现在的49%和85%之间，隔着的是31道"同样的坑"、21道钉子题、9道送分题，每一道都可以被死磕掉。</p>
+      <p>接下来三个月，别再刷题刷给自己看。<b>每错一道题，就交一份"三句话复盘"：错在哪一步？正确选项凭什么对？下次遇到同型题我先看什么？</b>把这三句话写满102遍，你的正确率曲线就会从"平坦"变成"陡峭"——送分题100%、难题60%，那才是85分的形状。</p>
+      <p>目标85%，不接受"尽力而为"。现在，从 YY067 和 YY050 这两道送分题开始，把账一笔笔还清。</p>
+    </div>
+
+    <div class="foot">
+      数据附注：全站平均正确率63%系由102题"APP全站正确率"字段加权平均计算；二刷对错判定以"二刷作答记录中是否出现APP标准答案"为准（多次作答有一中对即算对）。三刷至五刷字段全部为空，建议即刻启动三刷。<br>
+      报告生成日期：2026-09-26 · 数据来源：言语题库.json（102题错题记录）
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
