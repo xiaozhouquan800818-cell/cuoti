@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>资料分析：低频特殊模型（混合/年均/间隔/容斥）核心错题</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292929'/%3E%3Ctext x='32' y='46' font-size='36' text-anchor='middle' fill='white'%3E讲%3C/text%3E%3C/svg%3E"/>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --accent: #292929;
+    --line: #9f9f9f;
+    --mat-bg: #f5f5f5;
+    --label: #636363;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    background: var(--paper);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* ===== 封面页 ===== */
+  .cover-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 56px;
+    page-break-after: always;
+    border-bottom: 1px solid var(--line);
+  }
+  .cover-kicker {
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0 0 18px 0;
+    color: var(--accent);
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--label);
+    margin: 0 0 48px 0;
+  }
+  .cover-notes {
+    background: var(--mat-bg);
+    border-left: 4px solid var(--accent);
+    padding: 26px 30px;
+    margin: 0;
+  }
+  .cover-notes .notes-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+  }
+  .cover-notes ol {
+    margin: 0;
+    padding-left: 22px;
+  }
+  .cover-notes li {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover-meta {
+    margin-top: 44px;
+    font-size: 13px;
+    color: var(--label);
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+  }
+  /* ===== 正文题目 ===== */
+  .content-page { padding: 24px 32px; }
+  .content-head {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin: 10px 0 22px 0;
+  }
+  .question-block {
+    page-break-inside: avoid;
+    margin-bottom: 40px;
+    padding-bottom: 6px;
+  }
+  .q-head {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .q-no { color: var(--label); }
+  .q-page { float: right; font-size: 12px; color: var(--label); }
+  .q-point {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .q-label {
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  .q-material {
+    background: var(--mat-bg);
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0 10px 0;
+  }
+  .q-material-same { background: transparent; border-style: dashed; }
+  .mat-body {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: justify;
+  }
+  .q-stem { margin: 8px 0; }
+  .stem-body { font-size: 15px; font-weight: 600; }
+  .q-stem img, .q-opts img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+  }
+  .q-opts { margin: 8px 0 10px 0; }
+  .opts-body { margin-top: 6px; }
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .opt-key {
+    flex: 0 0 34px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .opt-text { flex: 1; }
+  .note-area {
+    border: 2px dashed var(--line);
+    border-radius: 6px;
+    min-height: 150px;
+    margin-top: 12px;
+    padding: 10px 14px;
+  }
+  .note-label {
+    font-size: 13px;
+    color: var(--label);
+  }
+  /* ===== 打印样式 ===== */
+  @media print {
+    @page { size: A4; margin: 14mm 12mm; }
+    html, body { background: var(--paper); }
+    .cover-page {
+      height: auto;
+      min-height: 0;
+      padding: 20px 8px;
+      border-bottom: none;
+      page-break-after: always;
+    }
+    .cover-title { font-size: 32px; }
+    .question-block { page-break-inside: avoid; }
+    .note-area { min-height: 150px; }
+    img { max-width: 100% !important; height: auto !important; }
+    body::-webkit-scrollbar { display: none; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== 封面页 ===== -->
+  <section class="cover-page">
+    <div class="cover-kicker">Xing Ce Work · 听课配套讲义</div>
+    <h1 class="cover-title">《资料分析：低频特殊模型（混合/年均/间隔/容斥）核心错题》</h1>
+    <p class="cover-subtitle">2027公考行测 · 听课配套专属讲义 · 资料分析模块</p>
+    <div class="cover-notes">
+      <div class="notes-title">导师寄语：听课三条纪律</div>
+      <ol>
+      <li>严禁只记ABCD：每一道题必须在下方笔记区写明“特征识别”与“排错理由”，写不出理由算没做。</li>
+      <li>结合视频课程：听课时把老师的思维切入点、定位顺序和列式思路记录在笔记区，与自己的错因对照。</li>
+      <li>图片缺失不慌：若题干配图未显示，请查阅原题库 JSON 对应编号，或对照书籍原页码。</li>
+      </ol>
+    </div>
+    <div class="cover-meta">本讲义依据《三科易错板块与看课重点（2026-09-26）》优先板块生成，共收录 12 道核心错题；严禁在题面上直接抄写答案选项。</div>
+  </section>
+
+  <!-- ===== 题目正文 ===== -->
+  <section class="content-page">
+    <div class="content-head">资料分析：低频特殊模型（混合/年均/间隔/容斥）核心错题 · 共 12 题</div>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL011 (39-8)</b><span class="q-page">书本第 39 40 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 年均增长率；统计表</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2019-2021年，珠江口大型底栖生物多样性指数年均增长（    ）。</div>
+      <img src="zlimage/tigan/材料组9_底栖生物多样性.png" alt="题干配图 ZL011"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">16.4%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">17.7%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">18.1%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">35.3%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL012 (41-11)</b><span class="q-page">书本第 40 41 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 混合增长率；统计表</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2024年上半年，中国医药保健品进出口贸易顺差（出口额-进口额）比上年同期：</div>
+      <img src="zlimage/tigan/材料组10_医药保健品进出口.png" alt="题干配图 ZL012"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">下降了20%以上</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">下降了不到20%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">上升了20%以上</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">上升了不到20%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL016 (47-12)</b><span class="q-page">书本第 47 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 混合增长率；统计表</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2024年3-11月，全国啤酒当期产量增长率高于累计增长率的有几个？</div>
+      <img src="zlimage/tigan/材料组12_白酒啤酒产量.png" alt="题干配图 ZL016"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">3</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">4</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">5</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">6</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL019 (48-17)</b><span class="q-page">书本第 48 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 混合增长率；统计表</div>
+    <div class="q-material"><span class="q-label">【材料】</span>（无文本材料，见题干配图）</div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2025年1~2月，上海期货交易所成交额同比增速在以下哪个范围内？</div>
+      <img src="zlimage/tigan/材料组13_期货交易所.png" alt="题干配图 ZL019"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">不到45%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">超过85%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">45%~65%之间</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">65%~85%之间</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL030 (80-7)</b><span class="q-page">书本第 80 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 混合增长率；文字资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2023年3月，全国规模以上工业企业的工业机器人完成产量4.4万套，服务机器人完成产量70万套。2023年 1~3月全国规模以上工业企业的工业机器人累计完成产量10.4万套，服务机器人累计完成产量145万套。 2023年3月，我国机器人设备出口金额0.7亿美元，较上年增长110.3%，进口金额2.4亿美元，较上年增长 68.5%。2023年1~3月我国机器人设备累计出口金额1.9亿美元，较上年增长62.1%，累计进口金额6.9亿美元，较 上年增长55.1%。 2022年12月，全国规模以上工业企业的工业机器人完成产量4万套，服务机器人完成产量49.1万套。2022年 1~12月全国规模以上工业企业的工业机器人累计完成产量44.3万套，服务机器人累计完成产量645.8万套。 2022年12月，我国工业机器人设备出口金额0.5亿美元，进口金额1.8亿美元。2022年1~12月我国工业机器 人设备累计出口金额6.1亿美元，累计进口金额20亿美元。</div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2023年一季度，我国机器人设备进出口贸易逆差比上年同期：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">下降了不到30%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">下降了30%以上</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">上升了不到30%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">上升了30%以上</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL034 (85-6)</b><span class="q-page">书本第 85 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 间隔增长率；文字资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2022年，全国软件和信息技术服务业规模以上企业超3.5万家，累计完成软件业务收入108126亿元，同比增 长11.2%，增速较上年同期回落6.5个百分点。 2022年，全国软件业利润总额12648亿元，同比增长5.7%，增速较上年同期回落1.9个百分点。软件业务出 口额524.1亿美元，同比增长3.0%，增速较上年同期回落5.8个百分点。其中，软件外包服务出口额同比增长 9.2%。 2022年，东部、中部、西部和东北地区分别完成软件业务收入88663亿元、5390亿元、11574亿元和2499亿 元，分别同比增长10.6%、16.9%、14.3%和8.7%。软件业务收入居前5名的北京、广东、江苏、山东、浙江共完 成收入74537亿元，占比较上年同期提高2.9个百分点。 2022年，全国15个副省级中心城市实现软件业务收入53419亿元，同比增长10.0%，增速较上年同期回落6.3 个百分点；实现利润总额6924亿元，同比增长2.4%，增速较上年同期回落2.1个百分点。</div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2022年，全国软件和信息技术服务业规模以上企业累计完成软件业务收入约比2020年增长了：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">16%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">23%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">29%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">31%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL073 (135-16)</b><span class="q-page">书本第 135 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 间隔增长率；文字资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2021年，全国纺织品服装出口3155亿美元，同比增长8.4%。其中，纺织品出口1452.2亿美元，同比下降 5.6%，较2019年增长22.0%；服装出口1702.8亿美元，同比增长24.0%，较2019年增长16.0%。其中，针织服装 及衣着附件出口864.8亿美元，同比增长39.0%；梭织服装及衣着附件出口701.2亿美元，同比增长12.6%。 2021年，中国对美国、东盟、欧盟和日本的纺织品服装出口合计1724.9亿美元。其中，对美国出口额为 563.5亿美元，同比增长4.0%；向东盟十国出口纺织品服装491.2亿美元，同比增长24.9%；对欧盟27国出口纺织 品服装469.9亿美元，同比下降11.1%；对日本出口纺织品服装200.3亿美元，同比下降7.2%。 2021年，中国向全球出口纺织纱线138亿美元，出口织物667亿美元，分别同比增长41.5%和34.3%。纺织制 品当中，防疫类口罩出口额为129.5亿美元，出口金额、数量同比分别下降76.0%和13.0%。除防疫类口罩外，其 他纺织制品出口额为517.2亿美元，同比增长27.5%。 2021年，中国向“一带一路”沿线国家出口纺织品服装1137.9亿美元，同比增长24.5%，较2019年增长 17.3%；同时，中国自“一带一路”沿线国家进口纺织品服装131.6亿美元，同比增长24.5%。</div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2020年，全国服装出口额比2019年：</div>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">增长了10%以上</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">下降了10%以上</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">增长了不到10%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">下降了不到10%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL104 (173-9)</b><span class="q-page">书本第 172 173 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 两集合容斥；现期比重；综合资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2024年有48.07%的家庭收入持平，22.01%的家庭收入增加，其中6.09%的家庭收入 明显增加；近三成被访者表示收入减少，其中11.23%的家庭明显减少。对于2025年的家庭收入，46.10%的居民 预计将基本持平，19.04%的居民预期收入将增加，23.28%的居民对未来收入变化不确定，11.58%的居民预期收 入将明显减少。 调查发现，47.01%的城乡居民日常购物以线上渠道为主，37.52%的城乡居民线上、线下并重，只有15.48% 的城乡居民明确表示以线下为主。 不同群体的购物选择存在较大差异：一是代际断层，年轻群体成为线上消费主力，其中00后群体线上购物 占比69.8%，比70后群体高了53.79个百分点；二是城乡分化，城镇居民的线上购物占比50.18%，高于农村居民 11.66个百分点，务农群体选择线上购物的占比比农村居民还要低19.74个百分点；三是学历分化，高学历群体 选择线上购物比例更高，硕士以上学历群体线上购物占比62.81%，远高于初中及以下学历群体的22.63%。 </div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">在参与调查的居民中，2024年家庭收入未减少且2025年预期收入将基本持平的家庭数量：</div>
+      <img src="zlimage/tigan/综合_题91_材料图.png" alt="题干配图 ZL104"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">至少占16.18%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">至少占46.10%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">至多占16.18%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">至多占70.08%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL110 (187-8)</b><span class="q-page">书本第 185 186 187 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 年均增长率；综合资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">增加森林面积、提高森林质量、提升生态系统碳汇增量，将为我国实现碳达峰、碳中和目标、维护全球生 态安全做出巨大贡献。1973年，我国开展了第一次森林资源清查。目前已完成第9次森林资源清查，我国森林 面积和森林蓄积量连续30年保持“双增长”。“十三五”时期，我国累计造林5.45亿亩，森林覆盖率达到 23.04%，森林蓄积量为175.6亿立方米，森林面积达到2.2亿公顷（1公顷为15亩）。湿地保护率达到52%，治理 沙化土地1.5亿亩。 </div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2016-2018年，我国国际重要湿地面积的年均增长率约为（ ）。</div>
+      <img src="zlimage/tigan/综合_题71_材料图1.png" alt="题干配图 ZL110"/>
+      <img src="zlimage/tigan/综合_题71_材料图2.png" alt="题干配图 ZL110"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">25%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">30%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">35%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">40%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL134 (223-7)</b><span class="q-page">书本第 222 223 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 两集合容斥；现期比重；综合资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2019年2月中下旬，某市统计局随机抽取2000名在该市居住半年以上的18～65周岁居民，就其2019年春节 期间的消费情况进行了调查。调查结果显示：与上年春节相比，28.3%的受访居民消费支出有所增加，58.0%的 受访居民消费支出基本持平。 </div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2019年春节期间有“餐饮消费”的受访居民中，一定有人：</div>
+      <img src="zlimage/tigan/综合_题17_材料图1.png" alt="题干配图 ZL134"/>
+      <img src="zlimage/tigan/综合_题17_材料图2.png" alt="题干配图 ZL134"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">参加教育培训</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">去旅游</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">购保健产品</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">购数码产品、智能家电</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL138 (230-6)</b><span class="q-page">书本第 229 230 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 年均增长率；综合资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2021年，各地区各部门全面落实党中央、国务院关于实现数字乡村发展战略的决策部署，积极引入社会资 本投资建数字乡村。2021年全国用于县域农业农村信息化建设的社会资本投入为954.6亿元，县均社会资本投入 3588.8万元、乡村人均社会资本投入135.2元，分别比上年增长17.2%和24.0%。分区域看，东部地区社会资本投 入562.4亿元，占全国社会资本投入58.9%；中部地区社会资本投入193.8亿元；西部地区社会资本投入198.4亿 元。 </div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">2019-2021年，全国县域农业农村信息化建设县均社会资本投入的年均增率约为（ ）。</div>
+      <img src="zlimage/tigan/综合_题21_材料图1.png" alt="题干配图 ZL138"/>
+      <img src="zlimage/tigan/综合_题21_材料图2.png" alt="题干配图 ZL138"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">10%</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">21%</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">32%</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">43%</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  <section class="question-block">
+    <div class="q-head"><span class="q-no">【题目编号/题号】</span> <b>ZL150 (244-13)</b><span class="q-page">书本第 243 244 页</span></div>
+    <div class="q-point"><span class="q-label">【考点标签】</span> 两集合容斥；综合资料</div>
+    <div class="q-material"><div class="q-label">【材料】</div><div class="mat-body">2019年，1043.0万残疾儿童及持证 残疾人得到基本康复服务，其中包括0～6岁残疾儿童18.1万人。  截至2019年末，全国已竣工的各级残疾人综合服务设施2341个，总建设规模584.5万平方米，总投资183.1 亿元；已竣工各级残疾人康复设施1006个，总建设规模414.2万平方米，总投资132.2亿元。</div></div>
+    <div class="q-stem"><span class="q-label">【题干】</span>
+      <div class="stem-body">如提供视力残疾康复服务的残疾人康复机构中，同时提供听力言语残疾康复服务的机构比不提供该服务的机构多20%，则2019年末全国有多少家残疾人康复机构不提供以上两种康复服务中的任意一种？</div>
+      <img src="zlimage/tigan/综合_题33_材料图2.png" alt="题干配图 ZL150"/>
+      <img src="zlimage/tigan/综合_题33_材料图4.png" alt="题干配图 ZL150"/>
+    </div>
+    <div class="q-opts"><span class="q-label">【选项】</span><div class="opts-body">
+      <div class="opt"><span class="opt-key">A</span><span class="opt-text">不到7300家</span></div>
+      <div class="opt"><span class="opt-key">B</span><span class="opt-text">7300～7600家之间</span></div>
+      <div class="opt"><span class="opt-key">C</span><span class="opt-text">7600～7900家之间</span></div>
+      <div class="opt"><span class="opt-key">D</span><span class="opt-text">超过7900家</span></div>
+    </div></div>
+    <div class="note-area"><span class="note-label">听课笔记 / 决策路径：</span></div>
+  </section>
+  </section>
+</body>
+</html>
