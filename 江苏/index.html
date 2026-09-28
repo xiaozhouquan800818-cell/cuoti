@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江苏省考 · 备考导航</title>
+<style>
+:root{
+  --navy:#12243d; --navy2:#1e3a5f; --navy3:#2b527f;
+  --gold:#e8b64c; --gold2:#ffd166; --goldbg:#fff6e3;
+  --ink:#1a1d24; --sub:#5a6473; --line:#e3e7ee; --bg:#f6f8fb;
+  --blue:#1a5fb4; --bluebg:#eaf2fd; --teal:#1f7a4d; --tealbg:#e9f7ef;
+  --purple:#6b3fa0; --purplebg:#f3ecfb; --red:#c62828; --redbg:#fdecec;
+  --orange:#d97706; --orangebg:#fef3e2;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{text-decoration:none;color:inherit}
+.hero{background:linear-gradient(135deg,#0f1e33,#1e3a5f 55%,#2b527f);color:#fff;padding:56px 20px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(800px 300px at 80% 20%,rgba(232,182,76,.18),transparent 60%);pointer-events:none}
+.hero .tag{display:inline-block;font-size:12px;letter-spacing:3px;color:var(--gold2);background:rgba(232,182,76,.14);border:1px solid rgba(232,182,76,.4);padding:5px 16px;border-radius:20px;margin-bottom:16px}
+.hero h1{margin:0 0 10px;font-size:36px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{margin:0;color:#c3d4e8;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:30px 20px 60px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(20,40,80,.05);transition:transform .16s,box-shadow .16s;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(18,36,61,.12)}
+.card .top-line{position:absolute;top:0;left:0;right:0;height:4px}
+.clock{background:var(--blue)}.cplan{background:var(--gold)}.cmind{background:var(--teal)}
+.cnews{background:var(--red)}.chot{background:var(--purple)}.cspec{background:var(--orange)}
+.card .icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.card h3{margin:0;font-size:17px}
+.card p{margin:0;font-size:13.5px;color:var(--sub);flex:1}
+.card .go{font-size:13.5px;font-weight:700;color:var(--navy2)}
+.back{display:inline-block;margin-top:24px;color:#ffd166;font-size:14px;padding:8px 20px;border:1px solid rgba(255,209,102,.5);border-radius:20px;background:rgba(232,182,76,.12);pointer-events:auto}
+.back:hover{background:rgba(232,182,76,.25);color:#fff}
+@media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.hero h1{font-size:26px}}
+</style></head><body>
+<header class="hero">
+  <span class="tag">江 苏 省 考 · 备 考 资 料 中 心</span>
+  <h1>江苏省考<em>六大模块</em></h1>
+  <p>学习计划 · 思维导图 · 高频考点 · 专项突破 · 时政积累 · 职位表查询</p>
+  <a class="back" href="../index.html">← 返回错题复盘工作台</a></header>
+<main class="wrap">
+<div class="grid">
+
+  <a class="card" href="2.学习计划/HTML版/index.html">
+    <span class="top-line cplan"></span>
+    <div class="icon" style="background:var(--goldbg)">📅</div>
+    <h3>6个月学习计划</h3>
+    <p>判断/数量/言语/资料/申论五科分阶段备考方案，含目标正确率与每周安排。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+  <a class="card" href="3.思维导图/HTML版/index.html">
+    <span class="top-line cmind"></span>
+    <div class="icon" style="background:var(--tealbg)">🗺️</div>
+    <h3>思维导图</h3>
+    <p>五大科知识点高清思维导图，点击可放大查看细节。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+  <a class="card" href="5.高频考点/HTML版/index.html">
+    <span class="top-line chot"></span>
+    <div class="icon" style="background:var(--purplebg)">🔥</div>
+    <h3>高频考点</h3>
+    <p>判断/数量/言语/资料/申论五科高频考点解读，图形题高清渲染。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+  <a class="card" href="6.专项突破/HTML版/index.html">
+    <span class="top-line cspec"></span>
+    <div class="icon" style="background:var(--orangebg)">📚</div>
+    <h3>专项突破</h3>
+    <p>23个专题PDF：技巧方法、金词范文、实词成语，支持全文搜索。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+  <a class="card" href="4.时政积累/HTML版/index.html">
+    <span class="top-line cnews"></span>
+    <div class="icon" style="background:var(--redbg)">📰</div>
+    <h3>时政积累</h3>
+    <p>新年贺词、四中全会、政府工作报告、十五五规划解读。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+  <a class="card" href="0.历年职位表_报名情况_进面分/HTML版/index.html">
+    <span class="top-line clock"></span>
+    <div class="icon" style="background:var(--bluebg)">📊</div>
+    <h3>历年职位表查询</h3>
+    <p>2019-2026共5.1万条职位，支持搜索/筛选/排序/报名人数与进面分汇总。</p>
+    <span class="go">打开 →</span>
+  </a>
+
+</div>
+</main>
+</body></html>
