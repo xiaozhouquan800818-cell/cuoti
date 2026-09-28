@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>江苏 · 思维导图</title>
+<style>
+* { box-sizing:border-box; }
+body { margin:0; font-family:"Microsoft YaHei","PingFang SC",sans-serif; background:#f5f5f5; color:#222; }
+#sidebar { position:fixed; left:0; top:0; width:260px; height:100vh; background:#2c3e50; color:#ecf0f1; overflow-y:auto; padding:20px 0; z-index:10; }
+#sidebar h1 { font-size:18px; padding:0 20px; margin:0 0 15px; color:#f39c12; }
+#sidebar .group h2 { font-size:13px; color:#95a5a6; padding:8px 20px 4px; margin:10px 0 0; border-top:1px solid #34495e; }
+#sidebar ul { list-style:none; margin:0; padding:0; }
+#sidebar li a { display:block; padding:7px 20px; color:#ecf0f1; text-decoration:none; font-size:13px; cursor:pointer; }
+#sidebar li a:hover, #sidebar li a.active { background:#34495e; border-left:3px solid #f39c12; padding-left:17px; }
+#main { margin-left:260px; padding:20px; }
+.doc { background:#fff; padding:20px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,.1); text-align:center; }
+.doc h1 { font-size:20px; border-bottom:2px solid #f39c12; padding-bottom:10px; text-align:left; }
+.doc h1 .hint { font-size:12px; color:#999; font-weight:normal; }
+.doc figure { margin:10px 0; }
+.doc figure img { max-width:100%; height:auto; border:1px solid #ddd; cursor:zoom-in; transition:box-shadow .2s; }
+.doc figure img:hover { box-shadow:0 0 8px rgba(243,156,18,.5); }
+.tip { text-align:center; color:#999; margin-top:80px; }
+
+/* Lightbox */
+#lb { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88); z-index:100; overflow:hidden; }
+#lb.open { display:block; }
+#lb-img { position:absolute; transform-origin:0 0; cursor:grab; user-select:none; -webkit-user-drag:none; }
+#lb-img.dragging { cursor:grabbing; }
+#lb-close { position:fixed; top:15px; right:20px; color:#fff; font-size:32px; cursor:pointer; z-index:101; line-height:1; }
+#lb-zoom { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); color:#fff;
+           background:rgba(255,255,255,.15); padding:6px 14px; border-radius:20px; font-size:13px; z-index:101; }
+</style>
+<style>
+.js-topnav{position:fixed;top:0;left:0;right:0;height:40px;background:#12243d;display:flex;align-items:center;padding:0 14px;gap:2px;z-index:9999;overflow-x:auto;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.js-topnav a{color:#b9cde4;font-size:13px;padding:6px 12px;border-radius:6px;white-space:nowrap;text-decoration:none}
+.js-topnav a:hover{background:rgba(255,255,255,.12);color:#fff}
+body{padding-top:40px !important;}
+</style></head>
+<body><nav class="js-topnav">
+<a href="../../../index.html" style="background:rgba(232,182,76,.2);color:#ffd166;font-weight:700">← 错题工作台</a><a href="../../index.html">← 江苏首页</a>
+<a href="../../2.学习计划/HTML版/index.html">学习计划</a>
+<a href="../../3.思维导图/HTML版/index.html">思维导图</a>
+<a href="../../5.高频考点/HTML版/index.html">高频考点</a>
+<a href="../../6.专项突破/HTML版/index.html">专项突破</a>
+<a href="../../4.时政积累/HTML版/index.html">时政积累</a>
+<a href="../../0.历年职位表_报名情况_进面分/HTML版/index.html">职位表</a>
+</nav>
+<div id="sidebar">
+<h1>江苏 · 思维导图</h1>
+<div class="group"><h2>判断推理</h2><ul><li><a href="#" data-doc="0">【判断】江苏</a></li></ul></div><div class="group"><h2>言语理解</h2><ul><li><a href="#" data-doc="4">【言语】江苏</a></li></ul></div><div class="group"><h2>数量关系</h2><ul><li><a href="#" data-doc="2">【数学运算】江苏</a></li><li><a href="#" data-doc="1">【数字推理】江苏</a></li></ul></div><div class="group"><h2>资料分析</h2><ul><li><a href="#" data-doc="5">【资料】江苏</a></li></ul></div><div class="group"><h2>申论</h2><ul><li><a href="#" data-doc="3">【申论】江苏</a></li></ul></div>
+</div>
+<div id="main">
+<div class="doc" id="doc0" style="display:none"><h1>【判断】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【判断】江苏.png" alt="【判断】江苏" class="zoomable"></figure></div><div class="doc" id="doc1" style="display:none"><h1>【数字推理】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【数字推理】江苏.png" alt="【数字推理】江苏" class="zoomable"></figure></div><div class="doc" id="doc2" style="display:none"><h1>【数学运算】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【数学运算】江苏.png" alt="【数学运算】江苏" class="zoomable"></figure></div><div class="doc" id="doc3" style="display:none"><h1>【申论】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【申论】江苏.png" alt="【申论】江苏" class="zoomable"></figure></div><div class="doc" id="doc4" style="display:none"><h1>【言语】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【言语】江苏.png" alt="【言语】江苏" class="zoomable"></figure></div><div class="doc" id="doc5" style="display:none"><h1>【资料】江苏 <span class="hint">（点击图片可放大 / 滚轮缩放 / 拖拽平移 / ESC 关闭）</span></h1><figure><img src="images/【资料】江苏.png" alt="【资料】江苏" class="zoomable"></figure></div>
+<div id="welcome" class="tip"><h2 style="color:#2c3e50">江苏 · 思维导图</h2><p>从左侧选择一个科目查看大图</p></div>
+</div>
+
+<div id="lb">
+  <span id="lb-close">&times;</span>
+  <img id="lb-img" src="">
+  <div id="lb-zoom">100%</div>
+</div>
+
+<script>
+const links=document.querySelectorAll('#sidebar a[data-doc]');
+const docs=document.querySelectorAll('.doc');
+const welcome=document.getElementById('welcome');
+function show(id){docs.forEach(d=>d.style.display=(d.id==='doc'+id)?'block':'none');welcome.style.display='none';links.forEach(a=>a.classList.toggle('active',a.dataset.doc==id));window.scrollTo(0,0);}
+links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.doc);}));
+show(0);
+
+// Lightbox
+const lb=document.getElementById('lb');
+const lbImg=document.getElementById('lb-img');
+const lbZoom=document.getElementById('lb-zoom');
+const lbClose=document.getElementById('lb-close');
+let scale=1, tx=0, ty=0;
+function apply(){ lbImg.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`; lbZoom.textContent=Math.round(scale*100)+'%'; }
+function openLb(src){
+  lbImg.src=src;
+  lb.classList.add('open');
+  // 初始适应窗口
+  lbImg.onload=()=>{
+    const sw=window.innerWidth/lbImg.naturalWidth;
+    const sh=window.innerHeight/lbImg.naturalHeight;
+    scale=Math.min(sw,sh,1);
+    tx=(window.innerWidth-lbImg.naturalWidth*scale)/2;
+    ty=(window.innerHeight-lbImg.naturalHeight*scale)/2;
+    apply();
+  };
+}
+function closeLb(){ lb.classList.remove('open'); lbImg.src=''; }
+document.querySelectorAll('img.zoomable').forEach(img=>{
+  img.addEventListener('click',()=>openLb(img.src));
+});
+lbClose.addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
+lb.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const f=e.deltaY<0?1.15:1/1.15;
+  const ns=Math.max(0.2,Math.min(8,scale*f));
+  // 以鼠标位置为中心缩放
+  const r=lb.getBoundingClientRect();
+  const mx=e.clientX-r.left, my=e.clientY-r.top;
+  tx=mx-(mx-tx)*(ns/scale);
+  ty=my-(my-ty)*(ns/scale);
+  scale=ns; apply();
+},{passive:false});
+let drag=null;
+lbImg.addEventListener('mousedown',e=>{drag={x:e.clientX-tx,y:e.clientY-ty};lbImg.classList.add('dragging');e.preventDefault();});
+window.addEventListener('mousemove',e=>{ if(drag){tx=e.clientX-drag.x;ty=e.clientY-drag.y;apply();} });
+window.addEventListener('mouseup',()=>{drag=null;lbImg.classList.remove('dragging');});
+</script>
+</body></html>
