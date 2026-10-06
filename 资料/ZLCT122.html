@@ -203,6 +203,7 @@
     <button class="btn-primary" onclick="grade()">判定正确率</button>
     <button class="btn-ghost" onclick="resetAll()">清空作答</button>
     <button class="btn-ok" onclick="exportRecords()">导出作答记录</button>
+    <button class="btn-ghost" id="btnDone" onclick="toggleDone()">隐藏已完成</button>
     <div class="score" id="score">已作答 <b id="doneN">0</b> / 122</div>
   </div>
 
@@ -394,12 +395,13 @@ function render(){
     const primary = members.filter(o=>groupsOf(o.q)[0]===sec);
     const secondary = members.filter(o=>groupsOf(o.q)[0]!==sec);
     const keyBadge = KEY_SECTIONS.includes(sec) ? `<span class="sec-key">重点攻坚</span>` : "";
-    html += `<h2 class="sec">${esc(sec)}${keyBadge}<span class="sec-n">共 ${members.length} 题</span></h2>`;
-    html += primary.map(o=>cardHtml(o.q,o.i)).join("");
+    let inner = `<h2 class="sec">${esc(sec)}${keyBadge}<span class="sec-n">共 ${members.length} 题</span></h2>`;
+    inner += primary.map(o=>cardHtml(o.q,o.i)).join("");
     if(secondary.length){
-      html += `<div class="xref">↳ 交叉考点（完整题干见主分类）：` +
+      inner += `<div class="xref">↳ 交叉考点（完整题干见主分类）：` +
         secondary.map(o=>`<a href="#${esc(o.q.id)}">${esc(o.q.id)}</a>`).join("、") + `</div>`;
     }
+    html += `<div class="sec-block" data-idx="${primary.map(o=>o.i).join(",")}">${inner}</div>`;
   });
   sheet.innerHTML = html;
 
@@ -413,6 +415,7 @@ function render(){
       document.getElementById("card-"+i).classList.remove("right","wrong");
       document.querySelector(`#card-${i} .verdict`).textContent = "";
       updateDone();
+      applyFilter();
     });
   });
 }
@@ -425,6 +428,28 @@ function updateDone(){
   let n = 0;
   for(let i=0;i<DATA.length;i++) if(selectedOf(i)) n++;
   document.getElementById("doneN").textContent = n;
+}
+
+/* ===== 隐藏 / 显示已作答的题目 ===== */
+let hideDone = false;
+function toggleDone(){
+  hideDone = !hideDone;
+  const btn = document.getElementById("btnDone");
+  btn.textContent = hideDone ? "显示全部" : "隐藏已完成";
+  btn.classList.toggle("btn-primary", hideDone);
+  btn.classList.toggle("btn-ghost", !hideDone);
+  applyFilter();
+}
+function applyFilter(){
+  const vis = DATA.map((q,i)=> !(hideDone && selectedOf(i)));
+  DATA.forEach((q,i)=>{
+    const card = document.getElementById("card-"+i);
+    if(card) card.style.display = vis[i] ? "" : "none";
+  });
+  document.querySelectorAll(".sec-block").forEach(blk=>{
+    const idxs = (blk.dataset.idx || "").split(",").filter(s=>s!=="").map(Number);
+    blk.style.display = idxs.some(i=>vis[i]) ? "" : "none";
+  });
 }
 
 /* ===== 判定正确率 ===== */
@@ -443,6 +468,7 @@ function grade(){
   const rate = answered ? (right/answered*100).toFixed(1) : "0.0";
   document.getElementById("score").innerHTML =
     `已作答 <b>${answered}</b> / ${DATA.length} ｜ 正确 <b class="ok">${right}</b> ｜ 错误 <b class="bad">${answered-right}</b> ｜ 正确率 <b>${rate}%</b>`;
+  applyFilter();
   window.scrollTo({top:0, behavior:"smooth"});
 }
 
@@ -453,6 +479,7 @@ function resetAll(){
   document.querySelectorAll(".q").forEach(c=>c.classList.remove("right","wrong"));
   document.querySelectorAll(".verdict").forEach(v=>v.textContent="");
   document.getElementById("score").innerHTML = `已作答 <b id="doneN">0</b> / ${DATA.length}`;
+  applyFilter();
 }
 
 /* ===== 导出作答记录（仅 编号、题号、作答记录）===== */
